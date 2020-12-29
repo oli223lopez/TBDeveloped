@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 // import './navbar.css'
 
+import CreateRoom from "../chatroom/create_room";
+
 class NavBar extends React.Component {
     constructor(props) {
         super(props);
@@ -38,6 +40,7 @@ class NavBar extends React.Component {
             <div>
                 <h1>TBDeveloped</h1>
                 { this.getLinks()}
+                <CreateRoom />
             </div>
         );
     }
