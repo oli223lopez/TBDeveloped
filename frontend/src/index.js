@@ -9,7 +9,6 @@ import {signup, login} from "./util/session_api_util"
 import axios from 'axios'
 
 window.axios = axios; 
-
 window.signup = signup;
 window.login = login; 
 
