@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'production') {
 app.get("/", (req, res) => {
 
     // const user = new User({
-    //     handle: 'oli',
+    //     username: 'oli',
     //     email: 'oli@oli',
     //     password: 'password'
     // })    

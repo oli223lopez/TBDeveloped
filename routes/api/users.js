@@ -14,11 +14,6 @@ router.get('/test', (req, res) => {
 })
 module.exports = router;
 
-
-
-
-
-
 router.post('/register', (req, res) => {
 
     const { errors, isValid } = validateRegisterInput(req.body)
@@ -35,7 +30,7 @@ router.post('/register', (req, res) => {
                 })
             } else {
                 const newUser = new User({
-                    handle: req.body.handle,
+                    username: req.body.username,
                     email: req.body.email,
                     password: req.body.password
                 })
@@ -77,7 +72,7 @@ router.post('/login', (req, res) => {
                     if (isMatch) {
                         const payload = {
                             id: user.id,
-                            handle: user.handle,
+                            username: user.username,
                             email: user.email
                         }
                         jwt.sign(
