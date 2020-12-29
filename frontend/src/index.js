@@ -4,6 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+//test 
+import {signup, login} from "./util/session_api_util"
+import axios from 'axios'
+
+window.axios = axios; 
+
+window.signup = signup;
+window.login = login; 
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
