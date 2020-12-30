@@ -1,11 +1,12 @@
 const express = require("express");
 const app = express();
 const users = require("./routes/api/users");
-
 const User = require('./models/User')
 const bodyParser = require('body-parser')
 const passport = require('passport')
 const path = require('path');
+
+const questions = require("./routes/api/questions");
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('frontend/build'));
@@ -15,13 +16,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.get("/", (req, res) => {
-
-    // const user = new User({
-    //     username: 'oli',
-    //     email: 'oli@oli',
-    //     password: 'password'
-    // })    
-    // user.save()
     res.send(" World")
 
 });
@@ -44,4 +38,4 @@ app.use(passport.initialize())
 require('./config/passport')(passport)
 
 app.use("/api/users", users)
-
+app.use("/api/questions", questions) 
