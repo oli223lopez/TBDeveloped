@@ -25,8 +25,7 @@ router.get('/',(req,res) => {
 router.get('/:id',(req,res)=>{
     Question.findById(req.params.id)
     .then(question => res.json(question))
-    .catch(err => 
-        res.status(404).json(err))
+    .catch(err => res.status(404).json(err))
 })
 
 //posting questions
@@ -50,5 +49,56 @@ router.post('/',
 });
 
 
+//editing a question
+// router.put("/:id/update", (res,req) => {
+//     let updates = req.body
+
+//     Question.findOneAndUpdate({
+//         _id: req.params.id,updates, new: true})
+//         .then(updatedQuestion => res.json(updatedQuestion))
+//         .catch(err => res.status(404).json("Error: " + err))
+// });
+
+
+
+router.patch("/:id", async (req, res) => {
+	try {
+		const question = await Question.findById(req.params._id)
+
+		if (req.body.subject) {
+			question.subject = req.body.subject
+		}
+
+		if (req.body.content) {
+			question.content = req.body.content
+        }
+        
+        if (req.body.tag) {
+            question.tag = req.body.tag
+        }
+
+          if (req.body.solved) {
+              question.solved = req.body.solved
+          }
+
+		await question.save()
+		res.send(question)
+	} catch {
+		res.status(404)
+		res.send({ error: "Question doesn't exist!" })
+	}
+})
+
+
+
+//! CURRENTLY ONLY UPDATES CONTENT
+
+//deleting a question
+router.delete("/:id", (req, res) => {
+  Question.findByIdAndDelete(req.params.id)
+    .then(() => res.json("Question deleted"))
+    .catch(err => res.status(404).json(err))
+})
+//!TEST FOR UNIQUENESS OF SUBJECT
 
 module.exports = router;
