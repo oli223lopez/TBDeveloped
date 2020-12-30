@@ -1,6 +1,7 @@
 import * as QuestionsAPIUtil from "../util/questions_api_util"
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
+export const RECEIVE_QUESTION = "RECEIVE_QUESTION"
 export const REMOVE_QUESTION = "REMOVE_QUESTION"
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS"
 
@@ -8,6 +9,13 @@ const receiveQuestions = (questions) => {
     return {
         type: RECEIVE_QUESTIONS, 
         questions // ES6 synthax = questions: questions 
+    }
+}
+
+const receiveQuestion = (question) => {
+    return {
+        type: RECEIVE_QUESTION, 
+        question
     }
 }
 
@@ -29,21 +37,22 @@ const receiveQuestionErrors = (errors) => {
 
 export const fetchQuestions = () => (dispatch) => {
     return QuestionsAPIUtil.fetchQuestions()
-        .then( res => { dispatch(receiveQuestions(res)) })
+        .then( res => { dispatch(receiveQuestions(res.data)) })
         .catch(err => dispatch(receiveQuestionErrors(err)))
 }
 
 export const fetchQuestion = (questionId) => (dispatch) => {
-    return QuestionsAPIUtil.fetchQuestions(questionId)
-        .then( res => { dispatch(receiveQuestions(res)) })
+    return QuestionsAPIUtil.fetchQuestion(questionId)
+        .then( res => { dispatch(receiveQuestion(res.data)) })
         .catch(err => dispatch(receiveQuestionErrors(err)))
 }
 
 export const postQuestion = (newQuestion) => (dispatch) => {
     return QuestionsAPIUtil.postQuestion(newQuestion)
-        .then( res => { dispatch(receiveQuestions(res)) })
-        .catch(err => dispatch(receiveQuestionErrors(err)))
+        .then( res => { dispatch(receiveQuestion(res.data)) })
+        .catch( errors => { dispatch(receiveQuestionErrors(errors.response.data)) })
 }
+
 
 export const updateQuestion = (questionId, questionUpdates) => (dispatch) =>{
     return QuestionsAPIUtil.updateQuestion(questionId, questionUpdates)

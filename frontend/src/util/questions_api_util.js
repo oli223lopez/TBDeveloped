@@ -1,15 +1,15 @@
 import axios from "axios";
 
 export const fetchQuestions = () => {
-    return axios.get("/api/questions/questions")
+    return axios.get("/api/questions")
 };
 
 export const fetchQuestion = (questionId) => {
-    return axios.get(`/api/questions/questions/${questionId}`)
+    return axios.get(`/api/questions/${questionId}`)
 }
 
 export const postQuestion = (newQuestion) => {
-    return axios.post("/api/questions/questions", newQuestion)
+    return axios.post("/api/questions", newQuestion)
 }
 
 export const updateQuestion = (questionId, questionUpdates) => {

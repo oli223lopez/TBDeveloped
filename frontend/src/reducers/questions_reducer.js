@@ -1,4 +1,4 @@
-import { RECEIVE_QUESTIONS, REMOVE_QUESTION } from "../actions/questions_actions";
+import { RECEIVE_QUESTIONS, RECEIVE_QUESTION, REMOVE_QUESTION } from "../actions/questions_actions";
 
 
 const QuestionsReducer = (state={}, action) =>  {
@@ -8,6 +8,12 @@ const QuestionsReducer = (state={}, action) =>  {
 
     switch (action.type) {
         case RECEIVE_QUESTIONS:
+            Object.values(action.questions).map( question => {
+                newState[question._id] = question
+            })
+            return newState
+        case RECEIVE_QUESTION:
+            newState[action.question._id] = Object.assign(newState, action.question)
             return newState
         case REMOVE_QUESTION: 
             return newState
