@@ -4,13 +4,11 @@ const passport = require("passport");
 const validateQuestionInput = require('../../validation/question');
 const Question = require('../../models/Question');
 
-
 //test
 router.get('/test', (req, res) => {
     res.json({ msg: "This is the question route" })
 })
 //test
-
 
 //retreiving all the questions
 router.get('/',(req,res) => {
@@ -29,9 +27,11 @@ router.get('/:id',(req,res)=>{
         res.status(404).json(err))
 })
 
+
 //posting questions
 router.post('/',
     passport.authenticate('jwt',{session:false}),
+
     (req,res) =>{
         //check validation
         const {errors, isValid} = validateQuestionInput(req.body);
