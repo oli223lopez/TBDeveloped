@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router();
 const passport = require("passport");
 const validateQuestionInput = require('../../validation/question');
+const validateResponse = require('../../validation/response')
 const Question = require('../../models/Question');
 const User = require('../../models/User');
 
@@ -130,11 +131,22 @@ router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, 
 router.post("/:id/responses", passport.authenticate('jwt',{session:false}), async (req, res) => {
     let question = await Question.findById(req.params.id)
 
+    const { errors, isValid } = validateResponse(req.body);
+
     if(question) {
-        question.responses.push(Object.assign(req.body, {user: req.user.id}))
-        question.save( function (err) {
-            if (!err) res.json(question)
-        })
+
+        if(!isValid) {
+
+            return res.status(400).json(errors)
+
+        } else {
+
+            question.responses.push(Object.assign(req.body, {user: req.user.id}))
+            question.save( function (err) {
+                if (!err) res.json(question)
+            })
+        }
+
     } else {
         res.json("question does not exist.")
     }
