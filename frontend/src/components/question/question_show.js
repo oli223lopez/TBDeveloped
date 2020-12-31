@@ -56,9 +56,13 @@ class QuestionShow extends React.Component {
             const deleteQuestion = () => {
                 if (question[0].user === this.props.userId) {
                     return(
-                    <div onClick={() => this.deleteQuestion(question[0]._id)}>
-                        <Link to="/bulletin" >Delete Question</Link>
-                    </div>
+                    
+                        <Link to="/bulletin">
+                            <button onClick={() => this.props.deleteQuestion(question[0]._id)}>
+                                Delete Question
+                            </button>
+                        </Link>
+                    
                     )
                 }
             }

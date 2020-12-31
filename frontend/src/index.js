@@ -9,13 +9,8 @@ import { logout } from './actions/session_actions'
 
 // test
 import axios from "axios";
-<<<<<<< HEAD
-import { postQuestion } from "./actions/questions_actions"
-// import { postQuestion } from './util/questions_api_util'
-=======
 import { postQuestion, fetchQuestions, updateQuestion, deleteQuestion } from "./actions/questions_actions"
 // import { postQuestion, updateQuestion } from './util/questions_api_util'
->>>>>>> main
 //test
 
 
