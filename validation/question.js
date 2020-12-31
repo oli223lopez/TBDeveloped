@@ -10,14 +10,14 @@ module.exports = function validateQuestionInput(data){
     // data.solved = validBoolean(data.solved) ? data.solved
     
 
+    if (!Validator.isLength(data.subject, {min: 10 ,max: 100 })) {
+        errors.subject = "Please enter a subject thats between 10 and 100 characters"
+    }
 
     if (Validator.isEmpty(data.subject)) {
         errors.subject = "Please enter a subject"
     }
 
-     if (!Validator.isLength(data.subject, {min: 10 ,max: 100 })) {
-         errors.subject = "Please enter a subject thats between 10 and 100 "
-     }
 
     if (Validator.isEmpty(data.content)) {
         errors.content = `Please enter details for your ${data.tag === "question" ? "question" : "idea" }`
