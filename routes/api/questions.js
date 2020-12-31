@@ -31,8 +31,10 @@ router.get('/:id',(req,res)=>{
 //posting questions
 router.post('/',
     passport.authenticate('jwt',{session:false}),
-
+    
     (req,res) =>{
+
+        console.log(payload)
         //check validation
         const {errors, isValid} = validateQuestionInput(req.body);
         if(!isValid){
