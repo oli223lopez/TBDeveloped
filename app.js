@@ -18,6 +18,10 @@ const io = socket(app.listen(port, () => console.log(`Server is running on port 
 
 const rooms = {};
 
+//!TEST - WL - trying to remove video on meeting exit
+const peers = {};
+//!TEST
+
 io.on("connection", socket => { // listens for "connection" event, which generates a socket object. This is triggered when a user on a browser hits a particular page 
 
     // console.log((new Date()).getTime())
@@ -34,6 +38,10 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         // the event is emited with the room id which is just grabbed from the url 
         // here it checks to see if the room id exists within the rooms object declared on line 10
         // if it does it pushes the socket.id (the id of the )
+
+        //!TEST - WL - trying to remove video on meeting exit
+        peers[socket.id] = roomID;
+        //!TEST
 
         const otherUser = rooms[roomID].find(id => id !== socket.id);
 
@@ -55,6 +63,18 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         socket.on("ice-candidate", incoming => { // established a proper connection 
             io.to(incoming.target).emit("ice-candidate", incoming.candidate)
         })
+
+
+        //!TEST - WL - trying to remove video on meeting exit
+        socket.on('disconnect', () => {
+            const roomID = peers[socket.id];
+            let room = rooms[roomID];
+
+            socket.broadcast.emit('user left', socket.id);
+        })
+        //give me the roomID the socket.id is disconneting from and 
+        //with that information, give me that room.
+        //!TEST - 
 
     })
 })
