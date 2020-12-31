@@ -9,8 +9,8 @@ import { logout } from './actions/session_actions'
 
 // test
 import axios from "axios";
-import { postQuestion, fetchQuestion } from "./actions/questions_actions"
-// import { postQuestion } from './util/questions_api_util'
+import { postQuestion, fetchQuestions, updateQuestion, deleteQuestion } from "./actions/questions_actions"
+// import { postQuestion, updateQuestion } from './util/questions_api_util'
 //test
 
 
@@ -36,7 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // test 
   window.store = store; 
   window.axios = axios; 
-  window.postQuestion = postQuestion; 
+  window.deleteQuestion = deleteQuestion; 
+  window.fetchQuestions = fetchQuestions; 
+  window.updateQuestion = updateQuestion; 
   //test 
 
   const root = document.getElementById('root')
