@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { Link, redirect } from "react-router-dom";
 import io from "socket.io-client";
 
 const Room = (props) => {
@@ -19,8 +20,10 @@ const Room = (props) => {
             userVideo.current.srcObject = stream;
             userStream.current = stream;
 
+//!delete
 console.log(userStream.current)
 console.log('getTracks', userStream.current.getTracks())
+//!delete
 
             socketRef.current = io.connect("/");
             socketRef.current.emit("join room", props.match.params.roomID);
@@ -33,12 +36,6 @@ console.log('getTracks', userStream.current.getTracks())
             socketRef.current.on("user joined", userID => {
                 otherUser.current = userID;
             });
-
-
-
-
-
-
 
             socketRef.current.on("offer", handleRecieveCall);
 
@@ -134,8 +131,20 @@ console.log('getTracks', userStream.current.getTracks())
     };
 
 
-    //! is this leaving the call or just shutting off camera?
-    function stopStreamedVideo() {
+    //! VIDEO function
+    const playStop = () => {
+        let enabled = userVideo.current.srcObject.getVideoTracks()[0].enabled;
+        if(enabled){
+            userVideo.current.srcObject.getVideoTracks()[0].enabled = false;
+            console.log('false', enabled)
+        }else{
+            userVideo.current.srcObject.getVideoTracks()[0].enabled = true;
+            console.log('true', enabled)
+        }
+    }
+
+    //! Close connection for person clicking and leaves page.
+    const stopStreamedVideo = () => {
         const tracks = userStream.current.getTracks();
         console.log(tracks);
 
@@ -143,35 +152,46 @@ console.log('getTracks', userStream.current.getTracks())
         tracks.forEach(function(track) {
             track.stop();
         });
-
-
     }
-    //! is this leaving the call or just shutting off camera?
-    function stopUserStreamedVideo() {
-        const tracks = userVideo.current.srcObject.getTracks();
-        console.log('user',tracks);
 
-        //note - stream.stop() is deprecated. Do not use
-        tracks.forEach(function(track) {
-            track.stop();
-        });
+    //? is this leaving the call or just shutting off camera?
+    // function stopUserStreamedVideo() {
+    //     const tracks = userVideo.current.srcObject.getTracks();
+    //     console.log('user',tracks);
+
+    //     //note - stream.stop() is deprecated. Do not use
+    //     tracks.forEach(function(track) {
+    //         track.stop();
+    //     });
         
 
+    // }
+    
+    //? is this leaving the call or just shutting off camera?
+    // function stopPartnerStreamedVideo() {
+    //     const tracks = partnerVideo.current.srcObject.getTracks();
+    //     console.log('partner',tracks);
+
+    //     //note - stream.stop() is deprecated. Do not use
+    //     tracks.forEach(function(track) {
+    //         track.stop();
+    //     });
+    // }
+
+
+
+    //! MUTE function
+    const muteStream = () => {
+        const enabled = userVideo.current.srcObject.getAudioTracks()[0].enabled;
+        if(enabled){
+            userVideo.current.srcObject.getAudioTracks()[0].enabled = false;
+            // console.log('false', enabled)
+        }else {
+            userVideo.current.srcObject.getAudioTracks()[0].enabled = true;
+            // console.log('true', enabled)
+        }
     }
     
-    //! is this leaving the call or just shutting off camera?
-    function stopPartnerStreamedVideo() {
-        const tracks = partnerVideo.current.srcObject.getTracks();
-        console.log('partner',tracks);
-
-        //note - stream.stop() is deprecated. Do not use
-        tracks.forEach(function(track) {
-            track.stop();
-        });
-    }
-
-
-    //?mute button only works once but will not turn back on
     // function muteStream() {
     //     const tracks = userStream.current.getAudioTracks();
     //     //note - stream.stop() is deprecated. Do not use
@@ -183,39 +203,23 @@ console.log('getTracks', userStream.current.getTracks())
 
     // }
 
-
-    function muteStream() {
-        let tracks = userStream.current.getAudioTracks()[0].enabled;
-        //note - stream.stop() is deprecated. Do not use
-        // console.log('audio', tracks)
-        if(tracks === true){
-            tracks = true;
-            console.log('true', tracks)
-        }else{
-            tracks = false;
-            console.log('false', tracks)
-        }
-        // tracks.forEach(function(track) {
-        //     track.stop();
-        // });
-
-    }
-
-
     return (
         <div>
             <p>Hello</p>
-            <label>First User
-                <video autoPlay ref={userVideo} muted/>
-            </label>
-            <button onClick={() => stopUserStreamedVideo()}>userOneVideo</button>  
-            <button onClick={() => stopPartnerStreamedVideo()}>userTwoVideo</button>  
+            <video autoPlay ref={userVideo} muted/>
+            <video autoPlay ref={partnerVideo} />
 
-            <button onClick={() => muteStream()}>MuteControl</button>  
-            <label>Second User
-                <video autoPlay ref={partnerVideo} />
-            </label>
-            <button onClick={() => stopStreamedVideo()}>stopStreamVideo</button>  
+
+            {/* Leave meeting works but the other user sees a frozen screen */}
+            <Link to='/'>
+                <button onClick={() => stopStreamedVideo()}>Leave Meeting</button>  
+            </Link>
+
+
+            {/* BELOW IS WORKING FOR BOTH PARTY, DONT DELETE */}
+            <button onClick={() => muteStream()}>MuteControl</button> 
+            <button onClick={() => playStop()}>Video On/Off</button>  
+
 
         </div>
     );
