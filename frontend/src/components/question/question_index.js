@@ -1,5 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import CreateQuestionFormContainer from '../question/create_question_form_container'
+
 
 
 
@@ -17,10 +19,13 @@ class QuestionIndex extends React.Component {
                         <div key={i}>
                             <div>{question.user}</div>
                             <Link to={`/question/${question._id}`}>{question.subject}</Link>
-                            
                         </div>
+                        
                     )
                 })}
+                <div>
+                    <CreateQuestionFormContainer />
+                </div>
             </div>
         )
        

@@ -59,6 +59,7 @@ class BulletinBoard extends React.Component{
                         {this.state.idx === 0 ? <QuestionIndex questions={questionArray} /> : <ResolvedIndex resolved={resolvedArray}/>}
 
                     </div>
+                    
                 </div>
             )
         }

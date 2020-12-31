@@ -15,9 +15,10 @@ export class UpdateQuestionForm extends React.Component {
     }
 
     render() {
-       const {subject, content, tag, solved, user} = this.props
+       const {questionId, subject, content, tag, solved, user} = this.props
         return (
             <QuestionForm  
+                questionId = {questionId}
                 subject={subject}
                 content={content}
                 tag={tag}
@@ -30,14 +31,14 @@ export class UpdateQuestionForm extends React.Component {
 
 
 
-const mapStateToProps = (state, ownProps) => {
-    console.log(ownProps)
+const mapStateToProps = (state) => {
+    
     return({ formType: 'Update Question!'}
     )
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    processForm: (updatedQuestion) => dispatch(updateQuestion(updatedQuestion))
+    processForm: (questionId, questionUpdates) => dispatch(updateQuestion(questionId, questionUpdates))
 })
 
 

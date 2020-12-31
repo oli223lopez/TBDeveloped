@@ -14,7 +14,7 @@ const QuestionsReducer = (state={}, action) =>  {
             })
             return newState
         case RECEIVE_QUESTION:
-            newState[action.question._id] = Object.assign(newState, action.question)
+            newState[action.question._id] = action.question
             return newState
         case REMOVE_QUESTION: 
             return newState

@@ -13,11 +13,12 @@ class QuestionForm extends React.Component{
         }
 
         this.submit = this.submit.bind(this)
+        this.updateSubmit = this.updateSubmit.bind(this)
         this.update = this.update.bind(this)
     }
 
     update(field){
-        return (e) => this.setState({ [field]: e.target.currentValue})
+        return (e) => this.setState({[field]: e.currentTarget.value})
     }
 
 
@@ -30,24 +31,62 @@ class QuestionForm extends React.Component{
             tag: this.state.tag,
             user: this.props.user
         };
-        this.props.postQuestion(newQuestion)
+        this.props.processForm(newQuestion)
+    }
+
+    updateSubmit(e) {
+        console.log(this.props.questionId)
+        e.preventDefault();
+        let newQuestion = {
+            
+            content: this.state.content,
+            solved: this.state.solved,
+            tag: this.state.tag,
+            user: this.props.user
+
+        };
+        this.props.processForm(this.props.questionId, newQuestion)
     }
     
 
 
     render(){
-        const tag = this.state.tag
+        if (this.props.formType === 'Update Question!'){
+            return (
+                <form onSubmit={this.updateSubmit}>
+
+                    <label>
+                        Subject: {this.state.subject}
+                    </label>
+                    <label>
+                        Content: <textarea type='text' value={this.state.content} onChange={this.update('content')} />
+                    </label>
+                    <label>
+                        <select onChange={this.update('tag')} >
+                            <option value=''>--Choose a tag--</option>
+                            <option value='idea'>Idea</option>
+                            <option value='question'>Question</option>
+                        </select>
+                    </label>
+                    <label>
+                        <button type='submit'>{this.props.formType}</button>
+                    </label>
+
+
+                </form>
+            )
+        }
         return(
-            <form onSubmit={() => this.submit()}>
+            <form onSubmit={this.submit}>
                 
                 <label>
-                    Subject: <input type="text" value={this.state.subject} />
+                    Subject: <input type="text" value={this.state.subject} onChange={this.update('subject')}/>
                 </label>
                 <label>
-                    Content: <textarea type='text' value={this.state.content} />
+                    Content: <textarea type='text' value={this.state.content} onChange={this.update('content')}/>
                 </label>
                 <label>
-                    <select name={'tag'} onChange={this.update('tag')} value={this.state.tag}>
+                    <select onChange={this.update('tag')} >
                         <option value=''>--Choose a tag--</option>
                         <option value='idea'>Idea</option>
                         <option value='question'>Question</option>

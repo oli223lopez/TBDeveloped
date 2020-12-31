@@ -99,7 +99,7 @@ router.patch("/:id", passport.authenticate('jwt',{session:false}), async (req, r
 
         }
 	} catch(err) {
-        res.json(err)
+       
         res.status(404).json({
             error: "Question doesn't exist!"
         })

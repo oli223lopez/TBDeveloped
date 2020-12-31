@@ -9,7 +9,6 @@ import ResolvedShowContainer from './resolved/resolved_show_container'
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import ProfileFormContainer from './profile/profile_container'
-import CreateQuestionFormContainer from './question/create_question_form_container'
 
 
 
