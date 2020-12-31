@@ -56,7 +56,7 @@ export const postQuestion = (newQuestion) => (dispatch) => {
 
 export const updateQuestion = (questionId, questionUpdates) => (dispatch) =>{
     return QuestionsAPIUtil.updateQuestion(questionId, questionUpdates)
-        .then( res => { dispatch(receiveQuestion(res.data)) })
+        .then( res => { dispatch(receiveQuestion(res.data))})
         .catch(err => dispatch(receiveQuestionErrors(err)))
 }
 
@@ -65,3 +65,4 @@ export const deleteQuestion = (questionId) => (dispatch) => {
         .then( res => { dispatch(removeQuestion(res.data)) })
         .catch(err => dispatch(receiveQuestionErrors(err)))
 }
+
