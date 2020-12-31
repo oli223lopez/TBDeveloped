@@ -1,5 +1,4 @@
 import React from 'react'
-import QuestionIndexContainer from '../question/question_index_container'
 import QuestionIndex from '../question/question_index'
 import ResolvedIndex from '../resolved/resolved_index'
 
@@ -7,12 +6,15 @@ import ResolvedIndex from '../resolved/resolved_index'
 class BulletinBoard extends React.Component{
     constructor(props){
         super(props)
+        
         this.state = {
             idx: 0
         }
-
-
         this.handleClick = this.handleClick.bind(this)
+    }
+
+    componentDidMount() {
+        this.props.fetchQuestions()
     }
 
 
@@ -21,31 +23,45 @@ class BulletinBoard extends React.Component{
     }
 
 
-
-
+    isEmpty(obj) {
+        return Object.keys(obj).length === 0;
+    }
 
     render(){
-        let {one, two} = 'notSelected'
-        if(this.state.idx === 0){
-            one = '--Selected--'
+        
+
+        // console.log(this.props.questions)
+
+        if(this.isEmpty(this.props.questions)){
+            return(
+                null
+            )
         }else{
-            two = '--Selected--'
-        }
-
-        return(
-            <div>
-                <h1>Bulletin</h1>
-
+            // console.log(this.props.questions)
+            const questionArray = []
+            const resolvedArray = []
+            Object.values(this.props.questions).forEach(question => {
+                if(question.solved === false){
+                    questionArray.push(question)
+                }else{
+                    resolvedArray.push(question)
+                }
+            })
+            // console.log(questionArray)
+            return(
                 <div>
-                    <div className={one} onClick={this.handleClick(0)}>
-                        <QuestionIndex />
-                    </div>
-                    <div className={two} onClick={this.handleClick(0)}>
-                        <ResolvedIndex />
+                    <h1>Bulletin</h1>
+
+                    <div>
+                        <div className='questions' onClick={() => this.handleClick(0)}>Questions</div>
+                        <div className='resolvedQuestions' onClick={() => this.handleClick(1)}>Resolved Questions</div>
+
+                        {this.state.idx === 0 ? <QuestionIndex questions={questionArray} /> : <ResolvedIndex resolved={resolvedArray}/>}
+
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 
 

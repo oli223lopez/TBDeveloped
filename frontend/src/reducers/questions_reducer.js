@@ -5,7 +5,8 @@ const QuestionsReducer = (state={}, action) =>  {
     Object.freeze(state); 
 
     let newState = Object.assign({}, state);
-
+    // debugger
+    // console.log(action.type)
     switch (action.type) {
         case RECEIVE_QUESTIONS:
             Object.values(action.questions).map( question => {

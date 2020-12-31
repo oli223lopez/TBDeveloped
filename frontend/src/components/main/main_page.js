@@ -1,5 +1,5 @@
 import React from 'react';
-import BulletinBoard from '../bulletin_board/bulletin_board'
+
 
 class MainPage extends React.Component {
 

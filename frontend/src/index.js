@@ -9,7 +9,7 @@ import { logout } from './actions/session_actions'
 
 // test
 import axios from "axios";
-import { postQuestion, fetchQuestion } from "./actions/questions_actions"
+import { postQuestion } from "./actions/questions_actions"
 // import { postQuestion } from './util/questions_api_util'
 //test
 
