@@ -1,10 +1,10 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link, redirect } from "react-router-dom";
 import io from "socket.io-client";
 
 const Room = (props) => {
     //!TEST
-        // let [mute, setMute] = useState(true)
+        // let [peers, setPeers] = useState([]);
     //!TEST
 
 
@@ -36,6 +36,21 @@ console.log('getTracks', userStream.current.getTracks())
             socketRef.current.on("user joined", userID => {
                 otherUser.current = userID;
             });
+
+
+            //!TEST - WL - trying to remove video on meeting exit
+            // socketRef.current.on( "user left", id => {
+            //     const peerObj = peerRef.current.find(p => p.peerID === id);
+            //     if (peerObj){
+            //         peerObj.peer.destroy();
+            //     }
+            //     const peers = peerRef.current.filter(p => p.peerID !== id);
+            //     peerRef.current = peers;
+            //     setPeers(peers); //state
+
+            // })
+            //finding the peer, destorying the peer, and removing it from the array
+            //!TEST
 
             socketRef.current.on("offer", handleRecieveCall);
 
@@ -143,10 +158,19 @@ console.log('getTracks', userStream.current.getTracks())
         }
     }
 
-    //! Close connection for person clicking and leaves page.
+    //! Cut connection of the person leaving page.
     const stopStreamedVideo = () => {
         const tracks = userStream.current.getTracks();
         console.log(tracks);
+        
+        //!TEST - WL  - Intent here is the black the screen whenever some one leaves
+        // let enabled = userVideo.current.srcObject.getVideoTracks()[0].enabled;
+        // if(enabled){
+        //     userVideo.current.srcObject.getVideoTracks()[0].enabled = false;
+        // }
+        //!TEST
+
+
 
         //note - stream.stop() is deprecated. Do not use
         tracks.forEach(function(track) {
@@ -177,7 +201,6 @@ console.log('getTracks', userStream.current.getTracks())
     //         track.stop();
     //     });
     // }
-
 
 
     //! MUTE function
