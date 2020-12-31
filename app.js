@@ -7,6 +7,7 @@ const passport = require('passport')
 const path = require('path');
 
 const questions = require("./routes/api/questions");
+const responses = require("./routes/api/responses")
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('frontend/build'));
@@ -39,3 +40,4 @@ require('./config/passport')(passport)
 
 app.use("/api/users", users)
 app.use("/api/questions", questions) 
+app.use("/api/responses", responses)

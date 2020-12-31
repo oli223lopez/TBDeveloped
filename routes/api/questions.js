@@ -24,7 +24,7 @@ router.get('/',(req,res) => {
 router.get('/:id',(req,res)=>{
     Question.findById(req.params.id)
     .then(question => res.json(question))
-    .catch(err => res.status(404).json(err))
+    .catch(err => res.status(404).json("question not found"))
 })
 
 
@@ -106,24 +106,22 @@ router.patch("/:id", passport.authenticate('jwt',{session:false}), async (req, r
     
 })
 
-
-
-
 //deleting a question
 router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, res) => {
 
-    // console.log('1', req.user.id)
     const question = await Question.findOne({ _id: req.params.id })
-    // console.log('2', question.user)
 
-    if (`${question.user}` === req.user.id){
-        Question.findByIdAndDelete(req.params.id)
-        .then(() => res.json("Question deleted"))
-        .catch(err => res.status(404).json(err))
-    } else{
-        res.status(404).json({error: 'Incorrect user'})
+    if(question) {
+        if (`${question.user}` === req.user.id){
+            Question.findByIdAndDelete(req.params.id)
+            .then(() => res.json(question))
+            .catch(err => res.status(404).json(err))
+        } else{
+            res.status(404).json({error: 'Incorrect user'})
+        }
+    } else {
+        res.json("question not found")
     }
-    
 })
 
 module.exports = router;
