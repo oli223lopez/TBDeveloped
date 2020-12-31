@@ -5,6 +5,7 @@ const validateQuestionInput = require('../../validation/question');
 const Question = require('../../models/Question');
 const User = require('../../models/User');
 
+
 //test
 router.get('/test', (req, res) => {
     res.json({ msg: "This is the question route" })
@@ -121,6 +122,42 @@ router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, 
         }
     } else {
         res.json("question not found")
+    }
+})
+
+// responses
+
+router.post("/:id/responses", passport.authenticate('jwt',{session:false}), async (req, res) => {
+    let question = await Question.findById(req.params.id)
+
+    if(question) {
+        question.responses.push(Object.assign(req.body, {user: req.user.id}))
+        question.save( function (err) {
+            if (!err) res.json(question)
+        })
+    } else {
+        res.json("question does not exist.")
+    }
+})
+
+router.delete("/:questionId/responses/:responseId", passport.authenticate('jwt',{session:false}), async (req, res) => {
+    let question = await Question.findById(req.params.questionId);
+    let response = await question.responses.id(req.params.responseId)
+
+    if(question && response) {
+
+        if (`${response.user}` === req.user.id){
+            console.log(req.params.responseId)
+            question.responses.id(req.params.responseId).remove();
+            question.save(function (err) {
+                res.json(response)
+            })
+        } else{
+            res.status(404).json('You can only delete your own responses.')
+        }
+        
+    } else {
+        res.json("question and/or response does not exist.")
     }
 })
 
