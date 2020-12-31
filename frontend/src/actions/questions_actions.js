@@ -56,7 +56,11 @@ export const postQuestion = (newQuestion) => (dispatch) => {
 
 export const updateQuestion = (questionId, questionUpdates) => (dispatch) =>{
     return QuestionsAPIUtil.updateQuestion(questionId, questionUpdates)
+<<<<<<< HEAD
         .then( res => { dispatch(receiveQuestion(res.data))})
+=======
+        .then( res => { dispatch(receiveQuestion(res.data)) })
+>>>>>>> main
         .catch(err => dispatch(receiveQuestionErrors(err)))
 }
 
