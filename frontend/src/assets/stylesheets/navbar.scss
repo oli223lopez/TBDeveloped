@@ -1,0 +1,90 @@
+.navbar-container{
+    background-color:#f6efe8;
+}
+
+.nav-header-bar{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 40px;
+    margin-right: 40px;
+    padding: 10px;
+
+
+    .left-navbar{
+        display: flex;
+        align-items: center;
+        
+        .brand-navbar{
+            margin-right: 30px;
+            font-size: 20px;
+            padding: 5px;
+        }
+
+        .team-navbar {
+            padding: 5px;
+        }
+
+        .team-navbar:hover{
+            cursor: pointer;
+        }
+        
+        .teamInfo-navbar{
+            display: none;
+            position: absolute;
+            background-color: white;
+            z-index: 1;
+            margin-top: 5px;
+            border-radius: 5px;
+            border-top: 1px solid rgb(240, 240, 240);
+            border-bottom: 1px solid #F7F7F6;
+
+            .individual-member{
+                color: black;
+            }
+            .individual-member:hover{
+                background-color: #1264A3;
+                color: white;
+            }
+            
+
+
+
+        }
+
+        .team-navbar:hover .teamInfo-navbar{
+            display: block;
+        }
+
+
+
+    }
+
+    .right-navbar{
+        padding: 5px;
+    }
+
+    .signinButton{
+        text-decoration: none;
+        margin-right: 20px;
+    }
+
+    .signupButton{
+        color: #fff;
+        max-width: 140px;
+        text-align: center;
+        padding: 10px;
+        padding-top: 9px;
+        padding-bottom: 9px;
+        margin-top: 45px;
+        margin-bottom: 10px;
+        background-color: #611f69;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+    .signupButton:hover {
+        background-color: #4A154B;
+        text-decoration: none;
+    }
+}
+

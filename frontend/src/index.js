@@ -7,6 +7,12 @@ import jwt_decode from 'jwt-decode'
 import { setAuthToken } from './util/session_api_util'
 import { logout } from './actions/session_actions'
 
+// test
+import axios from "axios";
+import { postQuestion, fetchQuestions, updateQuestion, deleteQuestion } from "./actions/questions_actions"
+// import { postQuestion, updateQuestion } from './util/questions_api_util'
+//test
+
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -26,6 +32,14 @@ document.addEventListener('DOMContentLoaded', () => {
   else {
     store = configureStore({})
   }
+
+  // test 
+  window.store = store; 
+  window.axios = axios; 
+  window.deleteQuestion = deleteQuestion; 
+  window.fetchQuestions = fetchQuestions; 
+  window.updateQuestion = updateQuestion; 
+  //test 
 
   const root = document.getElementById('root')
   ReactDOM.render(<Root store={store} />, root)
