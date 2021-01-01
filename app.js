@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 const users = require("./routes/api/users");
-
 const User = require('./models/User')
 const bodyParser = require('body-parser')
 const passport = require('passport')
@@ -68,9 +67,9 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         //!TEST - WL - trying to remove video on meeting exit
         socket.on('disconnect', () => {
             const roomID = peers[socket.id];
-            let room = rooms[roomID];
+            let room = rooms[roomID];   
 
-            socket.broadcast.emit('user left', socket.id);
+            socket.to(roomId)
         })
         //give me the roomID the socket.id is disconneting from and 
         //with that information, give me that room.
@@ -81,6 +80,8 @@ io.on("connection", socket => { // listens for "connection" event, which generat
 
 // video feature test
 
+const questions = require("./routes/api/questions");
+// const responses = require("./routes/api/responses") 12/31/20 removed since responses are embedded within questions
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('frontend/build'));
@@ -90,13 +91,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.get("/", (req, res) => {
-
-    // const user = new User({
-    //     username: 'oli',
-    //     email: 'oli@oli',
-    //     password: 'password'
-    // })    
-    // user.save()
     res.send(" World")
 
 });
@@ -116,4 +110,5 @@ app.use(passport.initialize())
 require('./config/passport')(passport)
 
 app.use("/api/users", users)
-
+app.use("/api/questions", questions) 
+// app.use("/api/responses", responses) 12/31/20, removed since responses are embedded within questions

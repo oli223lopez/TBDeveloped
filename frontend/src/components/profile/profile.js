@@ -1,10 +1,12 @@
 import React from 'react';
+import CreateQuestionFormContainer from '../question/create_question_form_container'
+
 
 
 class Profile extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
 
     
 
@@ -12,6 +14,10 @@ class Profile extends React.Component {
         return(
         <div>
             <h2>{this.props.currentUser.username}'s Profile</h2>
+
+            <div>
+                <CreateQuestionFormContainer />
+            </div>
         </div>
         )
     }
