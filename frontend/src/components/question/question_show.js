@@ -3,6 +3,7 @@ import UpdateQuestionForm from './update_question_form_container'
 import CreateQuestionFormContainer from '../question/create_question_form_container'
 import {Link} from 'react-router-dom'
 
+import CreateRoom from "../chatroom/create_room";
 
 class QuestionShow extends React.Component {
     constructor(props){
@@ -75,9 +76,15 @@ class QuestionShow extends React.Component {
                     <p>{question[0].content}</p>
                     <p>Created on: {Date(question[0].createdAt)}</p>
                     <p>Tag: {question[0].tag}</p>
-                    {update()}
-                    {deleteQuestion()}
-
+                    <div>
+                        {update()}
+                    </div>
+                    <div>
+                        {deleteQuestion()}
+                    </div>
+                    <div>
+                        <CreateRoom />
+                    </div>
                     <div>
                         <CreateQuestionFormContainer />
                     </div>

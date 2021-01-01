@@ -68,6 +68,10 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         socket.on('disconnect', () => {
             const roomID = peers[socket.id];
             let room = rooms[roomID];
+            if(room){
+                room = room.filter(id => id !== socket.id);
+                users[roomId] = room
+            }
 
             socket.broadcast.emit('user left', socket.id);
         })

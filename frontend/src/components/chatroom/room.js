@@ -4,7 +4,7 @@ import io from "socket.io-client";
 
 const Room = (props) => {
     //!TEST
-        // let [peers, setPeers] = useState([]);
+        let [peers, setPeers] = useState([]);
     //!TEST
 
 
@@ -14,6 +14,7 @@ const Room = (props) => {
     const socketRef = useRef();
     const otherUser = useRef();
     const userStream = useRef();
+    const setPeers = useRef();
 
     useEffect(() => {
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
@@ -39,17 +40,17 @@ console.log('getTracks', userStream.current.getTracks())
 
 
             //!TEST - WL - trying to remove video on meeting exit
-            // socketRef.current.on( "user left", id => {
-            //     const peerObj = peerRef.current.find(p => p.peerID === id);
-            //     if (peerObj){
-            //         peerObj.peer.destroy();
-            //     }
-            //     const peers = peerRef.current.filter(p => p.peerID !== id);
-            //     peerRef.current = peers;
-            //     setPeers(peers); //state
+            socketRef.current.on( "user left", id => {
+                const peerObj = peerRef.current.find(p => p.peerID === id);
+                if (peerObj){
+                    peerObj.peer.destroy();
+                }
+                const peers = peerRef.current.filter(p => p.peerID !== id);
+                peerRef.current = peers;
+                setPeers(peers); //state
 
-            // })
-            //finding the peer, destorying the peer, and removing it from the array
+            })
+            // finding the peer, destorying the peer, and removing it from the array
             //!TEST
 
             socketRef.current.on("offer", handleRecieveCall);
