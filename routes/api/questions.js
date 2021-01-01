@@ -31,13 +31,13 @@ router.get('/:id',(req,res)=>{
 
 
 //posting questions
-router.post('/',passport.authenticate('jwt',{session:false}),(req,res) =>{
+router.post('/', passport.authenticate('jwt',{session:false}), async (req,res) =>{
         //check validation
         const {errors, isValid} = validateQuestionInput(req.body);
          if (!isValid) {
              return res.status(400).json(errors);
          }
-        Question.findOne({subject:req.body.subject}).then( question => {
+        Question.findOne({subject:req.body.subject}).then( async question => {
             if (question) {
                 return res.status(400).json({
                 Error: "Question has already been submitted"
@@ -52,7 +52,12 @@ router.post('/',passport.authenticate('jwt',{session:false}),(req,res) =>{
                 tag: req.body.tag,
                 solved: req.body.solved
         });
-         newQuestion.save().then(question => res.json(question));
+         newQuestion.save().then(question => res.json(question))
+
+         let user = await User.findById(req.user.id)
+         user.questions.push(newQuestion._id)
+         user.save()
+        
       }
     
         })
@@ -146,7 +151,12 @@ router.post("/:id/responses", passport.authenticate('jwt',{session:false}), asyn
                 if (!err) res.json(question)
             })
 
-            // push ref into users document 
+            let user = await User.findById(req.user.id)
+            if(!user.questions.find(question._id)) {
+                user.questions.push(question._id)
+                user.save()
+            }
+
         }
 
     } else {
@@ -161,11 +171,12 @@ router.delete("/:questionId/responses/:responseId", passport.authenticate('jwt',
     if(question && response) {
 
         if (`${response.user}` === req.user.id){
-            console.log(req.params.responseId)
+            // console.log(req.params.responseId)
             question.responses.id(req.params.responseId).remove();
             question.save(function (err) {
                 res.json(response)
             })
+            
         } else{
             res.status(404).json('You can only delete your own responses.')
         }
