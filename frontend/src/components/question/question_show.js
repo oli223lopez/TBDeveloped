@@ -2,8 +2,8 @@ import React from 'react'
 import UpdateQuestionForm from './update_question_form_container'
 import CreateQuestionFormContainer from '../question/create_question_form_container'
 import {Link} from 'react-router-dom'
-import AnswerIndexContainer from '../answer/answer_index_container'
-
+import AnswerIndex from '../answer/answer_index_container'
+import CreateAnswersFormContainer from '../answer/create_answers_form_container'
 class QuestionShow extends React.Component {
     constructor(props){
         super(props)
@@ -69,7 +69,7 @@ class QuestionShow extends React.Component {
                 }
             }
             const displayAnswers = () => {
-                if (question[0].answers.length >0) {
+                if (question[0].responses.length >0) {
                     return(
                     
                         <div>
@@ -83,6 +83,20 @@ class QuestionShow extends React.Component {
                 }
             }
             
+             const createAnswers = () => {
+                if (question[0].user !== this.props.userId) {
+                    return(
+                    
+                        <div>
+                            <CreateAnswersFormContainer 
+                                questionId = {question[0].id}
+                                
+                            />
+                        </div>
+                    
+                    )
+                }
+            }
             
             return(
                 <div>
@@ -94,7 +108,7 @@ class QuestionShow extends React.Component {
                     {displayAnswers()}
                     {update()}
                     {deleteQuestion()}
-
+                    {createAnswers()}
                     <div>
                         <CreateQuestionFormContainer />
                     </div>
