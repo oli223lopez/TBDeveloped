@@ -74,6 +74,7 @@ class QuestionShow extends React.Component {
                     return(
                         
                         <div>
+                        <p>------------------- Responses -------------------------------------------</p> 
                             <AnswerIndex 
                                 responses = {question[0].responses}
                                 questionID = {question[0]._id}
@@ -114,7 +115,7 @@ class QuestionShow extends React.Component {
                     <p>{question[0].content}</p>
                     <p>Created on: {Date(question[0].createdAt)}</p>
                     <p>Tag: {question[0].tag}</p>
-        <p>------------------- Responses -------------------------------------------</p>     
+            
                     {displayResponses()}
 
                     {update()}
