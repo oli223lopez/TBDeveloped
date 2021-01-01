@@ -145,6 +145,8 @@ router.post("/:id/responses", passport.authenticate('jwt',{session:false}), asyn
             question.save( function (err) {
                 if (!err) res.json(question)
             })
+
+            // push ref into users document 
         }
 
     } else {
