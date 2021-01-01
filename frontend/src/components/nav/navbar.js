@@ -35,9 +35,20 @@ class NavBar extends React.Component {
     }
 
     render() {
+        const tbdevelopedHeader = () => {
+            if(this.props.loggedIn === false){
+                return(
+                    <Link to='/'><h1>TBDeveloped</h1></Link>
+                )
+            }else{
+                return (
+                    <Link to='/bulletin'><h1>TBDeveloped</h1></Link>
+                )
+            }
+        }
         return (
             <div>
-                <h1>TBDeveloped</h1>
+                {tbdevelopedHeader()}
                 { this.getLinks()}
             </div>
         );
