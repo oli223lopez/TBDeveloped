@@ -17,7 +17,11 @@ const io = socket(app.listen(port, () => console.log(`Server is running on port 
 
 const rooms = {};
 
-io.on("connection", socket => { 
+//!TEST - WL - trying to remove video on meeting exit
+const peers = {};
+//!TEST
+
+io.on("connection", socket => { // listens for "connection" event, which generates a socket object. This is triggered when a user on a browser hits a particular page 
 
     // listens for "connection" event, which generates a socket object. 
     // this appears to be triggered by the room.js socketRef.current = io.connect("/");
@@ -39,6 +43,10 @@ io.on("connection", socket => {
         // the value is an array of socket id's, each of which belongs to a user
         // so a list of rooms, with each user in the room 
 
+
+        //!TEST - WL - trying to remove video on meeting exit
+        peers[socket.id] = roomID;
+        //!TEST
 
         const otherUser = rooms[roomID].find(id => id !== socket.id);
         // look into a speciific room based on the roomId emitted with the "join room event"
@@ -73,9 +81,17 @@ io.on("connection", socket => {
             io.to(incoming.target).emit("ice-candidate", incoming.candidate)
         })
 
-        socket.on("hang up", () => {
-            console.log("hang up the server")
+
+        //!TEST - WL - trying to remove video on meeting exit
+        socket.on('disconnect', () => {
+            const roomID = peers[socket.id];
+            let room = rooms[roomID];   
+
+            socket.to(roomId)
         })
+        //give me the roomID the socket.id is disconneting from and 
+        //with that information, give me that room.
+        //!TEST - 
 
     })
 })
@@ -83,6 +99,7 @@ io.on("connection", socket => {
 // video feature test
 
 const questions = require("./routes/api/questions");
+// const responses = require("./routes/api/responses") 12/31/20 removed since responses are embedded within questions
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('frontend/build'));
@@ -112,3 +129,4 @@ require('./config/passport')(passport)
 
 app.use("/api/users", users)
 app.use("/api/questions", questions) 
+// app.use("/api/responses", responses) 12/31/20, removed since responses are embedded within questions
