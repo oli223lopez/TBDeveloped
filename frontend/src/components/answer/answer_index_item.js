@@ -6,8 +6,8 @@ class AnswerIndexItem extends React.Component {
         
                 return(
                     <div>
-                        <p>{answer.consultation}</p>
-                        <p>{answer.answer}</p>
+                        <p>{response.consultation}</p>
+                        <p>{response.answer}</p>
 
                     </div>
                 )

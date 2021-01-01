@@ -5,6 +5,10 @@ import React from 'react'
 class ResponseForm extends React.Component{
     constructor(props){
         super(props)
+        this.state = {
+            consultation: this.props.consultation,
+            answer: this.props.answer
+        }
         this.submit = this.submit.bind(this)
         this.update = this.update.bind(this)
     }
@@ -15,13 +19,13 @@ class ResponseForm extends React.Component{
 
 
     submit(e){
-        e.preventDefault();
+        // e.preventDefault();
         let newResponse = {
             consultation: this.state.consultation,
             answer: this.state.answer,
-           
+            user: this.props.user
         };
-        this.props.processForm(newResponse)
+        this.props.processForm(this.props.questionId, newResponse)
     }
 
    
@@ -29,13 +33,13 @@ class ResponseForm extends React.Component{
 
     render(){
         return(
-            <form onSubmit={this.submit}>
+            <form onSubmit={() => this.submit()}>
                 
                 <label>
                     consultation: <input type="date" value={this.state.consultation} onChange={this.update('consultation')}/>
                 </label>
                 <label>
-                    answeer: <input type='text' value={this.state.answer} onChange={this.update('answer')}/>
+                    answer: <textarea  value={this.state.answer} onChange={this.update('answer')}/>
                 </label>
                 <label>
                     <button type='submit'>{this.props.formType}</button>

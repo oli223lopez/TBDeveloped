@@ -2,7 +2,7 @@ import React from 'react'
 import UpdateQuestionForm from './update_question_form_container'
 import CreateQuestionFormContainer from '../question/create_question_form_container'
 import {Link} from 'react-router-dom'
-import AnswerIndex from '../answer/answer_index_container'
+import AnswerIndexContainer from '../answer/answer_index_container'
 import CreateAnswersFormContainer from '../answer/create_answers_form_container'
 class QuestionShow extends React.Component {
     constructor(props){
@@ -54,32 +54,28 @@ class QuestionShow extends React.Component {
             const deleteQuestion = () => {
                 if (question[0].user === this.props.userId) {
                     return(
-                    
-                       <div>
-                            <UpdateQuestionForm 
-                                questionId = {question[0]._id}
-                                subject = {question[0].subject}
-                                content = {question[0].content}
-                                tag = {question[0].tag}
-                                solved = {question[0].solved}
-                                user = {question[0].user}
-                            />
-                        </div>
+                      <div>
+                          <Link to='/bulletin'><button onClick={() => this.props.deleteQuestion(question[0]._id)}>Delete Question</button></Link>
+                      </div>
                     )
                 }
             }
             const displayAnswers = () => {
                 if (question[0].responses.length >0) {
+                    if (question[0].user === this.props.userId){
                     return(
                     
                         <div>
+                            -----Responses------
                             <AnswerIndexContainer 
-                                questionId = {question[0].id}
+                                responses = {question[0].responses}
                                 
                             />
                         </div>
                     
                     )
+                }}else{
+                    <div></div>
                 }
             }
             
@@ -89,7 +85,7 @@ class QuestionShow extends React.Component {
                     
                         <div>
                             <CreateAnswersFormContainer 
-                                questionId = {question[0].id}
+                                questionId = {question[0]._id}
                                 
                             />
                         </div>

@@ -1,19 +1,19 @@
 import {connect} from 'react-redux'
 import ResponseForm from './answer_form'
-import {postResponse} from '../../actions/responses_action'
+import {postResponse} from '../../actions/responses_actions'
 
 
 const mapStateToProps = (state, ownProps)=> ({
     newResponse: {
         consultation: '',
         answer: '',
-        user: ownProps.userID
+        user: state.session.user.id
     },
     formType: 'Respond',
 })
 
 const mapDispatchToProps = dispatch => ({
-    processForm: (newResponse) => dispatch(postResponse(newResponse)) 
+    processForm: (questionsId, newResponse) => dispatch(postResponse(questionsId, newResponse)) 
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(ResponseForm)
