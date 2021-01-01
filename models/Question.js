@@ -1,8 +1,24 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-
-
+const ResponseSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users',
+        require: true
+    },
+    consultation: {
+        type: Date,
+        require: true
+    },
+    answer: {
+        type: String,
+        require: true 
+    }
+},
+    {
+        timestamps: true
+    })
 
 const QuestionSchema = new Schema({
     user: {
@@ -29,11 +45,13 @@ const QuestionSchema = new Schema({
         default: false,
         require: true
     },
+    responses: [ResponseSchema]
 },
     {
         timestamps: true
         
     })
+
 const Question = mongoose.model('Question', QuestionSchema);
 
 module.exports = Question
