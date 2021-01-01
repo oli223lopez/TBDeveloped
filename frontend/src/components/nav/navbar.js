@@ -50,10 +50,10 @@ class NavBar extends React.Component {
                                             <div>Oliver Lopez</div>
                                         </div>
                                         <div className='individual-member'>
-                                            <div>Thomas Cheung</div>
+                                            <div>Shane Sharareh</div>   
                                         </div>
                                         <div className='individual-member'>
-                                            <div>Shane Sharareh</div>   
+                                            <div>Thomas Cheung</div>
                                         </div>
                                         <div className='individual-member'>
                                             <div>William Leung</div>
