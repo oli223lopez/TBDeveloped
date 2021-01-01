@@ -6,7 +6,7 @@ import axios from "axios";
 // }
 
 export const postResponse = (questionId, response) => {
-    return axios.post(`/api/questions/${questionId}/responses`, response)
+    return axios.post(`/api/questions/${questionId}/responses/`, response)
 }
 
 //testing in browser
