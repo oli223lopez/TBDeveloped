@@ -6,7 +6,7 @@ module.exports = function validateResponse(data) {
     let errors = {}; 
 
     data.answer = validText(data.answer) ? data.answer : "";
-    
+
     if(Validator.isEmpty(data.answer)) {
         errors.answer = "Please include an answer"
     }
