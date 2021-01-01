@@ -5,6 +5,8 @@ import io from "socket.io-client";
 const Room = (props) => {
     //!TEST
         // let [peers, setPeers] = useState([]);
+        const [mute, setMute] = useState('Mute');
+        const [video, setVideo] = useState('Video Off');
     //!TEST
 
 
@@ -145,23 +147,31 @@ console.log('getTracks', userStream.current.getTracks())
         partnerVideo.current.srcObject = e.streams[0];
     };
 
+    useEffect(() => {
+        return () => {
+            stopStreamedVideo()
+        }
+    },[])
+    
 
     //! VIDEO function
     const playStop = () => {
         let enabled = userVideo.current.srcObject.getVideoTracks()[0].enabled;
         if(enabled){
             userVideo.current.srcObject.getVideoTracks()[0].enabled = false;
-            console.log('false', enabled)
+            // console.log('false', enabled)
+            setVideo('Video On')
         }else{
             userVideo.current.srcObject.getVideoTracks()[0].enabled = true;
-            console.log('true', enabled)
+            // console.log('true', enabled)
+            setVideo('Video Off')
         }
     }
 
     //! Cut connection of the person leaving page.
     const stopStreamedVideo = () => {
         const tracks = userStream.current.getTracks();
-        console.log(tracks);
+        // console.log(tracks);
         
         //!TEST - WL  - Intent here is the black the screen whenever some one leaves
         // let enabled = userVideo.current.srcObject.getVideoTracks()[0].enabled;
@@ -170,37 +180,12 @@ console.log('getTracks', userStream.current.getTracks())
         // }
         //!TEST
 
-
-
         //note - stream.stop() is deprecated. Do not use
         tracks.forEach(function(track) {
             track.stop();
         });
+
     }
-
-    //? is this leaving the call or just shutting off camera?
-    // function stopUserStreamedVideo() {
-    //     const tracks = userVideo.current.srcObject.getTracks();
-    //     console.log('user',tracks);
-
-    //     //note - stream.stop() is deprecated. Do not use
-    //     tracks.forEach(function(track) {
-    //         track.stop();
-    //     });
-        
-
-    // }
-    
-    //? is this leaving the call or just shutting off camera?
-    // function stopPartnerStreamedVideo() {
-    //     const tracks = partnerVideo.current.srcObject.getTracks();
-    //     console.log('partner',tracks);
-
-    //     //note - stream.stop() is deprecated. Do not use
-    //     tracks.forEach(function(track) {
-    //         track.stop();
-    //     });
-    // }
 
 
     //! MUTE function
@@ -208,10 +193,12 @@ console.log('getTracks', userStream.current.getTracks())
         const enabled = userVideo.current.srcObject.getAudioTracks()[0].enabled;
         if(enabled){
             userVideo.current.srcObject.getAudioTracks()[0].enabled = false;
+            setMute('Unmute')
             // console.log('false', enabled)
         }else {
             userVideo.current.srcObject.getAudioTracks()[0].enabled = true;
             // console.log('true', enabled)
+            setMute('Mute')
         }
     }
     
@@ -231,7 +218,7 @@ console.log('getTracks', userStream.current.getTracks())
             <p>Hello</p>
             <video autoPlay ref={userVideo} muted/>
             <video autoPlay ref={partnerVideo} />
-
+            
 
             {/* Leave meeting works but the other user sees a frozen screen */}
             <Link to='/'>
@@ -240,8 +227,8 @@ console.log('getTracks', userStream.current.getTracks())
 
 
             {/* BELOW IS WORKING FOR BOTH PARTY, DONT DELETE */}
-            <button onClick={() => muteStream()}>MuteControl</button> 
-            <button onClick={() => playStop()}>Video On/Off</button>  
+            <button onClick={() => muteStream()}>{mute}</button> 
+            <button onClick={() => playStop()}>{video}</button>  
 
 
         </div>

@@ -68,9 +68,9 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         //!TEST - WL - trying to remove video on meeting exit
         socket.on('disconnect', () => {
             const roomID = peers[socket.id];
-            let room = rooms[roomID];
+            let room = rooms[roomID];   
 
-            socket.broadcast.emit('user left', socket.id);
+            socket.to(roomId)
         })
         //give me the roomID the socket.id is disconneting from and 
         //with that information, give me that room.
