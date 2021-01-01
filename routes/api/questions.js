@@ -131,8 +131,8 @@ router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, 
     }
 })
 
-// responses
 
+// responses
 router.post("/:id/responses", passport.authenticate('jwt',{session:false}), async (req, res) => {
     let question = await Question.findById(req.params.id)
 
