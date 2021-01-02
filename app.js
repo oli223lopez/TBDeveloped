@@ -88,7 +88,9 @@ io.on("connection", socket => { // listens for "connection" event, which generat
             // let room = rooms[roomID];   
             // socket.to(roomId)
             let idx = rooms[roomID].indexOf(socket.id)   
+            
             rooms[roomID].splice(idx, 1)
+
             if(otherUser) {
                 io.to(otherUser).emit("killconnection")
             }

@@ -45,11 +45,15 @@ const Room = (props) => {
                 otherUser.current = userID;
 
                 // 1/1/21 test
-                otherUsers.current.push(userID)
-     
+                otherUsers.current.push(userID) 
+                    // may have to concat in a situation where a user joins 
+                    // and there are multiple existing users
+                    // they would have to make a call to each of the existing users
+
                 // otherUsers.current.forEach( (user) => {
                 //     callUser(user)
                 // })
+
                 // 1/1/21 test
             });
 
@@ -66,7 +70,9 @@ const Room = (props) => {
 
                 // 1/1/21 test
                 otherUsers.current.push(userID)
-
+                // this may not need concat because it should only
+                // be one user being added at a time 
+                // this is from the perspective of existing users in the room 
                 // 1/1/21 test
             });
 
@@ -98,12 +104,7 @@ const Room = (props) => {
 
     }, []);
 
-    // 1/1/21 test
-    const killIt = () => {
-        console.log("reading loud and clear")
-        peerRef.current.close()
-    }
-    // 1/1/21 test
+  
 
     function callUser(userID) {
         peerRef.current = createPeer(userID); 
@@ -283,6 +284,13 @@ const Room = (props) => {
     //     console.log('audio', tracks)
 
     // }
+
+    // 1/1/21 test
+      const killIt = () => {
+        console.log("reading loud and clear")
+        peerRef.current.close()
+    }
+    // 1/1/21 test
 
     const testFeatures = () => {
         // peerRef.current.close(); // works but only if there is a peerRef (only if a connection has been established)
