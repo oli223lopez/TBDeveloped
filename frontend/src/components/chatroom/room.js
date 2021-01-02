@@ -3,6 +3,7 @@ import { Link, redirect } from "react-router-dom";
 import io from "socket.io-client";
 
 const Room = (props) => {
+
     //!TEST
         // let [peers, setPeers] = useState([]);
         const [mute, setMute] = useState('Mute');
@@ -17,24 +18,21 @@ const Room = (props) => {
     const otherUser = useRef();
     const userStream = useRef();
 
+    // 1/1/21 test
+    const otherVideos = useRef(new Array());
+    const otherUsers = useRef(new Array()); 
+    const peers = useRef(new Object()); 
+    // 1/1/21 test
+
     useEffect(() => {
+
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(MediaStream => {
             userVideo.current.srcObject = MediaStream;
             userStream.current = MediaStream;
 
-<<<<<<< HEAD
-            socketRef.current = io.connect("/"); // open up a new socket on the client side
-=======
-//!delete
-console.log(userStream.current)
-console.log('getTracks', userStream.current.getTracks())
-//!delete
-
             socketRef.current = io.connect("/");
             socketRef.current.emit("join room", props.match.params.roomID);
->>>>>>> 6199337bf3cee4e6c9e8ac4d426d3e19a730a4a4
 
-            socketRef.current.emit("join room", props.match.params.roomID); 
             // has the socket emit this event, this event is caught by the server. I believe there's some 
             // 'long polling' involved. Interesting because the connection happens while this is on localhost 3000
             // and the server is on 5000  
@@ -45,6 +43,14 @@ console.log('getTracks', userStream.current.getTracks())
             socketRef.current.on('other user', userID => {
                 callUser(userID);
                 otherUser.current = userID;
+
+                // 1/1/21 test
+                otherUsers.current.push(userID)
+     
+                // otherUsers.current.forEach( (user) => {
+                //     callUser(user)
+                // })
+                // 1/1/21 test
             });
 
             // the above event is emitted from the server back to the client who created a chatroom, it basically 
@@ -57,6 +63,11 @@ console.log('getTracks', userStream.current.getTracks())
 
             socketRef.current.on("user joined", userID => {
                 otherUser.current = userID;
+
+                // 1/1/21 test
+                otherUsers.current.push(userID)
+
+                // 1/1/21 test
             });
 
 
@@ -80,15 +91,31 @@ console.log('getTracks', userStream.current.getTracks())
 
             socketRef.current.on("ice-candidate", handleNewICECandidateMsg);
 
+            // 1/1/21 test
+            socketRef.current.on("killconnection", killIt);
+            // 1/1/21 test
         });
 
     }, []);
+
+    // 1/1/21 test
+    const killIt = () => {
+        console.log("reading loud and clear")
+        peerRef.current.close()
+    }
+    // 1/1/21 test
 
     function callUser(userID) {
         peerRef.current = createPeer(userID); 
         // userID is the socket.id of the OTHER PERSON in the room 
         // it is used in the createPeer function and set to the peerRef hook  
         userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
+
+
+        // 1/1/21 test
+            // peerRef.current = {};
+            // peerRef.current[userID] = createPeer(userID)
+        // 1/1/21 test
     }   
     // userStream.current was set to the MediaStream above
     // i imagine i
@@ -257,14 +284,19 @@ console.log('getTracks', userStream.current.getTracks())
 
     // }
 
+    const testFeatures = () => {
+        // peerRef.current.close(); // works but only if there is a peerRef (only if a connection has been established)
+
+        socketRef.current.emit("hangUp", otherUser.current)
+        peerRef.current.close()
+    }
+
     return (
         <div>
             <p>Video Chat</p>
+
             <video id="myVideo" autoPlay ref={userVideo} muted/>
             <video autoPlay ref={partnerVideo} />
-<<<<<<< HEAD
-            <button onClick={hangUp}>Disconnect</button>
-=======
             
 
             {/* Leave meeting works but the other user sees a frozen screen */}
@@ -277,8 +309,7 @@ console.log('getTracks', userStream.current.getTracks())
             <button onClick={() => muteStream()}>{mute}</button> 
             <button onClick={() => playStop()}>{video}</button>  
 
-
->>>>>>> 6199337bf3cee4e6c9e8ac4d426d3e19a730a4a4
+            <button onClick={() => testFeatures()}>Test Button</button>
         </div>
     );
 };

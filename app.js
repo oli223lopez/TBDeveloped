@@ -84,14 +84,28 @@ io.on("connection", socket => { // listens for "connection" event, which generat
 
         //!TEST - WL - trying to remove video on meeting exit
         socket.on('disconnect', () => {
-            const roomID = peers[socket.id];
-            let room = rooms[roomID];   
-
-            socket.to(roomId)
+            // const roomID = peers[socket.id];
+            // let room = rooms[roomID];   
+            // socket.to(roomId)
+            let idx = rooms[roomID].indexOf(socket.id)   
+            rooms[roomID].splice(idx, 1)
+            if(otherUser) {
+                io.to(otherUser).emit("killconnection")
+            }
         })
         //give me the roomID the socket.id is disconneting from and 
         //with that information, give me that room.
         //!TEST - 
+
+
+        // 1/1/21 
+
+            socket.on("hangUp", otherUserId => {
+                console.log("server received")
+                io.to(otherUserId).emit("killconnection")
+            })
+
+        //
 
     })
 })
