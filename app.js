@@ -24,7 +24,7 @@ const peers = {};
 io.on("connection", socket => { // listens for "connection" event, which generates a socket object. This is triggered when a user on a browser hits a particular page 
 
     // console.log((new Date()).getTime())
-    console.log(socket.id)
+    
 
     socket.on("join room", roomID => { // applying a event listener to the socket generated, which listens for "join room", which is a event fired off from the CLIENT side 
         if (rooms[roomID]) {
@@ -39,9 +39,9 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         // if it does it pushes the socket.id (the id of the )
 
         //!TEST - WL - trying to remove video on meeting exit
-        peers[socket.id] = roomID;
+        // peers[socket.id] = roomID;
         //!TEST
-
+        
         const otherUser = rooms[roomID].find(id => id !== socket.id);
 
         if (otherUser) {
@@ -65,15 +65,16 @@ io.on("connection", socket => { // listens for "connection" event, which generat
 
 
         //!TEST - WL - trying to remove video on meeting exit
-        socket.on('disconnect', () => {
-            const roomID = peers[socket.id];
-            let room = rooms[roomID];   
-
-            socket.to(roomId)
-        })
-        //give me the roomID the socket.id is disconneting from and 
-        //with that information, give me that room.
-        //!TEST - 
+        // socket.on('disconnect', () => {
+        //     // const roomID = peers[socket.id];
+        //     // let room = rooms[roomID];   
+        //     socket.to(otherUser).emit('user-disconnected', () =>{
+        //         console.log('USER HAS DISCONNECTED')
+        //     })
+        // })
+        // give me the roomID the socket.id is disconneting from and 
+        // with that information, give me that room.
+        //!TEST 
 
     })
 })
