@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import '../../assets/stylesheets/reset.css';
 import '../../assets/stylesheets/navbar.scss';
-
+import favicon from '../../assets/images/favicon.png'
 
 import CreateRoom from "../chatroom/create_room";
 
@@ -42,6 +42,7 @@ class NavBar extends React.Component {
             <div className='navbar-container'>
                 <div className='nav-header-bar'>
                     <div className='left-navbar'>
+                        <img src={favicon} className='brand-icon'/>
                         <div className='brand-navbar'>TBDeveloped</div>
                         
                         <div className='team-navbar'>About
