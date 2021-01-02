@@ -5,10 +5,10 @@ export const REMOVE_RESPONSE = 'REMOVE_RESPONSE';
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 
 //THUNK
-const receiveResponse = (question) => {
+export const receiveResponse = (response) => {
     return{
         type: RECEIVE_RESPONSE,
-        question
+        response
     }
 }
 

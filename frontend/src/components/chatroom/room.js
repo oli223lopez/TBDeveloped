@@ -5,6 +5,7 @@ import io from "socket.io-client";
 const Room = (props) => {
     //!TEST
         let [peers, setPeers] = useState([]);
+        let [test, setTest] = useState([])
     //!TEST
 
 
@@ -14,28 +15,39 @@ const Room = (props) => {
     const socketRef = useRef();
     const otherUser = useRef();
     const userStream = useRef();
-    const setPeers = useRef();
+    // const setPeers = useRef();
 
     useEffect(() => {
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
             userVideo.current.srcObject = stream;
             userStream.current = stream;
 
-//!delete
-console.log(userStream.current)
-console.log('getTracks', userStream.current.getTracks())
-//!delete
+        //!delete
+        console.log(userStream.current)
+        console.log('getTracks', userStream.current.getTracks())
+        //!delete
 
             socketRef.current = io.connect("/");
+            console.log(socketRef.current)
+
             socketRef.current.emit("join room", props.match.params.roomID);
 
             socketRef.current.on('other user', userID => {
                 callUser(userID);
                 otherUser.current = userID;
+                console.log(otherUser.current)
+                // setTest(test.push(socketRef.current.id));
+                // setTest(test.push(otherUser.current))
+                console.log(test)
             });
 
             socketRef.current.on("user joined", userID => {
+
                 otherUser.current = userID;
+                // setTest(test.push(socketRef.current.id));
+                // setTest(test.push(otherUser.current))
+                console.log(test)
+
             });
 
 
@@ -130,14 +142,17 @@ console.log('getTracks', userStream.current.getTracks())
             const payload = {
                 target: otherUser.current,
                 candidate: e.candidate,
+                test: 'incoming test'
             }
             socketRef.current.emit("ice-candidate", payload);
         }
     }
 
     function handleNewICECandidateMsg(incoming) {
-        const candidate = new RTCIceCandidate(incoming);
 
+        const candidate = new RTCIceCandidate(incoming);
+        // console.log(incoming);
+        // console.log(candidate);
         peerRef.current.addIceCandidate(candidate)
             .catch(e => console.log(e));
     }
@@ -163,6 +178,8 @@ console.log('getTracks', userStream.current.getTracks())
     const stopStreamedVideo = () => {
         const tracks = userStream.current.getTracks();
         console.log(tracks);
+        console.log(socketRef.current)
+        socketRef.current.emit('remove-user')
         
         //!TEST - WL  - Intent here is the black the screen whenever some one leaves
         // let enabled = userVideo.current.srcObject.getVideoTracks()[0].enabled;
@@ -170,13 +187,17 @@ console.log('getTracks', userStream.current.getTracks())
         //     userVideo.current.srcObject.getVideoTracks()[0].enabled = false;
         // }
         //!TEST
+        userVideo.current.srcObject.getVideoTracks()[0].enabled = true;
 
-
-
+        peerRef.current.close();
         //note - stream.stop() is deprecated. Do not use
         tracks.forEach(function(track) {
             track.stop();
+            
         });
+        console.log(test)
+        // debugger
+        setTest(test.push('howdy'))
     }
 
     //? is this leaving the call or just shutting off camera?
@@ -210,9 +231,13 @@ console.log('getTracks', userStream.current.getTracks())
         if(enabled){
             userVideo.current.srcObject.getAudioTracks()[0].enabled = false;
             // console.log('false', enabled)
+            console.log(peerRef)
+            console.log(peerRef.current)
         }else {
             userVideo.current.srcObject.getAudioTracks()[0].enabled = true;
             // console.log('true', enabled)
+            console.log(peerRef)
+            console.log(peerRef.current)
         }
     }
     
@@ -226,6 +251,20 @@ console.log('getTracks', userStream.current.getTracks())
     //     console.log('audio', tracks)
 
     // }
+    const hangUpButton = () => {
+        onLeave();
+    }
+
+    function onLeave() {
+        userVideo.current.srcObject = null;
+        console.log(peerRef.current)
+        partnerVideo.current.srcObject = null;
+        peerRef.current.close();
+        console.log(peerRef.current)
+        peerRef.current.onicecandidate = null;
+        peerRef.current.onaddstream = null;
+        createPeer()
+    };
 
     return (
         <div>

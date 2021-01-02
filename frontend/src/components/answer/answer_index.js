@@ -1,6 +1,11 @@
 import React from 'react'
 import AnswerIndexItem from '../answer/answer_index_item'
 class AnswerIndex extends React.Component {
+
+
+    // componentDidMount(){
+    //     this.props.fetchAnswers(this.props.responses)
+    // }
     
     render() {
         return(

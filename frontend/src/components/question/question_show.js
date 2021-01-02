@@ -2,8 +2,12 @@ import React from 'react'
 import UpdateQuestionForm from './update_question_form_container'
 import CreateQuestionFormContainer from '../question/create_question_form_container'
 import {Link} from 'react-router-dom'
-import AnswerIndex from '../answer/answer_index'
+import AnswerIndexContainer from '../answer/answer_index_container'
 import CreateAnswersFormContainer from '../answer/create_answers_form_container'
+import CreateRoom from '../chatroom/create_room'
+
+
+
 class QuestionShow extends React.Component {
 
     constructor(props){
@@ -75,7 +79,7 @@ class QuestionShow extends React.Component {
                         
                         <div>
                         <p>------------------- Responses -------------------------------------------</p> 
-                            <AnswerIndex 
+                            <AnswerIndexContainer 
                                 responses = {question[0].responses}
                                 questionID = {question[0]._id}
                                 
@@ -128,6 +132,9 @@ class QuestionShow extends React.Component {
                     <div>
                         <CreateQuestionFormContainer />
                     </div>
+
+
+                    <CreateRoom />
                 </div>
             )
         }

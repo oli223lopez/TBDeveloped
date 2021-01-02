@@ -24,13 +24,15 @@ const peers = {};
 io.on("connection", socket => { // listens for "connection" event, which generates a socket object. This is triggered when a user on a browser hits a particular page 
 
     // console.log((new Date()).getTime())
-    console.log(socket.id)
+    console.log('this is the socket id', socket.id)
 
     socket.on("join room", roomID => { // applying a event listener to the socket generated, which listens for "join room", which is a event fired off from the CLIENT side 
         if (rooms[roomID]) {
             rooms[roomID].push(socket.id);
+            console.log('this is the rooms', rooms)
         } else {
             rooms[roomID] = [socket.id];
+            console.log('this is the rooms', rooms)
         }
         // listens for the join room event. This event is triggered when someone creates a room on the fronend or joins 
         // a room. 
@@ -47,12 +49,14 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         if (otherUser) {
             socket.emit("other user", otherUser);
             socket.to(otherUser).emit("user joined", socket.id)
+            console.log('other user joined')
         }
 
        
         // on this event, do this. 
         socket.on("offer", payload => { // caller, makes the call, and supplies a payload 
             io.to(payload.target).emit("offer", payload);
+           
         });
 
         socket.on("answer", payload => { // receiver, answers the call and responds with a payload 
@@ -60,21 +64,30 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         });
 
         socket.on("ice-candidate", incoming => { // established a proper connection 
+            console.log(incoming.test)
             io.to(incoming.target).emit("ice-candidate", incoming.candidate)
+        })
+
+        socket.on('remove-user', () => {
+            console.log('hello from yee old server')
+            // console.log(rooms[roomID].indexOf(socket.id))
+            const index = rooms[roomID].indexOf(socket.id) 
+            rooms[roomID] = rooms[roomID].splice(0, index) + rooms[roomID].splice(index + 1)
+            console.log(rooms)
         })
 
 
         //!TEST - WL - trying to remove video on meeting exit
-        socket.on('disconnect', () => {
-            const roomID = peers[socket.id];
-            let room = rooms[roomID];
-            if(room){
-                room = room.filter(id => id !== socket.id);
-                users[roomId] = room
-            }
+        // socket.on('disconnect', () => {
+        //     const roomID = peers[socket.id];
+        //     let room = rooms[roomID];
+        //     if(room){
+        //         room = room.filter(id => id !== socket.id);
+        //         users[roomID] = room
+        //     }
 
-            socket.broadcast.emit('user left', socket.id);
-        })
+        //     socket.broadcast.emit('user left', socket.id);
+        // })
         //give me the roomID the socket.id is disconneting from and 
         //with that information, give me that room.
         //!TEST - 

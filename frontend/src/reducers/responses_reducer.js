@@ -7,8 +7,8 @@ const ResponsesReducer = (state={}, action) =>  {
     let newState = Object.assign({}, state);
     switch (action.type) {
         case RECEIVE_RESPONSE:
-            newState[action.question._id] = action.question
-            return newState
+            
+            return Object.assign({}, action.response)
         case REMOVE_RESPONSE: 
             let responseId = action.response._id
             delete newState[responseId]
