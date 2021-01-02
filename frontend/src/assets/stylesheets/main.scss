@@ -3,6 +3,32 @@
     background-color:#f6efe8;
     .main_content{
         background-color:#f6efe8;
+        padding-top: 45px;
+        padding-bottom: 45px;
+
+        .welcome-tag{
+            font-size: 45px;
+        }
+
+        .signupButton {
+            color: #fff;
+            max-width: 140px;
+            text-align: center;
+            padding: 10px;
+            padding-top: 9px;
+            padding-bottom: 9px;
+            margin-top: 45px;
+            margin-bottom: 10px;
+            background-color: #611f69;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .signupButton:hover {
+            background-color: #4A154B;
+            text-decoration: none;
+        }
+
     }
 
     .footer_top_container{

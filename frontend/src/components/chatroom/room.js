@@ -40,12 +40,12 @@ const Room = (props) => {
             socketRef.current.on('other user', userID => {
                 callUser(userID);
                 otherUser.current = userID;
-                console.log('other user joined room')
+                console.log('user A is in the room already', userID)
             });
 
             socketRef.current.emit("user joined", userID => {
                 otherUser.current = userID;
-                
+                console.log('user B just joined the room', userID)
             });
             
 
@@ -82,6 +82,7 @@ const Room = (props) => {
     function callUser(userID) {
         peerRef.current = createPeer(userID);
         userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
+        //giving our peer individual access to our stream so they can view on their end
     }
 
     function createPeer(userID) {
