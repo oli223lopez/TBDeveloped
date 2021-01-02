@@ -1,0 +1,66 @@
+
+.main_container{
+    background-color:#f6efe8;
+    .main_content{
+        background-color:#f6efe8;
+    }
+
+    .footer_top_container{
+        background-color: #4a154b;
+        clip-path: ellipse(75% 100% at center top);
+        height: auto;
+        min-height: 330px;
+        text-align: center;
+
+        .footer_sent_container{
+            
+            
+            
+            .footer_sent{
+                font-size: 40px;
+                color: white;
+                padding-top: 90px;
+            }
+    
+            .freeTrial_container{
+                padding-top: 40px;
+
+                .footer_freeTrial{
+                    // display: flex;
+                    // justify-content:column;
+                    background-color: #FFFFFF;
+                    align-content: center;
+                    border-radius: 3px;
+                    color: #611f69;
+                    fill: #611f69;
+                    padding-left: 175px;
+                    padding-right: 175px;
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                }
+
+                .footer_freeTrial:hover{
+                    padding-left: 173px;
+                    padding-right: 173px;
+                    padding-top: 18px;
+                    padding-bottom: 18px;
+                }
+            }
+        }
+
+
+    }
+    .footer_container {
+        background-color: white;
+        position:absolute;
+        left:0;
+        bottom:0;
+        right:0;
+        padding: 50px;
+
+    
+        .copyRight{
+            color: black;
+        }
+    }
+}
