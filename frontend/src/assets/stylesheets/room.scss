@@ -1,0 +1,37 @@
+.room_container{
+    background-color: #1264A3;
+    
+    .main{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        padding-top: 50px;
+
+        .main_videos{
+            display: flex;
+            justify-content: center;
+
+            #video-grid{
+                display: flex;
+            }
+        }
+        .main_controls{
+            display: flex;
+            justify-content: space-evenly;
+            color: white;
+            padding: 15px;
+        }
+        
+        .main_controls button{
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .main_controls button:hover {
+            background-color: #115080;
+        }
+    }
+
+
+    
+
+}
