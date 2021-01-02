@@ -4,6 +4,8 @@ import '../../assets/stylesheets/reset.css';
 import '../../assets/stylesheets/navbar.scss';
 
 
+import CreateRoom from "../chatroom/create_room";
+
 class NavBar extends React.Component {
     constructor(props) {
         super(props);
@@ -50,10 +52,10 @@ class NavBar extends React.Component {
                                             <div>Oliver Lopez</div>
                                         </div>
                                         <div className='individual-member'>
-                                            <div>Thomas Cheung</div>
+                                            <div>Shane Sharareh</div>   
                                         </div>
                                         <div className='individual-member'>
-                                            <div>Shane Sharareh</div>   
+                                            <div>Thomas Cheung</div>
                                         </div>
                                         <div className='individual-member'>
                                             <div>William Leung</div>
