@@ -1,6 +1,8 @@
 import React from 'react' 
 import UpdateQuestionForm from './update_question_form_container'
 import CreateQuestionFormContainer from '../question/create_question_form_container'
+import CreateRoom from '../chatroom/create_room'
+
 import {Link} from 'react-router-dom'
 import AnswerIndexContainer from '../answer/answer_index_container'
 import CreateAnswersFormContainer from '../answer/create_answers_form_container'
@@ -132,9 +134,9 @@ class QuestionShow extends React.Component {
                     <div>
                         <CreateQuestionFormContainer />
                     </div>
-
-
-                    <CreateRoom />
+                    <div>
+                        <CreateRoom />
+                    </div>
                 </div>
             )
         }
