@@ -11,7 +11,7 @@ class MainPage extends React.Component {
 
                 <div className='main_content'>
                     <h1 className='welcome-tag'>Meet your Developer</h1>
-                    <p>Teamwork can be hard, messy, complicated… and still the best way to work. That’s why we made Slack — a place where people get work done, together.</p>
+                    <p>Finding the right team for your web idea can be hard, messy, complicated… That’s why we made TBDeveloped — a place where people can meet and get work done, together.</p>
                     <Link to={'/signup'} className='signupButton'>TRY FOR FREE</Link>
                 </div>
                 

@@ -23,31 +23,52 @@ const peers = {};
 
 io.on("connection", socket => { // listens for "connection" event, which generates a socket object. This is triggered when a user on a browser hits a particular page 
 
-    // console.log((new Date()).getTime())
-    
 
-    socket.on("join room", roomID => { // applying a event listener to the socket generated, which listens for "join room", which is a event fired off from the CLIENT side 
+    // listens for "connection" event, which generates a socket object. 
+    // this appears to be triggered by the room.js socketRef.current = io.connect("/");
+    
+    socket.on("join room", roomID => { 
+        // applying a event listener to the socket generated, which listens for "join room"
+        // this is an event fired off from the frontend room.js file 
+
+    // console.log((new Date()).getTime())
+
+    
         if (rooms[roomID]) {
             rooms[roomID].push(socket.id);
         } else {
             rooms[roomID] = [socket.id];
         }
-        // listens for the join room event. This event is triggered when someone creates a room on the fronend or joins 
-        // a room. 
-        // the event is emited with the room id which is just grabbed from the url 
-        // here it checks to see if the room id exists within the rooms object declared on line 10
-        // if it does it pushes the socket.id (the id of the )
+
+        // the "join room" event emits the roomID number (see rooms.js). This gets passed down to this
+        // "join room" listener. Here we set the roomID as the key of rooms
+        // essentially rooms is a key-value pair list of rooms
+        // the value is an array of socket id's, each of which belongs to a user
+        // so a list of rooms, with each user in the room 
+
 
         //!TEST - WL - trying to remove video on meeting exit
         // peers[socket.id] = roomID;
         //!TEST
         
         const otherUser = rooms[roomID].find(id => id !== socket.id);
+        // look into a speciific room based on the roomId emitted with the "join room event"
+        // goes through the id's stored in that room checks if there is a id in the room that doesn't belong to the 
+        // user who just joined then that becomes the otherUser 
+        // finds an ID that does NOT match the socket id of the user who just connected. This represents another user 
+        // in the room 
 
         if (otherUser) {
             socket.emit("other user", otherUser);
+            // this emits the other user event to the client side, the person who just joined this chatroom   
             socket.to(otherUser).emit("user joined", socket.id)
+            // this second line emits an event TO the other user. 
+            // socket.to().emit will emit an event to a specified user 
+            // remember otherUser is a socket essentially? 
         }
+
+        // if other user exists, then you emit a event called "other user" along with the OTHER USERS socket id 
+        // you also emit to the other user that a user joined, event along with the user who just joined 
 
        
         // on this event, do this. 
@@ -65,6 +86,23 @@ io.on("connection", socket => { // listens for "connection" event, which generat
 
 
         //!TEST - WL - trying to remove video on meeting exit
+
+        socket.on('disconnect', () => {
+            // const roomID = peers[socket.id];
+            // let room = rooms[roomID];   
+            // socket.to(roomId)
+            let idx = rooms[roomID].indexOf(socket.id)   
+            
+            rooms[roomID].splice(idx, 1)
+
+            if(otherUser) {
+                io.to(otherUser).emit("killconnection")
+            }
+        })
+        //give me the roomID the socket.id is disconneting from and 
+        //with that information, give me that room.
+        //!TEST - 
+
         // socket.on('disconnect', () => {
         //     // const roomID = peers[socket.id];
         //     // let room = rooms[roomID];   
@@ -75,6 +113,17 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         // give me the roomID the socket.id is disconneting from and 
         // with that information, give me that room.
         //!TEST 
+
+
+
+        // 1/1/21 
+
+            socket.on("hangUp", otherUserId => {
+                console.log("server received")
+                io.to(otherUserId).emit("killconnection")
+            })
+
+        //
 
     })
 })
