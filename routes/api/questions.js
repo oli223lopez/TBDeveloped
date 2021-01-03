@@ -11,13 +11,36 @@ const User = require('../../models/User');
 router.get('/test', (req, res) => {
     res.json({ msg: "This is the question route" })
 })
+
+
+
+router.get('/profile_questions', (req, res) => {
+    
+    Question.find()
+        // .sort({ timestamps: -1 })
+        .then(questions => {
+            console.log(req.body.questions)
+            const questionArray = []
+            questions.forEach(question => {
+                if(req.body.questions.includes(question._id)){
+                    questionArray.push(question)
+                }
+            })
+            
+            res.json(questionArray)
+        })
+        .catch(err => res.status(404).json(err));
+        
+
+})
 //test
 
 //retreiving all the questions
 router.get('/',(req,res) => {
+    
     Question.find()
     .sort({timestamps:-1})
-    .then(questions => res.json(questions))
+    .then(questions => {res.json(questions)})
     .catch(err => res.status(404).json(err));
 });
 
@@ -193,4 +216,3 @@ router.delete("/:questionId/responses/:responseId", passport.authenticate('jwt',
 module.exports = router;
 
 
- 

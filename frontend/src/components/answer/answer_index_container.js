@@ -4,7 +4,7 @@ import AnswerIndex from '../answer/answer_index'
 
 const mapStateToProps = (state, ownProps) => {
     return({
-    questionId: ownProps.questionId,
+    questionID: ownProps.questionID,
     responses: ownProps.responses
 
     })

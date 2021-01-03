@@ -5,7 +5,7 @@ import CreateRoom from '../chatroom/create_room'
 
 import {Link} from 'react-router-dom'
 import AnswerIndexContainer from '../answer/answer_index_container'
-import AnswerIndexItem from '../answer/answer_index_item'
+import AnswerIndexItemContainer from '../answer/answer_index_item_container'
 import CreateAnswersFormContainer from '../answer/create_answers_form_container'
 
 
@@ -30,6 +30,7 @@ class QuestionShow extends React.Component {
     
 
     render(){
+        
         const question = Object.values(this.props.question)
         // console.log(question)
         if(this.isEmpty(question) === true){
@@ -79,9 +80,12 @@ class QuestionShow extends React.Component {
                         return(
                             <div key={id}>
                                 <p>------------------- Response --------------------------------------------</p>
-                                <AnswerIndexItem 
+                                <AnswerIndexItemContainer 
                                     response = {response}
-                                    questionId = {question[0].id}
+                                    questionID = {question[0]._id}
+                                    currentUserID = {this.props.userId}
+                                    fetchQuestion = {this.props.fetchQuestion}
+
                                 />
                             </div>
                         )                       
@@ -101,6 +105,8 @@ class QuestionShow extends React.Component {
                             <AnswerIndexContainer 
                                 responses = {question[0].responses}
                                 questionID = {question[0]._id}
+                                currentUserID = {this.props.userId}
+                                fetchQuestion = {this.props.fetchQuestion}
                                 
                             />
                         </div>
@@ -121,6 +127,7 @@ class QuestionShow extends React.Component {
 
                             <CreateAnswersFormContainer 
                                 questionID = {question[0]._id}
+                                fetchQuestion = {this.props.fetchQuestion}
                                 
                             />
          <p>---------------------------------------------------------------------------</p>     
@@ -133,7 +140,7 @@ class QuestionShow extends React.Component {
             
             return(
                 <div>
-                    
+                    {/* {console.log(question)} */}
                     <h2>{question[0].subject}</h2>
                     <p>{question[0].content}</p>
                     <p>{`${question[0].solved}`}</p>
