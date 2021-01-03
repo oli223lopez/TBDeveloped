@@ -16,20 +16,20 @@ router.get('/test', (req, res) => {
 
 router.get('/profile_questions', (req, res) => {
     
+    console.log('this is being activated')
     Question.find()
-        // .sort({ timestamps: -1 })
         .then(questions => {
-            console.log(req.body.questions)
+            console.log(req)
             const questionArray = []
             questions.forEach(question => {
                 if(req.body.questions.includes(question._id)){
                     questionArray.push(question)
                 }
             })
-            
+            console.log(questionArray)
             res.json(questionArray)
         })
-        .catch(err => res.status(404).json(err));
+        .catch(err => res.status(404).json('this doesnt work'));
         
 
 })

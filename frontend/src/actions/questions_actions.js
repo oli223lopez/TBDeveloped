@@ -61,10 +61,9 @@ export const fetchQuestions = () => (dispatch) => {
 }
 
 
-export const fetchProfileQuestions = () => (dispatch) => {
-    return QuestionsAPIUtil.fetchQuestions()
-        .then(res => { dispatch(receiveProfileQuestions(res.data)) })
-
+export const fetchProfileQuestions = (questions) => (dispatch) => {
+    return QuestionsAPIUtil.fetchQuestions(questions)
+        .then(res => dispatch(receiveProfileQuestions(res.data)))
         .catch(err => dispatch(receiveQuestionErrors(err)))
 }
 

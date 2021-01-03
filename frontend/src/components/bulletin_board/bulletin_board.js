@@ -40,12 +40,15 @@ class BulletinBoard extends React.Component{
             // console.log(this.props.questions)
             const questionArray = []
             const resolvedArray = []
+            const usernames = []
             Object.values(this.props.questions).forEach(question => {
                 if(question.solved === false){
                     questionArray.push(question)
                 }else{
                     resolvedArray.push(question)
                 }
+                usernames.push(question.user)
+
             })
             // console.log(questionArray)
             return(
