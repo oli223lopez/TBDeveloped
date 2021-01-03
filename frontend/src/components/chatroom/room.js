@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import '../../assets/stylesheets/reset.css';
 import '../../assets/stylesheets/room.scss';
@@ -294,7 +294,8 @@ const Room = (props) => {
         }
 
     }
-
+    
+   
     
     return (
         <div className='room_container'>

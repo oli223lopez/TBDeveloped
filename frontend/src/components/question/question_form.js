@@ -15,6 +15,8 @@ class QuestionForm extends React.Component{
         this.submit = this.submit.bind(this)
         this.updateSubmit = this.updateSubmit.bind(this)
         this.update = this.update.bind(this)
+
+        
     }
 
     update(field){
@@ -61,11 +63,18 @@ class QuestionForm extends React.Component{
                     <label>
                         Content: <textarea type='text' value={this.state.content} onChange={this.update('content')} />
                     </label>
-                    <label>
+                    <label>Tag
                         <select onChange={this.update('tag')} >
                             <option value=''>--Choose a tag--</option>
                             <option value='idea'>Idea</option>
                             <option value='question'>Question</option>
+                        </select>
+                    </label>
+                    <label>Solved
+                        <select onChange={this.update('solved')} >
+                            <option value=''>--Choose a tag--</option>
+                            <option value='true'>True</option>
+                            <option value='false'>False</option>
                         </select>
                     </label>
                     <label>
@@ -95,6 +104,7 @@ class QuestionForm extends React.Component{
                 <label>
                     <button type='submit'>{this.props.formType}</button>
                 </label>
+                
 
 
             </form>
