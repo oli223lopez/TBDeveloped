@@ -50,6 +50,8 @@ class NavBar extends React.Component {
             }
         }
         return (
+
+
             <div className='navbar-container'>
                 <div className='nav-header-bar'>
                     <div className='left-navbar'>

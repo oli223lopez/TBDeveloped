@@ -18,8 +18,8 @@ const Room = (props) => {
     //!TEST
         
         
-    const [mute, setMute] = useState('Mute'); 
-    const [video, setVideo] = useState('Video Off');
+    // const [mute, setMute] = useState('Mute'); 
+    // const [video, setVideo] = useState('Video Off');
     const userVideo = useRef(); //for video html
     const partnerVideo = useRef(); //for video html
     const peerRef = useRef(); //rtc peerConnection
@@ -37,16 +37,9 @@ const Room = (props) => {
 
     useEffect(() => {
 
-
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(MediaStream => {
             userVideo.current.srcObject = MediaStream;
             userStream.current = MediaStream;
-
-//!delete
-// console.log(userStream.current)
-// console.log('getTracks', userStream.current.getTracks())
-//!delete
-
 
             socketRef.current = io.connect("/");
             console.log(socketRef.current)
@@ -64,6 +57,7 @@ const Room = (props) => {
             socketRef.current.on('other user', userID => {
                 callUser(userID);
                 otherUser.current = userID;
+                console.log('user A is in the room already', userID)
 
 
                 // 1/1/21 test
@@ -103,7 +97,7 @@ const Room = (props) => {
 
             socketRef.current.emit("user joined", userID => {
                 otherUser.current = userID;
-                
+                console.log('user B just joined the room', userID)
 
             });
             
@@ -160,13 +154,15 @@ const Room = (props) => {
         // userID is the socket.id of the OTHER PERSON in the room 
         // it is used in the createPeer function and set to the peerRef hook  
         userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
+        //giving our peer individual access to our stream so they can view on their end
+    }
 
 
         // 1/1/21 test
             // peerRef.current = {};
             // peerRef.current[userID] = createPeer(userID)
         // 1/1/21 test
-    }   
+    // }   
     // userStream.current was set to the MediaStream above
     // i imagine i
 
@@ -267,8 +263,6 @@ const Room = (props) => {
         console.log(userVideo.current)
         let vid = document.getElementById("myVideo")
         vid.parentNode.removeChild(vid);
-    }
-
         console.log('final step?')
     };
 
@@ -297,7 +291,7 @@ const Room = (props) => {
         }
     }
 
-    //! Cut connection of the person leaving page.
+    //! Cut connection of the person leaving page - media stream only.
     const stopStreamedVideo = () => {
         const tracks = userStream.current.getTracks();
         // console.log(tracks);
@@ -308,14 +302,16 @@ const Room = (props) => {
         //     userVideo.current.srcObject.getVideoTracks()[0].enabled = false;
         // }
         //!TEST
-        userVideo.current.srcObject.getVideoTracks()[0].enabled = true;
+        // userVideo.current.srcObject.getVideoTracks()[0].enabled = true;
 
         //note - stream.stop() is deprecated. Do not use
         tracks.forEach(function(track) {
             track.stop();
             
         });
-
+        //! @TOM FYI ADDING IT TO THIS BUTTON
+        testFeatures()
+        
     }
 
 
@@ -374,45 +370,25 @@ const Room = (props) => {
 
     const testFeatures = () => {
         // peerRef.current.close(); // works but only if there is a peerRef (only if a connection has been established)
+        //!@TOM added this conditional for your above comment
+        if (peerRef.current){
+            socketRef.current.emit("hangUp", otherUser.current)
+            peerRef.current.close()
+        }
 
-        socketRef.current.emit("hangUp", otherUser.current)
-        peerRef.current.close()
     }
 
+    
     return (
-
-        <div>
-            <p>Video Chat</p>
-
-            <video id="myVideo" autoPlay ref={userVideo} muted/>
-            <video autoPlay ref={partnerVideo} />
-
         <div className='room_container'>
-            {/* <video autoPlay ref={userVideo} muted/>
-            <video autoPlay ref={partnerVideo} /> */}
+            {/* button below now functions with leave meeting */}
+            {/* <button onClick={() => testFeatures()}>Test Button</button> */}
 
-            
-
-            {/* Leave meeting works but the other user sees a frozen screen */}
-            {/* <Link to='/'>
-                <button onClick={() => stopStreamedVideo()}>Leave Meeting</button>  
-            </Link> */}
-
-
-            {/* BELOW IS WORKING FOR BOTH PARTY, DONT DELETE */}
-
-            <button onClick={() => muteStream()}>{mute}</button> 
-            <button onClick={() => playStop()}>{video}</button>  
-
-            <button onClick={() => testFeatures()}>Test Button</button>
-
-            {/* <button onClick={() => muteStream()}>{mute}</button>  */}
-            {/* <button onClick={() => playStop()}>{video}</button>   */}
             <div className="main">
                 <div className="main_videos">
                     <div id="video-grid">
                         <div>
-                            <video autoPlay ref={userVideo} muted/>
+                            <video id="myVideo" autoPlay ref={userVideo} muted/>
                         </div>
                         <div>
                             <video autoPlay ref={partnerVideo} />
@@ -426,7 +402,6 @@ const Room = (props) => {
                             <button onClick={() => playStop()}>{video}</button>  
                         </div>
                         <div>
-                            {/* uncomment after testing below LINK */}
                             <Link to='/'>
                                 <button onClick={() => stopStreamedVideo()}>Leave Meeting</button>  
                             </Link>

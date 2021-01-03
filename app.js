@@ -34,7 +34,6 @@ io.on("connection", socket => { // listens for "connection" event, which generat
     // console.log((new Date()).getTime())
 
     
-
         if (rooms[roomID]) {
             rooms[roomID].push(socket.id);
             console.log('this is the rooms', rooms)
