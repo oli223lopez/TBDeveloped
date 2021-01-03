@@ -19,7 +19,8 @@ class ResponseForm extends React.Component{
     }
 
 
-    submit(e){
+
+    async submit(e){
 
         e.preventDefault();
         let newResponse = {
@@ -27,7 +28,8 @@ class ResponseForm extends React.Component{
             consultation: this.state.consultation,
             answer: this.state.answer
         };
-         this.props.processForm(this.props.questionID, newResponse)
+         let res =  await this.props.processForm(this.props.questionID, newResponse)
+         this.props.fetchQuestion(this.props.questionID)
     }
 
    
@@ -37,6 +39,7 @@ class ResponseForm extends React.Component{
         return(
             <form onSubmit={this.submit}>
                 <div>
+
                 <label>
                     consultation: <input type="date" placeholder={this.props.newResponse.consultation} onChange={this.update('consultation')}/>
                 </label>

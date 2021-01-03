@@ -1,20 +1,21 @@
 import React from 'react'
-import AnswerIndexItem from '../answer/answer_index_item'
+import AnswerIndexItemContainer from '../answer/answer_index_item_container'
 class AnswerIndex extends React.Component {
 
 
-    // componentDidMount(){
-    //     this.props.fetchAnswers(this.props.responses)
-    // }
+   
+
+
     
     render() {
+        let questionID = this.props.questionID;
         return(
 
         <div>
             {this.props.responses.map((response, i) =>{
                     return(
                     <div key={i}>
-                        <AnswerIndexItem response={response} />
+                        <AnswerIndexItemContainer fetchQuestion = {this.props.fetchQuestion}  response={response} questionID = {this.props.questionID} currentUserID={this.props.currentUserID} />
                     </div>
                     )
             })}
@@ -24,3 +25,5 @@ class AnswerIndex extends React.Component {
 }
 
 export default AnswerIndex
+
+                                
