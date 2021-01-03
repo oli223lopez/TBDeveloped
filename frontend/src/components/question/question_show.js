@@ -27,9 +27,7 @@ class QuestionShow extends React.Component {
         return Object.keys(obj).length === 0
     }
 
-   
-
-
+    
 
     render(){
         
@@ -145,6 +143,8 @@ class QuestionShow extends React.Component {
                     
                     <h2>{question[0].subject}</h2>
                     <p>{question[0].content}</p>
+                    <p>{`${question[0].solved}`}</p>
+
                     <p>Created on: {Date(question[0].createdAt)}</p>
                     <p>Tag: {question[0].tag}</p>
             

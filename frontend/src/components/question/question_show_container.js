@@ -4,6 +4,7 @@ import QuestionShow from './question_show'
 // import {} from '../../actions/question_actions'
 
 
+
 const mapStateToProps = (state, ownProps) => {
     let question = {}
     // console.log(state.entities.questions)
