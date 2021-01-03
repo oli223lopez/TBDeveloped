@@ -16,7 +16,6 @@ class AnswerIndexItem extends React.Component {
     
     render() {     
        
-        console.log('Question ID, and Response ID: '+ this.props.questionID + "" +this.props.response._id)   
 
                 return(
                     <div>

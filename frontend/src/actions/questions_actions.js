@@ -56,7 +56,7 @@ export const fetchQuestions = () => (dispatch) => {
 export const fetchQuestion = (questionId) => (dispatch) => {
     return QuestionsAPIUtil.fetchQuestion(questionId)
         .then(res => ( dispatch(receiveQuestion(res.data)), dispatch(receiveResponse(res.data.responses))))
-        .catch(err => dispatch(receiveQuestionErrors(err)))
+        .catch(err => (dispatch(receiveQuestionErrors(err))))
 }
 
 export const postQuestion = (newQuestion) => (dispatch) => {

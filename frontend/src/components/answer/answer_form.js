@@ -8,7 +8,7 @@ class ResponseForm extends React.Component{
         this.state = {
             consultation: this.props.consultation,
             answer: this.props.answer,
-           
+            errors: ""
         }
         this.submit = this.submit.bind(this)
         this.update = this.update.bind(this)
@@ -28,25 +28,45 @@ class ResponseForm extends React.Component{
             consultation: this.state.consultation,
             answer: this.state.answer
         };
-         let res =  await this.props.processForm(this.props.questionID, newResponse)
-         this.props.fetchQuestion(this.props.questionID)
+       
+
+        if(!newResponse.consultation){
+            this.setState({errors: "please pick a consultation date"})
+        }
+        else if(!newResponse.answer){
+            this.setState({errors: "please write out your response"})
+
+        }
+        else {
+            await this.props.processForm(this.props.questionID, newResponse)
+            this.props.fetchQuestion(this.props.questionID)
+            //clear errors and form fields
+            this.setState({errors: ""})
+            this.setState({consultation: ""})
+            this.setState({answer: ""})
+
+         
+        }
     }
 
    
 
 
     render(){
+        
         return(
             <form onSubmit={this.submit}>
                 <div>
-
+                    <div className="errors">
+                    <p>{this.state.errors}</p>
+                    </div>
                 <label>
-                    consultation: <input type="date" placeholder={this.props.newResponse.consultation} onChange={this.update('consultation')}/>
+                    consultation: <input type="date" value={this.state.consultation} onChange={this.update('consultation')}/>
                 </label>
                 </div>
                 <div>
                 <label>
-                    answer: <textarea type='text' placeholder={this.props.newResponse.answer} onChange={this.update('answer')}/>
+                    answer: <textarea type='text' value={this.state.answer} onChange={this.update('answer')}/>
                 </label>
                 </div>
 
