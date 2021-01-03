@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import '../../assets/stylesheets/reset.css';
+import '../../assets/stylesheets/navbar.scss';
 
-// import './navbar.css'
+
+import CreateRoom from "../chatroom/create_room";
 
 class NavBar extends React.Component {
     constructor(props) {
@@ -26,9 +29,9 @@ class NavBar extends React.Component {
             );
         } else {
             return (
-                <div>
-                    <Link to={'/signup'}>Signup</Link>
-                    <Link to={'/login'}>Login</Link>
+                <div className='right-navbar'>
+                    <Link to={'/login'} className='signinButton'>Sign in</Link>
+                    <Link to={'/signup'} className='signupButton'>TRY FOR FREE</Link>
                 </div>
             );
         }
@@ -47,9 +50,38 @@ class NavBar extends React.Component {
             }
         }
         return (
-            <div>
-                {tbdevelopedHeader()}
-                { this.getLinks()}
+
+
+            <div className='navbar-container'>
+                <div className='nav-header-bar'>
+                    <div className='left-navbar'>
+                        <div className='brand-navbar'>{tbdevelopedHeader()}</div>
+                        
+                        <div className='team-navbar'>About
+                            <div className='team-container'>
+                                <div className='teamInfo-navbar'>
+                                    <div>
+                                        <div className='individual-member'>
+                                            <div>Oliver Lopez</div>
+                                        </div>
+                                        <div className='individual-member'>
+                                            <div>Shane Sharareh</div>   
+                                        </div>
+                                        <div className='individual-member'>
+                                            <div>Thomas Cheung</div>
+                                        </div>
+                                        <div className='individual-member'>
+                                            <div>William Leung</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+
+                    </div>
+
+                    <div>{ this.getLinks()}</div>
+                </div>
             </div>
         );
     }
