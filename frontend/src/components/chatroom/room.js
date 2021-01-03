@@ -314,7 +314,7 @@ const Room = (props) => {
         });
         //! @TOM FYI ADDING IT TO THIS BUTTON
         testFeatures()
-        // props.history.goBack
+        // props.history.goBack()
         // console.log(props.history)
     }
 
@@ -326,10 +326,10 @@ const Room = (props) => {
             userVideo.current.srcObject.getAudioTracks()[0].enabled = false;
             setMute('Unmute')
             // console.log('false', enabled)
-            console.log(peerRef)
-            console.log(peerRef.current)
-            console.log(userStream)
-            console.log(userStream.current)
+            // console.log(peerRef)
+            // console.log(peerRef.current)
+            // console.log(userStream)
+            // console.log(userStream.current)
             
 
 
