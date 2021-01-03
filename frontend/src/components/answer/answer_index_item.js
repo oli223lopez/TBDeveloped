@@ -1,7 +1,8 @@
 import React from 'react'
 class AnswerIndexItem extends React.Component {
     
-    render() {        
+    render() {     
+        // console.log('answer index item')   
                 return(
                     <div>
                         <p>User: {this.props.response.user}</p>

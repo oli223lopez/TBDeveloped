@@ -113,6 +113,8 @@ router.patch("/:id", passport.authenticate('jwt',{session:false}), async (req, r
     
 })
 
+
+
 //deleting a question
 router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, res) => {
 

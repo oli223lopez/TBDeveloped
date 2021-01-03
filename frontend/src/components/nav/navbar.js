@@ -53,7 +53,7 @@ class NavBar extends React.Component {
             <div className='navbar-container'>
                 <div className='nav-header-bar'>
                     <div className='left-navbar'>
-                        <div className='brand-navbar'>TBDeveloped</div>
+                        <div className='brand-navbar'>{tbdevelopedHeader()}</div>
                         
                         <div className='team-navbar'>About
                             <div className='team-container'>

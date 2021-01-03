@@ -5,7 +5,7 @@ import io from "socket.io-client";
 const Room = (props) => {
 
     //!TEST
-        // let [peers, setPeers] = useState([]);
+        let [peers, setPeers] = useState([]);
         const [mute, setMute] = useState('Mute');
         const [video, setVideo] = useState('Video Off');
     //!TEST
@@ -22,7 +22,7 @@ const Room = (props) => {
     // 1/1/21 test
     const otherVideos = useRef(new Array());
     const otherUsers = useRef(new Array()); 
-    const peers = useRef(new Object()); 
+    // const peers = useRef(new Object()); 
     // 1/1/21 test
 
     useEffect(() => {
