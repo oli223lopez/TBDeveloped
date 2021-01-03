@@ -6,6 +6,7 @@ import configureStore from './store/store'
 import jwt_decode from 'jwt-decode'
 import { setAuthToken } from './util/session_api_util'
 import { logout } from './actions/session_actions'
+import {fetchProfileQuestions} from './util/questions_api_util'
 
 // test
 import axios from "axios";
@@ -39,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.deleteQuestion = deleteQuestion; 
   window.fetchQuestions = fetchQuestions; 
   window.updateQuestion = updateQuestion; 
+  window.fetchProfileQuestions = fetchProfileQuestions;
   //test 
 
   const root = document.getElementById('root')

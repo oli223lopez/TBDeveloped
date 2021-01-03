@@ -11,6 +11,7 @@ class Profile extends React.Component {
 
 
     componentDidMount() {
+        console.log(this.props.currentUser.questions)
         this.props.fetchProfileQuestions(this.props.currentUser.questions)
     }
 
@@ -21,7 +22,8 @@ class Profile extends React.Component {
             if(this.props.profile_questions.length > 0){
                 return(
                 this.props.profile_questions.map((question, id) => {
-                    if(question.user === this.props.currentUser.id){
+                    if(this.props.currentUser.questions.includes(question._id)){
+                        if(question.user === this.props.currentUser.id){
                         return(
                             <div key={id}>
                                 Question Asked:
@@ -50,6 +52,8 @@ class Profile extends React.Component {
                             </div>
                         )
                     }
+                    }
+                    
                 })
                 )
                 console.log(this.props.profile_questions)
