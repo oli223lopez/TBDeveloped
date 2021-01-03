@@ -113,6 +113,8 @@ router.patch("/:id", passport.authenticate('jwt',{session:false}), async (req, r
     
 })
 
+
+
 //deleting a question
 router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, res) => {
 
@@ -154,7 +156,9 @@ router.post("/:id/responses", passport.authenticate('jwt',{session:false}), asyn
             let user = await User.findById(req.user.id)
             if(!user.questions.find(question._id)) {
                 user.questions.push(question._id)
-                user.save()
+                user.save(function (err) {
+                    if (!err) res.json('not working?')
+                })
             }
 
         }

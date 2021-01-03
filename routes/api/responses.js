@@ -19,7 +19,6 @@ router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
     if(!isValid) {
         return res.status(400).json(errors);
     } else {
-
         const newResponse = new Response({
             user: req.user.id, 
             consultation: req.body.consultation, 

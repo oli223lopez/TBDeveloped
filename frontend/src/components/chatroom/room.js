@@ -7,22 +7,32 @@ import '../../assets/stylesheets/room.scss';
 
 const Room = (props) => {
 
+    //!TEST
+        let [peers, setPeers] = useState([]);
+        const [mute, setMute] = useState('Mute');
+        const [video, setVideo] = useState('Video Off');
+    //!TEST
+        // const [test, setTest] = useState(0);
+
+
+    //!TEST
         
         
-    const [mute, setMute] = useState('Mute'); 
-    const [video, setVideo] = useState('Video Off');
+    // const [mute, setMute] = useState('Mute'); 
+    // const [video, setVideo] = useState('Video Off');
     const userVideo = useRef(); //for video html
     const partnerVideo = useRef(); //for video html
     const peerRef = useRef(); //rtc peerConnection
     const socketRef = useRef();
     const otherUser = useRef(); //otherUser - generated ID
     const userStream = useRef();
+    // const setPeers = useRef();
     
 
     // 1/1/21 test
     const otherVideos = useRef(new Array());
     const otherUsers = useRef(new Array()); 
-    const peers = useRef(new Object()); 
+    // const peers = useRef(new Object()); 
     // 1/1/21 test
 
     useEffect(() => {
@@ -32,6 +42,8 @@ const Room = (props) => {
             userStream.current = MediaStream;
 
             socketRef.current = io.connect("/");
+            console.log(socketRef.current)
+
             socketRef.current.emit("join room", props.match.params.roomID);
             
 
@@ -70,6 +82,7 @@ const Room = (props) => {
             // this i where the callUser function comes in. Essentially it calls the OTHER USER  
 
             socketRef.current.on("user joined", userID => {
+
                 otherUser.current = userID;
 
                 // 1/1/21 test
@@ -87,6 +100,39 @@ const Room = (props) => {
                 console.log('user B just joined the room', userID)
 
             });
+            
+
+
+            //!TEST - WL - trying to remove video on meeting exit
+            socketRef.current.on( "user left", id => {
+                const peerObj = peerRef.current.find(p => p.peerID === id);
+                if (peerObj){
+                    peerObj.peer.destroy();
+                }
+                const peers = peerRef.current.filter(p => p.peerID !== id);
+                peerRef.current = peers;
+                setPeers(peers); //state
+
+            })
+            // finding the peer, destorying the peer, and removing it from the array
+            // socketRef.current.on("disconnect", () => {
+            //     console.log('dIsCoNnEcTeD')
+                
+            // });
+
+            // socketRef.current.on( "user-disconnected", room => {
+            //     console.log('room', room)
+                // const peerObj = peerRef.current.find(p => p.peerID === id);
+                // if (peerObj){
+                //     peerObj.peer.destroy();
+                // }
+                // const peers = peerRef.current.filter(p => p.peerID !== id);
+                // peerRef.current = peers;
+                // setPeers(peers); //state
+
+            // })
+            //finding the peer, destorying the peer, and removing it from the array
+            //!TEST
 
             socketRef.current.on("offer", handleRecieveCall);
 
@@ -248,9 +294,20 @@ const Room = (props) => {
     //! Cut connection of the person leaving page - media stream only.
     const stopStreamedVideo = () => {
         const tracks = userStream.current.getTracks();
+        // console.log(tracks);
+        
+        //!TEST - WL  - Intent here is the black the screen whenever some oneleaves
+        // let enabled = userVideo.current.srcObject.getVideoTracks()[0].enabled;
+        // if(enabled){
+        //     userVideo.current.srcObject.getVideoTracks()[0].enabled = false;
+        // }
+        //!TEST
+        // userVideo.current.srcObject.getVideoTracks()[0].enabled = true;
+
         //note - stream.stop() is deprecated. Do not use
         tracks.forEach(function(track) {
             track.stop();
+            
         });
         //! @TOM FYI ADDING IT TO THIS BUTTON
         testFeatures()
@@ -265,6 +322,8 @@ const Room = (props) => {
             userVideo.current.srcObject.getAudioTracks()[0].enabled = false;
             setMute('Unmute')
             // console.log('false', enabled)
+            console.log(peerRef)
+            console.log(peerRef.current)
             console.log(userStream)
             console.log(userStream.current)
 
@@ -277,6 +336,30 @@ const Room = (props) => {
         }
     }
     
+    // function muteStream() {
+    //     const tracks = userStream.current.getAudioTracks();
+    //     //note - stream.stop() is deprecated. Do not use
+    //     console.log('audio', tracks)
+    //     tracks.forEach(function(track) {
+    //         track.stop();
+    //     });
+    //     console.log('audio', tracks)
+
+    // }
+    const hangUpButton = () => {
+        onLeave();
+    }
+
+    function onLeave() {
+        userVideo.current.srcObject = null;
+        console.log(peerRef.current)
+        partnerVideo.current.srcObject = null;
+        peerRef.current.close();
+        console.log(peerRef.current)
+        peerRef.current.onicecandidate = null;
+        peerRef.current.onaddstream = null;
+        createPeer()
+    };
 
     // 1/1/21 test
       const killIt = () => {
