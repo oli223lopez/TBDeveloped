@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import '../../assets/stylesheets/reset.css';
 import '../../assets/stylesheets/navbar.scss';
-
+import dino2 from '../../assets/images/dino2.png'
 
 
 
@@ -55,12 +55,17 @@ class NavBar extends React.Component {
             <div className='navbar-container'>
                 <div className='nav-header-bar'>
                     <div className='left-navbar'>
-                        <div className='brand-navbar'>{tbdevelopedHeader()}</div>
+
+                        
+                        <Link to='/'><img alt="" src={dino2} className='brand-icon'/></Link>
+                        <Link to='/'><div className='brand-navbar'>{tbdevelopedHeader()}</div></Link>
+
+
                         
                         <div className='team-navbar'>About
                             <div className='team-container'>
                                 <div className='teamInfo-navbar'>
-                                    <div>
+                                    <div className='teamInfo-group'>
                                         <div className='individual-member'>
                                             <div>Oliver Lopez</div>
                                         </div>
