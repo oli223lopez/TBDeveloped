@@ -4,7 +4,7 @@ import '../../assets/stylesheets/reset.css';
 import '../../assets/stylesheets/navbar.scss';
 import dino2 from '../../assets/images/dino2.png'
 
-import CreateRoom from "../chatroom/create_room";
+
 
 class NavBar extends React.Component {
     constructor(props) {
@@ -38,13 +38,28 @@ class NavBar extends React.Component {
     }
 
     render() {
+        const tbdevelopedHeader = () => {
+            if(this.props.loggedIn === false){
+                return(
+                    <Link to='/'><h1>TBDeveloped</h1></Link>
+                )
+            }else{
+                return (
+                    <Link to='/bulletin'><h1>TBDeveloped</h1></Link>
+                )
+            }
+        }
         return (
+
+
             <div className='navbar-container'>
                 <div className='nav-header-bar'>
                     <div className='left-navbar'>
+
                         
                         <Link to='/'><img alt="" src={dino2} className='brand-icon'/></Link>
-                        <Link to='/'><div className='brand-navbar'>TBDeveloped</div></Link>
+                        <Link to='/'><div className='brand-navbar'>{tbdevelopedHeader()}</div></Link>
+
 
                         
                         <div className='team-navbar'>About

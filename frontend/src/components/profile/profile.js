@@ -16,6 +16,10 @@ class Profile extends React.Component {
             <h2>{this.props.currentUser.username}'s Profile</h2>
 
             <div>
+                
+            </div>
+
+            <div>
                 <CreateQuestionFormContainer />
             </div>
         </div>
