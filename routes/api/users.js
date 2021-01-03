@@ -10,7 +10,10 @@ const passport = require('passport')
 
 
 router.get('/test', (req, res) => {
-    res.json({ msg: "This is the user route" })
+    User.find()
+    .then(users => res.json(users))
+    .catch(err => res.status(404).json(err));
+
 })
 module.exports = router;
 

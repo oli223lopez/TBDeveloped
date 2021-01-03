@@ -1,6 +1,7 @@
 import * as QuestionsAPIUtil from "../util/questions_api_util"
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
+export const RECEIVE_PROFILE_QUESTIONS = "RECEIVE_PROFILE_QUESTIONS";
 export const RECEIVE_QUESTION = "RECEIVE_QUESTION"
 export const REMOVE_QUESTION = "REMOVE_QUESTION"
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS"
@@ -15,6 +16,12 @@ export const receiveResponse = (response) => {
     }
 }
 //test
+const receiveProfileQuestions = (questions) => {
+    return {
+        type: RECEIVE_PROFILE_QUESTIONS,
+        questions // ES6 synthax = questions: questions 
+    }
+}
 
 const receiveQuestions = (questions) => {
     return {
@@ -50,6 +57,14 @@ export const fetchQuestions = () => (dispatch) => {
     return QuestionsAPIUtil.fetchQuestions()
         .then( res => { dispatch(receiveQuestions(res.data)) } )
         
+        .catch(err => dispatch(receiveQuestionErrors(err)))
+}
+
+
+export const fetchProfileQuestions = () => (dispatch) => {
+    return QuestionsAPIUtil.fetchQuestions()
+        .then(res => { dispatch(receiveProfileQuestions(res.data)) })
+
         .catch(err => dispatch(receiveQuestionErrors(err)))
 }
 

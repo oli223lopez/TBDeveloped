@@ -8,7 +8,11 @@ class ResponseForm extends React.Component{
         this.state = {
             consultation: this.props.consultation,
             answer: this.props.answer,
+<<<<<<< HEAD
             errors: ""
+=======
+            errors: this.props.errors
+>>>>>>> main
         }
         this.submit = this.submit.bind(this)
         this.update = this.update.bind(this)
@@ -48,6 +52,21 @@ class ResponseForm extends React.Component{
          
         }
     }
+    componentWillReceiveProps(nextProps) {
+        this.setState({ errors: nextProps.errors })
+    }
+
+    renderErrors() {
+        return (
+            <ul>
+                {Object.keys(this.state.errors).map((error, i) => (
+                    <li key={`error-${i}`}>
+                        {this.state.errors[error]}
+                    </li>
+                ))}
+            </ul>
+        );
+    }
 
    
 
@@ -73,6 +92,7 @@ class ResponseForm extends React.Component{
                 <div>
                 <label>
                     <button type='submit'>{this.props.formType}</button>
+                    {this.renderErrors()}
                 </label>
                 </div>
             </form>

@@ -1,4 +1,4 @@
-import { RECEIVE_QUESTIONS, RECEIVE_QUESTION, REMOVE_QUESTION } from "../actions/questions_actions";
+import { RECEIVE_QUESTIONS, RECEIVE_QUESTION,REMOVE_QUESTION } from "../actions/questions_actions";
 
 
 const QuestionsReducer = (state={}, action) =>  {

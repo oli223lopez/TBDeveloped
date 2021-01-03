@@ -33,7 +33,7 @@ export class UpdateQuestionForm extends React.Component {
 
 const mapStateToProps = (state) => {
     
-    return({ formType: 'Update Question!'}
+    return ({ formType: 'Update Question!', errors: state.errors.questions}
     )
 }
 

@@ -58,7 +58,7 @@ class NavBar extends React.Component {
 
                         
                         <Link to='/'><img alt="" src={dino2} className='brand-icon'/></Link>
-                        <Link to='/'><div className='brand-navbar'>{tbdevelopedHeader()}</div></Link>
+                        <div className='brand-navbar'>{tbdevelopedHeader()}</div>
 
 
                         
