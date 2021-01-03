@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import '../../assets/stylesheets/reset.css';
 import '../../assets/stylesheets/room.scss';
 
 
+
 const Room = (props) => {
+
 
     //!TEST
         let [peers, setPeers] = useState([]);
@@ -20,6 +22,7 @@ const Room = (props) => {
         
     // const [mute, setMute] = useState('Mute'); 
     // const [video, setVideo] = useState('Video Off');
+
     const userVideo = useRef(); //for video html
     const partnerVideo = useRef(); //for video html
     const peerRef = useRef(); //rtc peerConnection
@@ -311,7 +314,8 @@ const Room = (props) => {
         });
         //! @TOM FYI ADDING IT TO THIS BUTTON
         testFeatures()
-        
+        // props.history.goBack
+        // console.log(props.history)
     }
 
 
@@ -326,6 +330,8 @@ const Room = (props) => {
             console.log(peerRef.current)
             console.log(userStream)
             console.log(userStream.current)
+            
+
 
         }else {
             userVideo.current.srcObject.getAudioTracks()[0].enabled = true;
@@ -374,10 +380,12 @@ const Room = (props) => {
         if (peerRef.current){
             socketRef.current.emit("hangUp", otherUser.current)
             peerRef.current.close()
+
         }
 
     }
-
+    
+   
     
     return (
         <div className='room_container'>
@@ -405,6 +413,7 @@ const Room = (props) => {
                             <Link to='/'>
                                 <button onClick={() => stopStreamedVideo()}>Leave Meeting</button>  
                             </Link>
+
                         </div>
                     </div>
                 </div>   
