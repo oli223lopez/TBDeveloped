@@ -23,12 +23,16 @@ const peers = {};
 
 io.on("connection", socket => { // listens for "connection" event, which generates a socket object. This is triggered when a user on a browser hits a particular page 
 
+
     // listens for "connection" event, which generates a socket object. 
     // this appears to be triggered by the room.js socketRef.current = io.connect("/");
     
     socket.on("join room", roomID => { 
         // applying a event listener to the socket generated, which listens for "join room"
         // this is an event fired off from the frontend room.js file 
+
+    // console.log((new Date()).getTime())
+
     
 
         if (rooms[roomID]) {
@@ -47,9 +51,9 @@ io.on("connection", socket => { // listens for "connection" event, which generat
 
 
         //!TEST - WL - trying to remove video on meeting exit
-        peers[socket.id] = roomID;
+        // peers[socket.id] = roomID;
         //!TEST
-
+        
         const otherUser = rooms[roomID].find(id => id !== socket.id);
         // look into a speciific room based on the roomId emitted with the "join room event"
         // goes through the id's stored in that room checks if there is a id in the room that doesn't belong to the 
@@ -94,6 +98,7 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         })
 
         //!TEST - WL - trying to remove video on meeting exit
+
         socket.on('disconnect', () => {
             // const roomID = peers[socket.id];
             // let room = rooms[roomID];   
@@ -109,6 +114,18 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         //give me the roomID the socket.id is disconneting from and 
         //with that information, give me that room.
         //!TEST - 
+
+        // socket.on('disconnect', () => {
+        //     // const roomID = peers[socket.id];
+        //     // let room = rooms[roomID];   
+        //     socket.to(otherUser).emit('user-disconnected', () =>{
+        //         console.log('USER HAS DISCONNECTED')
+        //     })
+        // })
+        // give me the roomID the socket.id is disconneting from and 
+        // with that information, give me that room.
+        //!TEST 
+
 
 
         // 1/1/21 

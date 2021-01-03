@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, redirect } from "react-router-dom";
 import io from "socket.io-client";
+import '../../assets/stylesheets/reset.css';
+import '../../assets/stylesheets/room.scss';
+
 
 const Room = (props) => {
 
@@ -9,15 +12,22 @@ const Room = (props) => {
         const [mute, setMute] = useState('Mute');
         const [video, setVideo] = useState('Video Off');
     //!TEST
+        // const [test, setTest] = useState(0);
 
 
-    const userVideo = useRef();
-    const partnerVideo = useRef();
-    const peerRef = useRef();
+    //!TEST
+        
+        
+    const [mute, setMute] = useState('Mute'); 
+    const [video, setVideo] = useState('Video Off');
+    const userVideo = useRef(); //for video html
+    const partnerVideo = useRef(); //for video html
+    const peerRef = useRef(); //rtc peerConnection
     const socketRef = useRef();
-    const otherUser = useRef();
+    const otherUser = useRef(); //otherUser - generated ID
     const userStream = useRef();
     // const setPeers = useRef();
+    
 
     // 1/1/21 test
     const otherVideos = useRef(new Array());
@@ -27,14 +37,22 @@ const Room = (props) => {
 
     useEffect(() => {
 
+
         navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(MediaStream => {
             userVideo.current.srcObject = MediaStream;
             userStream.current = MediaStream;
+
+//!delete
+// console.log(userStream.current)
+// console.log('getTracks', userStream.current.getTracks())
+//!delete
+
 
             socketRef.current = io.connect("/");
             console.log(socketRef.current)
 
             socketRef.current.emit("join room", props.match.params.roomID);
+            
 
             // has the socket emit this event, this event is caught by the server. I believe there's some 
             // 'long polling' involved. Interesting because the connection happens while this is on localhost 3000
@@ -46,6 +64,7 @@ const Room = (props) => {
             socketRef.current.on('other user', userID => {
                 callUser(userID);
                 otherUser.current = userID;
+
 
                 // 1/1/21 test
                 otherUsers.current.push(userID) 
@@ -78,7 +97,16 @@ const Room = (props) => {
                 // be one user being added at a time 
                 // this is from the perspective of existing users in the room 
                 // 1/1/21 test
+
+                console.log('other user joined room')
             });
+
+            socketRef.current.emit("user joined", userID => {
+                otherUser.current = userID;
+                
+
+            });
+            
 
 
             //!TEST - WL - trying to remove video on meeting exit
@@ -93,6 +121,23 @@ const Room = (props) => {
 
             })
             // finding the peer, destorying the peer, and removing it from the array
+            // socketRef.current.on("disconnect", () => {
+            //     console.log('dIsCoNnEcTeD')
+                
+            // });
+
+            // socketRef.current.on( "user-disconnected", room => {
+            //     console.log('room', room)
+                // const peerObj = peerRef.current.find(p => p.peerID === id);
+                // if (peerObj){
+                //     peerObj.peer.destroy();
+                // }
+                // const peers = peerRef.current.filter(p => p.peerID !== id);
+                // peerRef.current = peers;
+                // setPeers(peers); //state
+
+            // })
+            //finding the peer, destorying the peer, and removing it from the array
             //!TEST
 
             socketRef.current.on("offer", handleRecieveCall);
@@ -210,6 +255,7 @@ const Room = (props) => {
 
     function handleTrackEvent(e) {
         partnerVideo.current.srcObject = e.streams[0];
+
     }; // creating a video for the person you're calling? 
 
 
@@ -223,11 +269,18 @@ const Room = (props) => {
         vid.parentNode.removeChild(vid);
     }
 
+        console.log('final step?')
+    };
+
+
+
+    //cuts connection when user leaves page
     useEffect(() => {
         return () => {
             stopStreamedVideo()
         }
     },[])
+
     
 
     //! VIDEO function
@@ -249,7 +302,7 @@ const Room = (props) => {
         const tracks = userStream.current.getTracks();
         // console.log(tracks);
         
-        //!TEST - WL  - Intent here is the black the screen whenever some one leaves
+        //!TEST - WL  - Intent here is the black the screen whenever some oneleaves
         // let enabled = userVideo.current.srcObject.getVideoTracks()[0].enabled;
         // if(enabled){
         //     userVideo.current.srcObject.getVideoTracks()[0].enabled = false;
@@ -275,10 +328,15 @@ const Room = (props) => {
             // console.log('false', enabled)
             console.log(peerRef)
             console.log(peerRef.current)
+            console.log(userStream)
+            console.log(userStream.current)
+
         }else {
             userVideo.current.srcObject.getAudioTracks()[0].enabled = true;
             // console.log('true', enabled)
             setMute('Mute')
+            // console.log(props)
+
         }
     }
     
@@ -322,24 +380,61 @@ const Room = (props) => {
     }
 
     return (
+
         <div>
             <p>Video Chat</p>
 
             <video id="myVideo" autoPlay ref={userVideo} muted/>
             <video autoPlay ref={partnerVideo} />
+
+        <div className='room_container'>
+            {/* <video autoPlay ref={userVideo} muted/>
+            <video autoPlay ref={partnerVideo} /> */}
+
             
 
             {/* Leave meeting works but the other user sees a frozen screen */}
-            <Link to='/'>
+            {/* <Link to='/'>
                 <button onClick={() => stopStreamedVideo()}>Leave Meeting</button>  
-            </Link>
+            </Link> */}
 
 
             {/* BELOW IS WORKING FOR BOTH PARTY, DONT DELETE */}
+
             <button onClick={() => muteStream()}>{mute}</button> 
             <button onClick={() => playStop()}>{video}</button>  
 
             <button onClick={() => testFeatures()}>Test Button</button>
+
+            {/* <button onClick={() => muteStream()}>{mute}</button>  */}
+            {/* <button onClick={() => playStop()}>{video}</button>   */}
+            <div className="main">
+                <div className="main_videos">
+                    <div id="video-grid">
+                        <div>
+                            <video autoPlay ref={userVideo} muted/>
+                        </div>
+                        <div>
+                            <video autoPlay ref={partnerVideo} />
+                        </div>
+                    </div>
+                </div>
+                <div className="main_controls_container">
+                    <div className='main_controls'>
+                        <div>
+                            <button onClick={() => muteStream()}>{mute}</button> 
+                            <button onClick={() => playStop()}>{video}</button>  
+                        </div>
+                        <div>
+                            {/* uncomment after testing below LINK */}
+                            <Link to='/'>
+                                <button onClick={() => stopStreamedVideo()}>Leave Meeting</button>  
+                            </Link>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+
         </div>
     );
 };
