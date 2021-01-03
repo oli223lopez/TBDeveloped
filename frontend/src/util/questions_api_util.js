@@ -4,6 +4,10 @@ export const fetchQuestions = () => {
     return axios.get("/api/questions")
 };
 
+export const fetchProfileQuestions = (questions) => {
+    return axios.get("/api/questions/profile_questions", questions)
+};
+
 export const fetchQuestion = (questionId) => {
     return axios.get(`/api/questions/${questionId}`)
 }

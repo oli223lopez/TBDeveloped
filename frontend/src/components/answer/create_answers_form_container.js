@@ -10,7 +10,8 @@ const mapStateToProps = (state, props)=> {
         answer: '',
         user: state.session.user.id
     },
-    formType: 'Respond',})
+    formType: 'Respond',
+    errors: state.errors.responses})
 }
 
 const mapDispatchToProps = dispatch => ({

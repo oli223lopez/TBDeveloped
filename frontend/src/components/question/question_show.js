@@ -133,7 +133,7 @@ class QuestionShow extends React.Component {
             
             return(
                 <div>
-                    
+                    {/* {console.log(question)} */}
                     <h2>{question[0].subject}</h2>
                     <p>{question[0].content}</p>
                     <p>{`${question[0].solved}`}</p>
