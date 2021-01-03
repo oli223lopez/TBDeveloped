@@ -52,7 +52,7 @@
 
     .footer_top_container{
         background-color: #4a154b;
-        clip-path: ellipse(75% 100% at center top);
+        clip-path: ellipse(90% 100% at center top);
         height: auto;
         min-height: 330px;
         text-align: center;
@@ -64,7 +64,7 @@
             .footer_sent{
                 font-size: 40px;
                 color: white;
-                padding-top: 70px;
+                padding-top: 45px;
             }
     
             .freeTrial_container{
@@ -93,19 +93,40 @@
             }
 
             .social{
-                color: white;
-                margin-top: 80px;
+                color: rgb(152, 86, 172);
+                margin-top: 70px;
+                margin-bottom: 5px;
             }
 
             .social_links{
                 display: flex;
                 justify-content: center;
+                font-size: 12px;
+                
+                .individual_info{
+                    display:flex;
+                    flex-direction: column;
 
+                    .info_align{
+                        display: flex;
+                        margin-bottom: 7px;
+                        margin-left: 5px;
+
+                        a{
+                            margin-left: 3px;
+                            color:rgb(221, 220, 220);
+                        }
+                        a:hover{
+                            text-decoration: underline;
+                        }
+                    }
+                }
                 .name-space{
                     display: flex;
                     margin-top: 10px;
                     margin-left: 10px;
                     margin-right: 10px;
+                    color:rgb(221, 220, 220);
 
                     img{
                         height: auto;

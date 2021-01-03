@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import '../../assets/stylesheets/main.scss';
 import splash from '../../assets/images/splash.jpg';
-import github2 from '../../assets/images/github2.png';
-import linkedin from '../../assets/images/linkedin.png';
+import gitty from '../../assets/images/gitty.png';
+import linkedn from '../../assets/images/linkedn.png';
 
 
 class MainPage extends React.Component {
@@ -50,34 +50,58 @@ class MainPage extends React.Component {
                         <div className='social_links'>
                             <div>
                                 <p className='name-space'>Oliver
-                                    <a href='https://github.com/oli223lopez'>Github</a>
-                                    <img src={github2} />
-                                    <a href='https://github.com/oli223lopez'>Linkedin</a>
-                                    <img src={linkedin} />
+                                <div className='individual_info'>
+                                    <div className='info_align'>
+                                        <img src={gitty} />
+                                        <a href='https://github.com/oli223lopez'>Github</a>
+                                    </div>
+                                    <div className='info_align'>
+                                        <img src={linkedn} />
+                                        <a href='https://www.linkedin.com/in/oliverlopez23/'>Linkedin</a>
+                                    </div>
+                                </div>
                                 </p>
                             </div>
                             <div>
                                 <p className='name-space'>Shane
-                                    <a href='https://github.com/oli223lopez'>Github</a>                                
-                                    <img src={github2} />
-                                    <a href='https://github.com/oli223lopez'>Linkedin</a>
-                                    <img src={linkedin} />
+                                    <div className='individual_info'>
+                                        <div className='info_align'>
+                                            <img src={gitty} />
+                                            <a href='https://github.com/ShaneSharareh'>Github</a>
+                                        </div>
+                                        <div className='info_align'>
+                                            <img src={linkedn} />
+                                            <a href='https://www.linkedin.com/in/shanesharareh/'>Linkedin</a>
+                                        </div>
+                                    </div>
                                 </p>
                             </div>
                             <div>
                                 <p className='name-space'>Thomas
-                                    <a href='https://github.com/oli223lopez'>Github</a>                                
-                                    <img src={github2} />
-                                    <a href='https://github.com/oli223lopez'>Linkedin</a>
-                                    <img src={linkedin} />
+                                    <div className='individual_info'>
+                                        <div className='info_align'>
+                                            <img src={gitty} />
+                                            <a href='https://github.com/tom-cheung'>Github</a>
+                                        </div>
+                                        <div className='info_align'>
+                                            <img src={linkedn} />
+                                            <a href='https://www.linkedin.com/in/thomas-cheung-38953034/'>Linkedin</a>
+                                        </div>
+                                    </div>
                                 </p>
                             </div>
                             <div>
                                 <p className='name-space'>William
-                                    <a href='https://github.com/oli223lopez'>Github</a>                                
-                                    <img src={github2} />
-                                    <a href='https://github.com/oli223lopez'>Linkedin</a>
-                                    <img src={linkedin} />
+                                    <div className='individual_info'>
+                                        <div className='info_align'>
+                                            <img src={gitty} />
+                                            <a href='https://github.com/1071919wl'>Github</a>
+                                        </div>
+                                        <div className='info_align'>
+                                            <img src={linkedn} />
+                                            <a href='https://www.linkedin.com/in/william-leung-60589a73/'>Linkedin</a>
+                                        </div>
+                                    </div>
                                 </p>
                             </div>
                         </div>
