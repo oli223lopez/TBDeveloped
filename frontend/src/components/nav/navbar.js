@@ -43,7 +43,7 @@ class NavBar extends React.Component {
                 <div className='nav-header-bar'>
                     <div className='left-navbar'>
                         
-                        <Link to='/'><img src={dino2} className='brand-icon'/></Link>
+                        <Link to='/'><img alt="" src={dino2} className='brand-icon'/></Link>
                         <Link to='/'><div className='brand-navbar'>TBDeveloped</div></Link>
 
                         
