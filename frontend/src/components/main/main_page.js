@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import '../../assets/stylesheets/main.scss';
+import '../../assets/stylesheets/question_show.css';
+
 import splash from '../../assets/images/splash.jpg';
 import gitty from '../../assets/images/gitty.png';
 import linkedn from '../../assets/images/linkedn.png';
