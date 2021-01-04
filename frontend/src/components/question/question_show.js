@@ -145,19 +145,32 @@ class QuestionShow extends React.Component {
             }
             
             return(
-                <div>
-                    {/* {console.log(this.state.users)} */}
-                    <h2>{question[0].subject}</h2>
-                    <p>{question[0].content}</p>
-                    <p>{`${question[0].solved}`}</p>
+                < div className="question_container">
+                    <div className="question_description">
 
-                    <p>Created on: {Date(question[0].createdAt)}</p>
-                    <p>Tag: {question[0].tag}</p>
-            
-                    {userResponse()}
-                    {questionCreatorResponses()}
+                    {/* {console.log(this.state.users)} */}
+                    <div className="question_header">
+                    <h2>{question[0].subject}</h2>
+                    <p className="date_posted">posted: {Date(question[0].createdAt)}</p>
+                    </div>
+                     <div className="question_body">
+                         <p>{question[0].content}</p>
+
+                    </div>   
+
+                    <div className="question_footer">
+                    { question[0].solved ? <p> &#10003; Solved</p> : <p>&#10007; Unsolved</p> }
+                    <p className="tag">Tag: {question[0].tag}</p>
+                    <h1 className="question-author"> posted by {question[0].user.username}</h1>
+
+                    </div>
+
+                    </div>
+
                     {update()}
                     {deleteQuestion()}
+                    {userResponse()}
+                    {questionCreatorResponses()}
 
 
                     {createAnswers()}
@@ -169,6 +182,7 @@ class QuestionShow extends React.Component {
                     <div>
                         <CreateRoom />
                     </div>
+
                 </div>
             )
         }
