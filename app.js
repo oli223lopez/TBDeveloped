@@ -23,6 +23,12 @@ const peers = {};
 
 io.on("connection", socket => { // listens for "connection" event, which generates a socket object. This is triggered when a user on a browser hits a particular page 
 
+      // 1/3/21
+      socket.on("send name", username => {
+        peers[socket.id.toString()] = username
+        console.log(peers)
+        })
+    // 1/3/21
 
     // listens for "connection" event, which generates a socket object. 
     // this appears to be triggered by the room.js socketRef.current = io.connect("/");
@@ -32,7 +38,7 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         // this is an event fired off from the frontend room.js file 
 
     // console.log((new Date()).getTime())
-
+        
     
         if (rooms[roomID]) {
             rooms[roomID].push(socket.id);
@@ -60,6 +66,8 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         // finds an ID that does NOT match the socket id of the user who just connected. This represents another user 
         // in the room 
 
+      
+
         if (otherUser) {
             socket.emit("other user", otherUser);
             // this emits the other user event to the client side, the person who just joined this chatroom   
@@ -67,6 +75,10 @@ io.on("connection", socket => { // listens for "connection" event, which generat
             // this second line emits an event TO the other user. 
             // socket.to().emit will emit an event to a specified user 
             // remember otherUser is a socket essentially? 
+
+            let selfUser = socket.id
+            socket.to(otherUser).emit("receive name", peers[socket.id])
+            socket.emit("receive name", peers[otherUser])
         }
 
         // if other user exists, then you emit a event called "other user" along with the OTHER USERS socket id 
@@ -103,6 +115,8 @@ io.on("connection", socket => { // listens for "connection" event, which generat
             // let room = rooms[roomID];   
             // socket.to(roomId)
             let idx = rooms[roomID].indexOf(socket.id)   
+
+            delete peers[socket.id]
             
             rooms[roomID].splice(idx, 1)
 
