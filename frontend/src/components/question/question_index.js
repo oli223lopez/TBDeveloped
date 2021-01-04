@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import CreateQuestionFormContainer from '../question/create_question_form_container'
+import '../../assets/stylesheets/bulletin_board.css'
 
 
 
@@ -12,20 +12,20 @@ class QuestionIndex extends React.Component {
 
     render() {
         return(
-            <div>
+            <div className='questionIndex'>
                 {this.props.questions.map((question, i) => {
                     // console.log(question._id)
                     return(
-                        <div key={i}>
-                            <div>{question.user.username}</div>
-                            <Link to={`/question/${question._id}`}>{question.subject}</Link>
+                        <div key={i} className='individualQuestion'>
+                            <div className='individualQuestionLink'>Username: {question.user.username}</div>
+                            <div className='individualQuestionUser'>
+                                Case: <Link to={`/question/${question._id}`}>{question.subject}</Link>
+                            </div>
                         </div>
                         
                     )
                 })}
-                <div>
-                    <CreateQuestionFormContainer />
-                </div>
+                
             </div>
         )
        
