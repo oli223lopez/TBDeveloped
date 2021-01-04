@@ -39,6 +39,7 @@ router.get('/profile_questions', (req, res) => {
 router.get('/',(req,res) => {
     
     Question.find()
+    .populate('user')
     .sort({timestamps:-1})
     .then(questions => {res.json(questions)})
     .catch(err => res.status(404).json(err));
@@ -48,6 +49,7 @@ router.get('/',(req,res) => {
 //retreiving one quesion
 router.get('/:id',(req,res)=>{
     Question.findById(req.params.id)
+    .populate('user')
     .then(question => res.json(question))
     .catch(err => res.status(404).json("question not found"))
 })

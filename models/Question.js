@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const User = require('./User')
 
 const ResponseSchema = new Schema({
     user: {
@@ -23,7 +24,7 @@ const ResponseSchema = new Schema({
 const QuestionSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'User',
         require: true
     },
     subject: {
