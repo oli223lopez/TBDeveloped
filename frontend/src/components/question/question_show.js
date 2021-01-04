@@ -4,15 +4,19 @@ import CreateQuestionFormContainer from '../question/create_question_form_contai
 import CreateRoom from '../chatroom/create_room'
 
 import {Link} from 'react-router-dom'
+import AnswerIndexContainer from '../answer/answer_index_container'
+import AnswerIndexItemContainer from '../answer/answer_index_item_container'
+import CreateAnswersFormContainer from '../answer/create_answers_form_container'
+
+
 
 
 class QuestionShow extends React.Component {
+
     constructor(props){
         super(props)
         this.updateQuestion = this.props.updateQuestion.bind(this)
         this.deleteQuestion = this.props.deleteQuestion.bind(this)
-
-
     }
 
     componentDidMount(){
@@ -26,6 +30,7 @@ class QuestionShow extends React.Component {
     
 
     render(){
+        
         const question = Object.values(this.props.question)
         // console.log(question)
         if(this.isEmpty(question) === true){
@@ -48,7 +53,7 @@ class QuestionShow extends React.Component {
                         </div>
                     )
                 }else{
-                    console.log('you are not the owner of this question')
+                    // console.log('you are not the owner of this question')
                 }
             }
 
@@ -56,28 +61,101 @@ class QuestionShow extends React.Component {
                 if (question[0].user === this.props.userId) {
                     return(
                     
+                       <div>
                         <Link to="/bulletin">
-                            <button onClick={() => this.props.deleteQuestion(question[0]._id)}>
+                        <button onClick={() => this.props.deleteQuestion(question[0]._id)}>
                                 Delete Question
-                            </button>
+                        </button>
                         </Link>
+
+                        </div>
+                    )
+                }
+            }
+
+            const userResponse = () => {
+                return(
+                question[0].responses.map((response, id) => {
+                    if(response.user === this.props.userId){
+                        return(
+                            <div key={id}>
+                                <p>------------------- Response --------------------------------------------</p>
+                                <AnswerIndexItemContainer 
+                                    response = {response}
+                                    questionID = {question[0]._id}
+                                    currentUserID = {this.props.userId}
+                                    fetchQuestion = {this.props.fetchQuestion}
+
+                                />
+                            </div>
+                        )                       
+                    }
+                })
+                )
+            }
+            
+            const questionCreatorResponses = () => {
+               
+                if (question[0].responses.length >0) {
+                    if (question[0].user === this.props.userId){
+                    return(
+                        
+                        <div>
+                        <p>------------------- Responses -------------------------------------------</p> 
+                            <AnswerIndexContainer 
+                                responses = {question[0].responses}
+                                questionID = {question[0]._id}
+                                currentUserID = {this.props.userId}
+                                fetchQuestion = {this.props.fetchQuestion}
+                                
+                            />
+                        </div>
+                    
+                    )
+                }}else{
+                    <div></div>
+                }
+            }
+            
+             const createAnswers = () => {
+                if (question[0].user !== this.props.userId) {
+                    return(
+                        
+                    
+                        <div>
+             <p>------------------- Response Form -------------------------------------</p>     
+
+                            <CreateAnswersFormContainer 
+                                questionID = {question[0]._id}
+                                fetchQuestion = {this.props.fetchQuestion}
+                                
+                            />
+         <p>---------------------------------------------------------------------------</p>     
+
+                        </div>
                     
                     )
                 }
             }
             
-            
             return(
                 <div>
-                    
+                    {/* {console.log(question)} */}
                     <h2>{question[0].subject}</h2>
                     <p>{question[0].content}</p>
                     <p>{`${question[0].solved}`}</p>
 
                     <p>Created on: {Date(question[0].createdAt)}</p>
                     <p>Tag: {question[0].tag}</p>
+            
+                    {userResponse()}
+                    {questionCreatorResponses()}
                     {update()}
                     {deleteQuestion()}
+
+
+                    {createAnswers()}
+
 
                     <div>
                         <CreateQuestionFormContainer />

@@ -11,13 +11,36 @@ const User = require('../../models/User');
 router.get('/test', (req, res) => {
     res.json({ msg: "This is the question route" })
 })
+
+
+
+router.get('/profile_questions', (req, res) => {
+    
+    console.log('this is being activated')
+    Question.find()
+        .then(questions => {
+            console.log(req)
+            const questionArray = []
+            questions.forEach(question => {
+                if(req.body.questions.includes(question._id)){
+                    questionArray.push(question)
+                }
+            })
+            console.log(questionArray)
+            res.json(questionArray)
+        })
+        .catch(err => res.status(404).json('this doesnt work'));
+        
+
+})
 //test
 
 //retreiving all the questions
 router.get('/',(req,res) => {
+    
     Question.find()
     .sort({timestamps:-1})
-    .then(questions => res.json(questions))
+    .then(questions => {res.json(questions)})
     .catch(err => res.status(404).json(err));
 });
 
@@ -113,6 +136,8 @@ router.patch("/:id", passport.authenticate('jwt',{session:false}), async (req, r
     
 })
 
+
+
 //deleting a question
 router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, res) => {
 
@@ -154,7 +179,9 @@ router.post("/:id/responses", passport.authenticate('jwt',{session:false}), asyn
             let user = await User.findById(req.user.id)
             if(!user.questions.find(question._id)) {
                 user.questions.push(question._id)
-                user.save()
+                user.save(function (err) {
+                    if (!err) res.json('not working?')
+                })
             }
 
         }
@@ -189,4 +216,3 @@ router.delete("/:questionId/responses/:responseId", passport.authenticate('jwt',
 module.exports = router;
 
 
- 

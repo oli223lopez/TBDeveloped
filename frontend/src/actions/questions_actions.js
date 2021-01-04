@@ -1,9 +1,27 @@
 import * as QuestionsAPIUtil from "../util/questions_api_util"
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
+export const RECEIVE_PROFILE_QUESTIONS = "RECEIVE_PROFILE_QUESTIONS";
 export const RECEIVE_QUESTION = "RECEIVE_QUESTION"
 export const REMOVE_QUESTION = "REMOVE_QUESTION"
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS"
+
+
+//test
+export const RECEIVE_RESPONSE = 'RECEIVE_RESPONSE';
+export const receiveResponse = (response) => {
+    return {
+        type: RECEIVE_RESPONSE,
+        response
+    }
+}
+//test
+const receiveProfileQuestions = (questions) => {
+    return {
+        type: RECEIVE_PROFILE_QUESTIONS,
+        questions // ES6 synthax = questions: questions 
+    }
+}
 
 const receiveQuestions = (questions) => {
     return {
@@ -37,14 +55,22 @@ const receiveQuestionErrors = (errors) => {
 
 export const fetchQuestions = () => (dispatch) => {
     return QuestionsAPIUtil.fetchQuestions()
-        .then( res => { dispatch(receiveQuestions(res.data)) })
+        .then( res => { dispatch(receiveQuestions(res.data)) } )
+        
+        .catch(err => dispatch(receiveQuestionErrors(err)))
+}
+
+
+export const fetchProfileQuestions = (questions) => (dispatch) => {
+    return QuestionsAPIUtil.fetchQuestions(questions)
+        .then(res => dispatch(receiveProfileQuestions(res.data)))
         .catch(err => dispatch(receiveQuestionErrors(err)))
 }
 
 export const fetchQuestion = (questionId) => (dispatch) => {
     return QuestionsAPIUtil.fetchQuestion(questionId)
-        .then( res => { dispatch(receiveQuestion(res.data)) })
-        .catch(err => dispatch(receiveQuestionErrors(err)))
+        .then(res => ( dispatch(receiveQuestion(res.data)), dispatch(receiveResponse(res.data.responses))))
+        .catch(err => (dispatch(receiveQuestionErrors(err))))
 }
 
 export const postQuestion = (newQuestion) => (dispatch) => {

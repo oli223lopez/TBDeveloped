@@ -27,7 +27,7 @@ class MainPage extends React.Component {
 
                     <div className="image_top_container">
                         <div className='splash_img'>
-                            <img src={splash} />
+                            <img alt="" src={splash} />
                         </div>
                     </div>
 
@@ -49,60 +49,60 @@ class MainPage extends React.Component {
                         <div className='social'>Social</div>
                         <div className='social_links'>
                             <div>
-                                <p className='name-space'>Oliver
+                                <div className='name-space'>Oliver
                                 <div className='individual_info'>
                                     <div className='info_align'>
-                                        <img src={gitty} />
+                                        <img alt="" src={gitty} />
                                         <a href='https://github.com/oli223lopez'>Github</a>
                                     </div>
                                     <div className='info_align'>
-                                        <img src={linkedn} />
+                                        <img alt="" src={linkedn} />
                                         <a href='https://www.linkedin.com/in/oliverlopez23/'>Linkedin</a>
                                     </div>
                                 </div>
-                                </p>
+                                </div>
                             </div>
                             <div>
-                                <p className='name-space'>Shane
+                                <div className='name-space'>Shane
                                     <div className='individual_info'>
                                         <div className='info_align'>
-                                            <img src={gitty} />
+                                            <img alt="" src={gitty} />
                                             <a href='https://github.com/ShaneSharareh'>Github</a>
                                         </div>
                                         <div className='info_align'>
-                                            <img src={linkedn} />
+                                            <img alt="" src={linkedn} />
                                             <a href='https://www.linkedin.com/in/shanesharareh/'>Linkedin</a>
                                         </div>
                                     </div>
-                                </p>
+                                </div>
                             </div>
                             <div>
-                                <p className='name-space'>Thomas
+                                <div className='name-space'>Thomas
                                     <div className='individual_info'>
                                         <div className='info_align'>
-                                            <img src={gitty} />
+                                            <img alt="" src={gitty} />
                                             <a href='https://github.com/tom-cheung'>Github</a>
                                         </div>
                                         <div className='info_align'>
-                                            <img src={linkedn} />
+                                            <img alt="" src={linkedn} />
                                             <a href='https://www.linkedin.com/in/thomas-cheung-38953034/'>Linkedin</a>
                                         </div>
                                     </div>
-                                </p>
+                                </div>
                             </div>
                             <div>
-                                <p className='name-space'>William
+                                <div className='name-space'>William
                                     <div className='individual_info'>
                                         <div className='info_align'>
-                                            <img src={gitty} />
+                                            <img alt="" src={gitty} />
                                             <a href='https://github.com/1071919wl'>Github</a>
                                         </div>
                                         <div className='info_align'>
-                                            <img src={linkedn} />
+                                            <img alt="" src={linkedn} />
                                             <a href='https://www.linkedin.com/in/william-leung-60589a73/'>Linkedin</a>
                                         </div>
                                     </div>
-                                </p>
+                                </div>
                             </div>
                         </div>
 

@@ -36,8 +36,10 @@ io.on("connection", socket => { // listens for "connection" event, which generat
     
         if (rooms[roomID]) {
             rooms[roomID].push(socket.id);
+            console.log('this is the rooms', rooms)
         } else {
             rooms[roomID] = [socket.id];
+            console.log('this is the rooms', rooms)
         }
 
         // the "join room" event emits the roomID number (see rooms.js). This gets passed down to this
@@ -74,6 +76,7 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         // on this event, do this. 
         socket.on("offer", payload => { // caller, makes the call, and supplies a payload 
             io.to(payload.target).emit("offer", payload);
+           
         });
 
         socket.on("answer", payload => { // receiver, answers the call and responds with a payload 
@@ -81,9 +84,17 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         });
 
         socket.on("ice-candidate", incoming => { // established a proper connection 
+            console.log(incoming.test)
             io.to(incoming.target).emit("ice-candidate", incoming.candidate)
         })
 
+        socket.on('remove-user', () => {
+            console.log('hello from yee old server')
+            // console.log(rooms[roomID].indexOf(socket.id))
+            const index = rooms[roomID].indexOf(socket.id) 
+            rooms[roomID] = rooms[roomID].splice(0, index) + rooms[roomID].splice(index + 1)
+            console.log(rooms)
+        })
 
         //!TEST - WL - trying to remove video on meeting exit
 
