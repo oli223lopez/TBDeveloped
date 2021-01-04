@@ -5,9 +5,11 @@ import '../../assets/stylesheets/profile.scss';
 
 
 class Profile extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+    constructor(props) {
+        super(props);
+
+        this.caseResolved = this.caseResolved.bind(this);
+    }
 
 
     componentDidMount() {
@@ -15,12 +17,29 @@ class Profile extends React.Component {
         this.props.fetchProfileQuestions(this.props.currentUser.questions)
     }
 
+
+    caseResolved(bool){
+        if (bool === 'false'){
+            return (
+                <div className='bool_info'>
+                    False
+                </div>
+            )
+        }else{
+            return (
+                <div className='bool_info2'>
+                    True
+                </div>
+            )
+        }
+    }
     
 
     render() {
+        let boolean = false;
         let amtOfPost = 0
-        const profile_questions = () => {
 
+        const profile_questions = () => {
             if(this.props.profile_questions.length > 0){
                 return(
                     this.props.profile_questions.map((question, id) => {
@@ -29,6 +48,7 @@ class Profile extends React.Component {
                             if(question.user._id === this.props.currentUser.id){
                                 // console.log('bellow', (question.user._id));
                                 amtOfPost += 1;
+                                {`${question.solved}` === 'false' ? boolean = 'false' : boolean = true}
                                 return(
                                     <div key={id} className='questions_topic'>
                                         <div className='individual_case'>
@@ -44,7 +64,8 @@ class Profile extends React.Component {
                                             </label>
                                             <label>
                                                 <div className='sub_label'>Case Closed: </div>
-                                                <div className='actual_info'>{`${question.solved}`}</div>
+                                                {/* <div className='actual_info'>{`${question.solved}`}</div> */}
+                                                {this.caseResolved(boolean)}
                                             </label>
                                         </div>
                                         
@@ -85,7 +106,6 @@ class Profile extends React.Component {
 
                 <div className="user_profile_info">
                     <div className='profile_name'>{this.props.currentUser.username}'s Profile</div>
-
                     <img alt="robots" src={`https://robohash.org/${this.props.currentUser.id}?100x100`} className='roboImgApi'/>
 
                     <div className='profile_post_amt'>Number of Posts: {amtOfPost}</div>
