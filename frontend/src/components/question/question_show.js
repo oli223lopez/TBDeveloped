@@ -11,10 +11,14 @@ import CreateAnswersFormContainer from '../answer/create_answers_form_container'
 
 
 
+
 class QuestionShow extends React.Component {
 
     constructor(props){
         super(props)
+        this.state = {
+            users: []
+        }
         this.updateQuestion = this.props.updateQuestion.bind(this)
         this.deleteQuestion = this.props.deleteQuestion.bind(this)
     }
@@ -39,7 +43,7 @@ class QuestionShow extends React.Component {
             )
         }else{
             const update = () => {
-                if(question[0].user === this.props.userId){
+                if(question[0].user._id === this.props.userId){
                     return(
                         <div>
                             <UpdateQuestionForm 
@@ -48,7 +52,7 @@ class QuestionShow extends React.Component {
                                 content = {question[0].content}
                                 tag = {question[0].tag}
                                 solved = {question[0].solved}
-                                user = {question[0].user}
+                                user = {question[0].user._id}
                             />
                         </div>
                     )
@@ -58,7 +62,7 @@ class QuestionShow extends React.Component {
             }
 
             const deleteQuestion = () => {
-                if (question[0].user === this.props.userId) {
+                if (question[0].user._id === this.props.userId) {
                     return(
                     
                        <div>
@@ -76,16 +80,16 @@ class QuestionShow extends React.Component {
             const userResponse = () => {
                 return(
                 question[0].responses.map((response, id) => {
-                    if(response.user === this.props.userId){
+                    if(response.user._id === this.props.userId){
                         return(
                             <div key={id}>
-                                <p>------------------- Response --------------------------------------------</p>
+                                <p>------------------- Responses --------------------------------------------</p>
                                 <AnswerIndexItemContainer 
                                     response = {response}
                                     questionID = {question[0]._id}
                                     currentUserID = {this.props.userId}
                                     fetchQuestion = {this.props.fetchQuestion}
-
+                                   
                                 />
                             </div>
                         )                       
@@ -97,7 +101,8 @@ class QuestionShow extends React.Component {
             const questionCreatorResponses = () => {
                
                 if (question[0].responses.length >0) {
-                    if (question[0].user === this.props.userId){
+                    
+                    if (question[0].user._id === this.props.userId){
                     return(
                         
                         <div>
@@ -108,6 +113,7 @@ class QuestionShow extends React.Component {
                                 currentUserID = {this.props.userId}
                                 fetchQuestion = {this.props.fetchQuestion}
                                 
+                               
                             />
                         </div>
                     
@@ -118,7 +124,7 @@ class QuestionShow extends React.Component {
             }
             
              const createAnswers = () => {
-                if (question[0].user !== this.props.userId) {
+                if (question[0].user._id !== this.props.userId) {
                     return(
                         
                     
@@ -140,7 +146,7 @@ class QuestionShow extends React.Component {
             
             return(
                 <div>
-                    {/* {console.log(question)} */}
+                    {/* {console.log(this.state.users)} */}
                     <h2>{question[0].subject}</h2>
                     <p>{question[0].content}</p>
                     <p>{`${question[0].solved}`}</p>

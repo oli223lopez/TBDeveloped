@@ -1,9 +1,11 @@
 import React from 'react'
 import AnswerIndexItemContainer from '../answer/answer_index_item_container'
+import { allUsers } from '../../util/session_api_util'
+
 class AnswerIndex extends React.Component {
-
-
    
+
+
 
 
     

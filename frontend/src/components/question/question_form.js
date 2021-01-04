@@ -6,7 +6,7 @@ class QuestionForm extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            subject: this.props.subject,
+            subject: '',
             content: this.props.content,
             tag: this.props.tag,
             solved: this.props.solved,
@@ -44,7 +44,7 @@ class QuestionForm extends React.Component{
     }
 
     updateSubmit(e) {
-        console.log(this.props.questionId)
+        // console.log(this.props.questionId)
         e.preventDefault();
         let newQuestion = {
             
@@ -98,7 +98,6 @@ class QuestionForm extends React.Component{
                     <label>
                         <button type='submit'>{this.props.formType}</button>
                     </label>
-
 
                 </form>
             )

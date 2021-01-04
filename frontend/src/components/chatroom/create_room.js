@@ -12,7 +12,9 @@ const CreateRoom = (props) => {
 
     return (
         <div>
-            <p>RoomID: {uuid()}</p>
+            <div>
+                Start Video Chat!
+            </div>
             <Link to={`/room/${create()}`}><button>Create Room</button></Link>
         </div>
     )

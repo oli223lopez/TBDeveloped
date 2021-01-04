@@ -5,7 +5,9 @@ import AnswerIndex from '../answer/answer_index'
 const mapStateToProps = (state, ownProps) => {
     return({
     questionID: ownProps.questionID,
-    responses: ownProps.responses
+    responses: ownProps.responses,
+    username: ownProps.username,
+    
 
     })
 }

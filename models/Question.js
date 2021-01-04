@@ -5,7 +5,7 @@ const User = require('./User')
 const ResponseSchema = new Schema({
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'User',
         require: true
     },
     consultation: {

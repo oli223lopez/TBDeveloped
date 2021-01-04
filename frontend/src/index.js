@@ -7,6 +7,7 @@ import jwt_decode from 'jwt-decode'
 import { setAuthToken } from './util/session_api_util'
 import { logout } from './actions/session_actions'
 import {fetchProfileQuestions} from './util/questions_api_util'
+import {allUsers} from './util/session_api_util'
 
 // test
 import axios from "axios";
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.fetchQuestions = fetchQuestions; 
   window.updateQuestion = updateQuestion; 
   window.fetchProfileQuestions = fetchProfileQuestions;
+  window.allUsers = allUsers;
   //test 
 
   const root = document.getElementById('root')
