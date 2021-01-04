@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import '../../assets/stylesheets/signup.scss';
 
+
 class SignupForm extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +16,7 @@ class SignupForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearedErrors = false;
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,6 +55,25 @@ class SignupForm extends React.Component {
         ))}
       </ul>
     );
+  }
+
+
+  componentWillUnmount() {
+        this.props.removeErrors();
+    }
+
+
+  handleDemo(e) {
+    e.preventDefault();
+    // const demoUser = {email: 'Demo@user.com', password: 123456}
+    // const user = Object.assign({}, demoUser);
+    let user = {
+      email: 'Demo@user.com',
+      password: '123456'
+    };
+
+    this.props.login(user); 
+
   }
 
   render() {
@@ -101,7 +122,7 @@ class SignupForm extends React.Component {
                 <div className='signup_form_container'>
 
                     <div className='left_signin'>
-                        <div className='error_message'>{this.renderErrors()}</div>
+
                         <h2 className='sub_title'>Personal Information</h2>
                         
 
@@ -168,6 +189,7 @@ class SignupForm extends React.Component {
                             </div>
                             <span className='requried_field'>* Required Field</span>
                         </form>
+                        <div className='error_message'>{this.renderErrors()}</div>
                     </div>
                 </div>
             </div>
