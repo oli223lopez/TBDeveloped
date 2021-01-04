@@ -8,9 +8,20 @@
         flex-direction: column;
         padding-top: 50px;
 
+        .video_titles {
+            display: flex;
+            justify-content: space-evenly; 
+            padding-bottom: 50px;
+
+            .title {
+                color: white;
+            }
+        }
+
         .main_videos{
             display: flex;
             justify-content: center;
+            width: 100vw;
 
             #video-grid{
                 display: flex;
