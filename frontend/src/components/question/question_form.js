@@ -73,14 +73,16 @@ class QuestionForm extends React.Component{
     render(){
         if (this.props.formType === 'Update Question!'){
             return (
-                <form onSubmit={this.updateSubmit}>
+            <div className = "updateForm_container">
 
-                    <label>
-                        Subject: {this.state.subject}
-                    </label>
+                <form onSubmit={this.updateSubmit}>
+                        <h2 className="update_form_header">Edit Post</h2>
+                    <div>
                     <label>
                         Content: <textarea type='text' value={this.state.content} onChange={this.update('content')} />
                     </label>
+                    </div>
+                    <div>
                     <label>Tag
                         <select onChange={this.update('tag')} >
                             <option value=''>--Choose a tag--</option>
@@ -88,6 +90,8 @@ class QuestionForm extends React.Component{
                             <option value='question'>Question</option>
                         </select>
                     </label>
+                    </div>
+                    <div>
                     <label>Solved
                         <select onChange={this.update('solved')} >
                             <option value=''>--Choose a tag--</option>
@@ -95,11 +99,14 @@ class QuestionForm extends React.Component{
                             <option value='false'>False</option>
                         </select>
                     </label>
+                    </div>
                     <label>
                         <button type='submit'>{this.props.formType}</button>
                     </label>
 
                 </form>
+            </div>
+
             )
         }
         return(
