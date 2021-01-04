@@ -48,9 +48,9 @@ class ResponseForm extends React.Component{
          
         }
     }
-    componentWillReceiveProps(nextProps) {
-        this.setState({ errors: nextProps.errors })
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     this.setState({ errors: nextProps.errors })
+    // }
 
    
    

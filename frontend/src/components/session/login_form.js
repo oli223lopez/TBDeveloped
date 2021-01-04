@@ -58,7 +58,7 @@ class LoginForm extends React.Component {
                 <div className='login_form_container'>
 
                     <div className='left_login'>
-                        <h2 className='sub_title'>Registered Customers</h2>
+                        <h2 className='sub_title'>Registered User</h2>
                         <hr/>
                         <form onSubmit={this.handleSubmit} className='login_form_box'>
                             <p>If you have an account, sign in with your email address.</p>

@@ -121,9 +121,17 @@ router.post('/', passport.authenticate('jwt',{session:false}), async (req,res) =
 router.patch("/:id", passport.authenticate('jwt',{session:false}), async (req, res) => {
     try {
         let question = await Question.findById(req.params.id)
+            .populate('user')
+            .populate({
+                path: 'responses',
+                populate: {
+                    path: 'user',
+                    model: 'User'
+                }
+            })
         // console.log("user: " + question.user)
         // console.log("req user " + req.user.id )
-        if(req.user.id ===  `${question.user}`){
+        if(req.user.id ===  `${question.user._id}`){
         
             if (req.body.content) {
                 question.content = req.body.content

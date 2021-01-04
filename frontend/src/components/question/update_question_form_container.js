@@ -24,6 +24,7 @@ export class UpdateQuestionForm extends React.Component {
                 tag={tag}
                 solved={solved}
                 user={user}
+                
             />
         );
     }

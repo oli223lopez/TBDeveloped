@@ -23,7 +23,7 @@ class AnswerIndexItem extends React.Component {
                         <p>Consultation Date: {this.props.response.consultation}</p>
                         <p>Reply: {this.props.response.answer}</p>
                         <p>Date Posted: {this.props.response.createdAt}</p>
-                        {this.props.currentUserID ===this.props.response.user ? <button onClick= {this.removeResponse}>Delete</button> : <div></div> }
+                        {this.props.currentUserID ===this.props.response.user._id ? <button onClick= {this.removeResponse}>Delete</button> : <div></div> }
                         <br></br>
                     </div>
                 )

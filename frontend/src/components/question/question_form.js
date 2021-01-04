@@ -99,7 +99,6 @@ class QuestionForm extends React.Component{
                         <button type='submit'>{this.props.formType}</button>
                     </label>
 
-
                 </form>
             )
         }
