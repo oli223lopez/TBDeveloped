@@ -17,7 +17,7 @@ class QuestionIndex extends React.Component {
                     // console.log(question._id)
                     return(
                         <div key={i}>
-                            <div>{question.user}</div>
+                            <div>{question.user.username}</div>
                             <Link to={`/question/${question._id}`}>{question.subject}</Link>
                         </div>
                         
