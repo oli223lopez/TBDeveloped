@@ -9,14 +9,15 @@ class ResolvedIndex extends React.Component{
 
     render() {
         return (
-            <div>
+            <div className='resolvedIndex'>
                 {this.props.resolved.map((resolved, i) => {
                     return (
-                        <div key={i}>
-                            <div>{resolved.user.username}</div>
+                        <div key={i} className='individualResponse'>
+                            <div className='individualResponseUser'>Username: {resolved.user.username}</div>
                             {/* {console.log(resolved._id)} */}
-                            <Link to={`/resolved/${resolved._id}`}>{resolved.subject}</Link>
-
+                            <div className='individualResponseLink'>
+                                Case: <Link to={`/resolved/${resolved._id}`}>{resolved.subject}</Link>
+                            </div>
                         </div>
                     )
                 })}

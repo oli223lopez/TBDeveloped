@@ -73,14 +73,16 @@ class QuestionForm extends React.Component{
     render(){
         if (this.props.formType === 'Update Question!'){
             return (
-                <form onSubmit={this.updateSubmit}>
+            <div className = "updateForm_container">
 
-                    <label>
-                        Subject: {this.state.subject}
-                    </label>
+                <form onSubmit={this.updateSubmit}>
+                        <h2 className="update_form_header">Edit Post</h2>
+                    <div>
                     <label>
                         Content: <textarea type='text' value={this.state.content} onChange={this.update('content')} />
                     </label>
+                    </div>
+                    <div>
                     <label>Tag
                         <select onChange={this.update('tag')} >
                             <option value=''>--Choose a tag--</option>
@@ -88,6 +90,8 @@ class QuestionForm extends React.Component{
                             <option value='question'>Question</option>
                         </select>
                     </label>
+                    </div>
+                    <div>
                     <label>Solved
                         <select onChange={this.update('solved')} >
                             <option value=''>--Choose a tag--</option>
@@ -95,38 +99,50 @@ class QuestionForm extends React.Component{
                             <option value='false'>False</option>
                         </select>
                     </label>
+                    </div>
                     <label>
                         <button type='submit'>{this.props.formType}</button>
                     </label>
 
                 </form>
+            </div>
+
             )
         }
         return(
-            <form onSubmit={this.submit}>
-                
-                <label>
-                    Subject: <input type="text" value={this.state.subject} onChange={this.update('subject')}/>
-                </label>
-                <label>
-                    Content: <textarea type='text' value={this.state.content} onChange={this.update('content')}/>
-                </label>
-                <label>
-                    <select onChange={this.update('tag')} >
-                        <option value=''>--Choose a tag--</option>
-                        <option value='idea'>Idea</option>
-                        <option value='question'>Question</option>
-                    </select>
-                </label>
-                <label>
+            <div className="createform_container">
+                <form onSubmit={this.submit}>
+                    <div>
+                        <label>
+                            Subject: <input type="text" value={this.state.subject} onChange={this.update('subject')}/>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Content: <textarea value={this.state.content} onChange={this.update('content')}/>
+                        </label>
+
+                    </div>
+                    <div>
+                        <label>
+                            <select onChange={this.update('tag')} >
+                                <option value=''>--Choose a tag--</option>
+                                <option value='idea'>Idea</option>
+                                <option value='question'>Question</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                                <button type='submit'>{this.props.formType}</button>
+                                {this.renderErrors()}
+                        </label>
+                    </div>
                     
-                        <button type='submit'>{this.props.formType}</button>
-                        {this.renderErrors()}
-                </label>
-                
 
 
-            </form>
+                </form>
+            </div>
         )
     }
 }

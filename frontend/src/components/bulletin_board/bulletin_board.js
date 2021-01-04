@@ -1,6 +1,9 @@
 import React from 'react'
 import QuestionIndex from '../question/question_index'
 import ResolvedIndex from '../resolved/resolved_index'
+import '../../assets/stylesheets/bulletin_board.css'
+import CreateQuestionFormContainer from '../question/create_question_form_container'
+
 
 
 class BulletinBoard extends React.Component{
@@ -53,16 +56,22 @@ class BulletinBoard extends React.Component{
             // console.log(questionArray)
             return(
                 <div>
-                    <h1>Bulletin</h1>
+                    <h1></h1>
 
                     <div>
-                        <div className='questions' onClick={() => this.handleClick(0)}>Questions</div>
-                        <div className='resolvedQuestions' onClick={() => this.handleClick(1)}>Resolved Questions</div>
+                        <div className='qr'>
+                            <div className='questionsTab' onClick={() => this.handleClick(0)}>Questions</div>
+                            <div className='resolvedQuestionsTab' onClick={() => this.handleClick(1)}>Resolved Questions</div>
+                        </div>
 
-                        {this.state.idx === 0 ? <QuestionIndex questions={questionArray} /> : <ResolvedIndex resolved={resolvedArray}/>}
+                        {this.state.idx === 0 ? <QuestionIndex questions={questionArray} /> 
+                        : 
+                        <ResolvedIndex resolved={resolvedArray}/>}
 
                     </div>
-                    
+                    <div className='questionForm'>
+                        <CreateQuestionFormContainer />
+                    </div>
                 </div>
             )
         }
