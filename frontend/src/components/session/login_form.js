@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import '../../assets/stylesheets/login.scss';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -50,27 +51,42 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <br/>
-              <input type="text"
-                value={this.state.email}
-                onChange={this.update('email')}
-                placeholder="Email"
-              />
-            <br/>
-              <input type="password"
-                value={this.state.password}
-                onChange={this.update('password')}
-                placeholder="Password"
-              />
-            <br/>
-            <input type="submit" value="Submit" />
-            {this.renderErrors()}
-          </div>
-        </form>
-      </div>
+      
+      <div className='userAuth'>
+                <span className='login_title'>Customer Login</span>
+                
+                <div className='login_form_container'>
+
+                    <div className='left_login'>
+                        <h2 className='sub_title'>Registered Customers</h2>
+                        <hr/>
+                        <form onSubmit={this.handleSubmit} className='login_form_box'>
+                            <p>If you have an account, sign in with your email address.</p>
+                            <label className='email_login'>Email<span className='asterisk'>*</span>
+                                  <input type="text"
+                                    value={this.state.email}
+                                    onChange={this.update('email')}
+                                  />
+                            </label>
+
+                            <label className='password_login'>Password<span className='asterisk'>*</span> 
+                                  <input type="password"
+                                    value={this.state.password}
+                                    onChange={this.update('password')}
+                                  />
+                            </label>
+
+                            <button type="submit" value="Sign In" className='signin-Button'>Sign In</button>
+                            <span className='requried_field'>* Required Field</span>
+                        </form>
+                        <div className='error_message'>
+                            {this.renderErrors()}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
     );
   }
 }
