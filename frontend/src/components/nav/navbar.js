@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import '../../assets/stylesheets/reset.css';
 import '../../assets/stylesheets/navbar.scss';
-import dino2 from '../../assets/images/dino2.png'
+import dino2 from '../../assets/images/dino2.png';
+import linkedin from '../../assets/images/linkedin.png';
 
 
 
@@ -67,16 +68,28 @@ class NavBar extends React.Component {
                                 <div className='teamInfo-navbar'>
                                     <div className='teamInfo-group'>
                                         <div className='individual-member'>
-                                            <div>Oliver Lopez</div>
+                                            <a href='https://www.linkedin.com/in/oliverlopez23/' className='linked_a'>
+                                                <img alt="" src={linkedin} className='linkedin-icon'/>
+                                                <div className='person_name'>Oliver Lopez</div>
+                                            </a>    
                                         </div>
                                         <div className='individual-member'>
-                                            <div>Shane Sharareh</div>   
+                                            <a href='https://www.linkedin.com/in/shanesharareh/' className='linked_a'>
+                                                <img alt="" src={linkedin} className='linkedin-icon'/>
+                                                <div className='person_name'>Shane Sharareh</div>
+                                            </a>    
                                         </div>
                                         <div className='individual-member'>
-                                            <div>Thomas Cheung</div>
+                                            <a href='https://www.linkedin.com/in/thomas-cheung-38953034/' className='linked_a'>
+                                                <img alt="" src={linkedin} className='linkedin-icon'/>
+                                                <div className='person_name'>Thomas Cheung</div>
+                                            </a>  
                                         </div>
                                         <div className='individual-member'>
-                                            <div>William Leung</div>
+                                          <a href='https://www.linkedin.com/in/william-leung-60589a73/' className='linked_a'>
+                                                <img alt="" src={linkedin} className='linkedin-icon'/>
+                                                <div className='person_name'>William Leung</div>
+                                            </a>  
                                         </div>
                                     </div>
                                 </div>

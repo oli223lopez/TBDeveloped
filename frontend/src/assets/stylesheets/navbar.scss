@@ -47,29 +47,54 @@
             border-top: 1px solid rgb(240, 240, 240);
             border-bottom: 1px solid #F7F7F6;
 
+            border-radius: 5px;
             
 
             .teamInfo-group{
-                padding-bottom: 50px;
-                padding-left: 50px;
-                padding-right: 50px;
+                // padding-top: 10px;
+                // padding-bottom: 10px;
+                // padding-left: 10px;
+                // padding-right: 10px;
+
             }
 
             .individual-member{
                 color: black;
+                padding-right: 45px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: 10px;
+
+                .linkedin-icon {
+                    height: auto;
+                    width: 20px;
+                }
+
+                .linked_a{
+                    display: flex;
+
+
+                    .person_name{
+                        margin-top: 3px;
+                        text-align: center;
+                        margin-left: 10px;
+                    }
+                }
+                
             }
             .individual-member:hover{
                 background-color: #1264A3;
                 color: white;
+                border-radius: 5px;
+
             }
             
-
-
 
         }
 
         .team-navbar:hover .teamInfo-navbar{
             display: block;
+
         }
 
 
