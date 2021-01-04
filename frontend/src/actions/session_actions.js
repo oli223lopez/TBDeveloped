@@ -7,7 +7,6 @@ export const RECEIVE_USER_LOGOUT = "RECEIVE_USER_LOGOUT";
 export const RECEIVE_USER_SIGN_IN = "RECEIVE_USER_SIGN_IN";
 export const REMOVE_SESSION_ERRORS = 'REMOVE_SESSION_ERRORS';
 
-
 export const receiveCurrentUser = (currentUser) => ({ 
     type: RECEIVE_CURRENT_USER, 
     currentUser 
@@ -31,6 +30,12 @@ export const removeErrors = () => {
 export const logoutUser = () => ({ 
     type: RECEIVE_USER_LOGOUT
 });
+
+
+
+
+
+
 
 export const signup = user => dispatch => (  
     APIUtil.signup(user).then( () => (

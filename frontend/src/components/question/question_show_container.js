@@ -25,7 +25,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
     updateQuestion: (questionId, questionUpdates) => dispatch(updateQuestion(questionId, questionUpdates)),
     deleteQuestion: (questionId) => dispatch(deleteQuestion(questionId)),
-    fetchQuestion: (questionId) => dispatch(fetchQuestion(questionId))
+    fetchQuestion: (questionId) => dispatch(fetchQuestion(questionId)),
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionShow)

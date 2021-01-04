@@ -19,7 +19,7 @@ class AnswerIndexItem extends React.Component {
 
                 return(
                     <div>
-                        <p>User: {this.props.response.user}</p>
+                        <p>User: {this.props.response.user.username}</p>
                         <p>Consultation Date: {this.props.response.consultation}</p>
                         <p>Reply: {this.props.response.answer}</p>
                         <p>Date Posted: {this.props.response.createdAt}</p>

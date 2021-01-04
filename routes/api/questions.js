@@ -16,17 +16,17 @@ router.get('/test', (req, res) => {
 
 router.get('/profile_questions', (req, res) => {
     
-    console.log('this is being activated')
+    // console.log('this is being activated')
     Question.find()
         .then(questions => {
-            console.log(req)
+            // console.log(req)
             const questionArray = []
             questions.forEach(question => {
                 if(req.body.questions.includes(question._id)){
                     questionArray.push(question)
                 }
             })
-            console.log(questionArray)
+            // console.log(questionArray)
             res.json(questionArray)
         })
         .catch(err => res.status(404).json('this doesnt work'));
@@ -40,6 +40,13 @@ router.get('/',(req,res) => {
     
     Question.find()
     .populate('user')
+    .populate({
+        path: 'responses',
+        populate: {
+            path: 'user',
+            model: 'User'
+        }
+    })
     .sort({timestamps:-1})
     .then(questions => {res.json(questions)})
     .catch(err => res.status(404).json(err));
@@ -49,7 +56,16 @@ router.get('/',(req,res) => {
 //retreiving one quesion
 router.get('/:id',(req,res)=>{
     Question.findById(req.params.id)
+    // .populate('user')
     .populate('user')
+    .populate({
+        path: 'responses',
+        populate: {
+            path: 'user',
+            model: 'User'
+        }
+    })
+    
     .then(question => res.json(question))
     .catch(err => res.status(404).json("question not found"))
 })

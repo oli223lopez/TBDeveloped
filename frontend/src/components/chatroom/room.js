@@ -45,7 +45,7 @@ const Room = (props) => {
             userStream.current = MediaStream;
 
             socketRef.current = io.connect("/");
-            console.log(socketRef.current)
+            // console.log(socketRef.current)
 
             socketRef.current.emit("join room", props.match.params.roomID);
             
@@ -60,7 +60,7 @@ const Room = (props) => {
             socketRef.current.on('other user', userID => {
                 callUser(userID);
                 otherUser.current = userID;
-                console.log('user A is in the room already', userID)
+                // console.log('user A is in the room already', userID)
 
 
                 // 1/1/21 test
@@ -95,12 +95,12 @@ const Room = (props) => {
                 // this is from the perspective of existing users in the room 
                 // 1/1/21 test
 
-                console.log('other user joined room')
+                // console.log('other user joined room')
             });
 
             socketRef.current.emit("user joined", userID => {
                 otherUser.current = userID;
-                console.log('user B just joined the room', userID)
+                // console.log('user B just joined the room', userID)
 
             });
             
@@ -258,16 +258,16 @@ const Room = (props) => {
     }; // creating a video for the person you're calling? 
 
 
-    function hangUp(e) {
-        console.log(peerRef.current)
-        console.log(socketRef.current)
-        console.log("make this hangup button")
-        socketRef.current.emit("hang up")
-        console.log(userVideo.current)
-        let vid = document.getElementById("myVideo")
-        vid.parentNode.removeChild(vid);
-        console.log('final step?')
-    };
+    // function hangUp(e) {
+    //     console.log(peerRef.current)
+    //     console.log(socketRef.current)
+    //     console.log("make this hangup button")
+    //     socketRef.current.emit("hang up")
+    //     console.log(userVideo.current)
+    //     let vid = document.getElementById("myVideo")
+    //     vid.parentNode.removeChild(vid);
+    //     console.log('final step?')
+    // };
 
 
 
@@ -331,7 +331,7 @@ const Room = (props) => {
             // console.log(userStream)
             // console.log(userStream.current)
             
-
+            // console.log(props.history)
 
         }else {
             userVideo.current.srcObject.getAudioTracks()[0].enabled = true;
@@ -358,10 +358,10 @@ const Room = (props) => {
 
     function onLeave() {
         userVideo.current.srcObject = null;
-        console.log(peerRef.current)
+        // console.log(peerRef.current)
         partnerVideo.current.srcObject = null;
         peerRef.current.close();
-        console.log(peerRef.current)
+        // console.log(peerRef.current)
         peerRef.current.onicecandidate = null;
         peerRef.current.onaddstream = null;
         createPeer()

@@ -6,7 +6,7 @@ class ResponseForm extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            consultation: this.props.consultation,
+            consultation:'',
             answer: this.props.answer,
             errors: ""
         }
