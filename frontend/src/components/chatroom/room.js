@@ -13,6 +13,7 @@ const Room = (props) => {
         let [peers, setPeers] = useState([]);
         const [mute, setMute] = useState('Mute');
         const [video, setVideo] = useState('Video Off');
+        const[trigger, setOn] = useState('off');
     //!TEST
         // const [test, setTest] = useState(0);
 
@@ -36,6 +37,7 @@ const Room = (props) => {
     const otherVideos = useRef(new Array());
     const otherUsers = useRef(new Array()); 
     // const peers = useRef(new Object()); 
+    const otherUserName = useRef("")
     // 1/1/21 test
 
     useEffect(() => {
@@ -47,9 +49,17 @@ const Room = (props) => {
             socketRef.current = io.connect("/");
             // console.log(socketRef.current)
 
+            
+            // 1/3/21
+            socketRef.current.emit("send name", props.user)
+            socketRef.current.on("receive name", userName => {
+                otherUserName.current = userName
+                setOn('on');
+            })
+            // 1/3/21
+            
             socketRef.current.emit("join room", props.match.params.roomID);
             
-
             // has the socket emit this event, this event is caught by the server. I believe there's some 
             // 'long polling' involved. Interesting because the connection happens while this is on localhost 3000
             // and the server is on 5000  
@@ -115,7 +125,7 @@ const Room = (props) => {
                 const peers = peerRef.current.filter(p => p.peerID !== id);
                 peerRef.current = peers;
                 setPeers(peers); //state
-
+                
             })
             // finding the peer, destorying the peer, and removing it from the array
             // socketRef.current.on("disconnect", () => {
@@ -358,10 +368,8 @@ const Room = (props) => {
 
     function onLeave() {
         userVideo.current.srcObject = null;
-        // console.log(peerRef.current)
         partnerVideo.current.srcObject = null;
         peerRef.current.close();
-        // console.log(peerRef.current)
         peerRef.current.onicecandidate = null;
         peerRef.current.onaddstream = null;
         createPeer()
@@ -369,7 +377,6 @@ const Room = (props) => {
 
     // 1/1/21 test
       const killIt = () => {
-        console.log("reading loud and clear")
         peerRef.current.close()
     }
     // 1/1/21 test
@@ -393,6 +400,10 @@ const Room = (props) => {
             {/* <button onClick={() => testFeatures()}>Test Button</button> */}
 
             <div className="main">
+                        <div className="video_titles">
+                            <h1 className="title">{props.user}</h1>
+                            <h1 className="title">{otherUserName.current}</h1>
+                        </div>
                 <div className="main_videos">
                     <div id="video-grid">
                         <div>
