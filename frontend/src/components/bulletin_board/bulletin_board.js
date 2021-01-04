@@ -56,7 +56,7 @@ class BulletinBoard extends React.Component{
             // console.log(questionArray)
             return(
                 <div>
-                    <h1>Bulletin</h1>
+                    <h1></h1>
 
                     <div>
                         <div className='qr'>

@@ -60,17 +60,38 @@
 
 
 .questionForm{
- background: transparent;
-  border: 1px solid #eee;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 14px; /* Same font for both. */
-  margin: auto;
-  min-height: 200px;
-  outline: none;
-  padding: 10px;
-  width: 100%;
+      display: flex;
+    align-content: flex-end;
+    margin: auto;
+    width: 50%;
+    padding: 20px;
+    border: 3px solid;
 }
 
+.createfrom_container{
+    display: block;
+    margin-bottom: 15px;
+}
+.createfrom_container textarea{
+     width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.createfrom_container input[type=text],
+.createfrom_container select{
+     width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 
 .individualQuestion{
     padding: 10px;
@@ -86,16 +107,16 @@
 }
 
 .individualResponse{
-    padding: 10px;
     
 }
 
 .individualResponseUser{
-    font-size: 19px;
+    padding: 10px;   
+    font-size: 12px; 
 
 }
 .individualResponseLink{
-
+    font-size: 19px;
 }
 
 

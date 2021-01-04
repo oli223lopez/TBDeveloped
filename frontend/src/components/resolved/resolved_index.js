@@ -13,10 +13,10 @@ class ResolvedIndex extends React.Component{
                 {this.props.resolved.map((resolved, i) => {
                     return (
                         <div key={i} className='individualResponse'>
-                            <div className='individualResponseUser'>{resolved.user.username}</div>
+                            <div className='individualResponseUser'>Username: {resolved.user.username}</div>
                             {/* {console.log(resolved._id)} */}
                             <div className='individualResponseLink'>
-                                <Link to={`/resolved/${resolved._id}`}>{resolved.subject}</Link>
+                                Case: <Link to={`/resolved/${resolved._id}`}>{resolved.subject}</Link>
                             </div>
                         </div>
                     )
