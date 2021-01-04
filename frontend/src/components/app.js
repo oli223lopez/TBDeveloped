@@ -9,7 +9,7 @@ import ResolvedShowContainer from './resolved/resolved_show_container'
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import ProfileFormContainer from './profile/profile_container'
-
+import RoomContainer from './chatroom/room_container'
 // Room component 
 import Room from "./chatroom/room"
 
@@ -17,7 +17,7 @@ const App = () => (
   <div>
     <NavBarContainer />
     <Switch>
-      <Route path="/room/:roomID" component={Room}/>
+      <Route path="/room/:roomID" component={RoomContainer}/>
       <AuthRoute exact path="/" component={MainPage} />
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
