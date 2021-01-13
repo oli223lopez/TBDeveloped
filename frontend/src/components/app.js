@@ -25,8 +25,6 @@ const App = () => (
       <ProtectedRoute exact path="/bulletin" component={BulletinBoardContainer} />
       <ProtectedRoute exact path="/question/:questionId" component={QuestionShowContainer} />
       <ProtectedRoute exact path="/resolved/:resolvedId" component={ResolvedShowContainer} />
-
-
       
     </Switch>
   </div>
