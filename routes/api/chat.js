@@ -51,9 +51,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
 router.get('/:id', (req, res) => {
 
     Chat.findById(req.params.id)
-        // .populate('user')
-        .populate('message')
-
+        .populate('messages')
         .then(chat => res.json(chat))
         .catch(err => res.status(404).json("chat not found"))
 });
