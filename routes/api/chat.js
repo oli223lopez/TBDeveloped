@@ -1,9 +1,9 @@
 const express = require("express")
 const router = express.Router();
 const passport = require("passport");
-import validateChat from ('../../validation/chat')
-
+const validateChat = require('../../validation/chat')
 const Chat = require('../../models/Chat');
+const User = require('../../models/User')
 
 
 router.get('/test', (req, res) => {
@@ -18,25 +18,48 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
         return res.status(400).json(errors);
     }
 
-    Chat.findOne({ responseId: req.body.response}).then(async chat => {
+    Chat.findOne({ response: req.body.responseID}).then(async chat => {
         if(chat){
-            Error: "Chat has already been initiated"
+            return res.status(400).json({
+            Error: "Chat has already been initiated"})
         }else{
             const newChat = new Chat({
-                questionId: req.body.questionId,
-                responseId: req.body.responseId
+                question: req.body.questionID,
+                response: req.body.responseID
+
             })
             newChat.save().then(chat => res.json(chat))
-            let question = await Question.findById(req.body.questionId)
-            let response = await Response.findById(req.body.responseId) 
-            let questionUser = await User.findById(question.user._id)
-            let responseUser = await User.findById(response.user._id) 
+            console.log(newChat)
+            // User.findById(req.body.posterID).then(res => res.activeChats.push(newChat))
+            // // console.log(poster)
+            // User.findById(req.body.responseUserID).then(res => res.activeChats.push(newChat))
 
-            questionUser.chat.push(newChat._id)
-            responseUser.chat.push(newChat._id)
+            let poster = await User.findById(req.body.posterID)
+            poster.activeChats.push(newChat._id)
+            poster.save()
+
+
+            let responder = await User.findById(req.body.responseUserID)
+            responder.activeChats.push(newChat._id)
+            responder.save()
         }
     })
 });
+
+
+
+router.get('/:id', (req, res) => {
+
+    Chat.findById(req.params.id)
+        // .populate('user')
+        .populate('message')
+
+        .then(chat => res.json(chat))
+        .catch(err => res.status(404).json("chat not found"))
+});
+
+
+
 
 
 
@@ -47,13 +70,6 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(404).json(err))
 })
 
-
-
-
-
-
-
-
-
+module.exports = router
 
 
