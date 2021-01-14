@@ -141,7 +141,7 @@ class Profile extends React.Component {
 
                     {profile_questions()}
 
-                    <div className="created_post_title">Response to Posts:</div>
+                    <div className="responed_post_title">Response to Posts:</div>
 
                     {profile_responses()}
 
