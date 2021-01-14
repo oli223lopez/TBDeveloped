@@ -23,17 +23,15 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
             Error: "Chat has already been initiated"
         }else{
             const newChat = new Chat({
-                questionId: req.body.questionId,
-                responseId: req.body.responseId
+                question: req.body.questionID,
+                response: req.body.responseID
             })
             newChat.save().then(chat => res.json(chat))
-            let question = await Question.findById(req.body.questionId)
-            let response = await Response.findById(req.body.responseId) 
-            let questionUser = await User.findById(question.user._id)
-            let responseUser = await User.findById(response.user._id) 
+            let poster = User.findById(req.body.posterID)
+            let responseUser = User.findById(req.body.responseUserID)
 
-            questionUser.chat.push(newChat._id)
-            responseUser.chat.push(newChat._id)
+            poster.activeChats.push(newChat._id)
+            responseUser.activeChats.push(newChat._id)
         }
     })
 });
