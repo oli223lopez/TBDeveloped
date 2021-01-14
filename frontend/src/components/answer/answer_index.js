@@ -3,7 +3,23 @@ import AnswerIndexItemContainer from '../answer/answer_index_item_container'
 import { allUsers } from '../../util/session_api_util'
 
 class AnswerIndex extends React.Component {
-   
+   constructor(props) {
+       super(props)
+
+
+
+       this.createChat = this.createChat.bind(this);
+   }
+
+   createChat(questionID, responseID, responseUserID, posterID){
+        let newChat = {
+            questionID: questionID, 
+            responseID: responseID, 
+            posterID: posterID,
+            responseUserID: responseUserID
+        };
+        this.props.createChat(newChat);
+   }
     
 
 
@@ -16,7 +32,7 @@ class AnswerIndex extends React.Component {
                     return(
                     <div key={i}>
                         <AnswerIndexItemContainer fetchQuestion={this.props.fetchQuestion}  response={response} questionID = {this.props.questionID} currentUserID={this.props.currentUserID} />
-                        <button className="chatButton" onClick={ () => {console.log({'questionID': questionID, 'responseID': response._id, 'responseUserID':response.user._id, 'posterID': this.props.posterID})} }>Start a chat with {response.user.username}</button>
+                        <button className="chatButton" onClick={ () => {this.createChat(questionID, response._id, response.user._id, this.props.posterID)}}> Start a chat with {response.user.username}!</button>
                     </div>
                     )
             })}

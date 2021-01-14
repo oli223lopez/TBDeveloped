@@ -188,7 +188,7 @@ require('./config/passport')(passport)
 app.use("/api/users", users)
 app.use("/api/questions", questions) 
 
-const chat = require("./routes/api/chat")
+// const chat = require("./routes/api/chat")
 app.use('/api/chat',chat)
 
 const message = require('./routes/api/message')
