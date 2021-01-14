@@ -3,12 +3,12 @@ import {receiveResponse} from '../../actions/responses_actions'
 import AnswerIndex from '../answer/answer_index'
 
 const mapStateToProps = (state, ownProps) => {
+    
     return({
     questionID: ownProps.questionID,
     responses: ownProps.responses,
     username: ownProps.username,
-    
-
+    posterID: ownProps.currentUserID,
     })
 }
 

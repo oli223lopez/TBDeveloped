@@ -56,7 +56,6 @@ const receiveQuestionErrors = (errors) => {
 export const fetchQuestions = () => (dispatch) => {
     return QuestionsAPIUtil.fetchQuestions()
         .then( res => { dispatch(receiveQuestions(res.data)) } )
-        
         .catch(err => dispatch(receiveQuestionErrors(err)))
 }
 

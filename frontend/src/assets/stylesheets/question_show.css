@@ -106,3 +106,15 @@
 .update_form_header{
     text-align: center;
 }
+
+.chatButton {
+    color: red;
+    background-color: black;
+    padding: 5px 10px 5px 10px; 
+    border: 1px solid red;
+}
+
+.chatButton:hover {
+    background-color: white;
+    color: black;
+}
