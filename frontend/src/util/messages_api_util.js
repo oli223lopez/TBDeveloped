@@ -8,6 +8,8 @@ export const fetchChat = (chatID) => {
     return axios.get(`/api/chat/${chatID}`)
 }
 
+
+
 export const postMessage = (message) => {
     return axios.post(`/api/message`, message)
 }
