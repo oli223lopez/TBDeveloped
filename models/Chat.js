@@ -5,17 +5,23 @@ const Message = require("./Message")
 
 
 const ChatSchema = new Schema({
+
     question: {
         type: Schema.Types.ObjectId,
-        ref: 'questions',
+        ref: 'Question',
         require: true
     },
-     response: {
+    
+    response: {
         type: Schema.Types.ObjectId,
-        ref: 'responses',
+        ref: 'Response',
         require: true
     },
-    messages: [ { type: Schema.Types.ObjectId, ref: Message }]
+
+    messages: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: Message
+    }]
 },
     {
         timestamps: true
