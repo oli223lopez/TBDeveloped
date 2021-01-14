@@ -7,7 +7,7 @@ export const REMOVE_QUESTION = "REMOVE_QUESTION"
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS"
 
 
-//test
+
 export const RECEIVE_RESPONSE = 'RECEIVE_RESPONSE';
 export const receiveResponse = (response) => {
     return {
@@ -15,7 +15,7 @@ export const receiveResponse = (response) => {
         response
     }
 }
-//test
+
 const receiveProfileQuestions = (questions) => {
     return {
         type: RECEIVE_PROFILE_QUESTIONS,

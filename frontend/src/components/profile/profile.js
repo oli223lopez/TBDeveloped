@@ -37,7 +37,8 @@ class Profile extends React.Component {
 
     render() {
         let boolean = false;
-        let amtOfPost = 0
+        let amtOfPost = 0;
+        let amtOfResponse = 0;
 
         const profile_questions = () => {
             if(this.props.profile_questions.length > 0){
@@ -95,13 +96,55 @@ class Profile extends React.Component {
                 // console.log(this.props.profile_questions)
             }
         }
-        console.log('currentUserId', this.props.currentUser.id)
+
+
+
+        const profile_responses = () => {
+            if(this.props.profile_questions.length > 0){
+                return(
+                    this.props.profile_questions.map((question, id) => {
+                        return(
+                            question.responses.map((response, id) => {
+                                if(response.user._id === this.props.currentUser.id){
+                                    amtOfResponse += 1;
+                                    return (
+                                        <div key={id} className='questions_topic'>
+                                            <div className='individual_case'>
+                                                <label>
+                                                    <div className='sub_label'>Relating to Case Id:</div>
+                                                    <Link to={`/question/${question._id}`}>
+                                                    <div className='actual_info'>{question._id}</div>
+                                                    </Link>
+                                                </label>
+                                                <label>
+                                                    <div className='sub_label'>Response:</div>
+                                                    <div className='actual_info'>{response.answer}</div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    )
+
+                                }
+                            }) 
+                        )                           
+                    }
+                ) 
+                
+            )}
+        }
+
         return(
             <div className='profile_container'>
                 
                 <div className="created_post_info">
                     <div className="created_post_title">Created Posts:</div>
+
                     {profile_questions()}
+
+                    <div className="responed_post_title">Response to Posts:</div>
+
+                    {profile_responses()}
+
                 </div>
 
                 <div className="user_profile_info">
@@ -109,8 +152,9 @@ class Profile extends React.Component {
                     <img alt="robots" src={`https://robohash.org/${this.props.currentUser.id}?100x100`} className='roboImgApi'/>
 
                     <div className='profile_post_amt'>Number of Posts: {amtOfPost}</div>
-                    <div className='profile_reponse_amt'>Response to Posts: 0</div>
+                    <div className='profile_reponse_amt'>Response to Posts: {amtOfResponse}</div>
                 </div>
+
 
             </div>
             
