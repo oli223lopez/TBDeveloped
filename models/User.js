@@ -17,7 +17,18 @@ const UserSchema = new Schema({
         type: String,
         require: true
     },
-    questions: [ { type: Schema.Types.ObjectId, ref: Question }]
+    questions: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: Question 
+    }],
+
+    //collection of live chats this user has
+    activeChats: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Chat'
+    }],
+    
+    
 },
     {
         timestamps: true
