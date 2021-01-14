@@ -103,7 +103,10 @@ router.post('/login', (req, res) => {
 
 
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
-    res.json({ msg: 'Success' });
+    User.findById(req.user._id)
+    .populate('questions')
+    .then(user => {res.json(user)})
+
 })
 
 
