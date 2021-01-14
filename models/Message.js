@@ -2,18 +2,25 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const MessageSchema = new Schema({
-    question: {
+
+    chatId: {
         type: Schema.Types.ObjectId,
-        ref: 'questions',
+        ref: 'Chat',
         require: true
     },
+
+    //loggedIn User
     user: {
         type: Schema.Types.ObjectId,
         ref: 'users',
         require: true
     },
-    //string array of conversations
-    conversations: [ { type: string, required: true }]
+
+    //string for a single sentence
+    sentence: { 
+        type: String,
+        require: true
+    }
 },
     {
         timestamps: true
