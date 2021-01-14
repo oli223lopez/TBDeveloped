@@ -1,7 +1,7 @@
 import axios from 'axios'; 
 
-export const postChat = (questionID) => { // question 
-    return axios.post(`/api/chat`, questionID)
+export const postChat = (newChat) => { // question 
+    return axios.post(`/api/chat`, newChat)
 }
 
 export const fetchChat = (chatID) => {
