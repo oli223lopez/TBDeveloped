@@ -10,6 +10,11 @@ const ChatSchema = new Schema({
         ref: 'questions',
         require: true
     },
+     response: {
+        type: Schema.Types.ObjectId,
+        ref: 'responses',
+        require: true
+    },
     messages: [ { type: Schema.Types.ObjectId, ref: Message }]
 },
     {
