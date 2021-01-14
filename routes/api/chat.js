@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router();
 const passport = require("passport");
+import validateChat from ('../../validation/chat')
 
 const Chat = require('../../models/Chat');
 
@@ -12,19 +13,27 @@ router.get('/test', (req, res) => {
 
 router.post('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
     //check validation
-    // const { errors, isValid } = validateQuestionInput(req.body);
+    const { errors, isValid } = validateChat(req.body);
     if (!isValid) {
         return res.status(400).json(errors);
     }
 
-    Chat.findOne({ questionId: req.body.questionId}).then(async chat => {
+    Chat.findOne({ responseId: req.body.response}).then(async chat => {
         if(chat){
-            Error: "Chat has already been initialted"
+            Error: "Chat has already been initiated"
         }else{
             const newChat = new Chat({
-                questionId: req.body.questionId
+                questionId: req.body.questionId,
+                responseId: req.body.responseId
             })
             newChat.save().then(chat => res.json(chat))
+            let question = await Question.findById(req.body.questionId)
+            let response = await Response.findById(req.body.responseId) 
+            let questionUser = await User.findById(question.user._id)
+            let responseUser = await User.findById(response.user._id) 
+
+            questionUser.chat.push(newChat._id)
+            responseUser.chat.push(newChat._id)
         }
     })
 });
