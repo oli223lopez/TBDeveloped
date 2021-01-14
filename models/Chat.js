@@ -8,13 +8,13 @@ const ChatSchema = new Schema({
 
     question: {
         type: Schema.Types.ObjectId,
-        ref: 'Question',
+        ref: 'question',
         require: true
     },
     
     response: {
         type: Schema.Types.ObjectId,
-        ref: 'Response',
+        ref: 'response',
         require: true
     },
 
