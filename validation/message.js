@@ -1,33 +1,19 @@
 const Validator = require("validator");
 const validText = require('./valid-text')
 
-module.exports = function validateMessages(data) {
+module.exports = function validateMessage(data) {
     let errors = {}; 
-
-
-    if(!data.question){
-        errors.question = "This message isn't associated with a question"
-    }
 
     if(!data.user){
         errors.user = "This message isn't associated with a user"
     }
 
-    if(data.conversations.length<1){
-        errors.conversations = "Please start a conversation"
+    data.sentence = validText(data.sentence) ? data.sentence : '';
 
-    }
-
-    //this loops through the conversations array and pulls out each question to see if its a valid text
-    data.conversations.forEach(message =>{
-
-        //checks to see if message is a valid text
-        const newMessage = validText(message) ? message : "";
-        if(Validator.isEmpty(newMessage)) {
-            errors.conversations = "Please write a valid message"
-         }
-
-    })
+    //checks to see if sentence is a valid text
+    if(Validator.isEmpty(data.sentence)) {
+        errors.sentence = "Please write a message to send"
+      }
 
     
 
