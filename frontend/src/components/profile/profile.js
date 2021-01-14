@@ -132,7 +132,7 @@ class Profile extends React.Component {
                 
             )}
         }
-
+        // console.log('user stuff', this.props.currentUser.id)
         return(
             <div className='profile_container'>
                 
