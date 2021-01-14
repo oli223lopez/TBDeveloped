@@ -1,8 +1,8 @@
 const express = require("express")
 const router = express.Router();
 const passport = require("passport");
-import validateChat from ('../../validation/chat')
-
+const validateChat = require('../../validation/chat')
+const User = require('../../models/User')
 const Chat = require('../../models/Chat');
 
 
@@ -45,6 +45,7 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(404).json(err))
 })
 
+module.exports = router;
 
 
 

@@ -156,6 +156,7 @@ io.on("connection", socket => { // listens for "connection" event, which generat
 // video feature test
 
 const questions = require("./routes/api/questions");
+const chat = require("./routes/api/chat")
 // const responses = require("./routes/api/responses") 12/31/20 removed since responses are embedded within questions
 
 if (process.env.NODE_ENV === 'production') {
@@ -186,4 +187,5 @@ require('./config/passport')(passport)
 
 app.use("/api/users", users)
 app.use("/api/questions", questions) 
+app.use("/api/chat", chat)
 // app.use("/api/responses", responses) 12/31/20, removed since responses are embedded within questions

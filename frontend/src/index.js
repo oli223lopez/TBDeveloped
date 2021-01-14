@@ -11,8 +11,6 @@ import {allUsers} from './util/session_api_util'
 
 // test
 import axios from "axios";
-import { postQuestion, fetchQuestions, updateQuestion, deleteQuestion } from "./actions/questions_actions"
-// import { postQuestion, updateQuestion } from './util/questions_api_util'
 //test
 
 
@@ -38,13 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // test 
   window.store = store; 
   window.axios = axios; 
-  window.deleteQuestion = deleteQuestion; 
-  window.fetchQuestions = fetchQuestions; 
-  window.updateQuestion = updateQuestion; 
-  window.fetchProfileQuestions = fetchProfileQuestions;
-  window.allUsers = allUsers;
   //test 
-  console.log("howdy")
+  
+  
   const root = document.getElementById('root')
   ReactDOM.render(<Root store={store} />, root)
 
