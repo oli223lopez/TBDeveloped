@@ -1,4 +1,3 @@
-import Message from "../../../models/Message";
 import * as MessagesAPIUtil from "../util/messages_api_util";
 
 export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
@@ -30,9 +29,9 @@ export const receiveChat = (chat) => {
 
 //THUNK ACTION
 
-export const postMessage = (message) => dispatch => {
-    return MessagesAPIUtil.postMessage(message)
-        .then(res => dispatch(receiveMessage(res.data)))
+export const postChat = (newChat) => dispatch => {
+    return MessagesAPIUtil.postChat(newChat)
+        .then(res => dispatch(receiveChat(res.data)))
 
 }
 
