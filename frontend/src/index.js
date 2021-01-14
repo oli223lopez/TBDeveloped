@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.fetchProfileQuestions = fetchProfileQuestions;
   window.allUsers = allUsers;
   //test 
-
+  console.log("howdy")
   const root = document.getElementById('root')
   ReactDOM.render(<Root store={store} />, root)
 
