@@ -5,6 +5,7 @@ module.exports = function validateChat(data) {
     }else if(!data.responseID){
       errors.response = "this chat isn't associcated with a response"
     }
+
     //for now we are allowing messages to be null
   return {
         errors,

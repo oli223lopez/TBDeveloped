@@ -5,20 +5,29 @@ module.exports = function validateMessage(data) {
     let errors = {}; 
 
 
-    if(!data.chatId){
+    if(!data.messages.chatId){
         errors.chatId = "This message isn't associated with a chat"
     }
 
-    if(!data.user){
+    if(!data.messages.user){
         errors.user = "This message isn't associated with a user"
     }
 
-    data.sentence = validText(data.sentence) ? data.sentence : '';
+    if(!data.messages.sentence){
+        errors.sentence = "Please start a conversation"
 
-    //checks to see if sentence is a valid text
-    if(Validator.isEmpty(data.sentence)) {
-        errors.sentence = "Please write a message to send"
-      }
+    }
+
+    //this loops through the conversations array and pulls out each question to see if its a valid text
+    // data.conversations.forEach(message =>{
+
+    //     //checks to see if message is a valid text
+    //     const newMessage = validText(message) ? message : "";
+    //     if(Validator.isEmpty(newMessage)) {
+    //         errors.conversations = "Please write a valid message"
+    //      }
+
+    // })
 
     
 
