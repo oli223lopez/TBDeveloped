@@ -1,7 +1,9 @@
+import Message from "../../../models/Message";
 import * as MessagesAPIUtil from "../util/messages_api_util";
 
 export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
 export const RECEIVE_MESSAGES = "RECEIVE_MESSAGES";
+export const RECEIVE_CHAT = 'RECEIVE_CHAT';
 
 
 export const receiveMessage = (message) => {
@@ -18,11 +20,21 @@ export const receiveMessages = (messages) => {
     }
 }
 
+export const receiveChat = (chat) => {
+    return {
+        type: RECEIVE_CHAT,
+        chat
+    }
+}
+
 
 //THUNK ACTION
 
+export const postMessage = (message) => dispatch => {
+    return MessagesAPIUtil.postMessage(message)
+        .then(res => dispatch(receiveMessage(res.data)))
 
-
+}
 
 export const fetchMessage = (messageId) => dispatch => {
     return MessagesAPIUtil.fetchMessage(messageId)
@@ -32,4 +44,10 @@ export const fetchMessage = (messageId) => dispatch => {
 export const fetchMessages = () => dispatch => {
     return MessagesAPIUtil.fetchMessages()
         .then(res => dispatch(receiveMessages(res.data)))
+}
+
+
+export const fetchChat = (chatID) => dispatch => {
+    return MessagesAPIUtil.fetchChat(chatID)
+        .then(res => dispatch(receiveChat(res.data)))
 }
