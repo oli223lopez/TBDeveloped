@@ -187,5 +187,10 @@ require('./config/passport')(passport)
 
 app.use("/api/users", users)
 app.use("/api/questions", questions) 
-app.use("/api/chat", chat)
+
+const chat = require("./routes/api/chat")
+app.use('/api/chat',chat)
+
+const message = require('./routes/api/message')
+app.use('/api/message', message)
 // app.use("/api/responses", responses) 12/31/20, removed since responses are embedded within questions
