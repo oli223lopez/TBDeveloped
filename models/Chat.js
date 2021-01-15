@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Message = require("./Message")
-
-
+const Question = require("./Question")
 
 const ChatSchema = new Schema({
 
     question: {
         type: Schema.Types.ObjectId,
-        ref: 'question',
+        ref: Question,
         require: true
     },
     

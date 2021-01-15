@@ -110,5 +110,27 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
 })
 
 
+//  Nested populate for fetching all users, their active chats, messages, and questions 
+// router.get('/', (req, res) => {
+//     User.find()
+//     .populate('activeChats')
+//     .populate({
+//         path: 'activeChats', 
+//         populate: {
+//             path: 'question',
+//             model: 'Question'
+//         }
+//     })
+//     .populate({
+//         path: 'activeChats', 
+//         populate: {
+//             path: 'messages',
+//             model: 'Message'
+//         }
+//     })
+//     .then(users => {res.json(users)})
+// })
+
+
 module.exports = router
 
