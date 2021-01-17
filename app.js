@@ -23,6 +23,17 @@ const peers = {};
 
 io.on("connection", socket => { // listens for "connection" event, which generates a socket object. This is triggered when a user on a browser hits a particular page 
 
+
+    //! 1/16/21 Oliver's socket test for chat
+    socket.emit('your id', socket.id)
+    socket.on('send message', body => {
+        io.emit('message', body)
+    })
+    //! 1/16/21 Oliver's socket test for chat
+
+
+
+
       // 1/3/21
       socket.on("send name", username => {
         peers[socket.id.toString()] = username
