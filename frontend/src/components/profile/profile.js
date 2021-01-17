@@ -15,6 +15,19 @@ class Profile extends React.Component {
     componentDidMount() {
         // console.log(this.props.currentUser.questions)
         this.props.fetchProfileQuestions(this.props.currentUser.questions)
+
+        //!test
+        // this.props.fetchProfileQuestions()
+        // this.props.currUser;
+        // this.props.profile_questions.map((question, id) => {
+        //     if(question.user._id === this.props.currentUser.id){
+                // this.props.fetchQuestion(id).subject
+                // return question.subject;
+        //     }
+
+        // })
+        
+
     }
 
 
@@ -36,6 +49,20 @@ class Profile extends React.Component {
     
 
     render() {
+        // console.log('51', this.props.currUser)
+        //!test\n
+        // this.props.profile_questions.map((question, id) => {
+        //     if(question.user._id === this.props.currentUser.id){
+        //         // this.props.fetchProfileQuestions(question.content)
+        //         console.log(question.subject)
+        //     }
+
+        // })
+
+        //!test
+
+
+
         let boolean = false;
         let amtOfPost = 0;
         let amtOfResponse = 0;
