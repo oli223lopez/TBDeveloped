@@ -27,8 +27,9 @@ const Messenger = (props) => {
             console.log("here");
             receivedMessage(message);
         })
-        console.log(props.user)
-        socketRef.current.emit('join', props.user[0])
+
+        // console.log('31', props.chatID)
+        socketRef.current.emit('join', props.chatID)
     }, []);
 
     function receivedMessage(message) {

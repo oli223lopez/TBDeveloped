@@ -5,7 +5,9 @@ import '../../assets/stylesheets/navbar.scss';
 import dino2 from '../../assets/images/dino2.png';
 import linkedin from '../../assets/images/linkedin.png';
 
-
+//!test
+import MessengerContainer from '../messenger/messenger_container'
+//!test
 
 class NavBar extends React.Component {
     constructor(props) {
@@ -14,6 +16,13 @@ class NavBar extends React.Component {
         this.getLinks = this.getLinks.bind(this);
 
         console.log(this.props.currentUser)
+
+        //!testing
+        this.state = {
+            showComponent: false,
+            chatID: ''
+        }
+        this.openChat = this.openChat.bind(this);
     }
 
     componentDidMount() {
@@ -43,7 +52,14 @@ class NavBar extends React.Component {
             );
         }
     }
-
+//!test
+    openChat(chat){
+        this.setState({
+            showComponent: true,
+            chatID: chat
+        })
+    }
+//!test
     render() {
         const tbdevelopedHeader = () => {
             if(this.props.loggedIn === false){
@@ -109,8 +125,19 @@ class NavBar extends React.Component {
                         
                         <ul>
                             {this.props.currentUser.activeChats.map((chat) => {
-                            return <li>{chat}</li>
+
+                            return (
+                                <div>
+                                    
+                                    <li onClick={() => this.openChat(chat)}>{chat}</li>
+                                    
+                                </div>
+                            )
+                            
                             })}
+                            <div>
+                                {this.state.showComponent ? <MessengerContainer chatID={this.state.chatID}/> : null}
+                            </div>
                         </ul>
 
                         : null
