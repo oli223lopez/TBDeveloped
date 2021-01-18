@@ -20,3 +20,7 @@ export const login = (userData) => {
 export const allUsers = () => {
     return axios.get('api/users/test')
 }
+
+export const fetchUser = () => {
+    return axios.get(`api/users/current`)
+}
