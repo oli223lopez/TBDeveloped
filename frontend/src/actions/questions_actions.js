@@ -59,12 +59,19 @@ export const fetchQuestions = () => (dispatch) => {
         .catch(err => dispatch(receiveQuestionErrors(err)))
 }
 
-
-export const fetchProfileQuestions = (questions) => (dispatch) => {
-    return QuestionsAPIUtil.fetchQuestions(questions)
+//!TEST
+// export const fetchProfileQuestions = (questions) => (dispatch) => {
+//     return QuestionsAPIUtil.fetchQuestions(questions)
+//         .then(res => dispatch(receiveProfileQuestions(res.data)))
+//         .catch(err => dispatch(receiveQuestionErrors(err)))
+// }
+export const fetchProfileQuestions = () => (dispatch) => {
+    return QuestionsAPIUtil.fetchQuestions()
         .then(res => dispatch(receiveProfileQuestions(res.data)))
         .catch(err => dispatch(receiveQuestionErrors(err)))
 }
+
+//!TEST
 
 export const fetchQuestion = (questionId) => (dispatch) => {
     return QuestionsAPIUtil.fetchQuestion(questionId)
