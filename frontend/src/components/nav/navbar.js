@@ -12,6 +12,12 @@ class NavBar extends React.Component {
         super(props);
         this.logoutUser = this.logoutUser.bind(this);
         this.getLinks = this.getLinks.bind(this);
+
+        console.log(this.props.currentUser)
+    }
+
+    componentDidMount() {
+        this.props.fetchUser()
     }
 
     logoutUser(e) {
@@ -96,6 +102,22 @@ class NavBar extends React.Component {
                             </div>
                         </div> 
 
+                    </div>
+
+                    <div>
+                        {this.props.currentUser.activeChats ? 
+                        
+                        <ul>
+                            {this.props.currentUser.activeChats.map((chat) => {
+                            return <li>{chat}</li>
+                            })}
+                        </ul>
+
+                        : null
+                    
+                    }
+                        
+                        
                     </div>
 
                     <div>{ this.getLinks()}</div>

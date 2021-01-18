@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import Profile from './profile';
 import {fetchProfileQuestions} from '../../actions/questions_actions'
+import {fetchUser} from '../../actions/session_actions'
 
 //testing
 // import {receiveCurrentUser} from '../../actions/session_actions'

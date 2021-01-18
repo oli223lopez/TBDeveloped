@@ -51,22 +51,21 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
 router.get('/:id', (req, res) => {
 
     Chat.findById(req.params.id)
+        .populate('question')
         .populate('messages')
         .then(chat => res.json(chat))
         .catch(err => res.status(404).json("chat not found"))
 });
 
 
-
-
-
-
-router.get('/:id', (req, res) => {
-    Chat.findById(req.body.id)
-        .populate('messages')
-        .then( chat => {res.json(chat)})
-        .catch(err => res.status(404).json(err))
-})
+// 1/14/21 route for getting all chats, with populate for questions and messages 
+// router.get('/', (req, res) => {
+//     Chat.find()
+//         .populate('question')
+//         .populate('message')
+//         .then(chats => res.json(chats))
+//         .catch(err => res.status(404).json("chats not found"))
+// })
 
 module.exports = router
 
