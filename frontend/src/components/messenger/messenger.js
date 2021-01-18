@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import io from 'socket.io-client'
 
 
-const Messenger = () => {
+const Messenger = (props) => {
     const [yourID, setYourID] = useState();
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
@@ -16,10 +16,19 @@ const Messenger = () => {
             setYourID(id);
         })
 
+        //! emit chat id when opening chat
+        //! socketRef.emit to make the rooms personalized
+
+
+
+
+
         socketRef.current.on("message", (message) => {
             console.log("here");
             receivedMessage(message);
         })
+        console.log(props.user)
+        socketRef.current.emit('join', props.user[0])
     }, []);
 
     function receivedMessage(message) {
@@ -39,6 +48,8 @@ const Messenger = () => {
     function handleChange(e) {
         setMessage(e.target.value);
     }
+
+    // console.log(messages)
 
     return (
         <div>

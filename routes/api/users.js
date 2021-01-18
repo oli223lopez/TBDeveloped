@@ -76,7 +76,8 @@ router.post('/login', (req, res) => {
                             id: user.id,
                             username: user.username,
                             email: user.email,
-                            questions: user.questions
+                            questions: user.questions,
+                            activeChats: user.activeChats
                         }
                         jwt.sign(
                             payload,
@@ -106,8 +107,9 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
     User.findById(req.user._id)
     .populate('questions')
     .then(user => {res.json(user)})
-
 })
+
+
 
 
 //  Nested populate for fetching all users, their active chats, messages, and questions 

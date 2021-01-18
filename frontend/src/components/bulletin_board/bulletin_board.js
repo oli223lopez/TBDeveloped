@@ -3,7 +3,7 @@ import QuestionIndex from '../question/question_index'
 import ResolvedIndex from '../resolved/resolved_index'
 import '../../assets/stylesheets/bulletin_board.css'
 import CreateQuestionFormContainer from '../question/create_question_form_container'
-import Messenger from '../messenger/messenger'
+import MessengerContainer from '../messenger/messenger_container'
 
 
 
@@ -74,7 +74,7 @@ class BulletinBoard extends React.Component{
                         <CreateQuestionFormContainer />
                     </div>
 
-                    <Messenger />
+                    <MessengerContainer />
                 </div>
             )
         }
