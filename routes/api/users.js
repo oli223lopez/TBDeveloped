@@ -64,6 +64,7 @@ router.post('/login', (req, res) => {
     const password = req.body.password;
 
     User.findOne({ email })
+        .populate('questions')
         .then(user => {
             if (!user) {
                 return res.status(404).json({ email: 'this user does not exist' })
@@ -106,32 +107,39 @@ router.post('/login', (req, res) => {
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
     User.findById(req.user._id)
     .populate('questions')
-    .then(user => {res.json(user)})
+    .then(user => {res.json({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        questions: user.questions,
+        activeChats: user.activeChats
+    })})
+
 })
 
 
 
 
 //  Nested populate for fetching all users, their active chats, messages, and questions 
-// router.get('/', (req, res) => {
-//     User.find()
-//     .populate('activeChats')
-//     .populate({
-//         path: 'activeChats', 
-//         populate: {
-//             path: 'question',
-//             model: 'Question'
-//         }
-//     })
-//     .populate({
-//         path: 'activeChats', 
-//         populate: {
-//             path: 'messages',
-//             model: 'Message'
-//         }
-//     })
-//     .then(users => {res.json(users)})
-// })
+router.get('/', (req, res) => {
+    User.find()
+    .populate('activeChats')
+    .populate({
+        path: 'activeChats', 
+        populate: {
+            path: 'question',
+            model: 'Question'
+        }
+    })
+    .populate({
+        path: 'activeChats', 
+        populate: {
+            path: 'messages',
+            model: 'Message'
+        }
+    })
+    .then(users => {res.json(users)})
+})
 
 
 module.exports = router

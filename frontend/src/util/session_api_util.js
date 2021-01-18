@@ -21,7 +21,6 @@ export const allUsers = () => {
     return axios.get('api/users/test')
 }
 
-
-export const currentUser = (userID) => {
-    return axios.get()
+export const fetchUser = () => {
+    return axios.get(`api/users/current`)
 }
