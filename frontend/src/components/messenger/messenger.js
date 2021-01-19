@@ -16,21 +16,24 @@ const Messenger = (props) => {
             setYourID(id);
         })
 
-        //! emit chat id when opening chat
-        //! socketRef.emit to make the rooms personalized
-
-
-
-
-
         socketRef.current.on("message", (message) => {
             console.log("here");
+            console.log(message, 'hi')
             receivedMessage(message);
         })
+        
+        //!WL 1/18/ trying to kill chat connection
 
-        // console.log('31', props.chatID)
+        // socketRef.current.on('message', (message) => {
+        //     console.log(message, 'hi')
+        // })
+        
+        //!WL 1/18/ trying to kill chat connection
+        
+        console.log('messenger-31', props.chatID)
         socketRef.current.emit('join', props.chatID)
-    }, []);
+
+    }, [props.chatID]);
 
     function receivedMessage(message) {
         setMessages(oldMsgs => [...oldMsgs, message]);
@@ -50,7 +53,11 @@ const Messenger = (props) => {
         setMessage(e.target.value);
     }
 
-    // console.log(messages)
+    //!WL 1/18/ trying to kill chat connection
+    function leaveChat(){
+        socketRef.current.disconnect()
+    }
+    //!WL 1/18/ trying to kill chat connection
 
     return (
         <div>
@@ -78,6 +85,8 @@ const Messenger = (props) => {
                 <textarea value={message} onChange={handleChange} placeholder="Say something..." />
                 <button type='submit'>Send</button >
             </form>
+            <button onClick={() => leaveChat()}>Leave Chat</button>  
+
         </div>
     );
 };

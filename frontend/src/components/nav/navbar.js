@@ -15,14 +15,16 @@ class NavBar extends React.Component {
         this.logoutUser = this.logoutUser.bind(this);
         this.getLinks = this.getLinks.bind(this);
 
-        console.log(this.props.currentUser)
+        console.log('18', this.props.currentUser)
 
-        //!testing
-        this.state = {
-            showComponent: false,
-            chatID: ''
-        }
-        this.openChat = this.openChat.bind(this);
+        //!TESTING
+            this.state = {
+                // showComponent: false,
+                chatID: ''
+            }
+            this.openChat = this.openChat.bind(this);
+            this.chatItself = this.chatItself.bind(this);
+        //!TESTING
     }
 
     componentDidMount() {
@@ -54,10 +56,20 @@ class NavBar extends React.Component {
     }
 //!test
     openChat(chat){
-        this.setState({
-            showComponent: true,
-            chatID: chat
-        })
+        // console.log('58',chat)
+            this.setState({
+                chatID: chat
+            })
+        
+    }
+
+    chatItself(){
+        console.log('state', this.state.chatID)
+        return(
+            <div>
+                <MessengerContainer chatID={this.state.chatID}/>
+            </div>
+        )
     }
 //!test
     render() {
@@ -127,16 +139,15 @@ class NavBar extends React.Component {
                             {this.props.currentUser.activeChats.map((chat) => {
 
                             return (
-                                <div>
-                                    
+                                <div>   
                                     <li onClick={() => this.openChat(chat)}>{chat}</li>
-                                    
                                 </div>
                             )
                             
-                            })}
+                        })}
                             <div>
-                                {this.state.showComponent ? <MessengerContainer chatID={this.state.chatID}/> : null}
+                                {this.state.chatID != "" ? this.chatItself() : null}
+                                {/* {this.state.chatID != ""  ? <MessengerContainer chatID={this.state.chatID}/> : null} */}
                             </div>
                         </ul>
 
