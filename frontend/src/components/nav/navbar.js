@@ -5,9 +5,9 @@ import '../../assets/stylesheets/navbar.scss';
 import dino2 from '../../assets/images/dino2.png';
 import linkedin from '../../assets/images/linkedin.png';
 
-//!test
+//!{/* //!WL 1/19/ trying to kill chat connection */}
 import MessengerContainer from '../messenger/messenger_container'
-//!test
+//!{/* //!WL 1/19/ trying to kill chat connection */}
 
 class NavBar extends React.Component {
     constructor(props) {
@@ -17,14 +17,14 @@ class NavBar extends React.Component {
 
         console.log('18', this.props.currentUser)
 
-        //!TESTING
+        //!{/* //!WL 1/19/ trying to kill chat connection */}
             this.state = {
                 // showComponent: false,
                 chatID: ''
             }
             this.openChat = this.openChat.bind(this);
             this.chatItself = this.chatItself.bind(this);
-        //!TESTING
+        //!{/* //!WL 1/19/ trying to kill chat connection */}
     }
 
     componentDidMount() {
@@ -54,7 +54,7 @@ class NavBar extends React.Component {
             );
         }
     }
-//!test
+//!{/* //!WL 1/19/ trying to kill chat connection */}
     openChat(chat){
         // console.log('58',chat)
             this.setState({
@@ -71,7 +71,7 @@ class NavBar extends React.Component {
             </div>
         )
     }
-//!test
+//!{/* //!WL 1/19/ trying to kill chat connection */}
     render() {
         const tbdevelopedHeader = () => {
             if(this.props.loggedIn === false){
@@ -146,8 +146,10 @@ class NavBar extends React.Component {
                             
                         })}
                             <div>
+                                {/* //!WL 1/19/ trying to kill chat connection */}
                                 {this.state.chatID != "" ? this.chatItself() : null}
                                 {/* {this.state.chatID != ""  ? <MessengerContainer chatID={this.state.chatID}/> : null} */}
+                                {/* //!WL 1/19/ trying to kill chat connection */}
                             </div>
                         </ul>
 

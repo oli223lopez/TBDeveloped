@@ -53,11 +53,11 @@ const Messenger = (props) => {
         setMessage(e.target.value);
     }
 
-    //!WL 1/18/ trying to kill chat connection
+    //!{/* //!WL 1/19/ trying to kill chat connection */}
     function leaveChat(){
         socketRef.current.disconnect()
     }
-    //!WL 1/18/ trying to kill chat connection
+    //!{/* //!WL 1/19/ trying to kill chat connection */}
 
     return (
         <div>

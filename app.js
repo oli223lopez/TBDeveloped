@@ -38,14 +38,15 @@ io.on("connection", socket => { // listens for "connection" event, which generat
 
 
 
-    //!WL 1/18/ trying to kill chat connection
+    //!WL 1/19/ trying to kill chat connection
     socket.broadcast.emit('message', 'Someone joined the chat');
 
     socket.on('disconnect', () => {
+        socket.disconnect();
         console.log('server disconnect')
         io.emit('message', 'A user has left the chat');
     });
-    //!WL 1/18/ trying to kill chat connection
+    //!WL 1/19/ trying to kill chat connection
 
 
       // 1/3/21
