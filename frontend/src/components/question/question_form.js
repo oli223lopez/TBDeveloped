@@ -42,11 +42,12 @@ class QuestionForm extends React.Component{
             user: this.props.user
         };
         await this.props.processForm(newQuestion)
-        // this.setState({subject: ""})
-        // this.setState({content: ""})
-        // this.setState({tagSelected: true})
-
-        // this.props.fetchQuestions()
+        if(Object.keys(this.state.errors).length === 0){
+            this.setState({subject: ""})
+            this.setState({content: ""})
+            this.props.fetchQuestions()
+        }
+        console.log(this.state.errors)
 
     }
 
