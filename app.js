@@ -42,7 +42,6 @@ io.on("connection", socket => { // listens for "connection" event, which generat
     socket.broadcast.emit('message', 'Someone joined the chat');
 
     socket.on('disconnect', () => {
-        socket.disconnect();
         console.log('server disconnect')
         io.emit('message', 'A user has left the chat');
     });

@@ -17,18 +17,10 @@ const Messenger = (props) => {
         })
 
         socketRef.current.on("message", (message) => {
-            console.log("here");
+            // console.log("here");
             console.log(message, 'hi')
             receivedMessage(message);
         })
-        
-        //!WL 1/18/ trying to kill chat connection
-
-        // socketRef.current.on('message', (message) => {
-        //     console.log(message, 'hi')
-        // })
-        
-        //!WL 1/18/ trying to kill chat connection
         
         console.log('messenger-31', props.chatID)
         socketRef.current.emit('join', props.chatID)

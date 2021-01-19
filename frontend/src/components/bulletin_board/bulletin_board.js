@@ -54,7 +54,6 @@ class BulletinBoard extends React.Component{
                 usernames.push(question.user)
 
             })
-            // console.log(questionArray)
             return(
                 <div>
                     <h1></h1>
