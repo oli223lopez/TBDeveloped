@@ -10,7 +10,8 @@ class QuestionForm extends React.Component{
             content: this.props.content,
             tag: this.props.tag,
             solved: this.props.solved,
-            errors: this.props.errors
+            errors: this.props.errors,
+            tagSelected: true
             
         }
 
@@ -31,7 +32,7 @@ class QuestionForm extends React.Component{
     }
 
 
-    submit(e){
+    async submit(e){
         e.preventDefault();
         let newQuestion = {
             subject: this.state.subject,
@@ -40,7 +41,13 @@ class QuestionForm extends React.Component{
             tag: this.state.tag,
             user: this.props.user
         };
-        this.props.processForm(newQuestion)
+        await this.props.processForm(newQuestion)
+        // this.setState({subject: ""})
+        // this.setState({content: ""})
+        // this.setState({tagSelected: true})
+
+        // this.props.fetchQuestions()
+
     }
 
     updateSubmit(e) {
@@ -114,19 +121,19 @@ class QuestionForm extends React.Component{
                 <form onSubmit={this.submit}>
                     <div>
                         <label>
-                            Subject: <input type="text" value={this.state.subject} onChange={this.update('subject')}/>
+                            Subject: <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')}/>
                         </label>
                     </div>
                     <div>
                         <label>
-                            Content: <textarea value={this.state.content} onChange={this.update('content')}/>
+                            Content: <textarea className="question-subject" value={this.state.content} onChange={this.update('content')}/>
                         </label>
 
                     </div>
                     <div>
                         <label>
                             <select onChange={this.update('tag')} >
-                                <option value=''>--Choose a tag--</option>
+                                <option value='' selected={this.state.tagSelected}>--Choose a tag--</option>
                                 <option value='idea'>Idea</option>
                                 <option value='question'>Question</option>
                             </select>
