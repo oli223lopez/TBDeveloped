@@ -17,8 +17,8 @@ const Messenger = (props) => {
         })
 
         socketRef.current.on("message", (message) => {
-            console.log("here");
-            console.log(message, 'hi')
+            // console.log("here");
+            // console.log(message, 'hi')
             receivedMessage(message);
         })
         
@@ -30,7 +30,7 @@ const Messenger = (props) => {
         
         //!WL 1/18/ trying to kill chat connection
         
-        console.log('messenger-31', props.chatID)
+        // console.log('messenger-31', props.chatID)
         socketRef.current.emit('join', props.chatID)
 
     }, [props.chatID]);
@@ -85,7 +85,7 @@ const Messenger = (props) => {
                 <textarea value={message} onChange={handleChange} placeholder="Say something..." />
                 <button type='submit'>Send</button >
             </form>
-            <button onClick={() => leaveChat()}>Leave Chat</button>  
+            <button onClick={() => leaveChat()} id='leaveChat'>Leave Chat</button>  
 
         </div>
     );
