@@ -5,7 +5,9 @@ import '../../assets/stylesheets/navbar.scss';
 import dino2 from '../../assets/images/dino2.png';
 import linkedin from '../../assets/images/linkedin.png';
 
-
+//!{/* //!WL 1/19/ trying to kill chat connection */}
+import MessengerContainer from '../messenger/messenger_container'
+//!{/* //!WL 1/19/ trying to kill chat connection */}
 
 class NavBar extends React.Component {
     constructor(props) {
@@ -13,7 +15,16 @@ class NavBar extends React.Component {
         this.logoutUser = this.logoutUser.bind(this);
         this.getLinks = this.getLinks.bind(this);
 
-        console.log(this.props.currentUser)
+        console.log('18', this.props.currentUser)
+
+        //!{/* //!WL 1/19/ trying to kill chat connection */}
+            this.state = {
+                // showComponent: false,
+                chatID: ''
+            }
+            this.openChat = this.openChat.bind(this);
+            this.chatItself = this.chatItself.bind(this);
+        //!{/* //!WL 1/19/ trying to kill chat connection */}
     }
 
     componentDidMount() {
@@ -43,7 +54,24 @@ class NavBar extends React.Component {
             );
         }
     }
+//!{/* //!WL 1/19/ trying to kill chat connection */}
+    openChat(chat){
+        // console.log('58',chat)
+            this.setState({
+                chatID: chat
+            })
+        
+    }
 
+    chatItself(){
+        console.log('state', this.state.chatID)
+        return(
+            <div>
+                <MessengerContainer chatID={this.state.chatID}/>
+            </div>
+        )
+    }
+//!{/* //!WL 1/19/ trying to kill chat connection */}
     render() {
         const tbdevelopedHeader = () => {
             if(this.props.loggedIn === false){
@@ -109,8 +137,20 @@ class NavBar extends React.Component {
                         
                         <ul>
                             {this.props.currentUser.activeChats.map((chat) => {
-                            return <li>{chat}</li>
-                            })}
+
+                            return (
+                                <div>   
+                                    <li onClick={() => this.openChat(chat)}>{chat}</li>
+                                </div>
+                            )
+                            
+                        })}
+                            <div>
+                                {/* //!WL 1/19/ trying to kill chat connection */}
+                                {this.state.chatID != "" ? this.chatItself() : null}
+                                {/* {this.state.chatID != ""  ? <MessengerContainer chatID={this.state.chatID}/> : null} */}
+                                {/* //!WL 1/19/ trying to kill chat connection */}
+                            </div>
                         </ul>
 
                         : null
