@@ -149,22 +149,22 @@ class QuestionShow extends React.Component {
                 < div className="question_container">
                     <div className="question_description">
 
-                    {/* {console.log(this.state.users)} */}
-                    <div className="question_header">
-                    <h2>{question[0].subject}</h2>
-                    <p className="date_posted">posted: {Date(question[0].createdAt)}</p>
-                    </div>
-                     <div className="question_body">
-                         <p>{question[0].content}</p>
+                        {/* {console.log(this.state.users)} */}
+                        <div className="question_header">
+                            <h2>{question[0].subject}</h2>
+                            <p className="date_posted">posted: {Date(question[0].createdAt)}</p>
+                        </div>
+                         <div className="question_body">
+                             <p>{question[0].content}</p>
 
-                    </div>   
+                        </div>   
 
-                    <div className="question_footer">
-                    { question[0].solved ? <p> &#10003; Solved</p> : <p>&#10007; Unsolved</p> }
-                    <p className="tag">Tag: {question[0].tag}</p>
-                    <h1 className="question-author"> posted by {question[0].user.username}</h1>
+                        <div className="question_footer">
+                            { question[0].solved ? <p> &#10003; Solved</p> : <p>&#10007; Unsolved</p> }
+                            <p className="tag">Tag: {question[0].tag}</p>
+                            <h1 className="question-author"> posted by {question[0].user.username}</h1>
 
-                    </div>
+                        </div>
 
                     </div>
 
