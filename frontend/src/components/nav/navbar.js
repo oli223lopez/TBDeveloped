@@ -147,7 +147,7 @@ class NavBar extends React.Component {
                         })}
                             <div>
                                 {/* //!WL 1/19/ trying to kill chat connection */}
-                                {this.state.chatID != "" ? this.chatItself() : null}
+                                {this.state.chatID !== "" ? this.chatItself() : null}
                                 {/* {this.state.chatID != ""  ? <MessengerContainer chatID={this.state.chatID}/> : null} */}
                                 {/* //!WL 1/19/ trying to kill chat connection */}
                             </div>
