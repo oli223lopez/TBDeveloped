@@ -1,6 +1,4 @@
 import React from 'react'
-import mongoose from 'mongoose';
-
 
 class ResponseForm extends React.Component{
     constructor(props){

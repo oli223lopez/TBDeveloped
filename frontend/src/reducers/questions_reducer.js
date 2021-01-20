@@ -14,10 +14,6 @@ const QuestionsReducer = (state={}, action) =>  {
                 questionState[question._id] = question
             })
             return questionState
-            // Object.values(action.questions).map( question => {
-            //     return newState[question._id] = question
-            // })
-            // return newState
         case RECEIVE_QUESTION:
             newState[action.question._id] = action.question
             return newState
