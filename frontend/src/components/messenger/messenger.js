@@ -101,7 +101,7 @@ const Messenger = (props) => {
                 <textarea value={message} onChange={handleChange} placeholder="Say something..." />
                 <button type='submit'>Send</button >
             </form>
-            <button onClick={() => leaveChat()}>Leave Chat</button>  
+            <div onClick={() => leaveChat()} id={`leaveChat${props.chatID}`}></div>  
 
         </div>
     );
