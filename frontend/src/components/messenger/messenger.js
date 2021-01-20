@@ -4,7 +4,7 @@ import io from 'socket.io-client'
 
 const Messenger = (props) => {
     const [yourID, setYourID] = useState();
-    const [messages, setMessages] = useState([]);
+    const [conversations, setConversations] = useState([]);
     const [message, setMessage] = useState("");
 
     const socketRef = useRef();
@@ -17,18 +17,9 @@ const Messenger = (props) => {
         })
 
         socketRef.current.on("message", (message) => {
-            console.log("here");
-            console.log(message, 'hi')
+            // console.log('here', message)
             receivedMessage(message);
         })
-        
-        //!WL 1/18/ trying to kill chat connection
-
-        // socketRef.current.on('message', (message) => {
-        //     console.log(message, 'hi')
-        // })
-        
-        //!WL 1/18/ trying to kill chat connection
         
         console.log('messenger-31', props.chatID)
         socketRef.current.emit('join', props.chatID)
@@ -36,15 +27,17 @@ const Messenger = (props) => {
     }, [props.chatID]);
 
     function receivedMessage(message) {
-        setMessages(oldMsgs => [...oldMsgs, message]);
+        setConversations(oldMsgs => [...oldMsgs, message]);
     }
 
     function sendMessage(e) {
+        // console.log('printSetConversations', conversations)
         e.preventDefault();
         const messageObject = {
-            body: message,
+            sentence: message,
             id: yourID,
         };
+        messageToDB()
         setMessage("");
         socketRef.current.emit("send message", messageObject);
     }
@@ -53,21 +46,43 @@ const Messenger = (props) => {
         setMessage(e.target.value);
     }
 
+    function messageToDB(){
+
+        let newMess = {
+            chatId: props.chatID,
+            user: props.userID,
+            sentence: message
+        };
+
+        props.postMessage(newMess);
+    }
+
     //!{/* //!WL 1/19/ trying to kill chat connection */}
     function leaveChat(){
         socketRef.current.disconnect()
     }
     //!{/* //!WL 1/19/ trying to kill chat connection */}
+    
+    //!renders DB Conversations
+    useEffect(() => {
+        if(props.chatID){
+            props.fetchChat(props.chatID).then(res => 
+                setConversations(res.chat.messages)
+            )
+        }
+    }, [])
+    //!renders DB Conversations
 
     return (
         <div>
             <div>
-                {messages.map((message, index) => {
+                {conversations.map((message, index) => {
                     if (message.id === yourID) {
                         return (
                             <div key={index}>
                                 <div>
-                                    {message.body}
+                                    {/* {message.user} */}
+                                    {message.sentence}
                                 </div>
                             </div>
                         )
@@ -75,7 +90,8 @@ const Messenger = (props) => {
                     return (
                         <div key={index}>
                             <div>
-                                {message.body}
+                                {/* {message.user} */}
+                                {message.sentence}
                             </div>
                         </div>
                     )
