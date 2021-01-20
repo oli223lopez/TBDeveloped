@@ -10,14 +10,16 @@ class AnswerIndex extends React.Component {
        this.createChat = this.createChat.bind(this);
    }
 
-   createChat(questionID, responseID, responseUserID, posterID){
+   async createChat(questionID, responseID, responseUserID, posterID){
         let newChat = {
             questionID: questionID, 
             responseID: responseID, 
             posterID: posterID,
             responseUserID: responseUserID
         };
-        this.props.createChat(newChat);
+       await this.props.createChat(newChat);
+        this.props.fetchUser()
+
    }
     
 

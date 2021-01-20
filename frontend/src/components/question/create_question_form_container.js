@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import QuestionFrom from './question_form'
-import {postQuestion} from '../../actions/questions_actions'
+import {postQuestion, fetchQuestions} from '../../actions/questions_actions'
 
 
 const mapStateToProps = state => ({
@@ -16,7 +16,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    processForm: (newQuestion) => dispatch(postQuestion(newQuestion)) 
+    processForm: (newQuestion) => dispatch(postQuestion(newQuestion)), 
+    fetchQuestions: () => dispatch(fetchQuestions()) 
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(QuestionFrom)
