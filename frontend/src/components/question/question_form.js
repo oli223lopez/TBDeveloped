@@ -123,12 +123,12 @@ class QuestionForm extends React.Component{
                 <form onSubmit={this.submit}>
                     <div>
                         <label>
-                            Subject: <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')}/>
+                            Subject: <span class="error_message">*</span> <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')}/>
                         </label>
                     </div>
                     <div>
                         <label>
-                            Content: <textarea className="question-subject" value={this.state.content} onChange={this.update('content')}/>
+                            Content: <span class="error_message">*</span> <textarea className="question-subject" value={this.state.content} onChange={this.update('content')}/>
                         </label>
 
                     </div>
@@ -144,7 +144,10 @@ class QuestionForm extends React.Component{
                     <div>
                         <label>
                                 <button className="submit-question-button" type='submit'>{this.props.formType}</button>
+                                <div className ="error_message">
                                 {this.renderErrors()}
+
+                                </div>
                         </label>
                     </div>
                     
