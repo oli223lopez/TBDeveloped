@@ -15,9 +15,11 @@ class ResolvedIndex extends React.Component{
                         <div key={i} className='individualQuestion'>
                             <div className='individualQuestionLink'>Username: {resolved.user.username}</div>
                             {/* {console.log(resolved._id)} */}
-                            <div className='individualQuestionUser'>
-                                Topic: <Link to={`/resolved/${resolved._id}`}>{resolved.subject}</Link>
-                            </div>
+                            <Link to={`/resolved/${resolved._id}`}>
+                                <div className='individualResponseUser'>
+                                    Topic: {resolved.subject}
+                                </div>
+                            </Link>
                         </div>
                     )
                 })}

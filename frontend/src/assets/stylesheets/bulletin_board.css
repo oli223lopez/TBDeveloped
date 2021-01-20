@@ -22,8 +22,9 @@
 }
 
 .bulletin_spacing{
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+
 }
 
 .qr{
@@ -66,7 +67,8 @@
     border-width: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     background-color: #aed3ef;
-    padding-right: 500px;
+    /* padding-right: 500px; */
+
     
 }
 
@@ -82,7 +84,7 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     background-color: #f5beb1;
     padding-left: 2px;
-    padding-right: 556px;
+    /* padding-right: 556px; */
 }
 
 
@@ -121,19 +123,28 @@
 }
 
 .individualQuestion{
-    padding: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    outline: 1px solid lightgray;
+    /* background-color: yellow; */
+    /* padding-right: 120px; */
     
 }
 
 .individualQuestionUser{
     font-size: 19px;
-
+    /* background-color: green; */
+    white-space: nowrap;
+    padding-right: 120px;
+    /* width: 100%; */
 
 }
 
 .individualQuestionUser a{
-    /* padding-right: 1000px; */
+    /* padding-right: 500px; */
     /* width: 500px; */
+
 }
 
 
@@ -146,8 +157,12 @@
 }
 
 .individualResponseUser{
-    padding: 10px;   
-    font-size: 12px; 
+    font-size: 19px;
+    /* background-color: green; */
+    white-space: nowrap;
+    padding-right: 178px;
+    /* width: 100%; */
+
 
 }
 .individualResponseLink{

@@ -20,9 +20,11 @@ class QuestionIndex extends React.Component {
                     return(
                         <div key={i} className='individualQuestion'>
                             <div className='individualQuestionLink'>Username: {question.user.username}</div>
-                            <div className='individualQuestionUser'>
-                                Topic: <Link to={`/question/${question._id}`}>{question.subject}</Link>
-                            </div>
+                            <Link to={`/question/${question._id}`}>
+                                <div className='individualQuestionUser'>
+                                    Topic: {question.subject}
+                                </div>
+                            </Link>    
                         </div>
                         
                     )
