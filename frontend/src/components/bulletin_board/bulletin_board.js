@@ -60,7 +60,7 @@ class BulletinBoard extends React.Component{
                         <div className='bulletin_left'>
                             <div className='qr'>
                                 <div className='questionsTab' onClick={() => this.handleClick(0)}>Questions</div>
-                                <div className='resolvedQuestionsTab' onClick={() => this.handleClick(1)}>Resolved Questions</div>
+                                <div className='resolvedQuestionsTab' onClick={() => this.handleClick(1)}>Resolved</div>
                             </div>
 
                             {this.state.idx === 0 ? <QuestionIndex questions={questionArray} /> 

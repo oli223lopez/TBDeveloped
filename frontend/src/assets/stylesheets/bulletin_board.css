@@ -44,15 +44,19 @@
     padding: 16.75px 0px;
     border-top-left-radius: 5px;
     font-family: sans-serif;
+    cursor: pointer;
 }
 
 .resolvedQuestionsTab{
     font-size: 22px;
-    /* padding: 4px; */
+    padding: 16.75px 0px;
+    padding-left: 5px;
+    padding-right: 5px;
     font-weight: bold;
     background-color: #f5beb1;
     border-top-right-radius: 5px;
     font-family: sans-serif;
+    cursor: pointer;
 
 }
 
@@ -73,6 +77,8 @@
 }
 
 
+
+
 .resolvedIndex{
     font-size: 12px;
     font-weight: bold;
@@ -83,7 +89,7 @@
     border-width: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
     background-color: #f5beb1;
-    padding-left: 2px;
+    /* padding-left: 2px; */
     /* padding-right: 556px; */
 }
 
@@ -126,10 +132,33 @@
     padding-top: 10px;
     padding-left: 10px;
     padding-bottom: 10px;
-    outline: 1px solid lightgray;
+    /* outline: 1px solid lightgray; */
+    border-bottom: 1px solid lightgray;
     /* background-color: yellow; */
     /* padding-right: 120px; */
     
+}
+
+.individualQuestion1 {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    /* outline: 1px solid lightgray; */
+    border-bottom: 1px solid lightgray;
+    /* background-color: yellow; */
+    /* padding-right: 120px; */
+    background-color: #9bbdd8;
+
+}
+
+.individualQuestion:hover{
+    background-color: lightgray;
+    opacity: 0.9;
+}
+
+.individualQuestion1:hover {
+    background-color: lightgray;
+    opacity: 0.9;
 }
 
 .individualQuestionUser{
@@ -153,8 +182,21 @@
 }
 
 .individualResponse{
-    
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    /* outline: 1px solid lightgray; */
+    border-bottom: 1px solid lightgray;
 }
+
+.individualResponse1 {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    background-color: #dbaa9f;
+    border-bottom: 1px solid lightgray;
+}
+
 
 .individualResponseUser{
     font-size: 19px;
@@ -162,9 +204,19 @@
     white-space: nowrap;
     padding-right: 178px;
     /* width: 100%; */
-
-
 }
+
+.individualResponse:hover {
+    background-color: lightgray;
+    opacity: 0.9;
+}
+
+.individualResponse1:hover {
+    background-color: lightgray;
+    opacity: 0.9;
+}
+
+
 .individualResponseLink{
     font-size: 19px;
 }
