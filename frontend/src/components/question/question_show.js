@@ -84,7 +84,6 @@ class QuestionShow extends React.Component {
                     if(response.user._id === this.props.userId){
                         return(
                             <div key={id}>
-                                <p>------------------- Responses --------------------------------------------</p>
                                 <AnswerIndexItemContainer 
                                     response = {response}
                                     questionID = {question[0]._id}
@@ -107,7 +106,6 @@ class QuestionShow extends React.Component {
                     return(
                         
                         <div>
-                        <p>------------------- Responses -------------------------------------------</p> 
                             <AnswerIndexContainer 
                                 responses = {question[0].responses}
                                 questionID = {question[0]._id}
@@ -130,14 +128,12 @@ class QuestionShow extends React.Component {
                         
                     
                         <div>
-             <p>------------------- Response Form -------------------------------------</p>     
 
                             <CreateAnswersFormContainer 
                                 questionID = {question[0]._id}
                                 fetchQuestion = {this.props.fetchQuestion}
                                 
                             />
-         <p>---------------------------------------------------------------------------</p>     
 
                         </div>
                     
@@ -162,7 +158,9 @@ class QuestionShow extends React.Component {
                     <div className="question_footer">
                     { question[0].solved ? <p> &#10003; Solved</p> : <p>&#10007; Unsolved</p> }
                     <p className="tag">Tag: {question[0].tag}</p>
-                    <h1 className="question-author"> posted by {question[0].user.username}</h1>
+                         <img className = "question-show-author-image" alt="robots" src={`https://robohash.org/${question[0].user._id}?100x100`} />
+
+                        <h1 className="question-author"> posted by {question[0].user.username}</h1>
 
                     </div>
 
@@ -177,7 +175,7 @@ class QuestionShow extends React.Component {
                     {createAnswers()}
 
 
-                    <div>
+                    <div className= "show_createform_container">
                         <CreateQuestionFormContainer />
                     </div>
                     <div>

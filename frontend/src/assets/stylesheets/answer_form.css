@@ -1,0 +1,54 @@
+.response-date{ 
+     color: #ad98b7;
+     font-family: "Helvetica";
+     font-size: 16px;
+     border: 1px solid #ecf0f1;
+     background: #ecf0f1;
+     border-radius: 7px;
+     padding: 1px;
+     display: inline-block;
+     visibility: visible !important;
+    
+}
+
+.response-text-area{ 
+    width: 100%;
+    padding: 8px 5px;
+    margin-top: 8px;
+    display: inline-block;
+    border: 1px solid #484848;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.response-submission-button{
+    color: #967a9e;
+    font-size: 14px;
+        margin-left: 5px;
+
+
+}
+
+.respondants-image{
+   height: 41px;
+   width: auto;
+   border-radius: 50%;
+   border: 1px solid grey;
+   margin-right: 11px;
+}
+
+
+.respondant-header{ 
+    display:flex;
+}
+
+.consoldation-label{ 
+  margin-top: 7px;
+}
+
+
+.response-form{
+    margin-top: 10px;
+    margin-bottom: 15px;
+    }
