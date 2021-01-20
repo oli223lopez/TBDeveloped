@@ -16,6 +16,13 @@ const ChatSchema = new Schema({
         ref: 'response',
         require: true
     },
+    ///questionSubject: {
+        // type: string,
+        // require: true
+    // },
+    // posterID: { type: Schema.Types.ObjectId, ref: 'user', require: true},
+    // responderID: { type: Schema.Types.ObjectId, ref: 'user', require: true},
+
 
     messages: [{ 
         type: Schema.Types.ObjectId, 

@@ -25,6 +25,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
         }else{
             const newChat = new Chat({
                 question: req.body.questionID,
+                //questionSubject: req.body.subject
                 response: req.body.responseID
 
             })

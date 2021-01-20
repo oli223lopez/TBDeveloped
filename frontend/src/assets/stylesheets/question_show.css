@@ -45,8 +45,11 @@
     
     display: flex;
     flex-direction: row;
+     padding-bottom: 10px;
        border-bottom: 1px solid #b4b4b4;
     margin-bottom: 40px;
+    padding-top: 5px;
+
 }
 
 .question_footer p {
@@ -55,21 +58,25 @@
     margin: 5px;
     display: flex;
     flex-direction: row;
+    margin-top: 8px;
 }
 
 .question_footer .question-author {
-    margin-left: 313px;
+    margin-left: 10px;
+    margin-top: 8px;
+
+;
 }
 
 .question_footer .tag{
     margin-left: 20px;
+
 }
 
         
 
 .date_posted{
-     width: 160px;
-     flex: 11;
+    width: 186px;
      white-space: nowrap;
      overflow: hidden;
 }
@@ -117,4 +124,16 @@
 .chatButton:hover {
     background-color: white;
     color: black;
+}
+
+.question-show-author-image{
+    height: 38px;
+    width: auto;
+    border-radius: 50%;
+    border: 1px solid grey;
+    margin-left: 304px;
+;
+}
+.question-show-author {
+    display: flex;
 }

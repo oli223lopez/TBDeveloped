@@ -64,7 +64,9 @@ class NavBar extends React.Component {
     //         leaveButton.click()
     //     }
             let chatsArray = this.state.chats
+        if (!chatsArray.includes(chat)){
             chatsArray.push(chat)
+        }
             this.setState({chats: chatsArray})
 
     //    if(this.state.chatID === ''){
