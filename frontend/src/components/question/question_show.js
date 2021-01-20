@@ -69,6 +69,7 @@ class QuestionShow extends React.Component {
                        <div>
                         <Link to="/bulletin">
                         <button onClick={() => this.props.deleteQuestion(question[0]._id)}>
+                            
                                 Delete Question
                         </button>
                         </Link>
