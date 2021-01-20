@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Profile from './profile';
-import {fetchProfileQuestions} from '../../actions/questions_actions'
-import {fetchUser} from '../../actions/session_actions'
+import { fetchProfileQuestions } from '../../actions/questions_actions'
+import { fetchUser } from '../../actions/session_actions'
 
 const mapStateToProps = (state) => {
     return {

@@ -3,6 +3,7 @@ import QuestionIndex from '../question/question_index'
 import ResolvedIndex from '../resolved/resolved_index'
 import '../../assets/stylesheets/bulletin_board.css'
 import CreateQuestionFormContainer from '../question/create_question_form_container'
+import MessengerContainer from '../messenger/messenger_container'
 
 
 
@@ -53,7 +54,6 @@ class BulletinBoard extends React.Component{
                 usernames.push(question.user)
 
             })
-            // console.log(questionArray)
             return(
                 <div>
                     <h1></h1>
@@ -72,6 +72,8 @@ class BulletinBoard extends React.Component{
                     <div className='questionForm'>
                         <CreateQuestionFormContainer />
                     </div>
+
+                    <MessengerContainer />
                 </div>
             )
         }

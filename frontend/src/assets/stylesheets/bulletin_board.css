@@ -1,6 +1,6 @@
 .qr{
     display: flex;
-    margin-left: 640px;
+    margin-left: 25px;
     margin-right: auto;
     width: 8em;
     align-items: center;
@@ -36,10 +36,11 @@
     border-radius: 5px;
     border-width: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-    margin: -1px 552px;
     padding: 0 16px 16px 16px;
     max-width: 480px;
     background-color: #aed3ef;
+
+
     
 }
 
@@ -52,7 +53,7 @@
     border-radius: 5px;
     border-width: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-    margin: -1px 603px;
+    /* margin: -1px 603px; */
     padding: 0 16px 16px 16px;
     max-width: 480px;
     background-color: #f5beb1;
@@ -101,7 +102,15 @@
 .individualQuestionUser{
     font-size: 19px;
 
+
 }
+
+.individualQuestionUser a{
+    padding-right: 1000px;
+    /* width: 500px; */
+}
+
+
 .individualQuestionLink{
 
 }

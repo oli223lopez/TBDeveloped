@@ -11,6 +11,8 @@ class QuestionIndex extends React.Component {
     // }
 
     render() {
+        
+        // console.log('im from question index',this.props.questions)
         return(
             <div className='questionIndex'>
                 {this.props.questions.map((question, i) => {

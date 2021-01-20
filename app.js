@@ -23,6 +23,30 @@ const peers = {};
 
 io.on("connection", socket => { // listens for "connection" event, which generates a socket object. This is triggered when a user on a browser hits a particular page 
 
+
+
+    //? 1/17/21 Oliver's socket test for chat
+    socket.on('join', room  => {
+        socket.join(room);
+        // console.log('31',room)
+        socket.emit('your id', socket.id)
+        socket.on('send message', body => {
+            // console.log('34', room);
+            io.to(room).emit('message', body)
+        })
+    });
+
+
+    //!WL 1/19/ trying to kill chat connection
+    // socket.broadcast.emit('message', 'Someone joined the chat');
+
+    // socket.on('disconnect', () => {
+    //     console.log('server disconnect')
+    //     io.emit('message', 'A user has left the chat');
+    // });
+    //!WL 1/19/ trying to kill chat connection
+
+
       // 1/3/21
       socket.on("send name", username => {
         peers[socket.id.toString()] = username
