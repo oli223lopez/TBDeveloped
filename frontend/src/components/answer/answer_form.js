@@ -1,5 +1,5 @@
 import React from 'react'
-import mongoose from 'mongoose';
+
 import '../../assets/stylesheets/answer_form.css'
 
 

@@ -9,10 +9,11 @@ const QuestionsReducer = (state={}, action) =>  {
     // console.log(action.type)
     switch (action.type) {
         case RECEIVE_QUESTIONS:
-            Object.values(action.questions).map( question => {
-                return newState[question._id] = question
+            let questionState = {}
+            Object.values(action.questions).forEach(question => {
+                questionState[question._id] = question
             })
-            return newState
+            return questionState
         case RECEIVE_QUESTION:
             newState[action.question._id] = action.question
             return newState
