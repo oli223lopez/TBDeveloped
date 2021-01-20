@@ -1,5 +1,6 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom'
+import '../../assets/stylesheets/question_form.css'
 
 
 class QuestionForm extends React.Component{
@@ -142,7 +143,7 @@ class QuestionForm extends React.Component{
                     </div>
                     <div>
                         <label>
-                                <button type='submit'>{this.props.formType}</button>
+                                <button className="submit-question-button" type='submit'>{this.props.formType}</button>
                                 {this.renderErrors()}
                         </label>
                     </div>
