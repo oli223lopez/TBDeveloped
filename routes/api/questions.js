@@ -212,7 +212,7 @@ router.post("/:id/responses", passport.authenticate('jwt',{session:false}), asyn
                 user.questions.push(question._id)
                 user.save()
             } else {
-                console.log('question already in there')
+                null
             }
 
             // if(!user.questions.find(question._id)) {
