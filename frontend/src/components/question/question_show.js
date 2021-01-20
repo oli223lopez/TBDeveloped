@@ -84,7 +84,6 @@ class QuestionShow extends React.Component {
                     if(response.user._id === this.props.userId){
                         return(
                             <div key={id}>
-                                <p>------------------- Responses --------------------------------------------</p>
                                 <AnswerIndexItemContainer 
                                     response = {response}
                                     questionID = {question[0]._id}
@@ -107,7 +106,6 @@ class QuestionShow extends React.Component {
                     return(
                         
                         <div>
-                        <p>------------------- Responses -------------------------------------------</p> 
                             <AnswerIndexContainer 
                                 responses = {question[0].responses}
                                 questionID = {question[0]._id}
@@ -130,14 +128,12 @@ class QuestionShow extends React.Component {
                         
                     
                         <div>
-             <p>------------------- Response Form -------------------------------------</p>     
 
                             <CreateAnswersFormContainer 
                                 questionID = {question[0]._id}
                                 fetchQuestion = {this.props.fetchQuestion}
                                 
                             />
-         <p>---------------------------------------------------------------------------</p>     
 
                         </div>
                     

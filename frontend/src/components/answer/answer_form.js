@@ -1,5 +1,6 @@
 import React from 'react'
 import mongoose from 'mongoose';
+import '../../assets/stylesheets/answer_form.css'
 
 
 class ResponseForm extends React.Component{
@@ -57,26 +58,29 @@ class ResponseForm extends React.Component{
 
 
     render(){
-        
+          console.log(this.props.currentUser) 
         return(
-            <form onSubmit={this.submit}>
+            <form className = "response-form" onSubmit={this.submit}>
                 <div>
                     <div className="errors">
                     <p>{this.state.errors}</p>
                     </div>
-                <label>
-                    consultation: <input type="date" value={this.state.consultation} onChange={this.update('consultation')}/>
+                <div className="respondant-header">
+                <img className = "respondants-image" alt="robots" src={`https://robohash.org/${this.props.currentUser.id}?100x100`} />
+                <label className = "consoldation-label">
+                    Consultation Date: <input className ="response-date" type="date" value={this.state.consultation} onChange={this.update('consultation')}/>
                 </label>
+                </div>
                 </div>
                 <div>
                 <label>
-                    answer: <textarea type='text' value={this.state.answer} onChange={this.update('answer')}/>
+                   <textarea className = "response-text-area" placeholder="Write a Response..." type='text' value={this.state.answer} onChange={this.update('answer')}/>
                 </label>
                 </div>
 
                 <div>
                 <label>
-                    <button type='submit'>{this.props.formType}</button>
+                    <button className = "response-submission-button" type='submit'>{this.props.formType}</button>
                 </label>
                 </div>
             </form>
