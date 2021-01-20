@@ -23,13 +23,30 @@
     margin-right: auto;
     text-align: center;
 }
- .createform_container .question-subject{
+
+.question-subject{
      text-align: left;
- }
+     color: black;
+
+}
+
 .submit-question-button{
     background-color: purple;
     color: #f5eaea;
     border-radius: 5px;
     padding: 9px;
     margin-top: 9px;
+}
+
+.question_errors_msg{
+    margin-top: 2px;
+    color: rgb(250, 125, 125);
+    font-size: 16px;
+    max-width: 280px;
+
+}
+
+.question_create_label {
+    color: white;
+    font-size: 16px;
 }
