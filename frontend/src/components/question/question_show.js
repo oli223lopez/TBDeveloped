@@ -158,7 +158,9 @@ class QuestionShow extends React.Component {
                     <div className="question_footer">
                     { question[0].solved ? <p> &#10003; Solved</p> : <p>&#10007; Unsolved</p> }
                     <p className="tag">Tag: {question[0].tag}</p>
-                    <h1 className="question-author"> posted by {question[0].user.username}</h1>
+                         <img className = "question-show-author-image" alt="robots" src={`https://robohash.org/${question[0].user._id}?100x100`} />
+
+                        <h1 className="question-author"> posted by {question[0].user.username}</h1>
 
                     </div>
 
@@ -173,7 +175,7 @@ class QuestionShow extends React.Component {
                     {createAnswers()}
 
 
-                    <div>
+                    <div className= "show_createform_container">
                         <CreateQuestionFormContainer />
                     </div>
                     <div>
