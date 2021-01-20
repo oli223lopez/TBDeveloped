@@ -35,6 +35,13 @@ export const postChat = (newChat) => dispatch => {
 
 }
 
+
+export const postMessage = (message) => dispatch => {
+    return MessagesAPIUtil.postMessage(message)
+        .then(res => dispatch(receiveMessage(res.data)))
+}
+
+
 export const fetchMessage = (messageId) => dispatch => {
     return MessagesAPIUtil.fetchMessage(messageId)
         .then(res => dispatch(receiveMessage(res.data)))

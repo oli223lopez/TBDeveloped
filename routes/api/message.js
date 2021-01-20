@@ -14,33 +14,35 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
     // if (!isValid) {
     //     return res.status(400).json(errors);
     // }
-    let newMessages = []
+
+
+    // let newMessages = []
     let chat = await Chat.findById(req.body.chatId)
     
-    Message.insertMany(req.body.messages)
-    .then(messages =>{
-        newMessages = messages
-        // console.log(newMessages)
-        res.json(messages)
-        newMessages.forEach(message =>{
-            console.log(message)
-            chat.messages.push(message._id)
-        })
-        chat.save()
-    })
-    .catch(err => res.status(404).json(err));
+    // Message.insertMany(req.body.messages)
+    // .then(messages =>{
+    //     newMessages = messages
+    //     // console.log(newMessages)
+    //     res.json(messages)
+    //     newMessages.forEach(message =>{
+    //         console.log(message)
+    //         chat.messages.push(message._id)
+    //     })
+    //     chat.save()
+    // })
+    // .catch(err => res.status(404).json(err));
     // console.log(newMessages)
     
+    const newMessage = new Message({
+        chatId: req.body.chatId,
+        user: req.body.user,
+        sentence: req.body.sentence
+    })
+    newMessage.save().then(chat => res.json(chat))
+        .catch(err => res.status(404).json(err));
 
-    // const newMessage = new Message({
-    //     chatId: req.body.chatId,
-    //     user: req.body.user,
-    //     sentence: req.body.sentence
-    // })
-    // newMessage.save().then(chat => res.json(chat))
-    //     .catch(err => res.status(404).json(err));
-
-    
+    chat.messages.push(newMessage);
+    chat.save();
 
 });
 
