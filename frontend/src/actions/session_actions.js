@@ -33,8 +33,13 @@ export const logoutUser = () => ({
 
 
 
-
-
+export const fetchUser = () => dispatch => (
+    APIUtil.fetchUser().then( (res) => {
+        dispatch((receiveCurrentUser(res.data)))
+    }, err => (
+        console.log(err)
+    ))
+)
 
 
 export const signup = user => dispatch => (  
