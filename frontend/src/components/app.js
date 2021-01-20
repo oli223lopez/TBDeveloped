@@ -11,7 +11,7 @@ import SignupFormContainer from './session/signup_form_container';
 import ProfileFormContainer from './profile/profile_container'
 import RoomContainer from './chatroom/room_container'
 // Room component 
-import Room from "./chatroom/room"
+
 
 const App = () => (
   <div>

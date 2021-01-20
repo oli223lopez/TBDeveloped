@@ -21,6 +21,12 @@ class BulletinBoard extends React.Component{
         this.props.fetchQuestions()
     }
 
+    componentDidUpdate(prevState) {
+        if(Object.values(prevState.questions).length != Object.values(this.props.questions).length) {
+            this.props.fetchQuestions()
+        }
+    }
+
 
     handleClick(num){
         this.setState({idx: num})
