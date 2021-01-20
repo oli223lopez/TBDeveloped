@@ -55,25 +55,25 @@ class BulletinBoard extends React.Component{
 
             })
             return(
-                <div>
-                    <h1></h1>
+                <div className="bulletin_container">
+                    <div className='bulletin_content'>
+                        <div className='bulletin_left'>
+                            <div className='qr'>
+                                <div className='questionsTab' onClick={() => this.handleClick(0)}>Questions</div>
+                                <div className='resolvedQuestionsTab' onClick={() => this.handleClick(1)}>Resolved Questions</div>
+                            </div>
 
-                    <div>
-                        <div className='qr'>
-                            <div className='questionsTab' onClick={() => this.handleClick(0)}>Questions</div>
-                            <div className='resolvedQuestionsTab' onClick={() => this.handleClick(1)}>Resolved Questions</div>
+                            {this.state.idx === 0 ? <QuestionIndex questions={questionArray} /> 
+                            : 
+                            <ResolvedIndex resolved={resolvedArray}/>}
                         </div>
 
-                        {this.state.idx === 0 ? <QuestionIndex questions={questionArray} /> 
-                        : 
-                        <ResolvedIndex resolved={resolvedArray}/>}
-
+                        <div className="bulletin_spacing"></div>
+                        
+                        <div className='questionForm'>
+                            <CreateQuestionFormContainer />
+                        </div>
                     </div>
-                    <div className='questionForm'>
-                        <CreateQuestionFormContainer />
-                    </div>
-
-                    <MessengerContainer />
                 </div>
             )
         }
