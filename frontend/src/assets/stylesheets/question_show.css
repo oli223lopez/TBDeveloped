@@ -43,7 +43,7 @@
 
 .question_footer{
         color: #3f413f;
-        /* justify-content: space-evenly; */
+       justify-content: space-between;
         display: flex;
         flex-direction: row;
         padding-bottom: 23px;
@@ -53,21 +53,32 @@
 
 }
 
-.question_footer p {
+.footer-status {
+    display: flex;
+    margin-left: 5px;
+
+}
+
+.question_footer p{
     color: #3f413f;
     /* justify-content: space-evenly; */
-    margin: 5px;
+    margin-left: 5px;
     display: flex;
     flex-direction: row;
     margin-top: 8px;
 }
 
-.question_footer .question-author {
-    margin-left: 10px;
+.question_footer h1{
     margin-top: 8px;
 
-;
 }
+
+.footer-author{
+    display: flex;
+}
+
+
+
 
 .question_footer .tag{
     margin-left: 20px;
@@ -86,11 +97,15 @@
 .updateForm_container{
     display: block;
     margin-bottom: 45px;
-     
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
 }
 
 .updateForm_container .submit-question-button{
-        margin-left: 283px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
 
 }
 
@@ -138,7 +153,7 @@
     width: auto;
     border-radius: 50%;
     border: 1px solid grey;
-    margin-left: 338px;
+    margin-right: 5px;
 ;
 }
 .question-show-author {
@@ -147,6 +162,7 @@
 
 
 .question_header_container{
+    justify-content: space-between;
     display: flex;
     
 }
@@ -161,7 +177,6 @@
 .delete-question-btn{
     color: #874f8e;
     font-size: 17px;
-    margin-left: 59px;
 }
 
 .delete-question-btn:hover{
@@ -172,4 +187,33 @@
 .delete-question-btn:active {
     color:  #afa7a7;
 ;
+}
+
+
+.video-chat-button-container{
+margin-left: auto;
+margin-right: auto;
+width: 50%;
+justify-content: center;
+}
+
+.create-room-btn {
+    background-color: #611f69;
+    color: #f5eaea;
+    border-radius: 33px;
+    padding: 8px;
+    margin-bottom: 18px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  
+}
+
+
+
+.update-button-container{
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    justify-content: center;
 }
