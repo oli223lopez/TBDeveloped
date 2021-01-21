@@ -141,11 +141,10 @@ class QuestionForm extends React.Component{
                         </label>
                     </div>
                     <div>
-                        <label>
+                        <label className="ques_button_err">
                                 <button className="submit-question-button" type='submit'>{this.props.formType}</button>
                                 <div className ="error_message">
-                                {this.renderErrors()}
-
+                                    {this.renderErrors()}
                                 </div>
                         </label>
                     </div>
