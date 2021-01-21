@@ -109,9 +109,9 @@ class QuestionForm extends React.Component{
                         </select>
                     </label>
                     </div>
-                    <label>
+                    <div className="update-button-container">
                         <button className="submit-question-button" type='submit'>{this.props.formType}</button>
-                    </label>
+                    </div>
 
                 </form>
             </div>
