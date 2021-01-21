@@ -31,11 +31,33 @@
 }
 
 .submit-question-button{
-    background-color: purple;
+    background-color:#611f69;
     color: #f5eaea;
     border-radius: 5px;
     padding: 9px;
     margin-top: 9px;
+}
+
+
+.submit-question-button:active {
+    background-color: #47164d;
+    color: #afa7a7;
+
+}
+
+.create-room-btn{
+             background-color: #611f69;
+             color: #f5eaea;
+             border-radius: 33px;
+             padding: 8px;
+             margin-bottom: 18px;
+             margin-left: 317px;
+}
+
+.create-room-btn:active {
+    background-color: #47164d;
+    color: #afa7a7;
+   
 }
 
 .submit-question-button:hover {
@@ -52,4 +74,4 @@
 .question_create_label {
     color: white;
     font-size: 16px;
-}
+

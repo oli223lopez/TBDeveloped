@@ -147,10 +147,11 @@ class QuestionForm extends React.Component{
                     <div>
                         <label> */}
 
-//Wills Edits
+//Shanes Edits
                             Tag: <span class="error_message">*</span> <select onChange={this.update('tag')} >
                                 <option value='' defaultValue={this.state.tagSelected}>--Choose a tag--</option>
 
+                
                                 <option value='idea'>Idea</option>
                                 <option value='question'>Question</option>
                             </select>
