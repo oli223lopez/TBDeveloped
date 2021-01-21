@@ -123,7 +123,6 @@ class QuestionForm extends React.Component{
                 <form onSubmit={this.submit}>
                     <div>
 
-//Shanes edits
                         <label>
                             Subject: <span class="error_message">*</span> <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')}/>
                         </label>
@@ -132,22 +131,6 @@ class QuestionForm extends React.Component{
                         <label>
                             Content: <span class="error_message">*</span> <textarea className="question-subject" value={this.state.content} onChange={this.update('content')}/>
 
-//Wills edits
-                        {/* <label className="question_create_label">
-                            Subject: <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')}/>
-                        </label>
-                    </div>
-                    <div>
-                        <label className="question_create_label">
-                            Content: <textarea className="question-subject" value={this.state.content} onChange={this.update('content')}/>
-
-                        </label>
-
-                    </div>
-                    <div>
-                        <label> */}
-
-//Shanes Edits
                             Tag: <span class="error_message">*</span> <select onChange={this.update('tag')} >
                                 <option value='' defaultValue={this.state.tagSelected}>--Choose a tag--</option>
 
