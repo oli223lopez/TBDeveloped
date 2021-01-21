@@ -29,27 +29,27 @@
 
         width: 50%;
         padding: 10px;
-
+        min-width: 717px;
 }
 
 
 .question_body{
+    font-size: 21px;
     text-align: left;
-    
     margin-left: 15px;
+    margin-top: 10px;
 
 }
 
 .question_footer{
-    color: #3f413f;
-    /* justify-content: space-evenly; */
-    
-    display: flex;
-    flex-direction: row;
-     padding-bottom: 10px;
-       border-bottom: 1px solid #b4b4b4;
-    margin-bottom: 40px;
-    padding-top: 5px;
+        color: #3f413f;
+        /* justify-content: space-evenly; */
+        display: flex;
+        flex-direction: row;
+        padding-bottom: 23px;
+        border-bottom: 1px solid #b4b4b4;
+        margin-bottom: 12px;
+        padding-top: 5px;
 
 }
 
@@ -85,9 +85,15 @@
 
 .updateForm_container{
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 45px;
+     
+}
+
+.updateForm_container .submit-question-button{
+        margin-left: 283px;
 
 }
+
 
   .updateForm_container textarea {
     width: 100%;
@@ -132,9 +138,38 @@
     width: auto;
     border-radius: 50%;
     border: 1px solid grey;
-    margin-left: 304px;
+    margin-left: 338px;
 ;
 }
 .question-show-author {
     display: flex;
+}
+
+
+.question_header_container{
+    display: flex;
+    
+}
+
+.delete-question-container{
+    margin-left: 30px;
+    margin-left: 382px;
+
+}
+
+
+.delete-question-btn{
+    color: #874f8e;
+    font-size: 17px;
+    margin-left: 59px;
+}
+
+.delete-question-btn:hover{
+    color: #560261;
+   
+}
+
+.delete-question-btn:active {
+    color:  #afa7a7;
+;
 }

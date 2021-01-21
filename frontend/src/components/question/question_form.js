@@ -110,7 +110,7 @@ class QuestionForm extends React.Component{
                     </label>
                     </div>
                     <label>
-                        <button type='submit'>{this.props.formType}</button>
+                        <button className="submit-question-button" type='submit'>{this.props.formType}</button>
                     </label>
 
                 </form>
@@ -122,6 +122,17 @@ class QuestionForm extends React.Component{
             <div className="createform_container">
                 <form onSubmit={this.submit}>
                     <div>
+
+//Shanes edits
+                        <label>
+                            Subject: <span class="error_message">*</span> <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')}/>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Content: <span class="error_message">*</span> <textarea className="question-subject" value={this.state.content} onChange={this.update('content')}/>
+
+//Wills edits
                         <label className="question_create_label">
                             Subject: <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')}/>
                         </label>
@@ -129,13 +140,21 @@ class QuestionForm extends React.Component{
                     <div>
                         <label className="question_create_label">
                             Content: <textarea className="question-subject" value={this.state.content} onChange={this.update('content')}/>
+
                         </label>
 
                     </div>
                     <div>
                         <label>
+
+//Shanes Edits
+                            Tag: <span class="error_message">*</span> <select onChange={this.update('tag')} >
+                                <option value='' selected={this.state.tagSelected}>--Choose a tag--</option>
+
+//Wills Edits
                             <select onChange={this.update('tag')} >
                                 <option value='' defaultValue={this.state.tagSelected}>--Choose a tag--</option>
+
                                 <option value='idea'>Idea</option>
                                 <option value='question'>Question</option>
                             </select>
@@ -144,7 +163,10 @@ class QuestionForm extends React.Component{
                     <div>
                         <label>
                                 <button className="submit-question-button" type='submit'>{this.props.formType}</button>
+                                <div className ="error_message">
                                 {this.renderErrors()}
+
+                                </div>
                         </label>
                     </div>
                 </form>
