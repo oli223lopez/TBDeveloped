@@ -11,17 +11,26 @@
     background-color: white;
 }
 .show_createform_container{
-    margin-left: 108px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    align-items: center;
     margin-bottom: 41px;
     margin-top: 35px;
 
 
 }
 .createform_container{
+   display: block;
+   text-align: center;
+    margin-top: 80px;
+
+}
+
+.createform_container form{
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
 }
 
 .question-subject{
@@ -45,14 +54,7 @@
 
 }
 
-.create-room-btn{
-             background-color: #611f69;
-             color: #f5eaea;
-             border-radius: 33px;
-             padding: 8px;
-             margin-bottom: 18px;
-             margin-left: 317px;
-}
+
 
 .create-room-btn:active {
     background-color: #47164d;
