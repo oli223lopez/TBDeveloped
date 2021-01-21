@@ -11,7 +11,7 @@ import { logout } from './actions/session_actions'
 
 // test
 import axios from "axios";
-import { fetchUser } from './util/session_api_util'
+ import { fetchUser } from './util/session_api_util'
 // import { fetchUser } from './actions/session_actions'
 //test
 
