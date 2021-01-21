@@ -18,11 +18,13 @@ class BulletinBoard extends React.Component{
         this.state = {
             idx: 0,
             img: 1,
-            intervalId: ''
+            intervalId: '',
+            searchVal: ''
         }
         this.handleClick = this.handleClick.bind(this);
         this.adInterval = this.adInterval.bind(this);
         this.timer = this.timer.bind(this);
+        this.handleSearchVal = this.handleSearchVal.bind(this);
     }
 
     componentDidMount() {
@@ -90,12 +92,47 @@ class BulletinBoard extends React.Component{
         }
     }
     //!testing AD
+
     componentDidUpdate(prevState) {
         if(Object.values(prevState.questions).length != Object.values(this.props.questions).length) {
             this.props.fetchQuestions()
         }
     }
 
+    //!Search func
+    handleSearchVal(field) {
+        return e => {
+            this.setState({
+                [field]: e.target.value
+            });
+        }
+    };
+
+
+    matches(){
+        let array = [];
+
+        if (this.state.searchVal.length === 0) {
+            return [];
+        }
+
+        
+        Object.values(this.props.questions).forEach(question => {
+            console.log('118, searchFunc', question.subject)
+            let smallWord = question.subject.toLowerCase();
+            if (smallWord.includes(this.state.searchVal.toLowerCase())) {
+                array.push(question);
+            }
+
+        });
+
+        if (array.length === 0) {
+            array.push('No question found');
+        }
+        return array;
+
+    }
+    //!Search func
 
     handleClick(num){
         this.setState({idx: num})
@@ -108,21 +145,35 @@ class BulletinBoard extends React.Component{
 
 
     render(){
-        // console.log(this.props.questions)
+        
+        let results = this.matches().map((result, i) => {
+            if(result === 'No question found'){
+                return (
+                    <li key={i} className='searchList'>No topic found for "{this.state.searchVal}".</li>
+                );
+            }else{
+                return (
+                    <Link to={`/question/${result._id}`}>
+                        <li key={result.id} className='searchList'>{result.subject}</li>
+                    </Link>
+                );
+            }
+        });
 
         if(this.isEmpty(this.props.questions)){
             return(
-                <div className='bulletin_right'>
-                    <div className='questionForm'>
-                        <CreateQuestionFormContainer />
-                    </div>
-                    <div>
-                        <div className='adv_container'>
-                            <span>ADVERTISEMENT</span>
-                            {this.adInterval()}
-                        </div>
-                    </div>
-                </div> 
+                // <div className='bulletin_right'>
+                //     <div className='questionForm'>
+                //         <CreateQuestionFormContainer />
+                //     </div>
+                //     <div>
+                //         <div className='adv_container'>
+                //             <span>ADVERTISEMENT</span>
+                //             {this.adInterval()}
+                //         </div>
+                //     </div>
+                // </div> 
+                null
             )
         }else{
             // console.log(this.props.questions)
@@ -142,6 +193,19 @@ class BulletinBoard extends React.Component{
                 <div className="bulletin_container">
                     <div className='bulletin_content'>
                         <div className='bulletin_left'>
+
+                            <div className='divWrapInput'>
+                                <input type='text' onChange={this.handleSearchVal('searchVal')} 
+                                    placeholder='Search by topic...' 
+                                    value={this.state.searchVal} 
+                                    className='searchInput'
+                                    id='input'
+                                />
+                                <ul id='list'>
+                                    {results}
+                                </ul>
+                            </div>
+
                             <div className='qr'>
                                 <div className='questionsTab' onClick={() => this.handleClick(0)}>Questions</div>
                                 <div className='resolvedQuestionsTab' onClick={() => this.handleClick(1)}>Resolved</div>

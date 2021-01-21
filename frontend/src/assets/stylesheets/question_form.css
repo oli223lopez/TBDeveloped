@@ -68,9 +68,18 @@
 .question_errors_msg{
     margin-top: 2px;
     color: rgb(250, 125, 125);
-    font-size: 16px;
-    max-width: 280px;
+    font-size: 15px;
+    /* max-width: 300px; */
+    /* display:flex;
+    justify-content: center; */
+    /* align-items: center; */
 
+}
+
+.ques_button_err{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
 }
 
 .question_create_label {
