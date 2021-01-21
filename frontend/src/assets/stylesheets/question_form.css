@@ -11,7 +11,7 @@
     background-color: white;
 }
 .show_createform_container{
-    margin-left: 208px;
+    margin-left: 108px;
     margin-bottom: 41px;
     margin-top: 35px;
 
@@ -75,3 +75,10 @@
     color: white;
     font-size: 16px;
 
+}
+
+.questionForm{
+    color: white;
+    font-size: 16px;
+
+}
