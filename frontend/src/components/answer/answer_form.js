@@ -1,5 +1,5 @@
 import React from 'react'
-import mongoose from 'mongoose';
+
 import '../../assets/stylesheets/answer_form.css'
 
 
@@ -62,13 +62,13 @@ class ResponseForm extends React.Component{
         return(
             <form className = "response-form" onSubmit={this.submit}>
                 <div>
-                    <div className="errors">
-                    <p>{this.state.errors}</p>
+                    <div className = "response-answer-container" >
+                    <p className="error_message">{this.state.errors}</p>
                     </div>
                 <div className="respondant-header">
                 <img className = "respondants-image" alt="robots" src={`https://robohash.org/${this.props.currentUser.id}?100x100`} />
                 <label className = "consoldation-label">
-                    Consultation Date: <input className ="response-date" type="date" value={this.state.consultation} onChange={this.update('consultation')}/>
+                    Consultation Date: <span class="error_message">*</span> <input className ="response-date" type="date" value={this.state.consultation} onChange={this.update('consultation')}/>
                 </label>
                 </div>
                 </div>

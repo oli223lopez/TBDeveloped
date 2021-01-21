@@ -14,7 +14,7 @@ class NavBar extends React.Component {
         super(props);
         this.logoutUser = this.logoutUser.bind(this);
         this.getLinks = this.getLinks.bind(this);
-
+      
         console.log('18', this.props.currentUser)
 
         //!{/* //!WL 1/19/ trying to kill chat connection */}
@@ -31,6 +31,13 @@ class NavBar extends React.Component {
 
     componentDidMount() {
         this.props.fetchUser()
+    }
+
+    componentDidUpdate(prevState, b) {
+        // if (prevState.currentUser.questions.length != this.props.currentUser.questions.length) {
+        //     console.log('updating')
+        //     this.props.fetchUser()
+        // }
     }
 
     logoutUser(e) {
