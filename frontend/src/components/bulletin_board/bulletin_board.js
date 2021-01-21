@@ -90,6 +90,11 @@ class BulletinBoard extends React.Component{
         }
     }
     //!testing AD
+    componentDidUpdate(prevState) {
+        if(Object.values(prevState.questions).length != Object.values(this.props.questions).length) {
+            this.props.fetchQuestions()
+        }
+    }
 
 
     handleClick(num){
@@ -107,7 +112,17 @@ class BulletinBoard extends React.Component{
 
         if(this.isEmpty(this.props.questions)){
             return(
-                null
+                <div className='bulletin_right'>
+                    <div className='questionForm'>
+                        <CreateQuestionFormContainer />
+                    </div>
+                    <div>
+                        <div className='adv_container'>
+                            <span>ADVERTISEMENT</span>
+                            {this.adInterval()}
+                        </div>
+                    </div>
+                </div> 
             )
         }else{
             // console.log(this.props.questions)

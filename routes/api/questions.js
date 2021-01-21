@@ -172,6 +172,29 @@ router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, 
     if(question) {
         if (`${question.user}` === req.user.id){
             Question.findByIdAndDelete(req.params.id)
+            .then(  async () => {
+
+                let users = []; 
+
+                users.push(question.user)
+
+                question.responses.forEach(response => {
+                    users.push(response.user)
+                })
+
+                users.forEach(async user => {
+                    let questionUser = await User.findById(user._id)
+                    let questionIdx = questionUser.questions.indexOf(question._id)
+                    questionUser.questions.splice(questionIdx, 1)
+                    await questionUser.save()
+                } )
+
+                // const user = await User.findById(question.user)
+                // console.log('hello from line 177')
+                // console.log(user.questions.indexOf(question._id))
+                // console.log(user.questions.splice())
+            }
+            )
             .then(() => res.json(question))
             .catch(err => res.status(404).json(err))
         } else{
@@ -185,6 +208,7 @@ router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, 
 
 // responses
 router.post("/:id/responses", passport.authenticate('jwt',{session:false}), async (req, res) => {
+    
     let question = await Question.findById(req.params.id)
 
     const { errors, isValid } = validateResponse(req.body);
@@ -197,18 +221,32 @@ router.post("/:id/responses", passport.authenticate('jwt',{session:false}), asyn
 
         } else {
 
+
             question.responses.push(Object.assign(req.body, {user: req.user.id}))
             question.save( function (err) {
                 if (!err) res.json(question)
             })
 
             let user = await User.findById(req.user.id)
-            if(!user.questions.find(question._id)) {
+
+            let existingID = user.questions.find(id => id.toString() === question._id.toString())
+            
+            if(!existingID) {
                 user.questions.push(question._id)
-                user.save(function (err) {
-                    if (!err) res.json('not working?')
-                })
+                user.save()
+            } else {
+                null
             }
+
+            // if(!user.questions.find(question._id)) {
+            //     user.questions.push(question._id)
+            //     user.save()
+            //     // user.save(function (err) {
+            //     //     if (!err) res.json('not working?')
+            //     // })
+            // } else {
+            //     console.log('yes?')
+            // }
 
         }
 
@@ -220,15 +258,20 @@ router.post("/:id/responses", passport.authenticate('jwt',{session:false}), asyn
 router.delete("/:questionId/responses/:responseId", passport.authenticate('jwt',{session:false}), async (req, res) => {
     let question = await Question.findById(req.params.questionId);
     let response = await question.responses.id(req.params.responseId)
+    let user = await User.findById(response.user)
 
     if(question && response) {
 
         if (`${response.user}` === req.user.id){
-            // console.log(req.params.responseId)
+       
             question.responses.id(req.params.responseId).remove();
             question.save(function (err) {
                 res.json(response)
             })
+
+            let questionIdx = user.questions.indexOf(question._id)
+            user.questions.splice(questionIdx, 1)
+            await user.save()
             
         } else{
             res.status(404).json('You can only delete your own responses.')
