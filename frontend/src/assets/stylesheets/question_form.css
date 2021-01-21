@@ -38,6 +38,9 @@
     margin-top: 9px;
 }
 
+.submit-question-button:hover {
+    background-color: rgb(93, 2, 93);
+}
 .question_errors_msg{
     margin-top: 2px;
     color: rgb(250, 125, 125);

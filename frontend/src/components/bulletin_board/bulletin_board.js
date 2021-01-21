@@ -4,22 +4,92 @@ import ResolvedIndex from '../resolved/resolved_index'
 import '../../assets/stylesheets/bulletin_board.css'
 import CreateQuestionFormContainer from '../question/create_question_form_container'
 import MessengerContainer from '../messenger/messenger_container'
+import { Link } from 'react-router-dom'
 
-
+import wFSP from '../../assets/images/ad_fsp/wFSP.jpg';
+import tFSP2 from '../../assets/images/ad_fsp/tFSP2.png';
+import oFSP2 from '../../assets/images/ad_fsp/oFSP2.png';
+import sFSP from '../../assets/images/ad_fsp/sFSP.png';
 
 class BulletinBoard extends React.Component{
     constructor(props){
         super(props)
         
         this.state = {
-            idx: 0
+            idx: 0,
+            img: 1,
+            intervalId: ''
         }
-        this.handleClick = this.handleClick.bind(this)
+        this.handleClick = this.handleClick.bind(this);
+        this.adInterval = this.adInterval.bind(this);
+        this.timer = this.timer.bind(this);
     }
 
     componentDidMount() {
         this.props.fetchQuestions()
+
+
+        //!testing AD
+        let intervalId = setInterval(this.timer, 8000);
+        this.setState({
+            intervalId: intervalId
+        })
+        //!testing AD
     }
+
+    //!testing AD
+    componentWillUnmount() {
+        clearInterval(this.state.intervalId)
+    }
+
+    timer(){
+        if(this.state.img < 4){
+            this.setState({
+                img: this.state.img + 1
+            })
+        }else{
+            this.setState({
+                img: 1
+            })
+        }
+    }
+
+    adInterval(){
+        if( this.state.img === 1){
+            return(
+                <div className="wFSP-img">
+                     <a href='https://heighten-fullstack.herokuapp.com/#/' >
+                        <img alt="" src={wFSP} />
+                    </a>
+                </div>
+            )
+        }else if( this.state.img === 2){
+            return(
+                <div className="tFSP-img">
+                    <a href='https://spacegear.herokuapp.com/#/'>
+                        <img alt="" src={tFSP2} />
+                    </a>
+                </div>
+            )
+        }else if( this.state.img === 3){
+            return(
+                <div className="oFSP-img">
+                    <a href='https://alltreks.herokuapp.com/#/'>
+                        <img alt="" src={oFSP2} />
+                    </a>
+                </div>
+            )
+        }else if( this.state.img === 4){
+            return(
+                <div className="sFSP-img">
+                    <a href='https://bettercraft.herokuapp.com/#/'>
+                        <img alt="" src={sFSP} />
+                    </a>
+                </div>
+            )
+        }
+    }
+    //!testing AD
 
 
     handleClick(num){
@@ -31,9 +101,8 @@ class BulletinBoard extends React.Component{
         return Object.keys(obj).length === 0;
     }
 
-    render(){
-        
 
+    render(){
         // console.log(this.props.questions)
 
         if(this.isEmpty(this.props.questions)){
@@ -70,9 +139,17 @@ class BulletinBoard extends React.Component{
 
                         <div className="bulletin_spacing"></div>
                         
-                        <div className='questionForm'>
-                            <CreateQuestionFormContainer />
-                        </div>
+                        <div className='bulletin_right'>
+                            <div className='questionForm'>
+                                <CreateQuestionFormContainer />
+                            </div>
+                            <div>
+                                <div className='adv_container'>
+                                    <span>ADVERTISEMENT</span>
+                                    {this.adInterval()}
+                                </div>
+                            </div>
+                        </div>    
                     </div>
                 </div>
             )

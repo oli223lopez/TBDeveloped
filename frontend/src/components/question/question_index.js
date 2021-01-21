@@ -17,8 +17,8 @@ class QuestionIndex extends React.Component {
         if( i % 2 === 0){
             return(
                 <div key={i} className='individualQuestion'>
-                    <div className='individualQuestionLink'>Username: {question.user.username}</div>
                     <Link to={`/question/${question._id}`}>
+                    <div className='individualQuestionLink'>Username: {question.user.username}</div>
                         <div className='individualQuestionUser'>
                             Topic: {question.subject}
                         </div>
@@ -28,8 +28,8 @@ class QuestionIndex extends React.Component {
         }else{
             return(
                 <div key={i} className='individualQuestion1'>
-                    <div className='individualQuestionLink'>Username: {question.user.username}</div>
                     <Link to={`/question/${question._id}`}>
+                    <div className='individualQuestionLink'>Username: {question.user.username}</div>
                         <div className='individualQuestionUser'>
                             Topic: {question.subject}
                         </div>

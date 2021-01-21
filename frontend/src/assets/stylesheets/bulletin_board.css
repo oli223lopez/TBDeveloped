@@ -107,6 +107,7 @@
     padding-bottom: 60px;
     padding-top: 30px;
     border: 1px solid ;
+    border-radius: 5px;
     margin-top: 50px;
     background-color: #1264A3;
 }
@@ -231,3 +232,37 @@
 }
 
 
+.adv_container {
+    margin-top: 50px;
+    padding-left: 7px;
+    padding-bottom: 10px;
+    /* padding-right: -5px; */
+    max-width:390px;
+    margin-right: 18px;
+
+    background-color:white;
+}
+
+.wFSP-img{
+    margin-top:5px;
+    height:auto;
+    width: 370px;
+}
+
+.tFSP-img {
+    margin-top: 5px;
+    height: auto;
+    width: 370px;
+}
+
+.oFSP-img {
+    margin-top: 5px;
+    height: auto;
+    width: 370px;
+}
+
+.sFSP-img {
+    margin-top: 5px;
+    height: auto;
+    width: 370px;
+}

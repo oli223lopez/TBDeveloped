@@ -13,9 +13,9 @@ class ResolvedIndex extends React.Component{
         if( i % 2 === 0){
             return (
                 <div key={i} className='individualResponse'>
+                    <Link to={`/resolved/${resolved._id}`}>
                     <div className='individualQuestionLink'>Username: {resolved.user.username}</div>
                     {/* {console.log(resolved._id)} */}
-                    <Link to={`/resolved/${resolved._id}`}>
                         <div className='individualResponseUser'>
                             Topic: {resolved.subject}
                         </div>
@@ -25,9 +25,9 @@ class ResolvedIndex extends React.Component{
         }else{
             return (
                 <div key={i} className='individualResponse1'>
+                    <Link to={`/resolved/${resolved._id}`}>
                     <div className='individualQuestionLink'>Username: {resolved.user.username}</div>
                     {/* {console.log(resolved._id)} */}
-                    <Link to={`/resolved/${resolved._id}`}>
                         <div className='individualResponseUser'>
                             Topic: {resolved.subject}
                         </div>
