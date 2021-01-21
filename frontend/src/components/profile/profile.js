@@ -52,7 +52,7 @@ class Profile extends React.Component {
             }
         });
 
-        console.log(this.props.questions)
+        console.log(this.props.currentUser)
 
         const profile_questions = () => {
             
