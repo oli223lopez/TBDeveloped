@@ -23,13 +23,20 @@
 }
 
 .response-submission-button{
-    color: #967a9e;
+    color: #a370b1;
     font-size: 14px;
         margin-left: 5px;
 
-
 }
 
+.response-submission-button:hover {
+    color: #652f6b;
+
+}
+.response-submission-button:active {
+    color: #3d1441;
+
+}
 .respondants-image{
    height: 41px;
    width: auto;

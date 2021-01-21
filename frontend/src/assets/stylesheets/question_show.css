@@ -164,3 +164,13 @@
     font-size: 17px;
     margin-left: 59px;
 }
+
+.delete-question-btn:hover{
+    color: #560261;
+   
+}
+
+.delete-question-btn:active {
+    color:  #afa7a7;
+;
+}
