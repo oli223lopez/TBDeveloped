@@ -171,6 +171,7 @@ router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, 
 
     if(question) {
         if (`${question.user}` === req.user.id){
+            console.log(question)
             Question.findByIdAndDelete(req.params.id)
             .then(() => res.json(question))
             .catch(err => res.status(404).json(err))

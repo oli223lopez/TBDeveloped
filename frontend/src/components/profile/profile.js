@@ -37,90 +37,58 @@ class Profile extends React.Component {
 
 
     render() {
-        let boolean = false;
+        // let boolean = false;
+        let userID = this.props.currentUser.id; 
         let amtOfPost = 0;
         let amtOfResponse = 0;
+        let responses = []; 
+        let questions = []; 
+
+        this.props.currentUser.questions.forEach( (question) => {
+            if(question.user === userID) {
+                questions.push(question)
+            } else {
+                responses.push(question)
+            }
+        });
+
+        console.log(this.props.questions)
 
         const profile_questions = () => {
             
-            if(this.props.currentUser.questions.length > 0){
-                amtOfPost = this.props.currentUser.questions.length;
+            if(questions.length > 0){
+                amtOfPost = questions.length;
                 return(
 
-                    this.props.currentUser.questions.map((question, id) => {
+                    questions.map((question, id) => {
 
-                        return (
-                            <div key={id} className='questions_topic'>
-                                <div className='individual_case'>
-                                    <label>
-                                        <div className='sub_label'>Case Id:</div>
-                                        <Link to={`/question/${question._id}`}>
-                                            <div className='actual_info'>{question._id}</div>
-                                        </Link>
-                                    </label>
-                                    <label>
-                                        <div className='sub_label'>Subject:</div>
-                                        <div className='actual_info'>{question.subject}</div>
-                                    </label>
-                                    <label>
-                                        <div className='sub_label'>Case Closed: </div>
-                                        {question.solved ? 'True' : 'False'}
-                                    </label>
+                        if(question.user === userID) {
+
+                            return (
+                                <div key={id} className='questions_topic'>
+                                    <div className='individual_case'>
+                                        <label>
+                                            <div className='sub_label'>Case Id:</div>
+                                            <Link to={`/question/${question._id}`}>
+                                                <div className='actual_info'>{question._id}</div>
+                                            </Link>
+                                        </label>
+                                        <label>
+                                            <div className='sub_label'>Subject:</div>
+                                            <div className='actual_info'>{question.subject}</div>
+                                        </label>
+                                        <label>
+                                            <div className='sub_label'>Case Closed: </div>
+                                            {question.solved ? 'True' : 'False'}
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-
-                        // if(this.props.currentUser.questions.includes(question._id)){
-                        //     // console.log('jjello', this.props.currentUser);
-                        //     if(question.user._id === this.props.currentUser.id){
-                        //         // console.log('bellow', (question.user._id));
-                        //         amtOfPost += 1;
-                        //         {`${question.solved}` === 'false' ? boolean = 'false' : boolean = true}
-                        //         return(
-                        //             <div key={id} className='questions_topic'>
-                        //                 <div className='individual_case'>
-                        //                     <label>
-                        //                         <div className='sub_label'>Case Id:</div>
-                        //                         <Link to={`/question/${question._id}`}>
-                        //                         <div className='actual_info'>{question._id}</div>
-                        //                         </Link>
-                        //                     </label>
-                        //                     <label>
-                        //                         <div className='sub_label'>Subject:</div>
-                        //                         <div className='actual_info'>{question.subject}</div>
-                        //                     </label>
-                        //                     <label>
-                        //                         <div className='sub_label'>Case Closed: </div>
-                        //                         {/* <div className='actual_info'>{`${question.solved}`}</div> */}
-                        //                         {this.caseResolved(boolean)}
-                        //                     </label>
-                        //                 </div>
-
-                        //             </div>
-                        //         )
-                        // }
-
-                        //! USERS ANSWERED/RESPONDED POSTS. REVISIT AFTER COHORT. SHOULD BE A SEPARATE IF STATEMENT
-                        // else{
-                        //     return (
-                        //         <div key={id}>
-                        //             <div className="post_answered_title">Posts Answered:</div>
-                        //             <div>SUBJECT:
-                        //                 <Link to={`/question/${question._id}`}>
-                        //                     {question.subject}
-                        //                 </Link>
-                        //             </div>
-                        //             <div>CONTENT: 
-                        //                 {question.content}
-                        //             </div>
-                        //         </div>
-                        //     )
-                        // }
-                        // }
+                            )
+                            
+                        }
 
                     })
                 )
-                // console.log(this.props.profile_questions)
             }
         }
 
@@ -128,40 +96,39 @@ class Profile extends React.Component {
 
         const profile_responses = () => {
 
-            if (this.props.profile_questions.length > 0) {
+            if(responses.length > 0 ) {
+                amtOfResponse = responses.length
                 return (
-                    this.props.profile_questions.map((question, id) => {
-                        return (
-                            question.responses.map((response, id) => {
-                                if (response.user._id === this.props.currentUser.id) {
-                                    amtOfResponse += 1;
-                                    return (
-                                        <div key={id} className='questions_topic'>
-                                            <div className='individual_case'>
-                                                <label>
-                                                    <div className='sub_label'>Relating to Case Id:</div>
-                                                    <Link to={`/question/${question._id}`}>
-                                                        <div className='actual_info'>{question._id}</div>
-                                                    </Link>
-                                                </label>
-                                                <label>
-                                                    <div className='sub_label'>Response:</div>
-                                                    <div className='actual_info'>{response.answer}</div>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    )
+                    responses.map((question, id) => {
 
-                                }
-                            })
-                        )
+                        return question.responses.map(response => {
+
+                            if(response.user === userID) {
+                                return(
+                                    <div key={id} className='questions_topic'>
+                                        <div className='individual_case'>
+                                            <label>
+                                                <div className='sub_label'>Relating to Case Id:</div>
+                                                <Link to={`/question/${question._id}`}>
+                                                    <div className='actual_info'>{question._id}</div>
+                                                </Link>
+                                            </label>
+                                            <label>
+                                                <div className='sub_label'>Response:</div>
+                                                <div className='actual_info'>{response.answer}</div>
+                                            </label>
+                                        </div>
+                                    </div>  
+                                )
+                            }
+
+                        })
                     }
                     )
-
-                )
-            }
+            
+            )}
         }
-        // console.log('user stuff', this.props.currentUser.id)
+    
         return (
             <div className='profile_container'>
 
@@ -178,7 +145,7 @@ class Profile extends React.Component {
 
                 <div className="user_profile_info">
                     <div className='profile_name'>{this.props.currentUser.username}'s Profile</div>
-                    <img alt="robots" src={`https://robohash.org/${this.props.currentUser.id}?100x100`} className='roboImgApi' />
+                    <img alt="robots" src={`https://robohash.org/${userID}?100x100`} className='roboImgApi' />
 
                     <div className='profile_post_amt'>Number of Posts: {amtOfPost}</div>
                     <div className='profile_reponse_amt'>Response to Posts: {amtOfResponse}</div>
