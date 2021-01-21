@@ -42,9 +42,11 @@ class Profile extends React.Component {
         let amtOfResponse = 0;
 
         const profile_questions = () => {
+            
+            if(this.props.currentUser.questions.length > 0){
+                amtOfPost = this.props.currentUser.questions.length;
+                return(
 
-            if (this.props.currentUser.questions.length > 0) {
-                return (
                     this.props.currentUser.questions.map((question, id) => {
 
                         return (

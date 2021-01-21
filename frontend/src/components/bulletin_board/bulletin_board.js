@@ -90,6 +90,11 @@ class BulletinBoard extends React.Component{
         }
     }
     //!testing AD
+    componentDidUpdate(prevState) {
+        if(Object.values(prevState.questions).length != Object.values(this.props.questions).length) {
+            this.props.fetchQuestions()
+        }
+    }
 
 
     handleClick(num){
