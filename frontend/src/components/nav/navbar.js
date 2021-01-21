@@ -65,28 +65,13 @@ class NavBar extends React.Component {
     }
 //!{/* //!WL 1/19/ trying to kill chat connection */}
     openChat(chat){
-        // console.log('58',chat)
-    //     const leaveButton = document.getElementById('leaveChat')
-    //     if(leaveButton){
-    //         leaveButton.click()
-    //     }
             let chatsArray = this.state.chats
         if (!chatsArray.includes(chat)){
             chatsArray.push(chat)
         }
+        // console.log(chatsArray)
             this.setState({chats: chatsArray})
 
-    //    if(this.state.chatID === ''){
-    //         this.setState({
-    //             chatID: chat
-    //         })            
-    //     }else if(this.state.chatID !== chat ){
-             
-    //         this.setState({chatID: chat})
-    //     }else{
-    //         this.setState({chatID: ''})
-    //     }
-        
     }
 
     leaveChat(chat){ 
@@ -94,6 +79,8 @@ class NavBar extends React.Component {
         leaveButton.click()
         let chatsArray = this.state.chats
         delete chatsArray[chatsArray.indexOf(chat)]
+        // console.log(chatsArray)
+
         this.setState({chats: chatsArray})
     }
 
@@ -182,7 +169,7 @@ class NavBar extends React.Component {
                             return (
                                 <div>   
                                     {/* {console.log(chat)} */}
-                                    <li onClick={() => this.openChat(chat._id)}>{'hi'}</li>
+                                    <li onClick={() => this.openChat(chat)}>{chat}</li>
                                     
                                     {/* {this.chatItself()} */}
                                 </div>
@@ -204,7 +191,7 @@ class NavBar extends React.Component {
                                 {this.state.chats.map(chat => {
                                     return(
                                         <div>
-                                        {console.log(chat)}
+                                        {/* {console.log(chat)} */}
                                          <MessengerContainer chatID={chat}/>
                                         <button onClick={() => this.leaveChat(chat)} >Leave Chat</button>
 

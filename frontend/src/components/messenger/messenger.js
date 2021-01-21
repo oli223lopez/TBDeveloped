@@ -64,16 +64,16 @@ const Messenger = (props) => {
     //!{/* //!WL 1/19/ trying to kill chat connection */}
     
     //!renders DB Conversations
-    // useEffect(() => {
-    //     if(props.chatID){
-    //         console.log(props.chatID)
-    //         props.fetchChat(props.chatID).then(res =>
+    useEffect(() => {
+        if(props.chatID){
+            console.log(props.chatID)
+            props.fetchChat(props.chatID).then(res =>
 
-    //             setConversations(res.chat.messages)
-    //         )
+                setConversations(res.chat.messages)
+            )
             
-    //     }
-    // }, [])
+        }
+    }, [])
     //!renders DB Conversations
     // console.log(conversations)
     
@@ -85,7 +85,7 @@ const Messenger = (props) => {
                         return (
                             <div key={index}>
                                 <div>
-                                    {/* {message.user} */}
+                                    {/* {console.log(message)} */}
                                     {message.sentence}
                                 </div>
                             </div>
