@@ -124,14 +124,14 @@ class QuestionForm extends React.Component{
                     <div>
 
                         <label>
-                            Subject: <span class="error_message">*</span> <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')}/>
+                            Subject: <span className="error_message">*</span> <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')}/>
                         </label>
                     </div>
                     <div>
                         <label>
-                            Content: <span class="error_message">*</span> <textarea className="question-subject" value={this.state.content} onChange={this.update('content')}/>
+                            Content: <span className="error_message">*</span> <textarea className="question-subject" value={this.state.content} onChange={this.update('content')}/>
 
-                            Tag: <span class="error_message">*</span> <select onChange={this.update('tag')} >
+                            Tag: <span className="error_message">*</span> <select onChange={this.update('tag')} >
                                 <option value='' defaultValue={this.state.tagSelected}>--Choose a tag--</option>
 
                 
