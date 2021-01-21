@@ -4,7 +4,6 @@ import {postResponse} from '../../actions/responses_actions'
 import {fetchQuestion} from '../../actions/questions_actions'
 import {fetchUser} from '../../actions/session_actions';
 
-
 const mapStateToProps = (state, props,)=> { 
     return (
     {newResponse: {

@@ -33,6 +33,13 @@ class NavBar extends React.Component {
         this.props.fetchUser()
     }
 
+    componentDidUpdate(prevState, b) {
+        // if (prevState.currentUser.questions.length != this.props.currentUser.questions.length) {
+        //     console.log('updating')
+        //     this.props.fetchUser()
+        // }
+    }
+
     logoutUser(e) {
         e.preventDefault();
         this.props.logout();

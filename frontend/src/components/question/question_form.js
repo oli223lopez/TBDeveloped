@@ -70,7 +70,7 @@ class QuestionForm extends React.Component{
         return (
             <ul>
                 {Object.keys(this.state.errors).map((error, i) => (
-                    <li key={`error-${i}`}>
+                    <li key={`error-${i}`} className="question_errors_msg">
                         {this.state.errors[error]}
                     </li>
                 ))}
@@ -110,7 +110,7 @@ class QuestionForm extends React.Component{
                     </label>
                     </div>
                     <label>
-                        <button type='submit'>{this.props.formType}</button>
+                        <button className="submit-question-button" type='submit'>{this.props.formType}</button>
                     </label>
 
                 </form>
@@ -122,20 +122,19 @@ class QuestionForm extends React.Component{
             <div className="createform_container">
                 <form onSubmit={this.submit}>
                     <div>
-                        <label>
-                            Subject: <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')}/>
-                        </label>
-                    </div>
-                    <div>
-                        <label>
-                            Content: <textarea className="question-subject" value={this.state.content} onChange={this.update('content')}/>
-                        </label>
 
+                        <label>
+                            Subject: <span className="error_message">*</span> <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')}/>
+                        </label>
                     </div>
                     <div>
                         <label>
-                            <select onChange={this.update('tag')} >
-                                <option value='' selected={this.state.tagSelected}>--Choose a tag--</option>
+                            Content: <span className="error_message">*</span> <textarea className="question-subject" value={this.state.content} onChange={this.update('content')}/>
+
+                            Tag: <span className="error_message">*</span> <select onChange={this.update('tag')} >
+                                <option value='' defaultValue={this.state.tagSelected}>--Choose a tag--</option>
+
+                
                                 <option value='idea'>Idea</option>
                                 <option value='question'>Question</option>
                             </select>
@@ -144,12 +143,12 @@ class QuestionForm extends React.Component{
                     <div>
                         <label>
                                 <button className="submit-question-button" type='submit'>{this.props.formType}</button>
+                                <div className ="error_message">
                                 {this.renderErrors()}
+
+                                </div>
                         </label>
                     </div>
-                    
-
-
                 </form>
             </div>
         )
