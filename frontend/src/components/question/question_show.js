@@ -109,6 +109,7 @@ class QuestionShow extends React.Component {
                             <AnswerIndexContainer 
                                 responses = {question[0].responses}
                                 questionID = {question[0]._id}
+                                questionSubject = {question[0].subject}
                                 currentUserID = {this.props.userId}
                                 fetchQuestion = {this.props.fetchQuestion}
                                 

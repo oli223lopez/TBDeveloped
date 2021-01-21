@@ -184,31 +184,42 @@ router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, 
 
 
 // responses
-router.post("/:id/responses", passport.authenticate('jwt',{session:false}), async (req, res) => {
+router.post("/:id/responses", passport.authenticate('jwt', { session: false }), async (req, res) => {
+
     let question = await Question.findById(req.params.id)
 
     const { errors, isValid } = validateResponse(req.body);
 
-    if(question) {
+    if (question) {
 
-        if(!isValid) {
+        if (!isValid) {
 
             return res.status(400).json(errors)
 
         } else {
 
-            question.responses.push(Object.assign(req.body, {user: req.user.id}))
-            question.save( function (err) {
+
+            question.responses.push(Object.assign(req.body, { user: req.user.id }))
+            question.save(function (err) {
                 if (!err) res.json(question)
             })
 
             let user = await User.findById(req.user.id)
-            if(!user.questions.find(question._id)) {
+
+            let existingID = user.questions.find(id => id.toString() === question._id.toString())
+
+            if (!existingID) {
                 user.questions.push(question._id)
-                user.save(function (err) {
-                    if (!err) res.json('not working?')
-                })
+                user.save()
+            } else {
+                null
             }
+
+            // if(!user.questions.find(question._id)) {
+            //     user.questions.push(question._id)
+            //     user.save()
+            //     // user.sa
+
 
         }
 

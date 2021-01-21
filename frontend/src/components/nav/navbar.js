@@ -15,7 +15,7 @@ class NavBar extends React.Component {
         this.logoutUser = this.logoutUser.bind(this);
         this.getLinks = this.getLinks.bind(this);
 
-        console.log('18', this.props.currentUser)
+        // console.log('18', this.props.currentUser)
 
         //!{/* //!WL 1/19/ trying to kill chat connection */}
             this.state = {
@@ -117,6 +117,7 @@ class NavBar extends React.Component {
                 )
             }
         }
+        
         return (
 
 
@@ -173,7 +174,9 @@ class NavBar extends React.Component {
 
                             return (
                                 <div>   
-                                    <li onClick={() => this.openChat(chat)}>{chat}</li>
+                                    {/* {console.log(chat)} */}
+                                    <li onClick={() => this.openChat(chat._id)}>{'hi'}</li>
+                                    
                                     {/* {this.chatItself()} */}
                                 </div>
                             )
@@ -194,6 +197,7 @@ class NavBar extends React.Component {
                                 {this.state.chats.map(chat => {
                                     return(
                                         <div>
+                                        {console.log(chat)}
                                          <MessengerContainer chatID={chat}/>
                                         <button onClick={() => this.leaveChat(chat)} >Leave Chat</button>
 

@@ -21,7 +21,7 @@ const Messenger = (props) => {
             receivedMessage(message);
         })
         
-        console.log('messenger-31', props.chatID)
+        // console.log('messenger-31', props.chatID)
         socketRef.current.emit('join', props.chatID)
 
     }, [props.chatID]);
@@ -64,15 +64,19 @@ const Messenger = (props) => {
     //!{/* //!WL 1/19/ trying to kill chat connection */}
     
     //!renders DB Conversations
-    useEffect(() => {
-        if(props.chatID){
-            props.fetchChat(props.chatID).then(res => 
-                setConversations(res.chat.messages)
-            )
-        }
-    }, [])
-    //!renders DB Conversations
+    // useEffect(() => {
+    //     if(props.chatID){
+    //         console.log(props.chatID)
+    //         props.fetchChat(props.chatID).then(res =>
 
+    //             setConversations(res.chat.messages)
+    //         )
+            
+    //     }
+    // }, [])
+    //!renders DB Conversations
+    // console.log(conversations)
+    
     return (
         <div>
             <div>
