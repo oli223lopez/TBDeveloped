@@ -57,17 +57,17 @@ class BulletinBoard extends React.Component{
     adInterval(){
         if( this.state.img === 1){
             return(
-                <div className="wFSP-img">
-                     <a href='https://heighten-fullstack.herokuapp.com/#/' >
-                        <img alt="" src={wFSP} />
+                <div className="tFSP-img">
+                    <a href='https://spacegear.herokuapp.com/#/'>
+                        <img alt="" src={tFSP2} />
                     </a>
                 </div>
             )
         }else if( this.state.img === 2){
             return(
-                <div className="tFSP-img">
-                    <a href='https://spacegear.herokuapp.com/#/'>
-                        <img alt="" src={tFSP2} />
+                <div className="wFSP-img">
+                     <a href='https://heighten-fullstack.herokuapp.com/#/' >
+                        <img alt="" src={wFSP} />
                     </a>
                 </div>
             )
