@@ -33,3 +33,16 @@
     padding: 9px;
     margin-top: 9px;
 }
+
+
+.create-room-btn{
+             background-color: #611f69;
+             color: #f5eaea;
+             border-radius: 33px;
+             padding: 8px;
+             margin-bottom: 32px;
+             margin-left: 317px;
+}
+
+.update-question-button{
+}

@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
         solved: false,
         user: state.session.user.id
     },
-    formType: 'Ask a question!',
+    formType: 'Ask a Question!',
     errors: state.errors.questions
 })
 

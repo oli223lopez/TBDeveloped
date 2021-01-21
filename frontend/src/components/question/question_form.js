@@ -110,7 +110,7 @@ class QuestionForm extends React.Component{
                     </label>
                     </div>
                     <label>
-                        <button type='submit'>{this.props.formType}</button>
+                        <button className="submit-question-button" type='submit'>{this.props.formType}</button>
                     </label>
 
                 </form>
@@ -134,7 +134,7 @@ class QuestionForm extends React.Component{
                     </div>
                     <div>
                         <label>
-                            <select onChange={this.update('tag')} >
+                            Tag: <span class="error_message">*</span> <select onChange={this.update('tag')} >
                                 <option value='' selected={this.state.tagSelected}>--Choose a tag--</option>
                                 <option value='idea'>Idea</option>
                                 <option value='question'>Question</option>

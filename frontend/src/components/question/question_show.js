@@ -66,11 +66,11 @@ class QuestionShow extends React.Component {
                 if (question[0].user._id === this.props.userId) {
                     return(
                     
-                       <div>
+                       <div className ="delete-question-container">
                         <Link to="/bulletin">
-                        <button onClick={() => this.props.deleteQuestion(question[0]._id)}>
+                        <button className = "delete-question-btn" onClick={() => this.props.deleteQuestion(question[0]._id)}>
                             
-                                Delete Question
+                                Delete 
                         </button>
                         </Link>
 
@@ -147,9 +147,13 @@ class QuestionShow extends React.Component {
                     <div className="question_description">
 
                         {/* {console.log(this.state.users)} */}
-                        <div className="question_header">
-                            <h2>{question[0].subject}</h2>
-                            <p className="date_posted">posted: {Date(question[0].createdAt)}</p>
+                        <div className = "question_header_container">
+                            <div className="question_header">
+                                <h2>{question[0].subject}</h2>
+                                <p className="date_posted">posted: {Date(question[0].createdAt)}</p>
+                            </div>
+                            {deleteQuestion()}
+
                         </div>
                          <div className="question_body">
                              <p>{question[0].content}</p>
@@ -159,16 +163,21 @@ class QuestionShow extends React.Component {
                     <div className="question_footer">
                     { question[0].solved ? <p> &#10003; Solved</p> : <p>&#10007; Unsolved</p> }
                     <p className="tag">Tag: {question[0].tag}</p>
+                    
                          <img className = "question-show-author-image" alt="robots" src={`https://robohash.org/${question[0].user._id}?100x100`} />
 
                         <h1 className="question-author"> posted by {question[0].user.username}</h1>
 
                         </div>
+                    
 
                     </div>
-
+                     <div>
+                        <CreateRoom />
+                    </div>
                     {update()}
-                    {deleteQuestion()}
+                    
+
                     {userResponse()}
                     {questionCreatorResponses()}
 
@@ -179,10 +188,7 @@ class QuestionShow extends React.Component {
                     <div className= "show_createform_container">
                         <CreateQuestionFormContainer />
                     </div>
-                    <div>
-                        <CreateRoom />
-                    </div>
-
+                   
                 </div>
             )
         }
