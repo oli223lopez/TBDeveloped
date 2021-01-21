@@ -83,7 +83,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    margin-top: 35px;
     margin-right: 10px;
     /* background-color: yellow; */
 }
@@ -266,7 +266,7 @@
     margin-top: 50px;
     padding-left: 7px;
     padding-bottom: 10px;
-    /* padding-right: -5px; */
+    padding-right: 5px;
     max-width: 390px;
     margin-right: 10px;
 
@@ -297,4 +297,31 @@
     width: 370px;
 }
 
+.divWrapInput{
+    margin-bottom: 10px;
+}
 
+.searchList {
+
+    font-family: sans-serif;
+    color: black;
+    margin-bottom: 5px;
+
+    display: flex;
+    width: 100%;
+    /* background-color: yellow; */
+}
+
+.searchList:hover {
+    background-color: rgb(155, 155, 155);
+}
+
+.searchInput {
+    font-family: sans-serif;
+    color: #6e6c63;
+    /* width: 100%; */
+    font-size: 20px;
+    /* padding-right: 425px;
+    margin-left: 40px; */
+    /* width: 600px; */
+}
