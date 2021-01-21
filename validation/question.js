@@ -11,7 +11,7 @@ module.exports = function validateQuestionInput(data){
     
 
     if (!Validator.isLength(data.subject, {min: 10 ,max: 100 })) {
-        errors.subject = "Please enter a subject thats between 10 and 100 characters"
+        errors.subject = "Subject must be between 10 and 100 characters"
     }
 
     if (Validator.isEmpty(data.subject)) {
