@@ -70,7 +70,7 @@ class QuestionForm extends React.Component{
         return (
             <ul>
                 {Object.keys(this.state.errors).map((error, i) => (
-                    <li key={`error-${i}`}>
+                    <li key={`error-${i}`} className="question_errors_msg">
                         {this.state.errors[error]}
                     </li>
                 ))}
@@ -122,12 +122,12 @@ class QuestionForm extends React.Component{
             <div className="createform_container">
                 <form onSubmit={this.submit}>
                     <div>
-                        <label>
+                        <label className="question_create_label">
                             Subject: <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')}/>
                         </label>
                     </div>
                     <div>
-                        <label>
+                        <label className="question_create_label">
                             Content: <textarea className="question-subject" value={this.state.content} onChange={this.update('content')}/>
                         </label>
 
@@ -135,7 +135,7 @@ class QuestionForm extends React.Component{
                     <div>
                         <label>
                             <select onChange={this.update('tag')} >
-                                <option value='' selected={this.state.tagSelected}>--Choose a tag--</option>
+                                <option value='' defaultValue={this.state.tagSelected}>--Choose a tag--</option>
                                 <option value='idea'>Idea</option>
                                 <option value='question'>Question</option>
                             </select>
@@ -147,9 +147,6 @@ class QuestionForm extends React.Component{
                                 {this.renderErrors()}
                         </label>
                     </div>
-                    
-
-
                 </form>
             </div>
         )
