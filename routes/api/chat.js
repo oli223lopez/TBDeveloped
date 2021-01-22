@@ -55,8 +55,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
 
 router.get('/:id', (req, res) => {
 
-    console.log(req.params.id)
-    debugger
+    // console.log(req.params.id)
+    
     Chat.findById(req.params.id)
         .populate('question')
         .populate('posterID')

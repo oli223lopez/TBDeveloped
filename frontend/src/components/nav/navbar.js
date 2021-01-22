@@ -4,6 +4,7 @@ import '../../assets/stylesheets/reset.css';
 import '../../assets/stylesheets/navbar.scss';
 import dino2 from '../../assets/images/dino2.png';
 import linkedin from '../../assets/images/linkedin.png';
+import messageImg from '../../assets/images/chat.png'
 
 //!{/* //!WL 1/19/ trying to kill chat connection */}
 import MessengerContainer from '../messenger/messenger_container'
@@ -28,6 +29,7 @@ class NavBar extends React.Component {
             this.leaveChat = this.leaveChat.bind(this)
         //!{/* //!WL 1/19/ trying to kill chat connection */}
     }
+    
 
     componentDidMount() {
         this.props.fetchUser()
@@ -100,6 +102,7 @@ class NavBar extends React.Component {
     // }
 //!{/* //!WL 1/19/ trying to kill chat connection */}
     render() {
+        let [posterID, responderID, questionSubject] = ''
         const tbdevelopedHeader = () => {
             if(this.props.loggedIn === false){
                 return(
@@ -160,46 +163,49 @@ class NavBar extends React.Component {
 
                     </div>
 
-                    <div>
+                    
+                    <div >
                         {this.props.currentUser.activeChats ? 
-                        
-                        <ul>
-                            {this.props.currentUser.activeChats.map((chat) => {
+                        <div>
+                                <div className='chatDropdown'> 
 
+
+                            
+                            <img src={messageImg} className='messageImg'/>
+                        <ul className='chatList'>
+                            {this.props.currentUser.activeChats.map((chat) => {
+                            
                             return (
                                 <div>   
                                     {/* {console.log(chat)} */}
-                                    <li onClick={() => this.openChat(chat)}>{chat}</li>
+                                    <img onClick={() => this.openChat(chat._id)} src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id }?100x100`} 
+                                    className='robotNav' /><li onClick={() => this.openChat(chat._id)}>
+                                        {this.props.currentUser.id === chat.posterID._id ? 
+                                         `${chat.responderID.username}-${chat.questionSubject.substring(0, 15)}` 
+                                    : 
+                                   `${chat.posterID.username}-${chat.questionSubject.substring(0, 15)}`}</li>
                                     
                                     {/* {this.chatItself()} */}
                                 </div>
                             )
                             
                         })}
-                            <div>
-                                {/* //!WL 1/19/ trying to kill chat connection */}
-                                {/* {this.state.chatID != "" ? this.chatItself() 
                                 
-                                
-                                : null} */}
-                                {/* {this.state.chatID !== "" ? this.chatItself() : null} */}
-                                {/* {this.state.chatID != ""  ? <MessengerContainer chatID={this.state.chatID}/> : null} */}
-                                {/* //!WL 1/19/ trying to kill chat connection */}
-                            </div>
-                                
-                            <div>
+                        </ul>
+                                </div>
+                            <div className='chats'>
                                 {this.state.chats.map(chat => {
                                     return(
                                         <div>
                                         {/* {console.log(chat)} */}
-                                         <MessengerContainer chatID={chat}/>
-                                        <button onClick={() => this.leaveChat(chat)} >Leave Chat</button>
+                                        <button onClick={() => this.leaveChat(chat)} className='leaveChat' >Leave Chat</button>
+                                         <MessengerContainer chatID={chat} />
 
                                       </div>
                                     )
                                 })}
                             </div>
-                        </ul>
+                        </div>
 
                         : null
                     
