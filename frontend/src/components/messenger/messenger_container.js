@@ -8,7 +8,10 @@ const mSTP = (state) => {
     // console.log(state.session.user)
     return({
     userID: state.session.user.id,
-    user: state.session.user.activeChats})
+    user: state.session.user.activeChats,
+    username: state.session.user.username
+    })
+
 }
 
 const mDTP = (dispatch) => ({

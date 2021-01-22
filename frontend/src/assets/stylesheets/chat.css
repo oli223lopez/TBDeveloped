@@ -13,12 +13,15 @@
 
 .leaveChat{
     background-color: pink;
-  width: 30%;
-  border: none;
-  height: 40px;
-  border-radius: 10px;
-  color: #46516e;
-  font-size: 17px;
+    width: 5%;
+    border: none;
+    height: 30px;
+    border-radius: 10px;
+    color: #46516e;
+    font-size: 17px;
+    margin: 0px 0px;
+    padding: 1px 7px
+    
 
 }
 .messages{
@@ -97,5 +100,6 @@ justify-content: flex-start;
   word-wrap: break-word;
 
 }
+
 
 

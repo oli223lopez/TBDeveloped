@@ -77,7 +77,7 @@ class NavBar extends React.Component {
     }
 
     leaveChat(chat){ 
-        let leaveButton = document.getElementById(`leaveChat${chat}`)
+        let leaveButton = document.getElementById(`leaveChat${chat._id}`)
         leaveButton.click()
         let chatsArray = this.state.chats
         delete chatsArray[chatsArray.indexOf(chat)]
@@ -102,7 +102,6 @@ class NavBar extends React.Component {
     // }
 //!{/* //!WL 1/19/ trying to kill chat connection */}
     render() {
-        let [posterID, responderID, questionSubject] = ''
         const tbdevelopedHeader = () => {
             if(this.props.loggedIn === false){
                 return(
@@ -178,8 +177,8 @@ class NavBar extends React.Component {
                             return (
                                 <div>   
                                     {/* {console.log(chat)} */}
-                                    <img onClick={() => this.openChat(chat._id)} src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id }?100x100`} 
-                                    className='robotNav' /><li onClick={() => this.openChat(chat._id)}>
+                                    <img onClick={() => this.openChat(chat)} src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id }?100x100`} 
+                                    className='robotNav' /><li onClick={() => this.openChat(chat)}>
                                         {this.props.currentUser.id === chat.posterID._id ? 
                                          `${chat.responderID.username}-${chat.questionSubject.substring(0, 15)}` 
                                     : 
@@ -196,10 +195,34 @@ class NavBar extends React.Component {
                             <div className='chats'>
                                 {this.state.chats.map(chat => {
                                     return(
-                                        <div>
-                                        {/* {console.log(chat)} */}
-                                        <button onClick={() => this.leaveChat(chat)} className='leaveChat' >Leave Chat</button>
-                                         <MessengerContainer chatID={chat} />
+                                        <div className='chatContainer'>
+                                        
+                                            <div> 
+                                                <div className='test' > 
+                                                    <button onClick={() => this.leaveChat(chat)} className='leaveChat' >X</button>
+
+                                                    <div className='test2'> 
+                                                        <marquee behavior="scroll" direction="left" scrollamount="3">
+                                                        <div className='otherTest'> 
+                                                            <img src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id}?100x100`}
+                                                                className='robotChat' />
+                                                                
+
+                                                            {this.props.currentUser.id === chat.posterID._id ?
+                                                                `${chat.responderID.username}-${chat.questionSubject}`
+                                                                :
+                                                                `${chat.posterID.username}-${chat.questionSubject}`}
+                                                                
+                                                        </div>
+                                                    
+                                                        </marquee>
+                                            
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                <MessengerContainer chatID={chat} />
+                                                </div>
+                                            </div>
 
                                       </div>
                                     )

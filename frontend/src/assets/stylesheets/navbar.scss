@@ -171,9 +171,12 @@
     display: flex;
     bottom: 0%;
     justify-content: space-between;
-    background-color: #46516e;
     border-radius: 10px;
     z-index: 1;
+    // margin-right: 5px;
+    // margin-left: 5px;
+    // padding: 10px;
+    
 }
 
 .messageImg{
@@ -190,6 +193,8 @@
 //   height: 10vh;
   justify-content: space-around;
   padding: 10px 10px;
+   margin-right: 5px;
+    margin-left: 5px;
 }
 
 .chatList hover{
@@ -215,3 +220,50 @@
     border-radius: 50%;
     border: 1px solid grey;}
 
+.chatContainer{
+    display: flex;
+background-color: #46516e;
+    margin-right: 25px;
+    
+}
+
+.test{
+    display: flex;
+
+}
+
+.test2{
+    display: flex;
+    
+        width: 318px;
+    
+
+}
+
+.robotChat{
+    height: 40px;
+    width: auto;
+    border-radius: 50%;
+    // /* border: 1px solid grey; */
+}
+
+
+
+
+
+.otherTest{
+        display: flex;
+    align-items: center;
+    margin-right: 20px;
+    color: white;
+}
+
+
+.forSpacing{
+    margin: 5px;
+}
+
+
+      
+
+  

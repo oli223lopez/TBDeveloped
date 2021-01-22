@@ -6,7 +6,11 @@ import '../../assets/stylesheets/chat.css'
 
 const Messenger = (props) => {
     const [yourID, setYourID] = useState();
+    // const [conversations, setConversations] = useState([]);
     const [conversations, setConversations] = useState([]);
+    //! 
+        // const
+    //!
     const [message, setMessage] = useState("");
 
     const socketRef = useRef();
@@ -42,7 +46,8 @@ const Messenger = (props) => {
         const messageObject = {
             sentence: message,
             id: yourID,
-            user: props.userID
+            user: props.userID,
+            username: props.username
         };
         messageToDB()
         setMessage("");
@@ -52,7 +57,6 @@ const Messenger = (props) => {
 
     function handleChange(e) {
         setMessage(e.target.value);
-        
     }
 
     function messageToDB(){
@@ -75,11 +79,9 @@ const Messenger = (props) => {
     //!renders DB Conversations
     useEffect(() => {
         if(props.chatID){
-            props.fetchChat(props.chatID).then(res =>{
+            props.fetchChat(props.chatID._id).then(res =>{
                 // console.log(res.chat.posterID)
-                
                 setConversations(res.chat.messages)
-
             }
             )
         }
@@ -125,23 +127,20 @@ const Messenger = (props) => {
     
     return (
         <div>
-            <div>
-               
-               {posterValid()}
-
-            </div>
-
+            
         <div className='chatBox'>
-            <div onClick={() => leaveChat()} id={`leaveChat${props.chatID}`}></div> 
+
+            <div onClick={() => leaveChat()} id={`leaveChat${props.chatID._id}`}></div> 
             <div className='messages' >
                 {/* {console.log(conversations)} */}
+                   
                 {conversations.map((message, index) => {
-                    
                     
                     if (message.user === props.userID) {
                         // console.log(yourID)
                         return (
                             <div key={index} className='myMessagesRow'>
+                                {/* <div>{props.username}</div> */}
                                 <div className='myMessage'>
                                     {/* {console.log(message)} */}
                                     {/* {message.user} */}
