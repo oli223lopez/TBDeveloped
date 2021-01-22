@@ -178,7 +178,7 @@ class NavBar extends React.Component {
 
                             return (
                                 <div key={i}>   
-                                    <li onClick={() => this.openChat(chat)}>{chat} </li>
+                                    <li onClick={() => this.openChat(chat)} key={i}> {chat} </li>
                                     {/* {this.chatItself()} */}
                                 </div>
                             )
