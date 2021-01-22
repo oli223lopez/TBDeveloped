@@ -19,8 +19,8 @@ const App = () => (
     <ScrollToTop />
     <NavBarContainer />
     <Switch>
+    <AuthRoute exact path="/" component={MainPage} />
       <Route path="/room/:roomID" component={RoomContainer}/>
-      <AuthRoute exact path="/" component={MainPage} />
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} />
       <ProtectedRoute exact path="/profile" component={ProfileFormContainer} />
