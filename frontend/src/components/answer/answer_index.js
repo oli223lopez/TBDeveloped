@@ -31,7 +31,7 @@ class AnswerIndex extends React.Component {
         <div>
             {this.props.responses.map((response, i) =>{
                     return(
-                    <div key={i}>
+                    <div className= "answer-index-container" key={i}>
                         <AnswerIndexItemContainer fetchQuestion={this.props.fetchQuestion}  response={response} questionID = {this.props.questionID} currentUserID={this.props.currentUserID} />
                         <button className="chatButton" onClick={ () => {this.createChat(questionID, response._id, response.user._id, this.props.posterID)}}> Start a chat with {response.user.username}!</button>
                     </div>
