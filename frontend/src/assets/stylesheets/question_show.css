@@ -217,3 +217,16 @@ justify-content: center;
     width: 50%;
     justify-content: center;
 }
+
+
+.xIcon{
+    color: rgb(212, 38, 8);
+    margin-right: 5px;
+    font-size: 20px;
+}
+
+.checkIcon{
+    color: green;
+    margin-right: 5px;
+    font-size: 20px;
+}
