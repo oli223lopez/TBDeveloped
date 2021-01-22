@@ -49,12 +49,19 @@ class BulletinBoard extends React.Component{
     }
 
     handleClickOutside(e) {
-        let search = document.getElementById('search_container');
-        if (e.target !== search && this.state.searchVal !== '') {
+        // let search = document.getElementById('search_container');
+        let input = document.getElementById('input');
+        // let list = document.getElementById('list');
+        // let search_list = document.getElementById('search_list');
+        //array of li.searchList let test = document.getElementById("search_container").getElementsByTagName("li"); 
+
+
+        if(e.target && !e.target.matches("li.searchList") && e.target !== input){
             this.setState({
                 searchVal: ''
             })
         }
+
     }
 
     timer(){
@@ -160,16 +167,16 @@ class BulletinBoard extends React.Component{
         let results = this.matches().map((result, i) => {
             if(result === 'No question found'){
                 return (
-                    <li key={i} className='searchList'>No topic found for "{this.state.searchVal}".</li>
+                    <li key={i} className='noSearchList'>No topic found for "{this.state.searchVal}".</li>
                 );
             }else{
                 return (
-                    <div className='search_detail_container' key={i}>
+                    <div className='search_detail_container' key={i} id="test2">
                         <div key={i}>
-                            <img className = "search-author-image" alt="robots" src={`https://robohash.org/${result.user._id}?100x100`} />
+                            <img className="search-author-image" alt="robots" src={`https://robohash.org/${result.user._id}?100x100`} />
                         </div>
-                        <Link to={`/question/${result._id}`} >
-                            <li key={result.id} className='searchList'>{result.subject}</li>
+                        <Link to={`/question/${result._id}` } >
+                            <li key={result.id}  className='searchList'>{result.subject}</li>
                         </Link>
                     </div>
                 );

@@ -321,11 +321,34 @@
     width: 695px;
 }
 
+.noSearchList {
+
+    font-family: sans-serif;
+    /* color: black; */
+    color: white;
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding: 10px;
+    display: flex;
+    margin-top: 15px;
+    /* background-color: yellow; */
+    /* z-index: 15; */
+    margin-right: 10px;
+    width: 695px;
+}
+
+
 .searchList:hover {
     background-color: rgb(155, 155, 155);
     border-radius: 5px;
     
-    
+}
+
+.noSearchList:hover {
+    background-color: rgb(155, 155, 155);
+    border-radius: 5px;
+    width: 750px;
+
 }
 
 .searchInput {
