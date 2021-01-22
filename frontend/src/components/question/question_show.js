@@ -161,20 +161,22 @@ class QuestionShow extends React.Component {
                         </div>   
 
                     <div className="question_footer">
-                    { question[0].solved ? <p> &#10003; Solved</p> : <p>&#10007; Unsolved</p> }
-                    <p className="tag">Tag: {question[0].tag}</p>
-                    
+                        <div className="footer-status">
+                        { question[0].solved ? <p ><span className="checkIcon">&#10003;</span> Solved</p> : <p><span className="xIcon">&#10007;</span> Unsolved</p> }
+                         <p className="tag">Tag: {question[0].tag}</p>
+                        </div>
+                        <div className="footer-author">
                          <img className = "question-show-author-image" alt="robots" src={`https://robohash.org/${question[0].user._id}?100x100`} />
+                          <h1 className="question-author"> posted by {question[0].user.username}</h1>
 
-                        <h1 className="question-author"> posted by {question[0].user.username}</h1>
+                        </div>
+
 
                         </div>
                     
 
                     </div>
-                     <div>
                         <CreateRoom />
-                    </div>
                     {update()}
                     
 

@@ -42,8 +42,36 @@ router.post('/register', (req, res) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if (err) throw err;
                         newUser.password = hash
-                        newUser.save().then(user => res.json(user))
-                            .catch(err => console.log(err))
+                        newUser.save().then(async user => 
+                                {
+                                    User.findOne({email: user.email})
+                                        .populate('question')
+                                        .then(user => {
+                                            
+                                            const payload = {
+                                                id: user.id,
+                                                username: user.username,
+                                                email: user.email,
+                                                questions: user.questions,
+                                                activeChats: user.activeChats
+                                            }
+                                            jwt.sign(
+                                                payload,
+                                                keys.secretOrKey,
+                                                { expiresIn: 3600 },
+                                                (err, token) => {
+                                                    res.json({
+                                                        success: true,
+                                                        token: 'Bearer ' + token
+                                                    });
+                    
+                                                }
+                                            )
+
+                                        })
+
+                                }
+                                ).catch(err => console.log(err))
                     })
                 })
 
@@ -67,7 +95,7 @@ router.post('/login', (req, res) => {
         .populate('questions')
         .then(user => {
             if (!user) {
-                return res.status(404).json({ email: 'this user does not exist' })
+                return res.status(404).json({ email: 'This user does not exist' })
             }
 
             bcrypt.compare(password, user.password)

@@ -84,20 +84,28 @@
                     padding: 3px;
                     margin-right: 10px;
                     color: black;
+                    display:flex;
+                    align-items: center;
 
                 }
               
                 
                 .actual_info {
                     color: black;
+                    display:flex;
+                    align-items: center;
                     // color: rgb(224, 224, 224);
                 }
 
                 .bool_info{
+                    display:flex;
+                    align-items: center;
                     color: red;
                 }
 
                 .bool_info2 {
+                    display:flex;
+                    align-items: center;
                     color: rgb(7, 161, 7);
                 }
 
