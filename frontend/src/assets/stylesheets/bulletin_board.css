@@ -83,7 +83,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 35px;
+    margin-top: 70px;
     margin-right: 10px;
     /* background-color: yellow; */
 }
@@ -158,6 +158,7 @@
 
     padding-right: 10px;
 
+
 }
 
 .individualQuestion1 {
@@ -170,16 +171,19 @@
     /* padding-right: 120px; */
     background-color: #9bbdd8;
     padding-right: 10px;
+
 }
 
 .individualQuestion:hover {
     background-color: lightgray;
     opacity: 0.9;
+
 }
 
 .individualQuestion1:hover {
     background-color: lightgray;
     opacity: 0.9;
+
 }
 
 
@@ -304,24 +308,96 @@
 .searchList {
 
     font-family: sans-serif;
-    color: black;
-    margin-bottom: 5px;
-
+    /* color: black; */
+    color:white;
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding: 10px;
     display: flex;
-    width: 100%;
+    margin-top: 15px;
     /* background-color: yellow; */
+    /* z-index: 15; */
+    margin-right: 10px;
+    width: 695px;
 }
+
+.noSearchList {
+
+    font-family: sans-serif;
+    /* color: black; */
+    color: white;
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding: 10px;
+    display: flex;
+    margin-top: 15px;
+    /* background-color: yellow; */
+    /* z-index: 15; */
+    margin-right: 10px;
+    width: 695px;
+}
+
 
 .searchList:hover {
     background-color: rgb(155, 155, 155);
+    border-radius: 5px;
+    
+}
+
+.noSearchList:hover {
+    background-color: rgb(155, 155, 155);
+    border-radius: 5px;
+    width: 750px;
+
 }
 
 .searchInput {
     font-family: sans-serif;
-    color: #6e6c63;
+    /* color: white; */
+    color: black;
     /* width: 100%; */
     font-size: 20px;
     /* padding-right: 425px;
     margin-left: 40px; */
-    /* width: 600px; */
+    width: 750px;
+    border-radius: 5px;
+    padding: 15px;
+    /* padding-right: 100px; */
+    /* background-color: #592466; */
+    background-color: #ecb22e;
+    opacity: 0.9;
+
+
+}
+
+.search-author-image {
+    height: 40px;
+    width: auto;
+    border-radius: 50%;
+    border: 1px solid grey;
+    margin-right: 5px;
+    background-color: white;
+    padding: 2px;
+    margin-left: 6px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+.search_detail_container {
+    display: flex;
+}
+
+#list{
+    position: absolute;
+    background-color: #7c2d90;
+    border-radius: 5px;
+    width: 780px;
+    z-index: 1;
+    
+}
+
+#body {
+    background-color: #f6efe8;
+    height: 100vh;
 }

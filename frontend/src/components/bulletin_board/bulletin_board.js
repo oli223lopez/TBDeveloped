@@ -3,7 +3,7 @@ import QuestionIndex from '../question/question_index'
 import ResolvedIndex from '../resolved/resolved_index'
 import '../../assets/stylesheets/bulletin_board.css'
 import CreateQuestionFormContainer from '../question/create_question_form_container'
-import MessengerContainer from '../messenger/messenger_container'
+// import MessengerContainer from '../messenger/messenger_container'
 import { Link } from 'react-router-dom'
 
 import wFSP from '../../assets/images/ad_fsp/wFSP.jpg';
@@ -25,23 +25,43 @@ class BulletinBoard extends React.Component{
         this.adInterval = this.adInterval.bind(this);
         this.timer = this.timer.bind(this);
         this.handleSearchVal = this.handleSearchVal.bind(this);
+        this.handleClickOutside = this.handleClickOutside.bind(this);
+
     }
 
     componentDidMount() {
         this.props.fetchQuestions()
 
-
-        //!testing AD
+        //ad funciton
         let intervalId = setInterval(this.timer, 8000);
         this.setState({
             intervalId: intervalId
         })
-        //!testing AD
+
+        document.addEventListener('mousedown', this.handleClickOutside);
+
+
     }
 
-    //!testing AD
     componentWillUnmount() {
         clearInterval(this.state.intervalId)
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
+    handleClickOutside(e) {
+        // let search = document.getElementById('search_container');
+        let input = document.getElementById('input');
+        // let list = document.getElementById('list');
+        // let search_list = document.getElementById('search_list');
+        //array of li.searchList let test = document.getElementById("search_container").getElementsByTagName("li"); 
+
+
+        if(e.target && !e.target.matches("li.searchList") && e.target !== input){
+            this.setState({
+                searchVal: ''
+            })
+        }
+
     }
 
     timer(){
@@ -94,12 +114,11 @@ class BulletinBoard extends React.Component{
     //!testing AD
 
     componentDidUpdate(prevState) {
-        if(Object.values(prevState.questions).length != Object.values(this.props.questions).length) {
+        if(Object.values(prevState.questions).length !== Object.values(this.props.questions).length) {
             this.props.fetchQuestions()
         }
     }
 
-    //!Search func
     handleSearchVal(field) {
         return e => {
             this.setState({
@@ -118,7 +137,6 @@ class BulletinBoard extends React.Component{
 
         
         Object.values(this.props.questions).forEach(question => {
-            console.log('118, searchFunc', question.subject)
             let smallWord = question.subject.toLowerCase();
             if (smallWord.includes(this.state.searchVal.toLowerCase())) {
                 array.push(question);
@@ -132,7 +150,7 @@ class BulletinBoard extends React.Component{
         return array;
 
     }
-    //!Search func
+
 
     handleClick(num){
         this.setState({idx: num})
@@ -149,13 +167,18 @@ class BulletinBoard extends React.Component{
         let results = this.matches().map((result, i) => {
             if(result === 'No question found'){
                 return (
-                    <li key={i} className='searchList'>No topic found for "{this.state.searchVal}".</li>
+                    <li key={i} className='noSearchList'>No topic found for "{this.state.searchVal}".</li>
                 );
             }else{
                 return (
-                    <Link to={`/question/${result._id}`}>
-                        <li key={result.id} className='searchList'>{result.subject}</li>
-                    </Link>
+                    <div className='search_detail_container' key={i} id="test2">
+                        <div key={i}>
+                            <img className="search-author-image" alt="robots" src={`https://robohash.org/${result.user._id}?100x100`} />
+                        </div>
+                        <Link to={`/question/${result._id}` } >
+                            <li key={result.id}  className='searchList'>{result.subject}</li>
+                        </Link>
+                    </div>
                 );
             }
         });
@@ -194,7 +217,7 @@ class BulletinBoard extends React.Component{
                     <div className='bulletin_content'>
                         <div className='bulletin_left'>
 
-                            <div className='divWrapInput'>
+                            <div className='divWrapInput' id='search_container'>
                                 <input type='text' onChange={this.handleSearchVal('searchVal')} 
                                     placeholder='Search by topic...' 
                                     value={this.state.searchVal} 
