@@ -58,7 +58,7 @@ class ResponseForm extends React.Component{
 
 
     render(){
-          console.log(this.props.currentUser) 
+        //   console.log(this.props.currentUser) 
         return(
             <form className = "response-form" onSubmit={this.submit}>
                 <div>
@@ -68,7 +68,7 @@ class ResponseForm extends React.Component{
                 <div className="respondant-header">
                 <img className = "respondants-image" alt="robots" src={`https://robohash.org/${this.props.currentUser.id}?100x100`} />
                 <label className = "consoldation-label">
-                    Consultation Date: <span class="error_message">*</span> <input className ="response-date" type="date" value={this.state.consultation} onChange={this.update('consultation')}/>
+                    Consultation Date: <span className="error_message">*</span> <input className ="response-date" type="date" value={this.state.consultation} onChange={this.update('consultation')}/>
                 </label>
                 </div>
                 </div>

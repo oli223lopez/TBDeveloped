@@ -78,7 +78,7 @@ class Profile extends React.Component {
                                         </label>
                                         <label>
                                             <div className='sub_label'>Case Closed: </div>
-                                            {question.solved ? 'True' : 'False'}
+                                            {question.solved ? this.caseResolved('true') : this.caseResolved('false')}
                                         </label>
                                     </div>
                                 </div>

@@ -10,11 +10,13 @@ import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import ProfileFormContainer from './profile/profile_container'
 import RoomContainer from './chatroom/room_container'
+import ScrollToTop from './ScrollToTop';
 // Room component 
 
 
 const App = () => (
   <div>
+    <ScrollToTop />
     <NavBarContainer />
     <Switch>
       <Route path="/room/:roomID" component={RoomContainer}/>

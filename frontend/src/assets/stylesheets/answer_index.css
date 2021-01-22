@@ -28,7 +28,6 @@
 .response-footer{
        display: flex;
        flex-direction: row;
-       margin-bottom: 14px;
        margin-right: 370px;
        font-size: 14px;
 }
@@ -48,6 +47,10 @@
         margin-right: 10px;
         margin-right: 35px;
         color: #9e609e;
+}
+
+.answer-index-container{
+    margin-bottom: 28px;
 }
 
 
