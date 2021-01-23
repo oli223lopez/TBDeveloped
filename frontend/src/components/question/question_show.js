@@ -110,6 +110,7 @@ class QuestionShow extends React.Component {
                             <AnswerIndexContainer 
                                 responses = {question[0].responses}
                                 questionID = {question[0]._id}
+                                questionSubject = {question[0].subject}
                                 currentUserID = {this.props.userId}
                                 fetchQuestion = {this.props.fetchQuestion}
                                 
@@ -162,7 +163,7 @@ class QuestionShow extends React.Component {
 
                     <div className="question_footer">
                         <div className="footer-status">
-                        { question[0].solved ? <p> &#10003; Solved</p> : <p>&#10007; Unsolved</p> }
+                        { question[0].solved ? <p ><span className="checkIcon">&#10003;</span> Solved</p> : <p><span className="xIcon">&#10007;</span> Unsolved</p> }
                          <p className="tag">Tag: {question[0].tag}</p>
                         </div>
                         <div className="footer-author">

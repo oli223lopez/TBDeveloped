@@ -166,3 +166,104 @@
 
 }
 
+.chats{
+    position: fixed;
+    display: flex;
+    bottom: 0%;
+    justify-content: space-between;
+    border-radius: 10px;
+    z-index: 1;
+    // margin-right: 5px;
+    // margin-left: 5px;
+    // padding: 10px;
+    
+}
+
+.messageImg{
+    width: 45px;
+}
+.chatList{
+    display: none;
+  position: absolute;
+  background-color: #e49542;
+  color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+//   height: 10vh;
+  justify-content: space-around;
+  padding: 10px 10px;
+   margin-right: 5px;
+    margin-left: 5px;
+}
+
+.chatList hover{
+    background-color:#6b61b1
+}
+.chatList:hover {background-color:#6b61b1}
+
+.chatDropdown{
+    // background: red;
+     position: relative;
+    display: inline-block;
+    align-items: center;
+}
+
+
+
+.chatDropdown:hover .chatList{
+  display: block;
+}
+.robotNav{
+    height: 38px;
+    width: auto;
+    border-radius: 50%;
+    border: 1px solid grey;}
+
+.chatContainer{
+    display: flex;
+background-color: #46516e;
+    margin-right: 25px;
+    
+}
+
+.test{
+    display: flex;
+
+}
+
+.test2{
+    display: flex;
+    
+        width: 318px;
+    
+
+}
+
+.robotChat{
+    height: 40px;
+    width: auto;
+    border-radius: 50%;
+    // /* border: 1px solid grey; */
+}
+
+
+
+
+
+.otherTest{
+        display: flex;
+    align-items: center;
+    margin-right: 20px;
+    color: white;
+}
+
+
+.forSpacing{
+    margin: 5px;
+}
+
+
+      
+
+  

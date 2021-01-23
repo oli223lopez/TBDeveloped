@@ -21,14 +21,13 @@
     font-family: sans-serif;
     white-space: nowrap;
     overflow: hidden;
-    width: 207px;
+    width: 204px;
 
 }
 
 .response-footer{
        display: flex;
        flex-direction: row;
-       margin-bottom: 14px;
        margin-right: 370px;
        font-size: 14px;
 }
@@ -39,7 +38,7 @@
         color: #3f413f;
         white-space: nowrap;
         overflow: hidden;
-            width: 127px;
+            width: 123px;
 
 
 }
@@ -48,6 +47,10 @@
         margin-right: 10px;
         margin-right: 35px;
         color: #9e609e;
+}
+
+.answer-index-container{
+    margin-bottom: 28px;
 }
 
 
