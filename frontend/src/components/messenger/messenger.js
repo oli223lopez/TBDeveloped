@@ -32,6 +32,7 @@ const Messenger = (props) => {
 
     function sendMessage(e) {
         // console.log('printSetConversations', conversations)
+        //console.log(e)
         e.preventDefault();
         const messageObject = {
             sentence: message,
