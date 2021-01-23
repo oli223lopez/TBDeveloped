@@ -50,35 +50,37 @@ class ResponseForm extends React.Component{
             }
         }else{
         
+        let questionIDs = []     
         this.props.questions.forEach(async question => {
-            if(question._id === this.props.questionID) {
-                this.setState({ errors: "You cannot respond to a question more than once!" })
-            } else {
-                let newResponse = {
-                    user: this.props.user,
-                    consultation: this.state.consultation,
-                    answer: this.state.answer
-                };
-
-
-                if (!newResponse.consultation) {
-                    this.setState({ errors: "please pick a consultation date" })
-                }
-                else if (!newResponse.answer) {
-                    this.setState({ errors: "please write out your response" })
-                }
-                else {
-                    await this.props.processForm(this.props.questionID, newResponse)
-                    this.props.fetchQuestion(this.props.questionID)
-                    this.props.fetchUser()
-                    //clear errors and form fields
-                    this.setState({ errors: "" })
-                    this.setState({ consultation: "" })
-                    this.setState({ answer: "" })
-                }
-            }
-        
+            questionIDs.push(question._id)
+            
         })
+        if(questionIDs.includes( this.props.questionID)) {
+            this.setState({ errors: "You cannot respond to a question more than once!" })
+        } else {
+            let newResponse = {
+                user: this.props.user,
+                consultation: this.state.consultation,
+                answer: this.state.answer
+            };
+
+
+            if (!newResponse.consultation) {
+                this.setState({ errors: "please pick a consultation date" })
+            }
+            else if (!newResponse.answer) {
+                this.setState({ errors: "please write out your response" })
+            }
+            else {
+                await this.props.processForm(this.props.questionID, newResponse)
+                this.props.fetchQuestion(this.props.questionID)
+                this.props.fetchUser()
+                //clear errors and form fields
+                this.setState({ errors: "" })
+                this.setState({ consultation: "" })
+                this.setState({ answer: "" })
+            }
+        }
         }
         
     }
