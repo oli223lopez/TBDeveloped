@@ -87,12 +87,14 @@ const Messenger = (props) => {
 
         // if(props.chatID.messages.length !== conversations.length){
         if(props.chatID){
-            props.fetchChat(props.chatID._id).then(res =>{
+            props.fetchChat(props.chatID).then(res =>{
                 // console.log(res.chat.posterID)
                 setConversations(res.chat.messages)
             })
         }
+
         
+
     }, [])
 
     useEffect(() => {
@@ -136,14 +138,14 @@ const Messenger = (props) => {
             
         <div className='chatBox'>
 
-            <div onClick={() => leaveChat()} id={`leaveChat${props.chatID._id}`}></div> 
+            <div onClick={() => leaveChat()} id={`leaveChat${props.chatID}`}></div> 
             <div className='messages' >
                 {/* {console.log(conversations)} */}
                  {console.log(conversations)}  
                 {conversations.map((message, index) => {
                     
                     if (message.user === props.userID) {
-                        
+                        // console.log(yourID)
                         return (
                             <div key={index} className='myMessagesRow'>
                                 {/* <div>{props.username}</div> */}
