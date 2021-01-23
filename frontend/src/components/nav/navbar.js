@@ -174,7 +174,7 @@ class NavBar extends React.Component {
 
                     
                     <div >
-                        {this.props.currentUser.activeChats ? 
+                        {this.props.currentUser.activeChats.length > 0 ? 
                         <div>
                             <div className='chatDropdown'> 
 
@@ -251,7 +251,11 @@ class NavBar extends React.Component {
                             </div>
                         </div>
 
-                        : null
+                        :   <div className='chatDropdown'> 
+                                <img src={messageImg} className='messageImg'/>
+                                <div className='chatList'> No Active Chats!</div>
+                            </div>
+
                     
                     }
                         
