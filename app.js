@@ -28,7 +28,7 @@ io.on("connection", socket => { // listens for "connection" event, which generat
     //? 1/17/21 Oliver's socket test for chat
     socket.on('join', room  => {
         socket.join(room);
-        // console.log('31',room)
+        console.log('31',room)
         socket.emit('your id', socket.id)
         socket.on('send message', body => {
             // console.log('34', room);

@@ -17,7 +17,8 @@ const Messenger = (props) => {
         })
 
         socketRef.current.on("message", (message) => {
-            // console.log('here', message)
+            console.log('here')
+            console.log(props.chatID)
             receivedMessage(message);
         })
         
