@@ -178,7 +178,8 @@ class NavBar extends React.Component {
                                 <div>   
                                     {/* {console.log(chat)} */}
                                     <img onClick={() => this.openChat(chat)} src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id }?100x100`} 
-                                    className='robotNav' /><li onClick={() => this.openChat(chat)}>
+                                    className='robotNav' />
+                                    <li onClick={() => this.openChat(chat)}>
                                         {this.props.currentUser.id === chat.posterID._id ? 
                                          `${chat.responderID.username}-${chat.questionSubject.substring(0, 15)}` 
                                     : 
