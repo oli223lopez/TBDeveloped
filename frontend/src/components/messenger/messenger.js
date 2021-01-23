@@ -30,9 +30,20 @@ const Messenger = (props) => {
         setConversations(oldMsgs => [...oldMsgs, message]);
     }
 
+    
+    window.addEventListener('keydown', onKeyPress);
+    function onKeyPress(e){
+            if (e.code === 'Enter') {
+                document.getElementById("chatBtn").click();
+        }
+    }
+
+
     function sendMessage(e) {
+        console.log('invoked')
         // console.log('printSetConversations', conversations)
         e.preventDefault();
+
         const messageObject = {
             sentence: message,
             id: yourID,
@@ -98,8 +109,8 @@ const Messenger = (props) => {
                 })}
             </div>
             <form onSubmit={sendMessage}>
-                <textarea value={message} onChange={handleChange} placeholder="Say something..." />
-                <button type='submit'>Send</button >
+                <textarea id='chatInput' value={message} onChange={handleChange} placeholder="Say something..." />
+                <button id='chatBtn' type='submit'>Send</button >
             </form>
             <div onClick={() => leaveChat()} id={`leaveChat${props.chatID}`}></div>  
 
