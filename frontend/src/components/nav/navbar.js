@@ -44,6 +44,16 @@ class NavBar extends React.Component {
 
     logoutUser(e) {
         e.preventDefault();
+        //!TEST
+
+        if(this.state.chats.length > 0 ){
+            this.state.chats.forEach(chat => {
+                this.leaveChat(chat);
+            })
+        }
+
+        //!TEST
+
         this.props.logout();
     }
 
@@ -179,13 +189,19 @@ class NavBar extends React.Component {
                                     <div>   
                                         {/* {console.log(chat)} */}
                                         <img onClick={() => this.openChat(chat)} src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id }?100x100`} 
-                                        className='robotNav' /><li onClick={() => this.openChat(chat._id)}>
-                                            {this.props.currentUser.id === chat.posterID._id ? 
-                                            `${chat.responderID.username}-${chat.questionSubject.substring(0, 15)}` 
+                                        className='robotNav' />
+                                        
+                                    <li onClick={() => this.openChat(chat)}>
+                                        {this.props.currentUser.id === chat.posterID._id ? 
+                                        `${chat.responderID.username}-${chat.questionSubject.substring(0, 15)}` 
                                         : 
-                                    `${chat.posterID.username}-${chat.questionSubject.substring(0, 15)}`}</li>
+                                        `${chat.posterID.username}-${chat.questionSubject.substring(0, 15)}`}
+                                
+                                    </li>
                                         
                                         {/* {this.chatItself()} */}
+
+
                                     </div>
                                 )
 
@@ -193,7 +209,7 @@ class NavBar extends React.Component {
                         })}
 
                                 
-                                })}
+            
                                     
                             </ul>
                             </div>
