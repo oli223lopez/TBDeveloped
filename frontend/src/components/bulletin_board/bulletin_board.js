@@ -185,18 +185,17 @@ class BulletinBoard extends React.Component{
 
         if(this.isEmpty(this.props.questions)){
             return(
-                // <div className='bulletin_right'>
-                //     <div className='questionForm'>
-                //         <CreateQuestionFormContainer />
-                //     </div>
-                //     <div>
-                //         <div className='adv_container'>
-                //             <span>ADVERTISEMENT</span>
-                //             {this.adInterval()}
-                //         </div>
-                //     </div>
-                // </div> 
-                null
+                <div className='bulletin_right'>
+                    <div className='questionForm'>
+                        <CreateQuestionFormContainer />
+                    </div>
+                    <div>
+                        <div className='adv_container'>
+                            <span>ADVERTISEMENT</span>
+                            {this.adInterval()}
+                        </div>
+                    </div>
+                </div> 
             )
         }else{
             // console.log(this.props.questions)
