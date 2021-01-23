@@ -54,6 +54,7 @@ const Messenger = (props) => {
         socketRef.current.emit("send message", messageObject);
 
     }
+    
 
     function handleChange(e) {
         setMessage(e.target.value);
@@ -137,7 +138,7 @@ const Messenger = (props) => {
                 {conversations.map((message, index) => {
                     
                     if (message.user === props.userID) {
-                        // console.log(yourID)
+                        
                         return (
                             <div key={index} className='myMessagesRow'>
                                 {/* <div>{props.username}</div> */}

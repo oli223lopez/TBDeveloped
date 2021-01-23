@@ -25,7 +25,7 @@ class ResponseForm extends React.Component{
 
         e.preventDefault();
 
-        if(this.props.question != undefined){
+        if(this.props.questions.length === 0){
             let newResponse = {
                 user: this.props.user,
                 consultation: this.state.consultation,
@@ -40,8 +40,9 @@ class ResponseForm extends React.Component{
                 this.setState({ errors: "please write out your response" })
             }
             else {
-                this.props.processForm(this.props.questionID, newResponse)
+                await this.props.processForm(this.props.questionID, newResponse)
                 this.props.fetchQuestion(this.props.questionID)
+                this.props.fetchUser()
                 //clear errors and form fields
                 this.setState({ errors: "" })
                 this.setState({ consultation: "" })
@@ -69,6 +70,7 @@ class ResponseForm extends React.Component{
                 else {
                     await this.props.processForm(this.props.questionID, newResponse)
                     this.props.fetchQuestion(this.props.questionID)
+                    this.props.fetchUser()
                     //clear errors and form fields
                     this.setState({ errors: "" })
                     this.setState({ consultation: "" })
