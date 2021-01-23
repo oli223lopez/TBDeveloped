@@ -13,13 +13,12 @@ class ResponseForm extends React.Component{
         }
         this.submit = this.submit.bind(this)
         this.update = this.update.bind(this)
+        
     }
 
     update(field){
         return (e) => this.setState({[field]: e.currentTarget.value})
     }
-
-
 
     async submit(e){
 
@@ -87,10 +86,6 @@ class ResponseForm extends React.Component{
     // componentWillReceiveProps(nextProps) {
     //     this.setState({ errors: nextProps.errors })
     // }
-
-   
-   
-
 
     render(){
         //   console.log(this.props.currentUser) 

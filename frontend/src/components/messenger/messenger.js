@@ -39,7 +39,7 @@ const Messenger = (props) => {
     }, [props.chatID]);
 
     function receivedMessage(message) {
-        console.log('socketio@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+        // console.log('socketio@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
         setConversations(oldMsgs => [...oldMsgs, message]);        
     }
 
@@ -54,7 +54,7 @@ const Messenger = (props) => {
         messageToDB()
         setMessage("");
         socketRef.current.emit("send message", messageObject);
-
+        
     }
     
 
@@ -79,9 +79,7 @@ const Messenger = (props) => {
     }
     //!{/* //!WL 1/19/ trying to kill chat connection */}
 
-    // console.log(props.chatID)
-    // console.log(props.chatID.messages.length)
-    // console.log('conversation',conversations.length)
+    
     //!renders DB Conversations
     useEffect(() => {
 
@@ -132,6 +130,22 @@ const Messenger = (props) => {
         //    return null
         // }
     }
+
+    //!TESTS
+    
+    // function onKeyUpValue(e) {
+    //     e.preventDefault();
+    //     if(message === ''){
+    //         console.log('null')
+    //         return null
+    //     }else if (e.code==="Enter" && message !== ''){
+    //         console.log('submited')
+    //         sendMessage(e)
+    //     }
+    // }
+
+    //!TEST
+
     
     return (
         <div>
@@ -169,9 +183,10 @@ const Messenger = (props) => {
                 })}
             </div>
 
+            
             <form onSubmit={sendMessage} className='chatForm'>
                 <textarea value={message} className='chatTextArea' onChange={handleChange} placeholder="Say something..." />
-                {message === '' ? <button className='chatSend' type='submit' disabled>Send</button > : <button className='chatSend' type='submit'>Send</button > }
+                {message === '' ? <button className='chatSend' type='submit' disabled>Send</button > : <button className='chatSend' id='chatBtn' type='submit'>Send</button> }
                 
             </form>
             
