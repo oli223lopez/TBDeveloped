@@ -96,6 +96,10 @@ class NavBar extends React.Component {
         this.setState({chats: chatsArray})
     }
 
+    isEmpty(currentUser) {
+        return Object.values(currentUser).length === 0 
+    }
+
 
     // chatItself(){
     //     // console.log('state', this.state.chatID)
@@ -174,6 +178,10 @@ class NavBar extends React.Component {
 
                     
                     <div >
+
+                        { !this.isEmpty(this.props.currentUser) ? 
+
+                        <div> 
                         {this.props.currentUser.activeChats.length > 0 ? 
                         <div>
                             <div className='chatDropdown'> 
@@ -257,6 +265,9 @@ class NavBar extends React.Component {
                             </div>
 
                     
+                    }
+                    </div>
+                    : null
                     }
                         
                         
