@@ -174,6 +174,7 @@ class NavBar extends React.Component {
                         <ul className='chatList'>
                             {this.props.currentUser.activeChats.map((chat) => {
                             
+
                                 return (
                                     <div>   
                                         {/* {console.log(chat)} */}
@@ -187,6 +188,10 @@ class NavBar extends React.Component {
                                         {/* {this.chatItself()} */}
                                     </div>
                                 )
+
+                            
+                        })}
+
                                 
                                 })}
                                     

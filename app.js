@@ -31,7 +31,8 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         // console.log('31',room)
         socket.emit('your id', socket.id)
         socket.on('send message', body => {
-            // console.log('34', room);
+            console.log('34', room);
+
             io.to(room).emit('message', body)
         })
     });

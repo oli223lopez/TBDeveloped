@@ -27,8 +27,9 @@ const Messenger = (props) => {
         // console.log(yourID)
 
         socketRef.current.on("message", (message) => {
-            // console.log('here', message)
+            console.log('here')
             receivedMessage(message);
+
 
         })
         
@@ -38,6 +39,7 @@ const Messenger = (props) => {
     }, [props.chatID]);
 
     function receivedMessage(message) {
+        console.log('socketio@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
         setConversations(oldMsgs => [...oldMsgs, message]);        
     }
 
@@ -76,16 +78,23 @@ const Messenger = (props) => {
         socketRef.current.disconnect()
     }
     //!{/* //!WL 1/19/ trying to kill chat connection */}
-    
+
+    // console.log(props.chatID)
+    // console.log(props.chatID.messages.length)
+    // console.log('conversation',conversations.length)
     //!renders DB Conversations
     useEffect(() => {
+
+        // if(props.chatID.messages.length !== conversations.length){
         if(props.chatID){
             props.fetchChat(props.chatID).then(res =>{
                 // console.log(res.chat.posterID)
                 setConversations(res.chat.messages)
-            }
-            )
+            })
         }
+
+        
+
     }, [])
 
     useEffect(() => {
@@ -132,7 +141,7 @@ const Messenger = (props) => {
             <div onClick={() => leaveChat()} id={`leaveChat${props.chatID}`}></div> 
             <div className='messages' >
                 {/* {console.log(conversations)} */}
-                   
+                 {console.log(conversations)}  
                 {conversations.map((message, index) => {
                     
                     if (message.user === props.userID) {
