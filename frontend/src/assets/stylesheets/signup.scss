@@ -178,6 +178,11 @@ form input {
     padding: 12px;
 }
 
+
+.signup_inputs::placeholder {
+    color: red;
+}
+
 .personal_input {
     margin-left: 10px;
 }

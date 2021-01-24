@@ -11,7 +11,11 @@ class SignupForm extends React.Component {
       username: '',
       password: '',
       password2: '',
-      errors: {}
+      errors: {},
+      emailError: "", 
+      passwordError: "",
+      verifyPasswordError: "",
+      usernameError: "", 
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,7 +29,11 @@ class SignupForm extends React.Component {
       this.props.history.push('/login');
     }
 
-    this.setState({errors: nextProps.errors})
+    this.setState({errors: nextProps.errors});
+    this.setState({emailError: nextProps.errors.email});
+    this.setState({passwordError: nextProps.errors.password});
+    this.setState({verifyPasswordError: nextProps.errors.password2});
+    this.setState({usernameError: nextProps.errors.username});
   }
 
   update(field) {
@@ -34,7 +42,7 @@ class SignupForm extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
     let user = {
       email: this.state.email,
@@ -43,7 +51,20 @@ class SignupForm extends React.Component {
       password2: this.state.password2
     };
 
-    this.props.signup(user, this.props.history); 
+    await this.props.signup(user, this.props.history); 
+
+    if(!!this.state.errors.email) {
+      this.setState({email: ""})
+    }
+    if(!!this.state.errors.username) {
+      this.setState({username: ""})
+    }
+    if(!!this.state.errors.password) {
+      this.setState({password: ""})
+    }
+    if(!!this.state.errors.password2) {
+      this.setState({password2: ""})
+    }
   }
 
   renderErrors() {
@@ -122,33 +143,33 @@ class SignupForm extends React.Component {
 
                             <div className='sign_info'>
                                 <label className='email_signup'>Username<span className='asterisk'>*</span>
-                                      <input type="text"
+                                      <input className='signup_inputs' type="text"
                                         value={this.state.username}
                                         onChange={this.update('username')}
-                                        // placeholder="Username"
+                                        placeholder={this.state.usernameError}
                                       />
                                 </label>
                                 <label className='email_signup'>Email<span className='asterisk'>*</span>
-                                    <input type="text"
+                                    <input className='signup_inputs' type="text"
                                       value={this.state.email}
                                       onChange={this.update('email')}
-                                      // placeholder="Email"
+                                      placeholder={this.state.emailError}
                                     />
                                 </label>
                                 
                                 <label className='password_signup'>Password<span className='asterisk'>*</span>
-                                      <input type="password"
+                                      <input className='signup_inputs' type="password"
                                         value={this.state.password}
                                         onChange={this.update('password')}
-                                        // placeholder="Password"
+                                        placeholder={this.state.passwordError}
                                       />
                                 </label>
 
                                 <label className='password_signup'>Confirm Password<span className='asterisk'>*</span>
-                                      <input type="password"
+                                      <input className='signup_inputs' type="password"
                                         value={this.state.password2}
                                         onChange={this.update('password2')}
-                                        // placeholder="Confirm Password"
+                                        placeholder={this.state.verifyPasswordError}
                                       />
                                 </label>
                                 <div className='disclaimer'>
@@ -165,7 +186,7 @@ class SignupForm extends React.Component {
                             </div>
                             <span className='requried_field'>* Required Field</span>
                         </form>
-                        <div className='error_message'>{this.renderErrors()}</div>
+                        {/* <div className='error_message'>{this.renderErrors()}</div> */}
                     </div>
                 </div>
             </div>
