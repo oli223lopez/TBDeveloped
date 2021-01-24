@@ -194,25 +194,25 @@ class NavBar extends React.Component {
                             
 
                                 return (
-                                    <div>   
+                                    <div className='chat_list_items'>   
                                         {/* {console.log(chat)} */}
                                         <img onClick={() => this.openChat(chat)} src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id }?100x100`} 
                                         className='robotNav' />
                                         
-                                    <li onClick={() => this.openChat(chat)}>
-                                        {this.props.currentUser.id === chat.posterID._id ? 
-                                        `${chat.responderID.username}-${chat.questionSubject.substring(0, 15)}` 
-                                        : 
-                                        `${chat.posterID.username}-${chat.questionSubject.substring(0, 15)}`}
-                                
-                                    </li>
-                                        
-                                        {/* {this.chatItself()} */}
+                                        <li onClick={() => this.openChat(chat)} className="chat_list_li">
+                                            {this.props.currentUser.id === chat.posterID._id ? 
+                                            `${chat.responderID.username} - ${chat.questionSubject.substring(0, 15)}` 
+                                            : 
+                                            `${chat.posterID.username} - ${chat.questionSubject.substring(0, 15)}`}
+                                    
+                                        </li>
+                                            
+                                            {/* {this.chatItself()} */}
 
 
                                     </div>
                                 )
-
+                            
                             
                         })}
 
