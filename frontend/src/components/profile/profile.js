@@ -66,20 +66,20 @@ class Profile extends React.Component {
                             return (
                                 <div key={id} className='questions_topic'>
                                     <div className='individual_case'>
-                                        <label>
-                                            <div className='sub_label'>Case Id:</div>
-                                            <Link to={`/question/${question._id}`}>
-                                                <div className='actual_info'>{question._id}</div>
-                                            </Link>
-                                        </label>
-                                        <label>
-                                            <div className='sub_label'>Subject:</div>
-                                            <div className='actual_info'>{question.subject}</div>
-                                        </label>
-                                        <label>
-                                            <div className='sub_label'>Case Closed: </div>
-                                            {question.solved ? this.caseResolved('true') : this.caseResolved('false')}
-                                        </label>
+                                            <label>
+                                                <Link to={`/question/${question._id}`} className='question_topic_link'>
+                                                <div className='sub_label'>Case Id: </div>
+                                                    <div className='actual_info'>{question._id}</div>
+                                                </Link>
+                                            </label>
+                                            <label>
+                                                <div className='sub_label'>Subject:</div>
+                                                <div className='actual_info'>{question.subject}</div>
+                                            </label>
+                                            <label>
+                                                <div className='sub_label'>Case Closed: </div>
+                                                {question.solved ? this.caseResolved('true') : this.caseResolved('false')}
+                                            </label>
                                     </div>
                                 </div>
                             )
@@ -107,14 +107,14 @@ class Profile extends React.Component {
                                     <div key={id} className='questions_topic'>
                                         <div className='individual_case'>
                                             <label>
-                                                <div className='sub_label'>Relating to Case Id:</div>
-                                                <Link to={`/question/${question._id}`}>
+                                                <Link to={`/question/${question._id}`} className='question_topic_link'>
+                                                    <div className='sub_label'>Relating to Case Id:</div>
                                                     <div className='actual_info'>{question._id}</div>
                                                 </Link>
                                             </label>
                                             <label>
                                                 <div className='sub_label'>Response:</div>
-                                                <div className='actual_info'>{response.answer}</div>
+                                                <div className='actual_info_response'>{response.answer}</div>
                                             </label>
                                         </div>
                                     </div>  
