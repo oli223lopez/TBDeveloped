@@ -155,7 +155,7 @@ const Messenger = (props) => {
             <div onClick={() => leaveChat()} id={`leaveChat${props.chatID}`}></div> 
             <div className='messages' >
                 {/* {console.log(conversations)} */}
-                 {console.log(conversations)}  
+                 {/* {console.log(conversations)}   */}
                 {conversations.map((message, index) => {
                     
                     if (message.user === props.userID) {
