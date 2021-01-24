@@ -60,6 +60,7 @@ const Messenger = (props) => {
 
     function handleChange(e) {
         setMessage(e.target.value);
+        console.log(message)
     }
 
     function messageToDB(){
@@ -88,9 +89,10 @@ const Messenger = (props) => {
                 // console.log(res.chat.posterID)
                 setConversations(res.chat.messages)
             })
+            
         }
 
-    }, [])
+    }, [props.chatID])
 
     useEffect(() => {
         
