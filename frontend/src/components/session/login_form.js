@@ -10,10 +10,17 @@ class LoginForm extends React.Component {
       email: '',
       password: '',
       errors: this.props.errors,
+      emailError: "",
+      passwordError: "", 
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({emailError: nextProps.errors.email})
+    this.setState({passwordError: nextProps.errors.password})
   }
 
   update(field) {
@@ -79,7 +86,7 @@ class LoginForm extends React.Component {
                                   <input className='login_input' type="text"
                                     value={this.state.email}
                                     onChange={this.update('email')}
-                                    placeholder={this.state.errors.email}
+                                    placeholder={this.state.emailError}
                                   />
                             </label>
 
@@ -87,7 +94,7 @@ class LoginForm extends React.Component {
                                   <input className='login_input' type="password"
                                     value={this.state.password}
                                     onChange={this.update('password')}
-                                    placeholder={this.state.errors.password}
+                                    placeholder={this.state.passwordError}
                                   />
                             </label>
 
