@@ -82,7 +82,6 @@ const Messenger = (props) => {
     
     //!renders DB Conversations
     useEffect(() => {
-
         // if(props.chatID.messages.length !== conversations.length){
         if(props.chatID){
             props.fetchChat(props.chatID).then(res =>{
@@ -90,8 +89,6 @@ const Messenger = (props) => {
                 setConversations(res.chat.messages)
             })
         }
-
-        
 
     }, [])
 

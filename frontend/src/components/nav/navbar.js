@@ -76,45 +76,51 @@ class NavBar extends React.Component {
         }
     }
 //!{/* //!WL 1/19/ trying to kill chat connection */}
-    // openChat(chat){
-
-    //     let chatsArray = this.state.chats
-        
-    //     if (!chatsArray.includes(chat)){
-    //         if(chatsArray.length >= 3){
-    //             let closeChat = chatsArray.shift();
-    //             console.log('remove',closeChat);
-
-    //             let leaveButton = document.getElementById(`leaveChat${closeChat._id}`)
-    //             leaveButton.click()
-    //             delete chatsArray[chatsArray.indexOf(closeChat)]
-    //         }
-
-    //         chatsArray.push(chat)
-    //         this.setState({chats: chatsArray})
-    //     }
-    //     // console.log(chatsArray)
-    //     // this.setState({chats: chatsArray})
-    //     console.log('all', this.state.chats)
-
-    // }
-
     openChat(chat){
-            let chatsArray = this.state.chats
+
+        console.log(chat)
+
+        let chatsArray = this.state.chats
+
         if (!chatsArray.includes(chat)){
+            if(chatsArray.length >= 3){
+                let closeChat = chatsArray.shift();
+                
+                console.log('remove',closeChat);
+
+                let leaveButton = document.getElementById(`leaveChat${closeChat._id}`)
+                leaveButton.click()
+                // delete chatsArray[chatsArray.indexOf(closeChat)]
+                // chatsArray.splice(chatsArray.indexOf(chat), 1)
+            }
+
             chatsArray.push(chat)
-        }
-        console.log(chatsArray)
             this.setState({chats: chatsArray})
+        }
+        // console.log(chatsArray)
+        // this.setState({chats: chatsArray})
+        // console.log('all', this.state.chats)
 
     }
+
+    // openChat(chat){
+    //         let chatsArray = this.state.chats
+    //     if (!chatsArray.includes(chat)){
+    //         chatsArray.push(chat)
+    //     }
+    //     console.log(chatsArray)
+    //         this.setState({chats: chatsArray})
+
+    // }
 
     leaveChat(chat){ 
         let leaveButton = document.getElementById(`leaveChat${chat._id}`)
         // console.log(leaveButton)
         leaveButton.click()
         let chatsArray = this.state.chats
-        delete chatsArray[chatsArray.indexOf(chat)]
+        // console.log(chatsArray[0])
+        // delete chatsArray[chatsArray.indexOf(chat)]
+        chatsArray.splice(chatsArray.indexOf(chat), 1)
         // console.log(chatsArray)
 
         this.setState({chats: chatsArray})
