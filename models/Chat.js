@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Message = require("./Message")
 const Question = require("./Question")
+const User = require("./User")
 
 const ChatSchema = new Schema({
 
@@ -16,6 +17,13 @@ const ChatSchema = new Schema({
         ref: 'response',
         require: true
     },
+    questionSubject: {
+        type: String,
+        require: true
+    },
+    posterID: { type: Schema.Types.ObjectId, ref: 'User', require: true},
+    responderID: { type: Schema.Types.ObjectId, ref: 'User', require: true},
+
 
     messages: [{ 
         type: Schema.Types.ObjectId, 

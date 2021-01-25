@@ -7,7 +7,7 @@ import {fetchUser} from '../../actions/session_actions';
 const mapStateToProps = (state, ownProps) => {
     
     return({
-
+    questionSubject: ownProps.questionSubject,
     questionID: ownProps.questionID,
     responses: ownProps.responses,
     username: ownProps.username,

@@ -25,7 +25,7 @@ class ResolvedShow extends React.Component{
         // console.log(resolved)
         if (this.isEmpty(resolved) === true) {
             return (
-                <div>some text in that div tag</div>
+                null
             )
         } else {
            

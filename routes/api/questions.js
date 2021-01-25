@@ -213,9 +213,9 @@ router.post("/:id/responses", passport.authenticate('jwt',{session:false}), asyn
 
     const { errors, isValid } = validateResponse(req.body);
 
-    if(question) {
+    if (question) {
 
-        if(!isValid) {
+        if (!isValid) {
 
             return res.status(400).json(errors)
 

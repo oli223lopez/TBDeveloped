@@ -25,21 +25,26 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
         }else{
             const newChat = new Chat({
                 question: req.body.questionID,
-                response: req.body.responseID
+                //questionSubject: req.body.subject
+                response: req.body.responseID,
+                questionSubject: req.body.questionSubject,
+                posterID: req.body.posterID,
+                responderID: req.body.responderID
 
             })
             newChat.save().then(chat => res.json(chat))
-            console.log(newChat)
+            // console.log(newChat)
             // User.findById(req.body.posterID).then(res => res.activeChats.push(newChat))
             // // console.log(poster)
-            // User.findById(req.body.responseUserID).then(res => res.activeChats.push(newChat))
+            // User.findById(req.body.responderID).then(res => res.activeChats.push(newChat))
 
             let poster = await User.findById(req.body.posterID)
             poster.activeChats.push(newChat._id)
             poster.save()
 
 
-            let responder = await User.findById(req.body.responseUserID)
+            let responder = await User.findById(req.body.responderID)
+            // console.log(responder)
             responder.activeChats.push(newChat._id)
             responder.save()
         }
@@ -50,8 +55,12 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
 
 router.get('/:id', (req, res) => {
 
+    // console.log(req.params.id)
+    
     Chat.findById(req.params.id)
         .populate('question')
+        .populate('posterID')
+        .populate('responderID')
         .populate('messages')
         .then(chat => res.json(chat))
         .catch(err => res.status(404).json("chat not found"))
