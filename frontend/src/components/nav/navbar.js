@@ -46,14 +46,22 @@ class NavBar extends React.Component {
         e.preventDefault();
         //!TEST
 
-        if(this.state.chats.length > 0 ){
-            this.state.chats.forEach(chat => {
-                this.leaveChat(chat);
-            })
+        let chatArr = [...this.state.chats];
+        
+        if(chatArr.length > 0 ){
+            console.log(this.state.chats)
+            for(let i = 0; i < chatArr.length; i ++){
+                this.leaveChat(chatArr[i])
+            }
+
         }
-
+        
         //!TEST
-
+        this.setState({
+            chats: []
+        })
+        console.log(this.state.chats)
+        // console.log(this.state.chats)
         this.props.logout();
     }
 
@@ -121,7 +129,7 @@ class NavBar extends React.Component {
         // console.log(chatsArray[0])
         // delete chatsArray[chatsArray.indexOf(chat)]
         chatsArray.splice(chatsArray.indexOf(chat), 1)
-        // console.log(chatsArray)
+        console.log(chatsArray)
 
         this.setState({chats: chatsArray})
     }
@@ -224,12 +232,12 @@ class NavBar extends React.Component {
                             {this.props.currentUser.activeChats.map((chat) => {
                             
                                 return (
-                                    <div className='chat_list_items'>   
+                                    <div className='chat_list_items' onClick={() => this.openChat(chat)}>   
                                         {/* {console.log(chat)} */}
-                                        <img onClick={() => this.openChat(chat)} src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id }?100x100`} 
+                                        <img src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id }?100x100`} 
                                         className='robotNav' />
                                         
-                                        <li onClick={() => this.openChat(chat)} className="chat_list_li">
+                                        <li className="chat_list_li">
                                             {this.props.currentUser.id === chat.posterID._id ? 
                                             `${chat.responderID.username} - ${chat.questionSubject.substring(0, 15)}` 
                                             : 
