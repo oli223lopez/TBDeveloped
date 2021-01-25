@@ -101,6 +101,7 @@ class NavBar extends React.Component {
 
 
     leaveChat(chat){ 
+        console.log('console',chat._id)
         let leaveButton = document.getElementById(`leaveChat${chat._id}`)
         leaveButton.click()
         let chatsArray = this.state.chats

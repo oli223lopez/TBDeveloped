@@ -91,9 +91,9 @@ const Messenger = (props) => {
         }
     }, [conversations])
 
-    if(messages){
-        messages.scrollTop = messages.scrollHeight
-    }
+    // if(messages){
+    //     messages.scrollTop = messages.scrollHeight
+    // }
   
 
     //This works but not moving to production
