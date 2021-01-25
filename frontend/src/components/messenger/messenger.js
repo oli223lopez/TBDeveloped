@@ -192,18 +192,12 @@ const Messenger = (props) => {
                     }
                 })}
             </div>
-<<<<<<< HEAD
-            <form onSubmit={sendMessage}>
-                <textarea id='chatInput' value={message} onChange={handleChange} placeholder="Say something..." />
-                <button id='chatBtn' type='submit'>Send</button >
-=======
 
             
             <form onSubmit={sendMessage} className='chatForm'>
                 <textarea value={message} className='chatTextArea' onChange={handleChange} placeholder="Say something..." />
                 {message === '' ? <button className='chatSend' type='submit' disabled>Send</button > : <button className='chatSend' id='chatBtn' type='submit'>Send</button> }
                 
->>>>>>> chatEdit
             </form>
             
 
