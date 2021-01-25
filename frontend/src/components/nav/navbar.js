@@ -35,6 +35,7 @@ class NavBar extends React.Component {
             this.props.fetchUser()
         }
     }
+
     //Future implementation
     // componentDidUpdate(prevState, b) {
         // if (prevState.currentUser.questions.length != this.props.currentUser.questions.length) {
@@ -89,8 +90,9 @@ class NavBar extends React.Component {
                 let closeChat = chatsArray.shift();
                 
 
-                let leaveButton = document.getElementById(`leaveChat${closeChat._id}`)
-                leaveButton.click()
+                // let leaveButton = document.getElementById(`leaveChat${closeChat._id}`)
+                // leaveButton.click()
+                this.leaveChat(closeChat)
             }
 
             chatsArray.push(chat)
@@ -115,7 +117,7 @@ class NavBar extends React.Component {
 
 
     render() {
-        console.log(this.props.currentUser)
+        // console.log(this.props.currentUser)
         const tbdevelopedHeader = () => {
             if(this.props.loggedIn === false){
                 return(
@@ -181,7 +183,7 @@ class NavBar extends React.Component {
                     
                     <div >
                        
-                        { !this.isEmpty(this.props.currentUser) ? 
+                        { !this.isEmpty(this.props.currentUser) && this.props.currentUser.activeChats? 
 
                         
 
