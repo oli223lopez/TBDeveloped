@@ -1,6 +1,4 @@
 import React from 'react'
-// import {Link} from 'react-router-dom'
-
 import '../../assets/stylesheets/question_form.css'
 
 
@@ -24,8 +22,8 @@ class QuestionForm extends React.Component{
         
     }
 
+    //Needs to be updated/is deprecated
     componentWillReceiveProps(nextProps) {
-
         this.setState({ errors: nextProps.errors })
     }
 
@@ -57,12 +55,9 @@ class QuestionForm extends React.Component{
             }
 
         }
-        // console.log(this.state.errors)
-
     }
 
     updateSubmit(e) {
-        // console.log(this.props.questionId)
         e.preventDefault();
         let newQuestion = {
             
@@ -89,12 +84,6 @@ class QuestionForm extends React.Component{
 
 
     render(){
-
-        // console.log(this.props.errors.subject)
-        
-        // let subjectError = this.state.errors.subject;
-        // let contentError = this.state.errors.content; 
-        // let tagError = this.state.errors.tag;
 
         if (this.props.formType === 'Update Question!'){
             return (

@@ -6,11 +6,9 @@ import {fetchQuestion } from '../../actions/questions_actions'
 
 const mapStateToProps = (state, ownProps) => {
     let resolved = {}
-    // console.log(ownProps.match.params.resolvedId)
     if (Object.keys(state.entities.questions).length > 0) {
         resolved[ownProps.match.params.resolvedId] = state.entities.questions[ownProps.match.params.resolvedId]
     }
-    // console.log(ownProps.match.params.resolvedId)
     return ({
         resolvedId: ownProps.match.params.resolvedId,
         resolved,

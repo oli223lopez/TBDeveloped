@@ -92,19 +92,19 @@ router.post('/login', (req, res) => {
     const password = req.body.password;
 
     User.findOne({ email })
-        .populate('questions')
-        .populate({
-            path: 'activeChats',
-            populate: {
-                path: 'messages',
-                model: 'Message',
-            },
-            path: 'activeChats',
-            populate: {
-                path: 'responderID posterID',
-                model: 'User'
-            },
-        })
+        // .populate('questions')
+        // .populate({
+        //     path: 'activeChats',
+        //     populate: {
+        //         path: 'messages',
+        //         model: 'Message',
+        //     },
+        //     path: 'activeChats',
+        //     populate: {
+        //         path: 'responderID posterID',
+        //         model: 'User'
+        //     },
+        // })
         .then(user => {
             if (!user) {
                 return res.status(404).json({ email: 'This user does not exist' })
@@ -116,14 +116,13 @@ router.post('/login', (req, res) => {
                         const payload = {
                             id: user.id,
                             username: user.username,
-                            email: user.email,
-                            questions: user.questions,
-                            activeChats: user.activeChats
+                            email: user.email
+                           
                         }
                         jwt.sign(
                             payload,
                             keys.secretOrKey,
-                            { expiresIn: 3600 },
+                            { expiresIn: 3600},
                             (err, token) => {
                                 res.json({
                                     success: true,

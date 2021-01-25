@@ -13,7 +13,6 @@ class Profile extends React.Component {
 
 
     componentDidMount() {
-        // console.log(this.props.currentUser.questions)
         this.props.fetchProfileQuestions(this.props.currentUser.questions)
         this.props.fetchUser();
     }

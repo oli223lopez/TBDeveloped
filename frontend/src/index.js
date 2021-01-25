@@ -12,6 +12,8 @@ import { logout } from './actions/session_actions'
 // test
 import axios from "axios";
  import { fetchUser } from './util/session_api_util'
+//  import {fetchQuestions} from './util/questions_api_util'
+ import {fetchQuestions} from './actions/questions_actions'
 // import { fetchUser } from './actions/session_actions'
 //test
 
@@ -32,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentTime = Date.now() / 1000;
     if (decodedUser.exp < currentTime) {
       store.dispatch(logout());
-      window.location.href = '/login'
+      // window.location.href = '/login'
     }
 
   }
@@ -44,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.store = store; 
   window.axios = axios; 
   window.fetchUser = fetchUser;
+  window.fetchQuestions = fetchQuestions()
   //test 
   
   
