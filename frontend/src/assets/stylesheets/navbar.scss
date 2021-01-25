@@ -211,9 +211,13 @@
     padding: 3px;
     align-items: center;
 }
+.marquee{
+    width: 318px;
+}
 
 .chat_list_items:hover {
-    background-color: #6b61b1
+    background-color: #6b61b1;
+    cursor: pointer;
 }
 
 .chat_list_li{

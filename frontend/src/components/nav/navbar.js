@@ -80,26 +80,31 @@ class NavBar extends React.Component {
         }
     }
 //!{/* //!WL 1/19/ trying to kill chat connection */}
+
+
     openChat(chat){
 
 
         let chatsArray = this.state.chats
 
         if (!chatsArray.includes(chat)){
-            if(chatsArray.length >= 3){
-                let closeChat = chatsArray.shift();
-                
+                if(chatsArray.length != 0){
 
-                // let leaveButton = document.getElementById(`leaveChat${closeChat._id}`)
-                // leaveButton.click()
-                this.leaveChat(closeChat)
-            }
+                    let closeChat = chatsArray.shift();
+                    // let leaveButton = document.getElementById(`leaveChat${closeChat._id}`)
+                    // leaveButton.click()
+                    this.leaveChat(closeChat)
+                }
+            
 
             chatsArray.push(chat)
             this.setState({chats: chatsArray})
+            console.log(this.state.chats)
         }
     }
+    
 
+ 
 
 
     leaveChat(chat){ 
@@ -229,7 +234,7 @@ class NavBar extends React.Component {
                                                     <button onClick={() => this.leaveChat(chat)} className='leaveChat' >X</button>
 
                                                     <div className='test2'> 
-                                                        <marquee behavior="scroll" direction="left" scrollamount="3">
+                                                        <marquee behavior="scroll" direction="left" scrollamount="3" className='marquee'>
                                                         <div className='otherTest'> 
                                                             <img src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id}?100x100`}
                                                                 className='robotChat' />
