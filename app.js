@@ -27,6 +27,7 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         socket.join(room);
         socket.emit('your id', socket.id)
         socket.on('send message', body => {
+            console.log(room)
             io.to(room).emit('message', body)
         })
     });
