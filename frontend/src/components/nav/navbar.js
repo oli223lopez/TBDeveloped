@@ -82,33 +82,36 @@ class NavBar extends React.Component {
 //!{/* //!WL 1/19/ trying to kill chat connection */}
     openChat(chat){
 
-
         let chatsArray = this.state.chats
 
         if (!chatsArray.includes(chat)){
             if(chatsArray.length >= 3){
-                let closeChat = chatsArray.shift();
+                // let closeChat = chatsArray.shift();
+                let closeChat = chatsArray[0];
                 
-
+                
                 // let leaveButton = document.getElementById(`leaveChat${closeChat._id}`)
                 // leaveButton.click()
                 this.leaveChat(closeChat)
+                // this.setState({chats: chatsArray})
             }
 
             chatsArray.push(chat)
-            this.setState({chats: chatsArray})
+            this.setState({chat: chatsArray})
+            console.log(this.state.chats)
         }
     }
 
 
 
     leaveChat(chat){ 
-        console.log('console',chat._id)
+        // console.log('console',chat._id)
         let leaveButton = document.getElementById(`leaveChat${chat._id}`)
         leaveButton.click()
         let chatsArray = this.state.chats
         chatsArray.splice(chatsArray.indexOf(chat), 1)
         this.setState({chats: chatsArray})
+        console.log(this.state.chats)
     }
 
     isEmpty(currentUser) {
