@@ -60,6 +60,7 @@ const Messenger = (props) => {
 
     function handleChange(e) {
         setMessage(e.target.value);
+        console.log(message)
     }
 
     function messageToDB(){
@@ -82,18 +83,16 @@ const Messenger = (props) => {
     
     //!renders DB Conversations
     useEffect(() => {
-
         // if(props.chatID.messages.length !== conversations.length){
         if(props.chatID){
             props.fetchChat(props.chatID).then(res =>{
                 // console.log(res.chat.posterID)
                 setConversations(res.chat.messages)
             })
+            
         }
 
-        
-
-    }, [])
+    }, [props.chatID])
 
     useEffect(() => {
         
@@ -155,7 +154,7 @@ const Messenger = (props) => {
             <div onClick={() => leaveChat()} id={`leaveChat${props.chatID}`}></div> 
             <div className='messages' >
                 {/* {console.log(conversations)} */}
-                 {console.log(conversations)}  
+                 {/* {console.log(conversations)}   */}
                 {conversations.map((message, index) => {
                     
                     if (message.user === props.userID) {
