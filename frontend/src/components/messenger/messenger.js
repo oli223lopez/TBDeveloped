@@ -24,22 +24,18 @@ const Messenger = (props) => {
         socketRef.current.on("your id", id => {
             setYourID(id);
         })
-        // console.log(yourID)
 
         socketRef.current.on("message", (message) => {
-            console.log('here')
             receivedMessage(message);
 
 
         })
         
-        // console.log('messenger-31', props.chatID)
         socketRef.current.emit('join', props.chatID)
 
     }, [props.chatID]);
 
     function receivedMessage(message) {
-        // console.log('socketio@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@')
         setConversations(oldMsgs => [...oldMsgs, message]);        
     }
 
@@ -60,7 +56,6 @@ const Messenger = (props) => {
 
     function handleChange(e) {
         setMessage(e.target.value);
-        console.log(message)
     }
 
     function messageToDB(){
@@ -74,19 +69,14 @@ const Messenger = (props) => {
         props.postMessage(newMess);
     }
 
-    //!{/* //!WL 1/19/ trying to kill chat connection */}
     function leaveChat(){
         socketRef.current.disconnect()
     }
-    //!{/* //!WL 1/19/ trying to kill chat connection */}
 
     
-    //!renders DB Conversations
     useEffect(() => {
-        // if(props.chatID.messages.length !== conversations.length){
         if(props.chatID){
             props.fetchChat(props.chatID).then(res =>{
-                // console.log(res.chat.posterID)
                 setConversations(res.chat.messages)
             })
             
@@ -100,38 +90,13 @@ const Messenger = (props) => {
             messages.scrollTop = messages.scrollHeight
         }
     }, [conversations])
-    //!renders DB Conversations
-    // console.log(messages)
 
     if(messages){
         messages.scrollTop = messages.scrollHeight
     }
-    function posterValid(){
-        // if(poster){
-        //     if (props.userID === poster._id){
-        //         return(
-        //             <div>
-        //                { console.log(poster)}
-                        
-        //                 <img src={`https://robohash.org/${ responder._id}?100x100`}className='robotNav' />
-        //                 <div>{`${responder.username}-${questionSubject.substring(0, 15)}`}</div>
-        //             </div>
-        //         )
-        //     }else{
-        //         return (
-        //             <div>
-        //                 <img src={`https://robohash.org/${poster._id}?100x100`} className='robotNav' />
-        //                 <div>{`${poster.username}-${questionSubject.substring(0, 15)}`}</div>
-        //             </div>
-        //         )
-        //     }
-        // }else{
-        //    return null
-        // }
-    }
+  
 
-    //!TESTS
-    
+    //This works but not moving to production
     // function onKeyUpValue(e) {
     //     e.preventDefault();
     //     if(message === ''){
@@ -143,7 +108,6 @@ const Messenger = (props) => {
     //     }
     // }
 
-    //!TEST
 
     
     return (
@@ -153,18 +117,13 @@ const Messenger = (props) => {
 
             <div onClick={() => leaveChat()} id={`leaveChat${props.chatID}`}></div> 
             <div className='messages' >
-                {/* {console.log(conversations)} */}
-                 {/* {console.log(conversations)}   */}
                 {conversations.map((message, index) => {
                     
                     if (message.user === props.userID) {
-                        // console.log(yourID)
                         return (
                             <div key={index} className='myMessagesRow'>
                                 {/* <div>{props.username}</div> */}
                                 <div className='myMessage'>
-                                    {/* {console.log(message)} */}
-                                    {/* {message.user} */}
                                     {message.sentence}
                                 </div>
                             </div>

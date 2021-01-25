@@ -17,18 +17,14 @@ const io = socket(app.listen(port, () => console.log(`Server is running on port 
 
 const rooms = {};
 
-//!TEST - WL - trying to remove video on meeting exit
 const peers = {};
-//!TEST
 
 io.on("connection", socket => { // listens for "connection" event, which generates a socket object. This is triggered when a user on a browser hits a particular page 
 
 
 
-    //? 1/17/21 Oliver's socket test for chat
     socket.on('join', room  => {
         socket.join(room);
-        // console.log('31',room)
         socket.emit('your id', socket.id)
         socket.on('send message', body => {
             io.to(room).emit('message', body)
@@ -36,22 +32,12 @@ io.on("connection", socket => { // listens for "connection" event, which generat
     });
 
 
-    //!WL 1/19/ trying to kill chat connection
-    // socket.broadcast.emit('message', 'Someone joined the chat');
-
-    // socket.on('disconnect', () => {
-    //     console.log('server disconnect')
-    //     io.emit('message', 'A user has left the chat');
-    // });
-    //!WL 1/19/ trying to kill chat connection
+    
 
 
-      // 1/3/21
       socket.on("send name", username => {
         peers[socket.id.toString()] = username
-        console.log(peers)
         })
-    // 1/3/21
 
     // listens for "connection" event, which generates a socket object. 
     // this appears to be triggered by the room.js socketRef.current = io.connect("/");
@@ -60,15 +46,12 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         // applying a event listener to the socket generated, which listens for "join room"
         // this is an event fired off from the frontend room.js file 
 
-    // console.log((new Date()).getTime())
         
     
         if (rooms[roomID]) {
             rooms[roomID].push(socket.id);
-            // console.log('this is the rooms', rooms)
         } else {
             rooms[roomID] = [socket.id];
-            // console.log('this is the rooms', rooms)
         }
 
         // the "join room" event emits the roomID number (see rooms.js). This gets passed down to this
@@ -78,9 +61,6 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         // so a list of rooms, with each user in the room 
 
 
-        //!TEST - WL - trying to remove video on meeting exit
-        // peers[socket.id] = roomID;
-        //!TEST
         
         const otherUser = rooms[roomID].find(id => id !== socket.id);
         // look into a speciific room based on the roomId emitted with the "join room event"
@@ -131,12 +111,9 @@ io.on("connection", socket => { // listens for "connection" event, which generat
             // console.log(rooms)
         })
 
-        //!TEST - WL - trying to remove video on meeting exit
 
         socket.on('disconnect', () => {
-            // const roomID = peers[socket.id];
-            // let room = rooms[roomID];   
-            // socket.to(roomId)
+        
             let idx = rooms[roomID].indexOf(socket.id)   
 
             delete peers[socket.id]
@@ -147,27 +124,12 @@ io.on("connection", socket => { // listens for "connection" event, which generat
                 io.to(otherUser).emit("killconnection")
             }
         })
-        //give me the roomID the socket.id is disconneting from and 
-        //with that information, give me that room.
-        //!TEST - 
-
-        // socket.on('disconnect', () => {
-        //     // const roomID = peers[socket.id];
-        //     // let room = rooms[roomID];   
-        //     socket.to(otherUser).emit('user-disconnected', () =>{
-        //         console.log('USER HAS DISCONNECTED')
-        //     })
-        // })
-        // give me the roomID the socket.id is disconneting from and 
-        // with that information, give me that room.
-        //!TEST 
+       
 
 
 
-        // 1/1/21 
 
             socket.on("hangUp", otherUserId => {
-                // console.log("server received")
                 io.to(otherUserId).emit("killconnection")
             })
 

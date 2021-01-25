@@ -83,12 +83,9 @@ class ResponseForm extends React.Component{
         }
         
     }
-    // componentWillReceiveProps(nextProps) {
-    //     this.setState({ errors: nextProps.errors })
-    // }
+   
 
     render(){
-        //   console.log(this.props.currentUser) 
         let n = new Date();
         function date(){
             if(n.getMonth() > 9){
@@ -99,7 +96,6 @@ class ResponseForm extends React.Component{
             }
         }
 
-        // console.log(date())
         return(
             <form className = "response-form" onSubmit={this.submit}>
                 <div>

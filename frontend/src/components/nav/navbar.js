@@ -6,9 +6,7 @@ import dino2 from '../../assets/images/dino2.png';
 import linkedin from '../../assets/images/linkedin.png';
 import messageImg from '../../assets/images/chat.png'
 
-//!{/* //!WL 1/19/ trying to kill chat connection */}
 import MessengerContainer from '../messenger/messenger_container'
-//!{/* //!WL 1/19/ trying to kill chat connection */}
 
 class NavBar extends React.Component {
     constructor(props) {
@@ -16,52 +14,41 @@ class NavBar extends React.Component {
         this.logoutUser = this.logoutUser.bind(this);
         this.getLinks = this.getLinks.bind(this);
 
-        // console.log('18', this.props.currentUser)
 
-        //!{/* //!WL 1/19/ trying to kill chat connection */}
             this.state = {
-                // showComponent: false,
                 chats: []
                 
             }
             this.openChat = this.openChat.bind(this);
-            // this.chatItself = this.chatItself.bind(this);
             this.leaveChat = this.leaveChat.bind(this)
-        //!{/* //!WL 1/19/ trying to kill chat connection */}
     }
     
 
     componentDidMount() {
         this.props.fetchUser()
     }
-
-    componentDidUpdate(prevState, b) {
+    //Future implementation
+    // componentDidUpdate(prevState, b) {
         // if (prevState.currentUser.questions.length != this.props.currentUser.questions.length) {
-        //     console.log('updating')
         //     this.props.fetchUser()
         // }
-    }
+    // }
 
     logoutUser(e) {
         e.preventDefault();
-        //!TEST
 
         let chatArr = [...this.state.chats];
         
         if(chatArr.length > 0 ){
-            console.log(this.state.chats)
             for(let i = 0; i < chatArr.length; i ++){
                 this.leaveChat(chatArr[i])
             }
 
         }
         
-        //!TEST
         this.setState({
             chats: []
         })
-        console.log(this.state.chats)
-        // console.log(this.state.chats)
         this.props.logout();
     }
 
@@ -86,7 +73,6 @@ class NavBar extends React.Component {
 //!{/* //!WL 1/19/ trying to kill chat connection */}
     openChat(chat){
 
-        console.log(chat)
 
         let chatsArray = this.state.chats
 
@@ -94,43 +80,23 @@ class NavBar extends React.Component {
             if(chatsArray.length >= 3){
                 let closeChat = chatsArray.shift();
                 
-                console.log('remove',closeChat);
 
                 let leaveButton = document.getElementById(`leaveChat${closeChat._id}`)
                 leaveButton.click()
-                // delete chatsArray[chatsArray.indexOf(closeChat)]
-                // chatsArray.splice(chatsArray.indexOf(chat), 1)
             }
 
             chatsArray.push(chat)
             this.setState({chats: chatsArray})
         }
-        // console.log(chatsArray)
-        // this.setState({chats: chatsArray})
-        // console.log('all', this.state.chats)
-
     }
 
-    // openChat(chat){
-    //         let chatsArray = this.state.chats
-    //     if (!chatsArray.includes(chat)){
-    //         chatsArray.push(chat)
-    //     }
-    //     console.log(chatsArray)
-    //         this.setState({chats: chatsArray})
 
-    // }
 
     leaveChat(chat){ 
         let leaveButton = document.getElementById(`leaveChat${chat._id}`)
-        // console.log(leaveButton)
         leaveButton.click()
         let chatsArray = this.state.chats
-        // console.log(chatsArray[0])
-        // delete chatsArray[chatsArray.indexOf(chat)]
         chatsArray.splice(chatsArray.indexOf(chat), 1)
-        console.log(chatsArray)
-
         this.setState({chats: chatsArray})
     }
 
@@ -139,20 +105,6 @@ class NavBar extends React.Component {
     }
 
 
-    // chatItself(){
-    //     // console.log('state', this.state.chatID)
-    //     if(this.state.chatID === ''){
-    //         return null
-    //     }else{
-    //         return(
-    //             <div>
-    //                 <MessengerContainer chatID={this.state.chatID}/>
-    //             </div>
-    //         )
-
-    //     }
-    // }
-//!{/* //!WL 1/19/ trying to kill chat connection */}
     render() {
         const tbdevelopedHeader = () => {
             if(this.props.loggedIn === false){
@@ -233,7 +185,6 @@ class NavBar extends React.Component {
                             
                                 return (
                                     <div className='chat_list_items' onClick={() => this.openChat(chat)}>   
-                                        {/* {console.log(chat)} */}
                                         <img src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id }?100x100`} 
                                         className='robotNav' />
                                         
@@ -244,10 +195,6 @@ class NavBar extends React.Component {
                                             `${chat.posterID.username} - ${chat.questionSubject.substring(0, 15)}`}
                                     
                                         </li>
-                                            
-                                            {/* {this.chatItself()} */}
-
-
                                     </div>
                                 )
                             

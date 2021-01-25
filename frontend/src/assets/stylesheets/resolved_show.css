@@ -11,9 +11,9 @@
         text-align: center;
         margin-left: auto;
         margin-right: auto;
-        width: 210px;
         white-space: nowrap;
         overflow: hidden;
+        width: 223px;
     }
 
     .resolved_question-show-author-image{
@@ -51,6 +51,8 @@
 .resolved-date-resolved{
     display:flex;
 }
+
+
 
 .check-mark {
     font-size: 25px;

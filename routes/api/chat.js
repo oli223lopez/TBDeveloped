@@ -33,10 +33,6 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
 
             })
             newChat.save().then(chat => res.json(chat))
-            // console.log(newChat)
-            // User.findById(req.body.posterID).then(res => res.activeChats.push(newChat))
-            // // console.log(poster)
-            // User.findById(req.body.responderID).then(res => res.activeChats.push(newChat))
 
             let poster = await User.findById(req.body.posterID)
             poster.activeChats.push(newChat._id)
@@ -44,7 +40,6 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
 
 
             let responder = await User.findById(req.body.responderID)
-            // console.log(responder)
             responder.activeChats.push(newChat._id)
             responder.save()
         }
@@ -55,7 +50,6 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
 
 router.get('/:id', (req, res) => {
 
-    // console.log(req.params.id)
     
     Chat.findById(req.params.id)
         .populate('question')
@@ -67,7 +61,7 @@ router.get('/:id', (req, res) => {
 });
 
 
-// 1/14/21 route for getting all chats, with populate for questions and messages 
+// route for getting all chats, with populate for questions and messages 
 // router.get('/', (req, res) => {
 //     Chat.find()
 //         .populate('question')

@@ -16,24 +16,20 @@ router.get('/test', (req, res) => {
 
 router.get('/profile_questions', (req, res) => {
     
-    // console.log('this is being activated')
     Question.find()
         .then(questions => {
-            // console.log(req)
             const questionArray = []
             questions.forEach(question => {
                 if(req.body.questions.includes(question._id)){
                     questionArray.push(question)
                 }
             })
-            // console.log(questionArray)
             res.json(questionArray)
         })
         .catch(err => res.status(404).json('this doesnt work'));
         
 
 })
-//test
 
 //retreiving all the questions
 router.get('/',(req,res) => {
@@ -106,16 +102,6 @@ router.post('/', passport.authenticate('jwt',{session:false}), async (req,res) =
 });
 
 
-//editing a question
-// router.put("/:id/update", (res,req) => {
-//     let updates = req.body
-
-//     Question.findOneAndUpdate({
-//         _id: req.params.id,updates, new: true})
-//         .then(updatedQuestion => res.json(updatedQuestion))
-//         .catch(err => res.status(404).json("Error: " + err))
-// });
-
 
 
 router.patch("/:id", passport.authenticate('jwt',{session:false}), async (req, res) => {
@@ -129,8 +115,7 @@ router.patch("/:id", passport.authenticate('jwt',{session:false}), async (req, r
                     model: 'User'
                 }
             })
-        // console.log("user: " + question.user)
-        // console.log("req user " + req.user.id )
+
         if(req.user.id ===  `${question.user._id}`){
         
             if (req.body.content) {
@@ -189,10 +174,6 @@ router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, 
                     await questionUser.save()
                 } )
 
-                // const user = await User.findById(question.user)
-                // console.log('hello from line 177')
-                // console.log(user.questions.indexOf(question._id))
-                // console.log(user.questions.splice())
             }
             )
             .then(() => res.json(question))
@@ -237,16 +218,6 @@ router.post("/:id/responses", passport.authenticate('jwt',{session:false}), asyn
             } else {
                 null
             }
-
-            // if(!user.questions.find(question._id)) {
-            //     user.questions.push(question._id)
-            //     user.save()
-            //     // user.save(function (err) {
-            //     //     if (!err) res.json('not working?')
-            //     // })
-            // } else {
-            //     console.log('yes?')
-            // }
 
         }
 

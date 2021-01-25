@@ -5,7 +5,6 @@ import {postResponse} from '../../actions/responses_actions'
 import {fetchUser} from '../../actions/session_actions';
 
 const mapStateToProps = (state, props,)=> { 
-    console.log(state.entities.currentUser.questions)
     return (
     {newResponse: {
         consultation: '',
