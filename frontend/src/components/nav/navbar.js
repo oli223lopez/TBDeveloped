@@ -4,6 +4,7 @@ import '../../assets/stylesheets/reset.css';
 import '../../assets/stylesheets/navbar.scss';
 import dino2 from '../../assets/images/dino2.png';
 import linkedin from '../../assets/images/linkedin.png';
+import messageImg from '../../assets/images/chat.png'
 
 //!{/* //!WL 1/19/ trying to kill chat connection */}
 import MessengerContainer from '../messenger/messenger_container'
@@ -14,6 +15,8 @@ class NavBar extends React.Component {
         super(props);
         this.logoutUser = this.logoutUser.bind(this);
         this.getLinks = this.getLinks.bind(this);
+
+        // console.log('18', this.props.currentUser)
 
         //!{/* //!WL 1/19/ trying to kill chat connection */}
             this.state = {
@@ -26,6 +29,7 @@ class NavBar extends React.Component {
             this.leaveChat = this.leaveChat.bind(this)
         //!{/* //!WL 1/19/ trying to kill chat connection */}
     }
+    
 
     componentDidMount() {
         this.props.fetchUser()
@@ -40,6 +44,24 @@ class NavBar extends React.Component {
 
     logoutUser(e) {
         e.preventDefault();
+        //!TEST
+
+        let chatArr = [...this.state.chats];
+        
+        if(chatArr.length > 0 ){
+            console.log(this.state.chats)
+            for(let i = 0; i < chatArr.length; i ++){
+                this.leaveChat(chatArr[i])
+            }
+
+        }
+        
+        //!TEST
+        this.setState({
+            chats: []
+        })
+        console.log(this.state.chats)
+        // console.log(this.state.chats)
         this.props.logout();
     }
 
@@ -63,34 +85,57 @@ class NavBar extends React.Component {
     }
 //!{/* //!WL 1/19/ trying to kill chat connection */}
     openChat(chat){
-        // console.log('58',chat)
-    //     const leaveButton = document.getElementById('leaveChat')
-    //     if(leaveButton){
-    //         leaveButton.click()
-    //     }
-            let chatsArray = this.state.chats
+
+        console.log(chat)
+
+        let chatsArray = this.state.chats
+
+        if (!chatsArray.includes(chat)){
+            if(chatsArray.length >= 3){
+                let closeChat = chatsArray.shift();
+                
+                console.log('remove',closeChat);
+
+                let leaveButton = document.getElementById(`leaveChat${closeChat._id}`)
+                leaveButton.click()
+                // delete chatsArray[chatsArray.indexOf(closeChat)]
+                // chatsArray.splice(chatsArray.indexOf(chat), 1)
+            }
+
             chatsArray.push(chat)
             this.setState({chats: chatsArray})
+        }
+        // console.log(chatsArray)
+        // this.setState({chats: chatsArray})
+        // console.log('all', this.state.chats)
 
-    //    if(this.state.chatID === ''){
-    //         this.setState({
-    //             chatID: chat
-    //         })            
-    //     }else if(this.state.chatID !== chat ){
-             
-    //         this.setState({chatID: chat})
-    //     }else{
-    //         this.setState({chatID: ''})
-    //     }
-        
     }
 
+    // openChat(chat){
+    //         let chatsArray = this.state.chats
+    //     if (!chatsArray.includes(chat)){
+    //         chatsArray.push(chat)
+    //     }
+    //     console.log(chatsArray)
+    //         this.setState({chats: chatsArray})
+
+    // }
+
     leaveChat(chat){ 
-        let leaveButton = document.getElementById(`leaveChat${chat}`)
+        let leaveButton = document.getElementById(`leaveChat${chat._id}`)
+        // console.log(leaveButton)
         leaveButton.click()
         let chatsArray = this.state.chats
-        delete chatsArray[chatsArray.indexOf(chat)]
+        // console.log(chatsArray[0])
+        // delete chatsArray[chatsArray.indexOf(chat)]
+        chatsArray.splice(chatsArray.indexOf(chat), 1)
+        console.log(chatsArray)
+
         this.setState({chats: chatsArray})
+    }
+
+    isEmpty(currentUser) {
+        return Object.values(currentUser).length === 0 
     }
 
 
@@ -120,6 +165,8 @@ class NavBar extends React.Component {
                 )
             }
         }
+        
+        
         return (
 
 
@@ -168,46 +215,97 @@ class NavBar extends React.Component {
 
                     </div>
 
-                    <div>
-                        {this.props.currentUser.activeChats ? 
-                        
-                        <ul>
-                            {this.props.currentUser.activeChats.map((chat, i) => {
+                    
+                    <div >
 
-                            return (
-                                <div key={i}>   
-                                    <li onClick={() => this.openChat(chat)} key={i}> {chat} </li>
-                                    {/* {this.chatItself()} */}
-                                </div>
-                            )
+                        { !this.isEmpty(this.props.currentUser) ? 
+
+                        <div> 
+                        {this.props.currentUser.activeChats.length > 0 ? 
+                        <div>
+                            <div className='chatDropdown'> 
+
+
+                            
+                            <img src={messageImg} className='messageImg'/>
+                        <ul className='chatList'>
+                            {this.props.currentUser.activeChats.map((chat) => {
+                            
+                                return (
+                                    <div className='chat_list_items' onClick={() => this.openChat(chat)}>   
+                                        {/* {console.log(chat)} */}
+                                        <img src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id }?100x100`} 
+                                        className='robotNav' />
+                                        
+                                        <li className="chat_list_li">
+                                            {this.props.currentUser.id === chat.posterID._id ? 
+                                            `${chat.responderID.username} - ${chat.questionSubject.substring(0, 15)}` 
+                                            : 
+                                            `${chat.posterID.username} - ${chat.questionSubject.substring(0, 15)}`}
+                                    
+                                        </li>
+                                            
+                                            {/* {this.chatItself()} */}
+
+
+                                    </div>
+                                )
+                            
                             
                         })}
-                            <div>
-                                {/* //!WL 1/19/ trying to kill chat connection */}
-                                {/* {this.state.chatID != "" ? this.chatItself() 
+
                                 
-                                
-                                : null} */}
-                                {/* {this.state.chatID !== "" ? this.chatItself() : null} */}
-                                {/* {this.state.chatID != ""  ? <MessengerContainer chatID={this.state.chatID}/> : null} */}
-                                {/* //!WL 1/19/ trying to kill chat connection */}
+            
+                                    
+                            </ul>
                             </div>
-                                
-                            <div>
+                            <div className='chats'>
                                 {this.state.chats.map(chat => {
                                     return(
-                                        <div>
-                                         <MessengerContainer chatID={chat}/>
-                                        <button onClick={() => this.leaveChat(chat)} >Leave Chat</button>
+                                        <div className='chatContainer'>
+                                        
+                                            <div> 
+                                                <div className='test' > 
+                                                    <button onClick={() => this.leaveChat(chat)} className='leaveChat' >X</button>
+
+                                                    <div className='test2'> 
+                                                        <marquee behavior="scroll" direction="left" scrollamount="3">
+                                                        <div className='otherTest'> 
+                                                            <img src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id}?100x100`}
+                                                                className='robotChat' />
+                                                                
+
+                                                            {this.props.currentUser.id === chat.posterID._id ?
+                                                                `${chat.responderID.username}-${chat.questionSubject}`
+                                                                :
+                                                                `${chat.posterID.username}-${chat.questionSubject}`}
+                                                                
+                                                        </div>
+                                                    
+                                                        </marquee>
+                                            
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                <MessengerContainer chatID={chat._id} />
+                                                </div>
+                                            </div>
 
                                       </div>
                                     )
                                 })}
                             </div>
-                        </ul>
+                        </div>
 
-                        : null
+                        :   <div className='chatDropdown'> 
+                                <img src={messageImg} className='messageImg'/>
+                                <div className='chatList'> No Active Chats!</div>
+                            </div>
+
                     
+                    }
+                    </div>
+                    : null
                     }
                         
                         

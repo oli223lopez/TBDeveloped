@@ -39,6 +39,10 @@
 
 }
 
+.question-subject::placeholder {
+    color: red; 
+}
+
 .submit-question-button{
     background-color:#611f69;
     color: #f5eaea;

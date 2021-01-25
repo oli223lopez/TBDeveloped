@@ -93,6 +93,18 @@ router.post('/login', (req, res) => {
 
     User.findOne({ email })
         .populate('questions')
+        .populate({
+            path: 'activeChats',
+            populate: {
+                path: 'messages',
+                model: 'Message',
+            },
+            path: 'activeChats',
+            populate: {
+                path: 'responderID posterID',
+                model: 'User'
+            },
+        })
         .then(user => {
             if (!user) {
                 return res.status(404).json({ email: 'This user does not exist' })
@@ -135,6 +147,18 @@ router.post('/login', (req, res) => {
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
     User.findById(req.user._id)
     .populate('questions')
+    .populate({
+        path: 'activeChats',
+        populate: {
+            path: 'messages',
+            model: 'Message',
+        },
+        path: 'activeChats',
+        populate: {
+            path: 'responderID posterID',
+            model: 'User'
+        },
+    })
     .then(user => {res.json({
         id: user.id,
         username: user.username,
@@ -152,13 +176,6 @@ router.get('/current', passport.authenticate('jwt', { session: false }), (req, r
 router.get('/', (req, res) => {
     User.find()
     .populate('activeChats')
-    .populate({
-        path: 'activeChats', 
-        populate: {
-            path: 'question',
-            model: 'Question'
-        }
-    })
     .populate({
         path: 'activeChats', 
         populate: {
