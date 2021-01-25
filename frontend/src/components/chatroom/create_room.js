@@ -11,7 +11,7 @@ const CreateRoom = (props) => {
     }
 
     return (
-        <div>
+        <div className = "video-chat-button-container">
             
             <Link to={`/room/${create()}`}><button className="create-room-btn">Video Chat</button></Link>
         </div>

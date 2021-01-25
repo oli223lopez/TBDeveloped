@@ -9,20 +9,29 @@ class LoginForm extends React.Component {
     this.state = {
       email: '',
       password: '',
-      errors: {}
+      errors: this.props.errors,
+      emailError: "",
+      passwordError: "", 
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
   }
 
+  componentDidUpdate(prevState) {
+    if(prevState.errors !== this.props.errors) {
+      this.setState({emailError: this.props.errors.email})
+      this.setState({passwordError: this.props.errors.password})
+    }
+  }
+  
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
     });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
 
     let user = {
@@ -30,7 +39,20 @@ class LoginForm extends React.Component {
       password: this.state.password
     };
 
-    this.props.login(user); 
+    await this.props.login(user); 
+
+    if(Object.values(this.props.errors)) {
+      this.setState({errors: this.props.errors})
+
+      if(!!this.props.errors.email) {
+        this.setState({email: ""})
+      };
+  
+      if(!!this.props.errors.password) {
+        this.setState({password: ""})
+      }
+    }
+
   }
 
   renderErrors() {
@@ -63,16 +85,18 @@ class LoginForm extends React.Component {
                         <form onSubmit={this.handleSubmit} className='login_form_box'>
                             <p>If you have an account, sign in with your email address.</p>
                             <label className='email_login'>Email<span className='asterisk'>*</span>
-                                  <input type="text"
+                                  <input className='login_input' type="text"
                                     value={this.state.email}
                                     onChange={this.update('email')}
+                                    placeholder={this.state.emailError}
                                   />
                             </label>
 
                             <label className='password_login'>Password<span className='asterisk'>*</span> 
-                                  <input type="password"
+                                  <input className='login_input' type="password"
                                     value={this.state.password}
                                     onChange={this.update('password')}
+                                    placeholder={this.state.passwordError}
                                   />
                             </label>
 
@@ -80,7 +104,7 @@ class LoginForm extends React.Component {
                             <span className='requried_field'>* Required Field</span>
                         </form>
                         <div className='error_message'>
-                            {this.renderErrors()}
+                            {/* {this.renderErrors()} */}
                         </div>
                     </div>
 

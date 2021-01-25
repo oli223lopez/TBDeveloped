@@ -11,23 +11,36 @@
     background-color: white;
 }
 .show_createform_container{
-    margin-left: 108px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    align-items: center;
     margin-bottom: 41px;
     margin-top: 35px;
 
 
 }
 .createform_container{
+   display: block;
+   text-align: center;
+    /* margin-top: 80px; */
+
+}
+
+.createform_container form{
     display: inline-block;
     margin-left: auto;
     margin-right: auto;
-    text-align: center;
 }
 
 .question-subject{
      text-align: left;
      color: black;
 
+}
+
+.question-subject::placeholder {
+    color: red; 
 }
 
 .submit-question-button{
@@ -45,14 +58,7 @@
 
 }
 
-.create-room-btn{
-             background-color: #611f69;
-             color: #f5eaea;
-             border-radius: 33px;
-             padding: 8px;
-             margin-bottom: 18px;
-             margin-left: 317px;
-}
+
 
 .create-room-btn:active {
     background-color: #47164d;
@@ -66,9 +72,18 @@
 .question_errors_msg{
     margin-top: 2px;
     color: rgb(250, 125, 125);
-    font-size: 16px;
-    max-width: 280px;
+    font-size: 15px;
+    /* max-width: 300px; */
+    /* display:flex;
+    justify-content: center; */
+    /* align-items: center; */
 
+}
+
+.ques_button_err{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
 }
 
 .question_create_label {

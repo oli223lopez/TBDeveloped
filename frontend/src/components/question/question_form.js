@@ -1,5 +1,6 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
+
 import '../../assets/stylesheets/question_form.css'
 
 
@@ -47,8 +48,16 @@ class QuestionForm extends React.Component{
             this.setState({subject: ""})
             this.setState({content: ""})
             this.props.fetchQuestions()
+        } else {
+
+            if(this.props.errors.subject) {
+                this.setState({subject: ""})
+            } else if (this.props.errors.content) {
+                this.setState({content: ""})
+            }
+
         }
-        console.log(this.state.errors)
+        // console.log(this.state.errors)
 
     }
 
@@ -80,6 +89,13 @@ class QuestionForm extends React.Component{
 
 
     render(){
+
+        // console.log(this.props.errors.subject)
+        
+        // let subjectError = this.state.errors.subject;
+        // let contentError = this.state.errors.content; 
+        // let tagError = this.state.errors.tag;
+
         if (this.props.formType === 'Update Question!'){
             return (
             <div className = "updateForm_container">
@@ -109,9 +125,9 @@ class QuestionForm extends React.Component{
                         </select>
                     </label>
                     </div>
-                    <label>
+                    <div className="update-button-container">
                         <button className="submit-question-button" type='submit'>{this.props.formType}</button>
-                    </label>
+                    </div>
 
                 </form>
             </div>
@@ -124,14 +140,15 @@ class QuestionForm extends React.Component{
                     <div>
 
                         <label>
-                            Subject: <span class="error_message">*</span> <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')}/>
+                            Subject: <span className="error_message">*</span> 
+                            <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')} placeholder={this.props.errors.subject}/>
                         </label>
                     </div>
                     <div>
                         <label>
-                            Content: <span class="error_message">*</span> <textarea className="question-subject" value={this.state.content} onChange={this.update('content')}/>
+                            Content: <span className="error_message">*</span> <textarea className="question-subject" value={this.state.content} onChange={this.update('content')} placeholder={this.props.errors.content}/>
 
-                            Tag: <span class="error_message">*</span> <select onChange={this.update('tag')} >
+                            Tag: <span className="error_message">*</span> <select onChange={this.update('tag')} >
                                 <option value='' defaultValue={this.state.tagSelected}>--Choose a tag--</option>
 
                 
@@ -141,11 +158,10 @@ class QuestionForm extends React.Component{
                         </label>
                     </div>
                     <div>
-                        <label>
+                        <label className="ques_button_err">
                                 <button className="submit-question-button" type='submit'>{this.props.formType}</button>
                                 <div className ="error_message">
-                                {this.renderErrors()}
-
+                                    {this.props.errors.tag ? this.props.errors.tag : null}
                                 </div>
                         </label>
                     </div>
