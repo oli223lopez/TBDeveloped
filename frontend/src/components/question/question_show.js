@@ -37,8 +37,7 @@ class QuestionShow extends React.Component {
     render(){
         
         const question = Object.values(this.props.question)
-        // console.log(question)
-        if(this.isEmpty(question) === true){
+        if(this.isEmpty(this.props.question) === true){
             return(
                 <div></div>
             )
