@@ -95,8 +95,13 @@
                                     
                     .actual_info {
                         color: black;
-                        display:flex;
                         align-items: center;
+                        white-space: nowrap;
+                         overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 500px;
+                        margin-top: 3px;
+
                         // color: rgb(224, 224, 224);
                     }
 

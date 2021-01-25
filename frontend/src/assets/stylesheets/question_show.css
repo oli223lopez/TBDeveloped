@@ -8,12 +8,16 @@
 }
 
 .question_header h2{
-     font-size: 23px;
-     font-family: var(--theme-question-title-font-family);
-         line-height: 1.35;
+    
+    font-size: 23px;
+    font-family: var(--theme-question-title-font-family);
+    line-height: 1.35;
+    width: 715px;
+    word-wrap: break-word;
+}
          
 
-}
+
 .question_container{
 
         flex-direction: column;
