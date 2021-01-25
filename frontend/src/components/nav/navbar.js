@@ -82,7 +82,7 @@ class NavBar extends React.Component {
 //!{/* //!WL 1/19/ trying to kill chat connection */}
 
 
-    openChat(chat){
+openChat(chat){
 
 
         let chatsArray = this.state.chats
@@ -108,11 +108,13 @@ class NavBar extends React.Component {
 
 
     leaveChat(chat){ 
+        // console.log('console',chat._id)
         let leaveButton = document.getElementById(`leaveChat${chat._id}`)
         leaveButton.click()
         let chatsArray = this.state.chats
         chatsArray.splice(chatsArray.indexOf(chat), 1)
         this.setState({chats: chatsArray})
+        console.log(this.state.chats)
     }
 
     isEmpty(currentUser) {
