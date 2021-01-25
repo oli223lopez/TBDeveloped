@@ -99,7 +99,7 @@ openChat(chat){
 
             chatsArray.push(chat)
             this.setState({chats: chatsArray})
-            console.log(this.state.chats)
+            // console.log(this.state.chats)
         }
     }
     
@@ -114,7 +114,7 @@ openChat(chat){
         let chatsArray = this.state.chats
         chatsArray.splice(chatsArray.indexOf(chat), 1)
         this.setState({chats: chatsArray})
-        console.log(this.state.chats)
+        // console.log(this.state.chats)
     }
 
     isEmpty(currentUser) {

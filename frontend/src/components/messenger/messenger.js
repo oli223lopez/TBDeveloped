@@ -32,7 +32,7 @@ const Messenger = (props) => {
         })
         
         socketRef.current.emit('join', props.chatID)
-        console.log('mess', props.chatID)
+        // console.log('mess', props.chatID)
     }, [props.chatID]);
 
     function receivedMessage(message) {
@@ -71,7 +71,7 @@ const Messenger = (props) => {
     }
 
     function leaveChat(){
-        console.log('socket', socketRef.current)
+        // console.log('socket', socketRef.current)
         socketRef.current.disconnect()
     }
 
