@@ -18,11 +18,13 @@ class LoginForm extends React.Component {
     this.renderErrors = this.renderErrors.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({emailError: nextProps.errors.email})
-    this.setState({passwordError: nextProps.errors.password})
+  componentDidUpdate(prevState) {
+    if(prevState.errors !== this.props.errors) {
+      this.setState({emailError: this.props.errors.email})
+      this.setState({passwordError: this.props.errors.password})
+    }
   }
-
+  
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value

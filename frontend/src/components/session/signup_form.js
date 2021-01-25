@@ -24,16 +24,21 @@ class SignupForm extends React.Component {
     this.handleDemo2 = this.handleDemo2.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.signedIn === true) {
-      this.props.history.push('/login');
-    }
+  // componentWillReceiveProps is depracated 
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.signedIn === true) {
+  //     this.props.history.push('/login');
+  //   }
+  // }
 
-    this.setState({errors: nextProps.errors});
-    this.setState({emailError: nextProps.errors.email});
-    this.setState({passwordError: nextProps.errors.password});
-    this.setState({verifyPasswordError: nextProps.errors.password2});
-    this.setState({usernameError: nextProps.errors.username});
+  componentDidUpdate(prevState) {
+    if(prevState.errors !== this.props.errors) {
+      this.setState({errors: this.props.errors});
+      this.setState({emailError: this.props.errors.email});
+      this.setState({passwordError: this.props.errors.password});
+      this.setState({verifyPasswordError: this.props.errors.password2});
+      this.setState({usernameError: this.props.errors.username});
+    }
   }
 
   update(field) {
