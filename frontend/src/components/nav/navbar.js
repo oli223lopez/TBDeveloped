@@ -25,7 +25,15 @@ class NavBar extends React.Component {
     
 
     componentDidMount() {
+        
         this.props.fetchUser()
+        
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props.user !== prevProps.user){
+            this.props.fetchUser()
+        }
     }
     //Future implementation
     // componentDidUpdate(prevState, b) {
@@ -106,6 +114,7 @@ class NavBar extends React.Component {
 
 
     render() {
+        console.log(this.props.currentUser)
         const tbdevelopedHeader = () => {
             if(this.props.loggedIn === false){
                 return(
@@ -117,6 +126,7 @@ class NavBar extends React.Component {
                 )
             }
         }
+
         
         
         return (
@@ -169,14 +179,15 @@ class NavBar extends React.Component {
 
                     
                     <div >
-
+                       
                         { !this.isEmpty(this.props.currentUser) ? 
 
+                        
+
                         <div> 
-                        {this.props.currentUser.activeChats.length > 0 ? 
+                        {this.props.currentUser.activeChats.length > 0  && this.props.currentUser.activeChats[0]._id? 
                         <div>
                             <div className='chatDropdown'> 
-
 
                             
                             <img src={messageImg} className='messageImg'/>
