@@ -46,14 +46,22 @@ class NavBar extends React.Component {
         e.preventDefault();
         //!TEST
 
-        if(this.state.chats.length > 0 ){
-            this.state.chats.forEach(chat => {
-                this.leaveChat(chat);
-            })
+        let chatArr = [...this.state.chats];
+        
+        if(chatArr.length > 0 ){
+            console.log(this.state.chats)
+            for(let i = 0; i < chatArr.length; i ++){
+                this.leaveChat(chatArr[i])
+            }
+
         }
-
+        
         //!TEST
-
+        this.setState({
+            chats: []
+        })
+        console.log(this.state.chats)
+        // console.log(this.state.chats)
         this.props.logout();
     }
 
@@ -77,21 +85,51 @@ class NavBar extends React.Component {
     }
 //!{/* //!WL 1/19/ trying to kill chat connection */}
     openChat(chat){
-            let chatsArray = this.state.chats
+
+        console.log(chat)
+
+        let chatsArray = this.state.chats
+
         if (!chatsArray.includes(chat)){
+            if(chatsArray.length >= 3){
+                let closeChat = chatsArray.shift();
+                
+                console.log('remove',closeChat);
+
+                let leaveButton = document.getElementById(`leaveChat${closeChat._id}`)
+                leaveButton.click()
+                // delete chatsArray[chatsArray.indexOf(closeChat)]
+                // chatsArray.splice(chatsArray.indexOf(chat), 1)
+            }
+
             chatsArray.push(chat)
-        }
-        console.log(chatsArray)
             this.setState({chats: chatsArray})
+        }
+        // console.log(chatsArray)
+        // this.setState({chats: chatsArray})
+        // console.log('all', this.state.chats)
 
     }
 
+    // openChat(chat){
+    //         let chatsArray = this.state.chats
+    //     if (!chatsArray.includes(chat)){
+    //         chatsArray.push(chat)
+    //     }
+    //     console.log(chatsArray)
+    //         this.setState({chats: chatsArray})
+
+    // }
+
     leaveChat(chat){ 
         let leaveButton = document.getElementById(`leaveChat${chat._id}`)
+        // console.log(leaveButton)
         leaveButton.click()
         let chatsArray = this.state.chats
-        delete chatsArray[chatsArray.indexOf(chat)]
-        // console.log(chatsArray)
+        // console.log(chatsArray[0])
+        // delete chatsArray[chatsArray.indexOf(chat)]
+        chatsArray.splice(chatsArray.indexOf(chat), 1)
+        console.log(chatsArray)
 
         this.setState({chats: chatsArray})
     }
@@ -127,6 +165,7 @@ class NavBar extends React.Component {
                 )
             }
         }
+        
         
         return (
 
@@ -192,14 +231,13 @@ class NavBar extends React.Component {
                         <ul className='chatList'>
                             {this.props.currentUser.activeChats.map((chat) => {
                             
-
                                 return (
-                                    <div className='chat_list_items'>   
+                                    <div className='chat_list_items' onClick={() => this.openChat(chat)}>   
                                         {/* {console.log(chat)} */}
-                                        <img onClick={() => this.openChat(chat)} src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id }?100x100`} 
+                                        <img src={`https://robohash.org/${this.props.currentUser.id === chat.posterID._id ? chat.responderID._id : chat.posterID._id }?100x100`} 
                                         className='robotNav' />
                                         
-                                        <li onClick={() => this.openChat(chat)} className="chat_list_li">
+                                        <li className="chat_list_li">
                                             {this.props.currentUser.id === chat.posterID._id ? 
                                             `${chat.responderID.username} - ${chat.questionSubject.substring(0, 15)}` 
                                             : 
