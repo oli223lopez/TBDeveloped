@@ -15,7 +15,6 @@ class ResolvedIndex extends React.Component{
                 <div key={i} className='individualResponse'>
                     <Link to={`/resolved/${resolved._id}`}>
                     <div className='individualQuestionLink'>Username: {resolved.user.username}</div>
-                    {/* {console.log(resolved._id)} */}
                         <div className='individualResponseUser'>
                             Topic: {resolved.subject}
                         </div>
@@ -27,7 +26,6 @@ class ResolvedIndex extends React.Component{
                 <div key={i} className='individualResponse1'>
                     <Link to={`/resolved/${resolved._id}`}>
                     <div className='individualQuestionLink'>Username: {resolved.user.username}</div>
-                    {/* {console.log(resolved._id)} */}
                         <div className='individualResponseUser'>
                             Topic: {resolved.subject}
                         </div>
@@ -38,23 +36,7 @@ class ResolvedIndex extends React.Component{
     }
 
     render() {
-        // return (
-        //     <div className='resolvedIndex'>
-        //         {this.props.resolved.map((resolved, i) => {
-        //             return (
-        //                 <div key={i} className='individualResponse'>
-        //                     <div className='individualQuestionLink'>Username: {resolved.user.username}</div>
-        //                     {/* {console.log(resolved._id)} */}
-        //                     <Link to={`/resolved/${resolved._id}`}>
-        //                         <div className='individualResponseUser'>
-        //                             Topic: {resolved.subject}
-        //                         </div>
-        //                     </Link>
-        //                 </div>
-        //             )
-        //         })}
-        //     </div>
-        // )
+    
         return (
             <div className='resolvedIndex'>
                 {this.props.resolved.map((resolved, i) => {

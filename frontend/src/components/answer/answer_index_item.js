@@ -33,6 +33,7 @@ class AnswerIndexItem extends React.Component {
                         <div className= "response-footer">
                            {this.props.currentUserID ===this.props.response.user._id ? <button onClick= {this.removeResponse}>Delete</button> : <div></div> }
                             <p>Posted: {this.props.response.createdAt}</p>
+                            
 
                         </div>
                         <br></br>

@@ -7,6 +7,14 @@ export const RECEIVE_USER_LOGOUT = "RECEIVE_USER_LOGOUT";
 export const RECEIVE_USER_SIGN_IN = "RECEIVE_USER_SIGN_IN";
 export const REMOVE_SESSION_ERRORS = 'REMOVE_SESSION_ERRORS';
 
+export const FETCHCURRENTUSER = 'FETCHCURRENTUSER'
+
+export const fetchCurrentUser = (currentUser) => ({
+    type: FETCHCURRENTUSER,
+    currentUser
+});
+
+
 export const receiveCurrentUser = (currentUser) => ({ 
     type: RECEIVE_CURRENT_USER, 
     currentUser 
@@ -36,7 +44,7 @@ export const logoutUser = () => ({
 
 export const fetchUser = () => dispatch => (
     APIUtil.fetchUser().then( (res) => {
-        dispatch((receiveCurrentUser(res.data)))
+        dispatch((fetchCurrentUser(res.data)))
     }, err => (
         console.log(err)
     ))
@@ -65,6 +73,7 @@ export const login = user => dispatch => (
         dispatch(receiveCurrentUser(decoded))
     })
     .catch(err => {
+        console.log(err)
         dispatch(receiveErrors(err.response.data));
     })
 )

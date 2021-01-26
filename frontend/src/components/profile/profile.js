@@ -13,7 +13,6 @@ class Profile extends React.Component {
 
 
     componentDidMount() {
-        // console.log(this.props.currentUser.questions)
         this.props.fetchProfileQuestions(this.props.currentUser.questions)
         this.props.fetchUser();
     }
@@ -108,7 +107,7 @@ class Profile extends React.Component {
                                         <div className='individual_case'>
                                             <label>
                                                 <Link to={`/question/${question._id}`} className='question_topic_link'>
-                                                    <div className='sub_label'>Relating to Case Id:</div>
+                                                    <div className='sub_label2'>Relating to Case Id:</div>
                                                     <div className='actual_info'>{question._id}</div>
                                                 </Link>
                                             </label>

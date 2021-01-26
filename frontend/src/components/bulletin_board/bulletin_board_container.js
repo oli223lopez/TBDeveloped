@@ -5,7 +5,6 @@ import BulletinBoard from './bulletin_board'
 
 
 const mapStateToProps = (state) => {
-    // console.log(state.entities)
     return({
         questions: state.entities.questions
     })

@@ -21,13 +21,16 @@
             font-size: 20px;
             padding: 5px;
             font-weight: bold;
-
+             
         }
 
         .brand-icon{
             height: auto;
             width: 20px;
             padding-bottom: 5px;
+           
+            animation: bounce;
+            animation-duration: 10s;
         }
 
         .team-navbar {
@@ -211,9 +214,13 @@
     padding: 3px;
     align-items: center;
 }
+.marquee{
+    width: 318px;
+}
 
 .chat_list_items:hover {
-    background-color: #6b61b1
+    background-color: #6b61b1;
+    cursor: pointer;
 }
 
 .chat_list_li{

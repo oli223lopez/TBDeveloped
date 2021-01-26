@@ -49,13 +49,7 @@ class BulletinBoard extends React.Component{
     }
 
     handleClickOutside(e) {
-        // let search = document.getElementById('search_container');
         let input = document.getElementById('input');
-        // let list = document.getElementById('list');
-        // let search_list = document.getElementById('search_list');
-        //array of li.searchList let test = document.getElementById("search_container").getElementsByTagName("li"); 
-
-
         if(e.target && !e.target.matches("li.searchList") && e.target !== input){
             this.setState({
                 searchVal: ''
@@ -111,7 +105,6 @@ class BulletinBoard extends React.Component{
             )
         }
     }
-    //!testing AD
 
     componentDidUpdate(prevState) {
         if(Object.values(prevState.questions).length !== Object.values(this.props.questions).length) {
@@ -198,11 +191,10 @@ class BulletinBoard extends React.Component{
                 </div> 
             )
         }else{
-            // console.log(this.props.questions)
             const questionArray = []
             const resolvedArray = []
             const usernames = []
-            Object.values(this.props.questions).forEach(question => {
+            Object.values(this.props.questions).reverse().forEach(question => {
                 if(question.solved === false){
                     questionArray.push(question)
                 }else{

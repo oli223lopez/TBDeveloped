@@ -47,16 +47,13 @@ const Room = (props) => {
             userStream.current = MediaStream;
 
             socketRef.current = io.connect("/");
-            // console.log(socketRef.current)
 
             
-            // 1/3/21
             socketRef.current.emit("send name", props.user)
             socketRef.current.on("receive name", userName => {
                 otherUserName.current = userName
                 setOn('on');
             })
-            // 1/3/21
             
             socketRef.current.emit("join room", props.match.params.roomID);
             
@@ -70,7 +67,6 @@ const Room = (props) => {
             socketRef.current.on('other user', userID => {
                 callUser(userID);
                 otherUser.current = userID;
-                // console.log('user A is in the room already', userID)
 
 
                 // 1/1/21 test
@@ -79,11 +75,8 @@ const Room = (props) => {
                     // and there are multiple existing users
                     // they would have to make a call to each of the existing users
 
-                // otherUsers.current.forEach( (user) => {
-                //     callUser(user)
-                // })
+              
 
-                // 1/1/21 test
             });
 
             // the above event is emitted from the server back to the client who created a chatroom, it basically 
@@ -98,25 +91,20 @@ const Room = (props) => {
 
                 otherUser.current = userID;
 
-                // 1/1/21 test
                 otherUsers.current.push(userID)
                 // this may not need concat because it should only
                 // be one user being added at a time 
                 // this is from the perspective of existing users in the room 
-                // 1/1/21 test
 
-                // console.log('other user joined room')
             });
 
             socketRef.current.emit("user joined", userID => {
                 otherUser.current = userID;
-                // console.log('user B just joined the room', userID)
 
             });
             
 
 
-            //!TEST - WL - trying to remove video on meeting exit
             socketRef.current.on( "user left", id => {
                 const peerObj = peerRef.current.find(p => p.peerID === id);
                 if (peerObj){
@@ -127,25 +115,7 @@ const Room = (props) => {
                 setPeers(peers); //state
                 
             })
-            // finding the peer, destorying the peer, and removing it from the array
-            // socketRef.current.on("disconnect", () => {
-            //     console.log('dIsCoNnEcTeD')
-                
-            // });
-
-            // socketRef.current.on( "user-disconnected", room => {
-            //     console.log('room', room)
-                // const peerObj = peerRef.current.find(p => p.peerID === id);
-                // if (peerObj){
-                //     peerObj.peer.destroy();
-                // }
-                // const peers = peerRef.current.filter(p => p.peerID !== id);
-                // peerRef.current = peers;
-                // setPeers(peers); //state
-
-            // })
-            //finding the peer, destorying the peer, and removing it from the array
-            //!TEST
+           
 
             socketRef.current.on("offer", handleRecieveCall);
 
@@ -153,9 +123,7 @@ const Room = (props) => {
 
             socketRef.current.on("ice-candidate", handleNewICECandidateMsg);
 
-            // 1/1/21 test
             socketRef.current.on("killconnection", killIt);
-            // 1/1/21 test
         });
 
     }, []);
@@ -169,16 +137,6 @@ const Room = (props) => {
         userStream.current.getTracks().forEach(track => peerRef.current.addTrack(track, userStream.current));
         //giving our peer individual access to our stream so they can view on their end
     }
-
-
-        // 1/1/21 test
-            // peerRef.current = {};
-            // peerRef.current[userID] = createPeer(userID)
-        // 1/1/21 test
-    // }   
-    // userStream.current was set to the MediaStream above
-    // i imagine i
-
     function createPeer(userID) {
         const peer = new RTCPeerConnection({
             iceServers: [
@@ -268,18 +226,6 @@ const Room = (props) => {
     }; // creating a video for the person you're calling? 
 
 
-    // function hangUp(e) {
-    //     console.log(peerRef.current)
-    //     console.log(socketRef.current)
-    //     console.log("make this hangup button")
-    //     socketRef.current.emit("hang up")
-    //     console.log(userVideo.current)
-    //     let vid = document.getElementById("myVideo")
-    //     vid.parentNode.removeChild(vid);
-    //     console.log('final step?')
-    // };
-
-
 
     //cuts connection when user leaves page
     useEffect(() => {
@@ -290,7 +236,6 @@ const Room = (props) => {
 
     
 
-    //! VIDEO function
     const playStop = () => {
         let enabled = userVideo.current.srcObject.getVideoTracks()[0].enabled;
         if(enabled){
@@ -304,67 +249,36 @@ const Room = (props) => {
         }
     }
 
-    //! Cut connection of the person leaving page - media stream only.
     const stopStreamedVideo = () => {
         const tracks = userStream.current.getTracks();
-        // console.log(tracks);
-        
-        //!TEST - WL  - Intent here is the black the screen whenever some oneleaves
-        // let enabled = userVideo.current.srcObject.getVideoTracks()[0].enabled;
-        // if(enabled){
-        //     userVideo.current.srcObject.getVideoTracks()[0].enabled = false;
-        // }
-        //!TEST
-        // userVideo.current.srcObject.getVideoTracks()[0].enabled = true;
 
         //note - stream.stop() is deprecated. Do not use
         tracks.forEach(function(track) {
             track.stop();
             
         });
-        //! @TOM FYI ADDING IT TO THIS BUTTON
         testFeatures()
-        // props.history.goBack()
-        // console.log(props.history)
+        
     }
 
 
-    //! MUTE function
     const muteStream = () => {
         const enabled = userVideo.current.srcObject.getAudioTracks()[0].enabled;
         if(enabled){
             userVideo.current.srcObject.getAudioTracks()[0].enabled = false;
             setMute('Unmute')
-            // console.log('false', enabled)
-            // console.log(peerRef)
-            // console.log(peerRef.current)
-            // console.log(userStream)
-            // console.log(userStream.current)
-            
-            // console.log(props.history)
-
+           
         }else {
             userVideo.current.srcObject.getAudioTracks()[0].enabled = true;
-            // console.log('true', enabled)
             setMute('Mute')
-            // console.log(props)
 
         }
     }
     
-    // function muteStream() {
-    //     const tracks = userStream.current.getAudioTracks();
-    //     //note - stream.stop() is deprecated. Do not use
-    //     console.log('audio', tracks)
-    //     tracks.forEach(function(track) {
-    //         track.stop();
-    //     });
-    //     console.log('audio', tracks)
-
+  
+    // const hangUpButton = () => {
+    //     onLeave();
     // }
-    const hangUpButton = () => {
-        onLeave();
-    }
 
     function onLeave() {
         userVideo.current.srcObject = null;
@@ -375,15 +289,12 @@ const Room = (props) => {
         createPeer()
     };
 
-    // 1/1/21 test
       const killIt = () => {
         peerRef.current.close()
     }
-    // 1/1/21 test
 
     const testFeatures = () => {
-        // peerRef.current.close(); // works but only if there is a peerRef (only if a connection has been established)
-        //!@TOM added this conditional for your above comment
+         // works but only if there is a peerRef (only if a connection has been established)
         if (peerRef.current){
             socketRef.current.emit("hangUp", otherUser.current)
             peerRef.current.close()
@@ -397,7 +308,6 @@ const Room = (props) => {
     return (
         <div className='room_container'>
             {/* button below now functions with leave meeting */}
-            {/* <button onClick={() => testFeatures()}>Test Button</button> */}
 
             <div className="main">
                         <div className="video_titles">

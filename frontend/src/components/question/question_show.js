@@ -37,8 +37,7 @@ class QuestionShow extends React.Component {
     render(){
         
         const question = Object.values(this.props.question)
-        // console.log(question)
-        if(this.isEmpty(question) === true){
+        if(this.isEmpty(this.props.question) === true){
             return(
                 <div></div>
             )
@@ -58,7 +57,6 @@ class QuestionShow extends React.Component {
                         </div>
                     )
                 }else{
-                    // console.log('you are not the owner of this question')
                 }
             }
 
@@ -147,7 +145,6 @@ class QuestionShow extends React.Component {
                 < div className="question_container">
                     <div className="question_description">
 
-                        {/* {console.log(this.state.users)} */}
                         <div className = "question_header_container">
                             <div className="question_header">
                                 <h2>{question[0].subject}</h2>

@@ -114,3 +114,7 @@
 .error_message {
     color: rgb(255, 98, 59);
 }
+
+.login_input::placeholder {
+    color: red; 
+}

@@ -11,7 +11,6 @@ class ResolvedShow extends React.Component{
 
     componentDidMount() {
         this.props.fetchQuestion(this.props.resolvedId)
-        // console.log(this.props.resolvedId)
     }
 
     isEmpty(obj) {
@@ -22,7 +21,6 @@ class ResolvedShow extends React.Component{
 
     render() {
         const resolved = Object.values(this.props.resolved)
-        // console.log(resolved)
         if (this.isEmpty(resolved) === true) {
             return (
                 null
