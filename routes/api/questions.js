@@ -16,29 +16,33 @@ router.get('/test', (req, res) => {
 
 router.get('/profile_questions', (req, res) => {
     
-    console.log('this is being activated')
     Question.find()
         .then(questions => {
-            console.log(req)
             const questionArray = []
             questions.forEach(question => {
                 if(req.body.questions.includes(question._id)){
                     questionArray.push(question)
                 }
             })
-            console.log(questionArray)
             res.json(questionArray)
         })
         .catch(err => res.status(404).json('this doesnt work'));
         
 
 })
-//test
 
 //retreiving all the questions
 router.get('/',(req,res) => {
     
     Question.find()
+    .populate('user')
+    .populate({
+        path: 'responses',
+        populate: {
+            path: 'user',
+            model: 'User'
+        }
+    })
     .sort({timestamps:-1})
     .then(questions => {res.json(questions)})
     .catch(err => res.status(404).json(err));
@@ -48,6 +52,16 @@ router.get('/',(req,res) => {
 //retreiving one quesion
 router.get('/:id',(req,res)=>{
     Question.findById(req.params.id)
+    // .populate('user')
+    .populate('user')
+    .populate({
+        path: 'responses',
+        populate: {
+            path: 'user',
+            model: 'User'
+        }
+    })
+    
     .then(question => res.json(question))
     .catch(err => res.status(404).json("question not found"))
 })
@@ -88,24 +102,21 @@ router.post('/', passport.authenticate('jwt',{session:false}), async (req,res) =
 });
 
 
-//editing a question
-// router.put("/:id/update", (res,req) => {
-//     let updates = req.body
-
-//     Question.findOneAndUpdate({
-//         _id: req.params.id,updates, new: true})
-//         .then(updatedQuestion => res.json(updatedQuestion))
-//         .catch(err => res.status(404).json("Error: " + err))
-// });
-
 
 
 router.patch("/:id", passport.authenticate('jwt',{session:false}), async (req, res) => {
     try {
         let question = await Question.findById(req.params.id)
-        // console.log("user: " + question.user)
-        // console.log("req user " + req.user.id )
-        if(req.user.id ===  `${question.user}`){
+            .populate('user')
+            .populate({
+                path: 'responses',
+                populate: {
+                    path: 'user',
+                    model: 'User'
+                }
+            })
+
+        if(req.user.id ===  `${question.user._id}`){
         
             if (req.body.content) {
                 question.content = req.body.content
@@ -146,6 +157,25 @@ router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, 
     if(question) {
         if (`${question.user}` === req.user.id){
             Question.findByIdAndDelete(req.params.id)
+            .then(  async () => {
+
+                let users = []; 
+
+                users.push(question.user)
+
+                question.responses.forEach(response => {
+                    users.push(response.user)
+                })
+
+                users.forEach(async user => {
+                    let questionUser = await User.findById(user._id)
+                    let questionIdx = questionUser.questions.indexOf(question._id)
+                    questionUser.questions.splice(questionIdx, 1)
+                    await questionUser.save()
+                } )
+
+            }
+            )
             .then(() => res.json(question))
             .catch(err => res.status(404).json(err))
         } else{
@@ -159,17 +189,19 @@ router.delete("/:id", passport.authenticate('jwt',{session:false}), async (req, 
 
 // responses
 router.post("/:id/responses", passport.authenticate('jwt',{session:false}), async (req, res) => {
+    
     let question = await Question.findById(req.params.id)
 
     const { errors, isValid } = validateResponse(req.body);
 
-    if(question) {
+    if (question) {
 
-        if(!isValid) {
+        if (!isValid) {
 
             return res.status(400).json(errors)
 
         } else {
+
 
             question.responses.push(Object.assign(req.body, {user: req.user.id}))
             question.save( function (err) {
@@ -177,11 +209,14 @@ router.post("/:id/responses", passport.authenticate('jwt',{session:false}), asyn
             })
 
             let user = await User.findById(req.user.id)
-            if(!user.questions.find(question._id)) {
+
+            let existingID = user.questions.find(id => id.toString() === question._id.toString())
+            
+            if(!existingID) {
                 user.questions.push(question._id)
-                user.save(function (err) {
-                    if (!err) res.json('not working?')
-                })
+                user.save()
+            } else {
+                null
             }
 
         }
@@ -194,15 +229,20 @@ router.post("/:id/responses", passport.authenticate('jwt',{session:false}), asyn
 router.delete("/:questionId/responses/:responseId", passport.authenticate('jwt',{session:false}), async (req, res) => {
     let question = await Question.findById(req.params.questionId);
     let response = await question.responses.id(req.params.responseId)
+    let user = await User.findById(response.user)
 
     if(question && response) {
 
         if (`${response.user}` === req.user.id){
-            // console.log(req.params.responseId)
+       
             question.responses.id(req.params.responseId).remove();
             question.save(function (err) {
                 res.json(response)
             })
+
+            let questionIdx = user.questions.indexOf(question._id)
+            user.questions.splice(questionIdx, 1)
+            await user.save()
             
         } else{
             res.status(404).json('You can only delete your own responses.')

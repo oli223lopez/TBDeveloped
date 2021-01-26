@@ -2,10 +2,13 @@
 .main_container{
     background-color:#f6efe8;
     font-family: sans-serif;
+    
+
+    
     .main_content{
         background-color:#f6efe8;
-        padding-top: 45px;
-        padding-bottom: 45px;
+        padding-top: 100px;
+        padding-bottom: 130px;
         margin-left: 50px;
         margin-right: 50px;
         display: flex;
@@ -160,5 +163,57 @@
             }
         }
 
+    }
+
+    .featured_info{
+        background-color: rgb(246, 245, 245);
+        padding-top: 60px;
+        padding-bottom: 50px;
+        display: flex;
+        justify-content: space-evenly;
+
+
+        .feature_title{
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 26px;
+
+
+        }
+        
+        .title_info{
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
+        .feat_img {
+            height: auto;
+            width: 35px;
+            margin-left: 8px;
+        }
+
+        .feat_img1 {
+            height: auto;
+            width: 25px;
+            margin-left: 12px;
+        }
+
+
+        .title_name{
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+
+            .check_img{
+                height: auto;
+                width: 20px;
+                margin-right: 10px;
+            }
+        }
     }
 }

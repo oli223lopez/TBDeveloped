@@ -7,7 +7,7 @@ export const REMOVE_QUESTION = "REMOVE_QUESTION"
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS"
 
 
-//test
+
 export const RECEIVE_RESPONSE = 'RECEIVE_RESPONSE';
 export const receiveResponse = (response) => {
     return {
@@ -15,7 +15,7 @@ export const receiveResponse = (response) => {
         response
     }
 }
-//test
+
 const receiveProfileQuestions = (questions) => {
     return {
         type: RECEIVE_PROFILE_QUESTIONS,
@@ -56,16 +56,22 @@ const receiveQuestionErrors = (errors) => {
 export const fetchQuestions = () => (dispatch) => {
     return QuestionsAPIUtil.fetchQuestions()
         .then( res => { dispatch(receiveQuestions(res.data)) } )
-        
         .catch(err => dispatch(receiveQuestionErrors(err)))
 }
 
-
-export const fetchProfileQuestions = (questions) => (dispatch) => {
-    return QuestionsAPIUtil.fetchQuestions(questions)
+//!TEST
+// export const fetchProfileQuestions = (questions) => (dispatch) => {
+//     return QuestionsAPIUtil.fetchQuestions(questions)
+//         .then(res => dispatch(receiveProfileQuestions(res.data)))
+//         .catch(err => dispatch(receiveQuestionErrors(err)))
+// }
+export const fetchProfileQuestions = () => (dispatch) => {
+    return QuestionsAPIUtil.fetchQuestions()
         .then(res => dispatch(receiveProfileQuestions(res.data)))
         .catch(err => dispatch(receiveQuestionErrors(err)))
 }
+
+//!TEST
 
 export const fetchQuestion = (questionId) => (dispatch) => {
     return QuestionsAPIUtil.fetchQuestion(questionId)

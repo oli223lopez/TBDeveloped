@@ -7,14 +7,22 @@ export const RECEIVE_USER_LOGOUT = "RECEIVE_USER_LOGOUT";
 export const RECEIVE_USER_SIGN_IN = "RECEIVE_USER_SIGN_IN";
 export const REMOVE_SESSION_ERRORS = 'REMOVE_SESSION_ERRORS';
 
+export const FETCHCURRENTUSER = 'FETCHCURRENTUSER'
+
+export const fetchCurrentUser = (currentUser) => ({
+    type: FETCHCURRENTUSER,
+    currentUser
+});
+
 
 export const receiveCurrentUser = (currentUser) => ({ 
     type: RECEIVE_CURRENT_USER, 
     currentUser 
 });
 
-export const receiveUserSignIn = () => ({ 
-    type: RECEIVE_USER_SIGN_IN, 
+export const receiveUserSignIn = (currentUser) => ({ 
+    type: RECEIVE_USER_SIGN_IN,
+    currentUser
 });
 
 export const receiveErrors = errors => ({
@@ -32,10 +40,26 @@ export const logoutUser = () => ({
     type: RECEIVE_USER_LOGOUT
 });
 
+
+
+export const fetchUser = () => dispatch => (
+    APIUtil.fetchUser().then( (res) => {
+        dispatch((fetchCurrentUser(res.data)))
+    }, err => (
+        console.log(err)
+    ))
+)
+
+
 export const signup = user => dispatch => (  
-    APIUtil.signup(user).then( () => (
-        dispatch(receiveUserSignIn())
-    ), err => (
+    APIUtil.signup(user).then( (res) => {
+        const { token } = res.data; 
+        localStorage.setItem('jwtToken', token); 
+        APIUtil.setAuthToken(token); 
+        const decoded = jwt_decode(token);
+        dispatch(receiveUserSignIn(decoded))
+
+    }, err => (
         dispatch(receiveErrors(err.response.data))
     ))
 );
@@ -49,6 +73,7 @@ export const login = user => dispatch => (
         dispatch(receiveCurrentUser(decoded))
     })
     .catch(err => {
+        console.log(err)
         dispatch(receiveErrors(err.response.data));
     })
 )

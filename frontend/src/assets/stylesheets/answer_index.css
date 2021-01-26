@@ -1,0 +1,62 @@
+.response-header{
+    margin-bottom: -10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.response-header h2{
+    margin-top: 10px;
+    font-weight: bold;
+    color: #9e609e;
+
+}
+
+.response-answer{
+    margin-left: 50px;
+}
+
+.response-date-view{
+    font-size: 15px;
+    font-family: sans-serif;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 204px;
+
+}
+
+.response-footer{
+       display: flex;
+       flex-direction: row;
+       margin-right: 370px;
+       font-size: 14px;
+}
+
+
+.response-footer p{
+
+        color: #3f413f;
+        white-space: nowrap;
+        overflow: hidden;
+            width: 123px;
+
+
+}
+
+.response-footer button{
+        margin-right: 10px;
+        margin-right: 35px;
+        color: #9e609e;
+}
+
+.answer-index-container{
+    margin-bottom: 28px;
+}
+
+
+.chatErrors{
+    color: red;
+    display: flex;
+    text-align: center;
+}
+

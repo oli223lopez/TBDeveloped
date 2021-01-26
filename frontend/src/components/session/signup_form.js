@@ -11,20 +11,34 @@ class SignupForm extends React.Component {
       username: '',
       password: '',
       password2: '',
-      errors: {}
+      errors: {},
+      emailError: "", 
+      passwordError: "",
+      verifyPasswordError: "",
+      usernameError: "", 
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clearedErrors = false;
     this.handleDemo = this.handleDemo.bind(this);
+    this.handleDemo2 = this.handleDemo2.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.signedIn === true) {
-      this.props.history.push('/login');
-    }
+  // componentWillReceiveProps is depracated 
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.signedIn === true) {
+  //     this.props.history.push('/login');
+  //   }
+  // }
 
-    this.setState({errors: nextProps.errors})
+  componentDidUpdate(prevState) {
+    if(prevState.errors !== this.props.errors) {
+      this.setState({errors: this.props.errors});
+      this.setState({emailError: this.props.errors.email});
+      this.setState({passwordError: this.props.errors.password});
+      this.setState({verifyPasswordError: this.props.errors.password2});
+      this.setState({usernameError: this.props.errors.username});
+    }
   }
 
   update(field) {
@@ -33,7 +47,7 @@ class SignupForm extends React.Component {
     });
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
     let user = {
       email: this.state.email,
@@ -42,7 +56,20 @@ class SignupForm extends React.Component {
       password2: this.state.password2
     };
 
-    this.props.signup(user, this.props.history); 
+    await this.props.signup(user, this.props.history); 
+
+    if(!!this.state.errors.email) {
+      this.setState({email: ""})
+    }
+    if(!!this.state.errors.username) {
+      this.setState({username: ""})
+    }
+    if(!!this.state.errors.password) {
+      this.setState({password: ""})
+    }
+    if(!!this.state.errors.password2) {
+      this.setState({password2: ""})
+    }
   }
 
   renderErrors() {
@@ -76,46 +103,20 @@ class SignupForm extends React.Component {
 
   }
 
+  handleDemo2(e) {
+    e.preventDefault();
+    
+    let user = {
+      email: 'Demo2@user.com',
+      password: '123456'
+    };
+
+    this.props.login(user); 
+
+  }
+
   render() {
     return (
-      // <div className="login-form-container">
-      //   <form onSubmit={this.handleSubmit}>
-          
-      //     <div className="login-form">
-      //       <br/>
-      //         <input type="text"
-      //           value={this.state.email}
-      //           onChange={this.update('email')}
-      //           placeholder="Email"
-      //         />
-      //       <br/>
-      //         <input type="text"
-      //           value={this.state.username}
-      //           onChange={this.update('username')}
-      //           placeholder="Username"
-      //         />
-      //       <br/>
-      //         <input type="password"
-      //           value={this.state.password}
-      //           onChange={this.update('password')}
-      //           placeholder="Password"
-      //         />
-      //       <br/>
-      //         <input type="password"
-      //           value={this.state.password2}
-      //           onChange={this.update('password2')}
-      //           placeholder="Confirm Password"
-      //         />
-      //       <br/>
-      //       <input type="submit" value="Submit" />
-      //       {this.renderErrors()}
-      //     </div>
-      //   </form>
-      // </div>
-
-  
-
-
               <div className='userAuth'>
                 <span className='signup_title'>Create New Customer Account</span>
 
@@ -147,33 +148,33 @@ class SignupForm extends React.Component {
 
                             <div className='sign_info'>
                                 <label className='email_signup'>Username<span className='asterisk'>*</span>
-                                      <input type="text"
+                                      <input className='signup_inputs' type="text"
                                         value={this.state.username}
                                         onChange={this.update('username')}
-                                        // placeholder="Username"
+                                        placeholder={this.state.usernameError}
                                       />
                                 </label>
                                 <label className='email_signup'>Email<span className='asterisk'>*</span>
-                                    <input type="text"
+                                    <input className='signup_inputs' type="text"
                                       value={this.state.email}
                                       onChange={this.update('email')}
-                                      // placeholder="Email"
+                                      placeholder={this.state.emailError}
                                     />
                                 </label>
                                 
                                 <label className='password_signup'>Password<span className='asterisk'>*</span>
-                                      <input type="password"
+                                      <input className='signup_inputs' type="password"
                                         value={this.state.password}
                                         onChange={this.update('password')}
-                                        // placeholder="Password"
+                                        placeholder={this.state.passwordError}
                                       />
                                 </label>
 
                                 <label className='password_signup'>Confirm Password<span className='asterisk'>*</span>
-                                      <input type="password"
+                                      <input className='signup_inputs' type="password"
                                         value={this.state.password2}
                                         onChange={this.update('password2')}
-                                        // placeholder="Confirm Password"
+                                        placeholder={this.state.verifyPasswordError}
                                       />
                                 </label>
                                 <div className='disclaimer'>
@@ -185,24 +186,15 @@ class SignupForm extends React.Component {
                             <div className='enter_back'>
 
                                 <button type="submit" value="Create An Account" className='signupButton'>Create An Account</button>
-                                <button type='submit' onClick={this.handleDemo} className='demoButton'>Demo User</button>
+                                <button type='submit' onClick={this.handleDemo} className='demoButton'>Demo User 1</button>
+                                <button type='submit' onClick={this.handleDemo2} className='demoButton'>Demo User 2</button>
                             </div>
                             <span className='requried_field'>* Required Field</span>
                         </form>
-                        <div className='error_message'>{this.renderErrors()}</div>
+                        {/* <div className='error_message'>{this.renderErrors()}</div> */}
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
     );
   }
 }

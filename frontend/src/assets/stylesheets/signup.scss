@@ -1,6 +1,7 @@
 .userAuth {
     font-family: Sans-serif;
     color: #414141;
+    padding-bottom: 500px;
 }
 
 /*! user login section */
@@ -105,7 +106,7 @@ form input {
     padding-left: 18px;
     margin-top: 45px;
     margin-bottom: 10px;
-    background-color: white;
+    background-color:#f6efe8;
 }
 
 .demoButton:hover {
@@ -175,6 +176,11 @@ form input {
     color: #414141;
     margin-top: 25px;
     padding: 12px;
+}
+
+
+.signup_inputs::placeholder {
+    color: red;
 }
 
 .personal_input {

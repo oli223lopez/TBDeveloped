@@ -17,12 +17,28 @@ const io = socket(app.listen(port, () => console.log(`Server is running on port 
 
 const rooms = {};
 
-//!TEST - WL - trying to remove video on meeting exit
 const peers = {};
-//!TEST
 
 io.on("connection", socket => { // listens for "connection" event, which generates a socket object. This is triggered when a user on a browser hits a particular page 
 
+
+
+    socket.on('join', room  => {
+        socket.join(room);
+        socket.emit('your id', socket.id)
+        socket.on('send message', body => {
+            // console.log(room)
+            io.to(room).emit('message', body)
+        })
+    });
+
+
+    
+
+
+      socket.on("send name", username => {
+        peers[socket.id.toString()] = username
+        })
 
     // listens for "connection" event, which generates a socket object. 
     // this appears to be triggered by the room.js socketRef.current = io.connect("/");
@@ -31,15 +47,12 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         // applying a event listener to the socket generated, which listens for "join room"
         // this is an event fired off from the frontend room.js file 
 
-    // console.log((new Date()).getTime())
-
+        
     
         if (rooms[roomID]) {
             rooms[roomID].push(socket.id);
-            console.log('this is the rooms', rooms)
         } else {
             rooms[roomID] = [socket.id];
-            console.log('this is the rooms', rooms)
         }
 
         // the "join room" event emits the roomID number (see rooms.js). This gets passed down to this
@@ -49,9 +62,6 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         // so a list of rooms, with each user in the room 
 
 
-        //!TEST - WL - trying to remove video on meeting exit
-        // peers[socket.id] = roomID;
-        //!TEST
         
         const otherUser = rooms[roomID].find(id => id !== socket.id);
         // look into a speciific room based on the roomId emitted with the "join room event"
@@ -60,6 +70,8 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         // finds an ID that does NOT match the socket id of the user who just connected. This represents another user 
         // in the room 
 
+      
+
         if (otherUser) {
             socket.emit("other user", otherUser);
             // this emits the other user event to the client side, the person who just joined this chatroom   
@@ -67,6 +79,10 @@ io.on("connection", socket => { // listens for "connection" event, which generat
             // this second line emits an event TO the other user. 
             // socket.to().emit will emit an event to a specified user 
             // remember otherUser is a socket essentially? 
+
+            let selfUser = socket.id
+            socket.to(otherUser).emit("receive name", peers[socket.id])
+            socket.emit("receive name", peers[otherUser])
         }
 
         // if other user exists, then you emit a event called "other user" along with the OTHER USERS socket id 
@@ -84,25 +100,24 @@ io.on("connection", socket => { // listens for "connection" event, which generat
         });
 
         socket.on("ice-candidate", incoming => { // established a proper connection 
-            console.log(incoming.test)
+            // console.log(incoming.test)
             io.to(incoming.target).emit("ice-candidate", incoming.candidate)
         })
 
         socket.on('remove-user', () => {
-            console.log('hello from yee old server')
+            // console.log('hello from yee old server')
             // console.log(rooms[roomID].indexOf(socket.id))
             const index = rooms[roomID].indexOf(socket.id) 
             rooms[roomID] = rooms[roomID].splice(0, index) + rooms[roomID].splice(index + 1)
-            console.log(rooms)
+            // console.log(rooms)
         })
 
-        //!TEST - WL - trying to remove video on meeting exit
 
         socket.on('disconnect', () => {
-            // const roomID = peers[socket.id];
-            // let room = rooms[roomID];   
-            // socket.to(roomId)
+        
             let idx = rooms[roomID].indexOf(socket.id)   
+
+            delete peers[socket.id]
             
             rooms[roomID].splice(idx, 1)
 
@@ -110,27 +125,12 @@ io.on("connection", socket => { // listens for "connection" event, which generat
                 io.to(otherUser).emit("killconnection")
             }
         })
-        //give me the roomID the socket.id is disconneting from and 
-        //with that information, give me that room.
-        //!TEST - 
-
-        // socket.on('disconnect', () => {
-        //     // const roomID = peers[socket.id];
-        //     // let room = rooms[roomID];   
-        //     socket.to(otherUser).emit('user-disconnected', () =>{
-        //         console.log('USER HAS DISCONNECTED')
-        //     })
-        // })
-        // give me the roomID the socket.id is disconneting from and 
-        // with that information, give me that room.
-        //!TEST 
+       
 
 
 
-        // 1/1/21 
 
             socket.on("hangUp", otherUserId => {
-                console.log("server received")
                 io.to(otherUserId).emit("killconnection")
             })
 
@@ -142,6 +142,7 @@ io.on("connection", socket => { // listens for "connection" event, which generat
 // video feature test
 
 const questions = require("./routes/api/questions");
+const chat = require("./routes/api/chat")
 // const responses = require("./routes/api/responses") 12/31/20 removed since responses are embedded within questions
 
 if (process.env.NODE_ENV === 'production') {
@@ -172,4 +173,10 @@ require('./config/passport')(passport)
 
 app.use("/api/users", users)
 app.use("/api/questions", questions) 
+
+// const chat = require("./routes/api/chat")
+app.use('/api/chat',chat)
+
+const message = require('./routes/api/message')
+app.use('/api/message', message)
 // app.use("/api/responses", responses) 12/31/20, removed since responses are embedded within questions

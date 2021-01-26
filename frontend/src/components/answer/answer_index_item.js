@@ -1,4 +1,6 @@
 import React from 'react'
+import '../../assets/stylesheets/answer_index.css'
+
 class AnswerIndexItem extends React.Component {
 
     constructor(props){
@@ -15,15 +17,25 @@ class AnswerIndexItem extends React.Component {
     
     
     render() {     
-       
 
                 return(
-                    <div>
-                        <p>User: {this.props.response.user}</p>
-                        <p>Consultation Date: {this.props.response.consultation}</p>
-                        <p>Reply: {this.props.response.answer}</p>
-                        <p>Date Posted: {this.props.response.createdAt}</p>
-                        {this.props.currentUserID ===this.props.response.user ? <button onClick= {this.removeResponse}>Delete</button> : <div></div> }
+                    <div className="response-element">
+                        <div className="response-header">
+                        
+                         <img className = "respondants-image" alt="robots" src={`https://robohash.org/${this.props.response.user._id}?100x100`} />
+
+                         <h2> {this.props.response.user.username}</h2>
+                        </div>
+                        <div className = "response-body">
+                            <p className="response-answer">{this.props.response.answer}</p>
+                            <p className="response-date-view">Consultation Date: {this.props.response.consultation}</p>
+                        </div>
+                        <div className= "response-footer">
+                           {this.props.currentUserID ===this.props.response.user._id ? <button onClick= {this.removeResponse}>Delete</button> : <div></div> }
+                            <p>Posted: {this.props.response.createdAt}</p>
+                            
+
+                        </div>
                         <br></br>
                     </div>
                 )

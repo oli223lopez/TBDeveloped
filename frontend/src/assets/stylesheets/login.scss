@@ -1,0 +1,120 @@
+.userAuth {
+    font-family: Sans-serif;
+    color: #414141;
+    padding-bottom: 200px;
+}
+
+// /*! user login section */
+
+.login_title {
+    font-size: 26px;
+    margin-left: 50px;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.login_form_container {
+    display: flex;
+    // justify-content: center;
+
+}
+
+.sub_title {
+    font-size: 19px;
+}
+
+.login_form_container hr {
+    display: block;
+    border-top: 1px solid lightgray;
+    top: 4px;
+    margin: 1em 0;
+}
+
+// form input {
+//     width: 280px;
+// }
+
+
+.left_login {
+    // display: flex;
+    // flex-direction: column;
+    // margin-left: 30px;
+    // margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 120px;
+}
+
+.login_form_box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 450px;
+    padding-right: 100px;
+
+}
+
+
+
+.email_login,
+.password_login {
+    font-size: 14px;
+    outline: 1px solid lightgray;
+    color: #414141;
+    margin-top: 25px;
+    padding: 12px;
+}
+
+
+.asterisk {
+    font-size: 11px;
+    color: rgb(255, 98, 59);
+    padding-right: 10px;
+    align-content: row;
+}
+
+
+.signin-Button {
+    color: #fff;
+    max-width: 140px;
+    text-align: center;
+    padding: 10px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    margin-top: 45px;
+    margin-bottom: 10px;
+    background-color: #611f69;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.signin-Button:hover {
+    background-color: #4A154B;
+    text-decoration: none;
+}
+
+
+.requried_field {
+    font-size: 12px;
+    color: rgb(255, 98, 59);
+    margin-top: -3px;
+}
+
+
+
+
+.sub_title {
+    margin-top: 50px;
+
+
+}
+
+.error_message {
+    color: rgb(255, 98, 59);
+}
+
+.login_input::placeholder {
+    color: red; 
+}

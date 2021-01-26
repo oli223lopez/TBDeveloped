@@ -1,0 +1,159 @@
+#root{
+    background-color:#f6efe8;
+    // padding-bottom: 100px;
+    font-family: sans-serif;
+}
+
+.profile_container{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 60px;
+    // background-color:#f6efe8;
+    padding-bottom: 250px;
+
+    .user_profile_info{
+        background-color: #1264A3;
+        // outline: 3px solid #1264A3;
+        border-radius: 5px;
+        padding: 10px;
+
+        height: 450px;
+        width: 350px;
+        margin-right: 150px;
+
+        .roboImgApi{
+            margin-top: 8px;
+            margin-bottom: 10px;
+            background-color: rgb(225, 217, 233);
+            outline: 2px solid black;
+        }
+
+        .profile_name{
+            color: rgb(224, 224, 224);
+            font-weight: bolder;
+            font-size: 24px;
+            // margin-bottom: 20px;
+        }
+
+        .profile_post_amt{
+            color: black;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .profile_reponse_amt {
+            color: black;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+    }
+
+    .created_post_info{
+        background-color: lightgray;
+        border-radius: 5px;
+        margin-left: 150px;
+        padding: 10px;
+
+        width: 700px;
+
+        .created_post_title{
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+
+        .responed_post_title{
+            margin-top: 30px;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+
+        .questions_topic{
+            padding: 10px;
+            background-color: rgb(238, 237, 237);
+            
+
+            .individual_case{
+                display: flex;
+                flex-direction: column;
+
+                .question_topic_link{
+                    display:flex;
+                }
+
+                    .sub_label{
+                        font-weight: bold;
+                        padding: 3px;
+                        margin-right: 10px;
+                        color: black;
+                        display:flex;
+                        align-items: center;
+
+                    }
+                    .sub_label2{
+                        font-weight: bold;
+                        padding: 3px;
+                        margin-right: 10px;
+                        color: black;
+                        display:flex;
+                        align-items: center;
+                        width: 150px;
+
+                    }
+                                    
+                    .actual_info {
+                        color: black;
+                        align-items: center;
+                        white-space: nowrap;
+                         overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 500px;
+                        margin-top: 3px;
+
+                        // color: rgb(224, 224, 224);
+                    }
+
+                     .actual_info_response {
+                         color: black;
+                        //  display: flex;
+                        margin-top: 4px;
+                         align-items: center;
+                         white-space: nowrap;
+                         overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 500px;
+                         // color: rgb(224, 224, 224);
+                     }
+
+                
+
+                .bool_info{
+                    display:flex;
+                    align-items: center;
+                    color: red;
+                }
+
+                .bool_info2 {
+                    display:flex;
+                    align-items: center;
+                    color: rgb(7, 161, 7);
+                }
+
+                label{
+                    display: flex;
+                }
+            }
+
+            
+        }
+        
+
+    }
+    
+
+
+}
+
+    

@@ -7,7 +7,6 @@ import QuestionShow from './question_show'
 
 const mapStateToProps = (state, ownProps) => {
     let question = {}
-    // console.log(state.entities.questions)
     if(Object.keys(state.entities.questions).length > 0){
         question[ownProps.match.params.questionId]= state.entities.questions[ownProps.match.params.questionId]
     }
@@ -25,7 +24,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
     updateQuestion: (questionId, questionUpdates) => dispatch(updateQuestion(questionId, questionUpdates)),
     deleteQuestion: (questionId) => dispatch(deleteQuestion(questionId)),
-    fetchQuestion: (questionId) => dispatch(fetchQuestion(questionId))
+    fetchQuestion: (questionId) => dispatch(fetchQuestion(questionId)),
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionShow)

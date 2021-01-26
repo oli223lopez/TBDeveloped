@@ -6,27 +6,38 @@ import configureStore from './store/store'
 import jwt_decode from 'jwt-decode'
 import { setAuthToken } from './util/session_api_util'
 import { logout } from './actions/session_actions'
-import {fetchProfileQuestions} from './util/questions_api_util'
+
+
 
 // test
 import axios from "axios";
-import { postQuestion, fetchQuestions, updateQuestion, deleteQuestion } from "./actions/questions_actions"
-// import { postQuestion, updateQuestion } from './util/questions_api_util'
+//  import { fetchUser } from './util/session_api_util'
+//  import {fetchQuestions} from './util/questions_api_util'
+ import {fetchQuestions} from './actions/questions_actions'
+import { fetchUser } from './actions/session_actions'
 //test
 
 
-document.addEventListener('DOMContentLoaded', () => {
+
+
+document.addEventListener('DOMContentLoaded', async () => {
   let store;
+  // let currentUser = await fetchUser().then(res )
   if (localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
     const decodedUser = jwt_decode(localStorage.jwtToken)
-    const preloadedState = { session: { isAuthenticated: true, user: decodedUser } };
+    const preloadedState = { 
+      session: { isAuthenticated: true, user: decodedUser }, 
+      entities: {
+        currentUser: decodedUser
+      }
+    };
 
     store = configureStore(preloadedState)
     const currentTime = Date.now() / 1000;
     if (decodedUser.exp < currentTime) {
       store.dispatch(logout());
-      window.location.href = '/login'
+      // window.location.href = '/login'
     }
 
   }
@@ -34,15 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
     store = configureStore({})
   }
 
+  fetchUser()(store.dispatch)
+
+
   // test 
   window.store = store; 
   window.axios = axios; 
-  window.deleteQuestion = deleteQuestion; 
-  window.fetchQuestions = fetchQuestions; 
-  window.updateQuestion = updateQuestion; 
-  window.fetchProfileQuestions = fetchProfileQuestions;
+  window.fetchUser = fetchUser;
+  window.fetchQuestions = fetchQuestions()
   //test 
-
+  
+  
   const root = document.getElementById('root')
   ReactDOM.render(<Root store={store} />, root)
 

@@ -1,16 +1,17 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import '../../assets/stylesheets/question_form.css'
 
 
 class QuestionForm extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            subject: this.props.subject,
+            subject: '',
             content: this.props.content,
             tag: this.props.tag,
             solved: this.props.solved,
-            errors: this.props.errors
+            errors: this.props.errors,
+            tagSelected: true
             
         }
 
@@ -21,8 +22,8 @@ class QuestionForm extends React.Component{
         
     }
 
+    //Needs to be updated/is deprecated
     componentWillReceiveProps(nextProps) {
-
         this.setState({ errors: nextProps.errors })
     }
 
@@ -31,7 +32,7 @@ class QuestionForm extends React.Component{
     }
 
 
-    submit(e){
+    async submit(e){
         e.preventDefault();
         let newQuestion = {
             subject: this.state.subject,
@@ -40,11 +41,23 @@ class QuestionForm extends React.Component{
             tag: this.state.tag,
             user: this.props.user
         };
-        this.props.processForm(newQuestion)
+        await this.props.processForm(newQuestion)
+        if(Object.keys(this.state.errors).length === 0){
+            this.setState({subject: ""})
+            this.setState({content: ""})
+            this.props.fetchQuestions()
+        } else {
+
+            if(this.props.errors.subject) {
+                this.setState({subject: ""})
+            } else if (this.props.errors.content) {
+                this.setState({content: ""})
+            }
+
+        }
     }
 
     updateSubmit(e) {
-        console.log(this.props.questionId)
         e.preventDefault();
         let newQuestion = {
             
@@ -61,7 +74,7 @@ class QuestionForm extends React.Component{
         return (
             <ul>
                 {Object.keys(this.state.errors).map((error, i) => (
-                    <li key={`error-${i}`}>
+                    <li key={`error-${i}`} className="question_errors_msg">
                         {this.state.errors[error]}
                     </li>
                 ))}
@@ -71,16 +84,19 @@ class QuestionForm extends React.Component{
 
 
     render(){
+
         if (this.props.formType === 'Update Question!'){
             return (
-                <form onSubmit={this.updateSubmit}>
+            <div className = "updateForm_container">
 
-                    <label>
-                        Subject: {this.state.subject}
-                    </label>
+                <form onSubmit={this.updateSubmit}>
+                        <h2 className="update_form_header">Edit Post</h2>
+                    <div>
                     <label>
                         Content: <textarea type='text' value={this.state.content} onChange={this.update('content')} />
                     </label>
+                    </div>
+                    <div>
                     <label>Tag
                         <select onChange={this.update('tag')} >
                             <option value=''>--Choose a tag--</option>
@@ -88,6 +104,8 @@ class QuestionForm extends React.Component{
                             <option value='question'>Question</option>
                         </select>
                     </label>
+                    </div>
+                    <div>
                     <label>Solved
                         <select onChange={this.update('solved')} >
                             <option value=''>--Choose a tag--</option>
@@ -95,39 +113,49 @@ class QuestionForm extends React.Component{
                             <option value='false'>False</option>
                         </select>
                     </label>
-                    <label>
-                        <button type='submit'>{this.props.formType}</button>
-                    </label>
-
+                    </div>
+                    <div className="update-button-container">
+                        <button className="submit-question-button" type='submit'>{this.props.formType}</button>
+                    </div>
 
                 </form>
+            </div>
+
             )
         }
         return(
-            <form onSubmit={this.submit}>
-                
-                <label>
-                    Subject: <input type="text" value={this.state.subject} onChange={this.update('subject')}/>
-                </label>
-                <label>
-                    Content: <textarea type='text' value={this.state.content} onChange={this.update('content')}/>
-                </label>
-                <label>
-                    <select onChange={this.update('tag')} >
-                        <option value=''>--Choose a tag--</option>
-                        <option value='idea'>Idea</option>
-                        <option value='question'>Question</option>
-                    </select>
-                </label>
-                <label>
-                    
-                        <button type='submit'>{this.props.formType}</button>
-                        {this.renderErrors()}
-                </label>
-                
+            <div className="createform_container">
+                <form onSubmit={this.submit}>
+                    <div>
 
+                        <label>
+                            Subject: <span className="error_message">*</span> 
+                            <input className="question-subject" type="text" value={this.state.subject} onChange={this.update('subject')} placeholder={this.props.errors.subject}/>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Content: <span className="error_message">*</span> <textarea className="question-subject" value={this.state.content} onChange={this.update('content')} placeholder={this.props.errors.content}/>
 
-            </form>
+                            Tag: <span className="error_message">*</span> <select onChange={this.update('tag')} >
+                                <option value='' defaultValue={this.state.tagSelected}>--Choose a tag--</option>
+
+                
+                                <option value='idea'>Idea</option>
+                                <option value='question'>Question</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <label className="ques_button_err">
+                                <button className="submit-question-button" type='submit'>{this.props.formType}</button>
+                                <div className ="error_message">
+                                    {this.props.errors.tag ? this.props.errors.tag : null}
+                                </div>
+                        </label>
+                    </div>
+                </form>
+            </div>
         )
     }
 }

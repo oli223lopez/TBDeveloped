@@ -11,9 +11,9 @@ const CreateRoom = (props) => {
     }
 
     return (
-        <div>
-            <p>RoomID: {uuid()}</p>
-            <Link to={`/room/${create()}`}><button>Create Room</button></Link>
+        <div className = "video-chat-button-container">
+            
+            <Link to={`/room/${create()}`}><button className="create-room-btn">Video Chat</button></Link>
         </div>
     )
 }

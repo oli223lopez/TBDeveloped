@@ -1,10 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import '../../assets/stylesheets/main.scss';
+import '../../assets/stylesheets/question_show.css';
+
 import splash from '../../assets/images/splash.jpg';
 import gitty from '../../assets/images/gitty.png';
 import linkedn from '../../assets/images/linkedn.png';
 
+import logo192 from '../../assets/images/features/logo192.png';
+import mongodb from '../../assets/images/features/mongodb.png';
+import redux from '../../assets/images/features/redux.png';
+import webRTC from '../../assets/images/features/webRTC.png';
+import socketio from '../../assets/images/features/socketio.png';
+import checkmark from '../../assets/images/features/checkmark.png';
 
 class MainPage extends React.Component {
 
@@ -30,10 +38,72 @@ class MainPage extends React.Component {
                             <img alt="" src={splash} />
                         </div>
                     </div>
+                </div>
+
+                <div className="featured_info">
+                    <div>
+                    <h1 className='feature_title'>Key Features</h1>
+                        <div className="title_name">
+                            <div className='check_img'>
+                                <img alt="" src={checkmark} />
+                            </div>
+                            <div>Share business ideas</div>
+                        </div>
+                        <div className="title_name">
+                            <div className='check_img'>
+                                <img alt="" src={checkmark} />
+                            </div>
+                            <div>Ask questions</div>
+                        </div>
+                        <div className="title_name">
+                            <div className='check_img'>
+                                <img alt="" src={checkmark} />
+                            </div>
+                            <div>Live video chat</div>
+                        </div>
+                        <div className="title_name">
+                            <div className='check_img'>
+                                <img alt="" src={checkmark} />
+                            </div>
+                            <div>Real-time messaging</div>
+                        </div>
+                    </div>
+
+                    <div>
+                    <h1 className='feature_title'>Main Technologies</h1>
+                        <div className='title_info'>
+                            <div>React</div>    
+                            <div className='feat_img1'>
+                                <img alt="" src={logo192} />
+                            </div>
+                        </div>
+                        <div className='title_info'>
+                            <div>Redux</div>
+                            <div className='feat_img1'>
+                                <img alt="" src={redux} />
+                            </div>
+                        </div>
+                        <div className='title_info'>
+                            <div>MongoDB</div>
+                            <div className='feat_img1'>
+                                <img alt="" src={mongodb} />
+                            </div>
+                        </div>
+                        <div className='title_info'>
+                            <div>Socket.Io</div>
+                            <div className='feat_img'>
+                                <img alt="" src={socketio} />
+                            </div>
+                        </div>
+                        <div className='title_info'>
+                            <div>WebRTC</div>
+                            <div className='feat_img1'>
+                                <img alt="" src={webRTC} />
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
-                
-
 
 
                 <div className="footer_top_container">

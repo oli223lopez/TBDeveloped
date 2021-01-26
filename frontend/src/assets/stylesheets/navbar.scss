@@ -1,6 +1,8 @@
 .navbar-container{
     background-color:#f6efe8;
     font-family: sans-serif;
+
+    border-bottom: 1px solid lightgray;
 }
 
 .nav-header-bar{
@@ -8,7 +10,7 @@
     justify-content: space-between;
     margin-left: 40px;
     margin-right: 40px;
-    padding: 10px;
+    padding: 15px;
 
 
     .left-navbar{
@@ -19,13 +21,16 @@
             font-size: 20px;
             padding: 5px;
             font-weight: bold;
-
+             
         }
 
         .brand-icon{
             height: auto;
             width: 20px;
             padding-bottom: 5px;
+           
+            animation: bounce;
+            animation-duration: 10s;
         }
 
         .team-navbar {
@@ -47,29 +52,54 @@
             border-top: 1px solid rgb(240, 240, 240);
             border-bottom: 1px solid #F7F7F6;
 
+            border-radius: 5px;
             
 
             .teamInfo-group{
-                padding-bottom: 50px;
-                padding-left: 50px;
-                padding-right: 50px;
+                // padding-top: 10px;
+                // padding-bottom: 10px;
+                // padding-left: 10px;
+                // padding-right: 10px;
+
             }
 
             .individual-member{
                 color: black;
+                padding-right: 45px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: 10px;
+
+                .linkedin-icon {
+                    height: auto;
+                    width: 20px;
+                }
+
+                .linked_a{
+                    display: flex;
+
+
+                    .person_name{
+                        margin-top: 3px;
+                        text-align: center;
+                        margin-left: 10px;
+                    }
+                }
+                
             }
             .individual-member:hover{
                 background-color: #1264A3;
                 color: white;
+                border-radius: 5px;
+
             }
             
-
-
 
         }
 
         .team-navbar:hover .teamInfo-navbar{
             display: block;
+
         }
 
 
@@ -103,5 +133,169 @@
         background-color: #4A154B;
         text-decoration: none;
     }
+
+
+    .lefty {
+        padding: 5px;
+
+
+        .logoutButton {
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .profileButton {
+            color: #611f69;
+            outline: 2px solid #611f69;
+            max-width: 140px;
+            text-align: center;
+            padding: 10px;
+            padding-top: 9px;
+            padding-bottom: 9px;
+            padding-right: 18px;
+            padding-left: 18px;
+            margin-top: 45px;
+            margin-bottom: 10px;
+            // background-color: white;
+        }
+
+        .profileButton:hover {
+            // background-color: #1264A3;
+            outline: 3px solid #611f69;
+            color:#611f69;
+        }
+    }
+
+
 }
 
+.chats{
+    position: fixed;
+    display: flex;
+    bottom: 0%;
+    justify-content: space-between;
+    border-radius: 10px;
+    z-index: 1;
+    // margin-right: 900px;
+    // margin-left: 5px;
+    // padding: 10px;
+    right: 0;
+}
+
+.messageImg{
+    width: 45px;
+}
+.chatList{
+    display: none;
+  position: absolute;
+  background-color: #e49542;
+  color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+//   height: 10vh;
+  justify-content: space-around;
+  padding: 10px 10px;
+   margin-right: 5px;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+// .chatList hover{
+//     background-color:#6b61b1
+// }
+
+// .chatList:hover {
+//     background-color:#6b61b1
+// }
+
+.chat_list_items {
+    display: flex;
+    padding: 3px;
+    align-items: center;
+}
+.marquee{
+    width: 318px;
+}
+
+.chat_list_items:hover {
+    background-color: #6b61b1;
+    cursor: pointer;
+}
+
+.chat_list_li{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 3px;
+    width: 150px;
+}
+
+.chatDropdown{
+    // background: red;
+     position: relative;
+    display: inline-block;
+    align-items: center;
+}
+
+
+
+.chatDropdown:hover .chatList{
+  display: block;
+}
+.robotNav{
+    height: 38px;
+    width: auto;
+    border-radius: 50%;
+    border: 1px solid grey;
+    background-color: lightgray;
+}
+
+.chatContainer{
+    display: flex;
+    background-color: #46516e;
+    margin-right: 25px;
+    outline: 1px solid black;
+    
+}
+
+.test{
+    display: flex;
+
+}
+
+.test2{
+    display: flex;
+    
+        width: 318px;
+    
+
+}
+
+.robotChat{
+    height: 40px;
+    width: auto;
+    border-radius: 50%;
+    // /* border: 1px solid grey; */
+}
+
+
+
+
+
+.otherTest{
+        display: flex;
+    align-items: center;
+    margin-right: 20px;
+    color: white;
+}
+
+
+.forSpacing{
+    margin: 5px;
+}
+
+
+      
+
+  
