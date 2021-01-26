@@ -32,7 +32,7 @@ const Messenger = (props) => {
         })
         
         socketRef.current.emit('join', props.chatID)
-        console.log('mess', props.chatID)
+        // console.log('mess', props.chatID)
     }, [props.chatID]);
 
     function receivedMessage(message) {
@@ -47,7 +47,7 @@ const Messenger = (props) => {
             user: props.userID,
             username: props.username
         };
-        console. log('messObj', messageObject)
+        // console. log('messObj', messageObject)
         messageToDB()
         setMessage("");
         socketRef.current.emit("send message", messageObject);
@@ -71,7 +71,7 @@ const Messenger = (props) => {
     }
 
     function leaveChat(){
-        console.log('socket', socketRef.current)
+        // console.log('socket', socketRef.current)
         socketRef.current.disconnect()
     }
 

@@ -22,7 +22,10 @@ class AnswerIndex extends React.Component {
         this.props.fetchUser()
 
    }
-    
+
+   componentWillUnmount() {
+       this.props.removeChatErrors()
+   }
 
 
     render() {
@@ -30,14 +33,18 @@ class AnswerIndex extends React.Component {
         return(
 
         <div>
+            <div className='chatErrors'>{this.props.chatErrors.length === 0 ? this.props.chatErrors : this.props.chatErrors[0]}</div>
+
             {this.props.responses.map((response, i) =>{
                     return(
                     <div className= "answer-index-container" key={i}>
                         <AnswerIndexItemContainer fetchQuestion={this.props.fetchQuestion}  response={response} questionID = {this.props.questionID} currentUserID={this.props.currentUserID} />
                         <button className="chatButton" onClick={ () => {this.createChat(questionID, response._id, response.user._id, this.props.posterID, this.props.questionSubject)}}> Start a chat with {response.user.username}!</button>
                     </div>
+
                     )
             })}
+
         </div>
         )
     }

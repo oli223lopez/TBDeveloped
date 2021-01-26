@@ -92,11 +92,26 @@
                         align-items: center;
 
                     }
-                                    
-                    .actual_info {
+                    .sub_label2{
+                        font-weight: bold;
+                        padding: 3px;
+                        margin-right: 10px;
                         color: black;
                         display:flex;
                         align-items: center;
+                        width: 150px;
+
+                    }
+                                    
+                    .actual_info {
+                        color: black;
+                        align-items: center;
+                        white-space: nowrap;
+                         overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 500px;
+                        margin-top: 3px;
+
                         // color: rgb(224, 224, 224);
                     }
 

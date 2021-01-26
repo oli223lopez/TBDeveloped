@@ -3,6 +3,9 @@ import * as MessagesAPIUtil from "../util/messages_api_util";
 export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
 export const RECEIVE_MESSAGES = "RECEIVE_MESSAGES";
 export const RECEIVE_CHAT = 'RECEIVE_CHAT';
+export const RECEIVE_CHAT_ERRORS = 'RECEIVE_CHAT_ERRORS';
+
+export const REMOVE_CHAT_ERRORS = 'REMOVE_CHAT_ERRORS'
 
 
 export const receiveMessage = (message) => {
@@ -26,12 +29,29 @@ export const receiveChat = (chat) => {
     }
 }
 
+export const receiveChatErrors = (errors) => {
+    return {
+        type: RECEIVE_CHAT_ERRORS,
+        errors
+    }
+}
+
+export const removeChatErrors = () => {
+    return{
+        type: REMOVE_CHAT_ERRORS
+    }
+}
+
+
 
 //THUNK ACTION
 
 export const postChat = (newChat) => dispatch => {
     return MessagesAPIUtil.postChat(newChat)
-        .then(res => dispatch(receiveChat(res.data)))
+        .then(res => dispatch(receiveChat(res.data)), err => {
+            // console.log(err.response.data.Error)
+            dispatch(receiveChatErrors(err.response.data.Error))
+        })
 
 }
 
@@ -39,6 +59,7 @@ export const postChat = (newChat) => dispatch => {
 export const postMessage = (message) => dispatch => {
     return MessagesAPIUtil.postMessage(message)
         .then(res => dispatch(receiveMessage(res.data)))
+        
 }
 
 
