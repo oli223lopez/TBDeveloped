@@ -21,7 +21,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), async (req, r
     Chat.findOne({ response: req.body.responseID}).then(async chat => {
         if(chat){
             return res.status(400).json({
-            Error: "Chat has already been initiated"})
+            Error: "Chat has already been initiated. \nPlease check the message icon in your navbar to continue the conversation"})
         }else{
             const newChat = new Chat({
                 question: req.body.questionID,
