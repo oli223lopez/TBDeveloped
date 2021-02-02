@@ -40,12 +40,12 @@ const Messenger = (props) => {
     }
 
     
-    window.addEventListener('keydown', onKeyPress);
-    function onKeyPress(e){
-            if (e.code === 'Enter') {
-                document.getElementById("chatBtn").click();
-        }
-    }
+//     window.addEventListener('keydown', onKeyPress);
+//     function onKeyPress(e){
+//             if (e.code === 'Enter') {
+//                 document.getElementById("chatBtn").click();
+//         }
+//     }
 
 
     function sendMessage(e) {
