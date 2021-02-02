@@ -39,8 +39,19 @@ const Messenger = (props) => {
         setConversations(oldMsgs => [...oldMsgs, message]);        
     }
 
+    
+//     window.addEventListener('keydown', onKeyPress);
+//     function onKeyPress(e){
+//             if (e.code === 'Enter') {
+//                 document.getElementById("chatBtn").click();
+//         }
+//     }
+
+
     function sendMessage(e) {
+        // console.log('printSetConversations', conversations)
         e.preventDefault();
+
         const messageObject = {
             sentence: message,
             id: yourID,

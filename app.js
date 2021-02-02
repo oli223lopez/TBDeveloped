@@ -25,6 +25,10 @@ io.on("connection", socket => { // listens for "connection" event, which generat
 
     socket.on('join', room  => {
         socket.join(room);
+<<<<<<< HEAD
+        console.log('31',room)
+=======
+>>>>>>> chatEdit
         socket.emit('your id', socket.id)
         socket.on('send message', body => {
             // console.log(room)
