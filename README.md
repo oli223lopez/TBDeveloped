@@ -14,15 +14,15 @@ You're someone with an idea that you know for sure will take off, or maybe you'r
 * Users can post questions or business ideas for people to respond to.
 * User can have discussions with any question responder via real-time messasing.
 
-![image](https://github.com/oli223lopez/TBDeveloped/blob/master/frontend/src/assets/images/production_readme/main.png)
+![image](https://github.com/oli223lopez/TBDeveloped/blob/main/frontend/src/assets/images/production_readme/main.png)
 
 * In each question show page, developers can respond to these as well as set up a consultation date to further discuss.
 
-![image](https://github.com/oli223lopez/TBDeveloped/blob/master/frontend/src/assets/images/production_readme/posts.png)
+![image](https://github.com/oli223lopez/TBDeveloped/blob/main/frontend/src/assets/images/production_readme/posts.png)
 
 * Users can interact via video chat
 
-![image](https://github.com/oli223lopez/TBDeveloped/blob/master/frontend/src/assets/images/production_readme/ex3.png)
+![image](https://github.com/oli223lopez/TBDeveloped/blob/main/frontend/src/assets/images/production_readme/ex2.png)
 
 
 
