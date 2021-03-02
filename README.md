@@ -7,6 +7,7 @@ https://tbdeveloped1.herokuapp.com/#/
 You're someone with an idea that you know for sure will take off, or maybe you're a developer with a problem that you are stuck on. In both instances you are looking for someone who can help you out and with:
 * Bulletin Board: Users can post project ideas and request  
 * Real-time communications: Allowing users to communicate through video chat and/or messaging.
+
 TBDeveloped can make this possible!
 
 ### Features
