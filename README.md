@@ -4,11 +4,10 @@ TBDeveloped is an open source platform that allows dreamers/developers to connec
 https://tbdeveloped1.herokuapp.com/#/
 
 # Background and Overview
-You're someone with an idea that you know for sure will take off, or maybe you're a developer with a problem that you are stuck on. In both instances you are looking for someone who can help you out and 
+You're someone with an idea that you know for sure will take off, or maybe you're a developer with a problem that you are stuck on. In both instances you are looking for someone who can help you out and with:
 * Bulletin Board: Users can post project ideas and request  
 * Real-time communications: Allowing users to communicate through video chat and/or messaging.
-* Reviews: Users can rate the experience they had with eachother
-
+TBDeveloped can make this possible!
 
 ### Features
 * Users can post questions or business ideas for people to respond to.
